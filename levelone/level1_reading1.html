@@ -1,379 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Level 1 - Lesson 1: Greetings and Introductions (Saludos e Presentaciones)</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #2ecc71;
-            --bg-color: #f8f9fa;
-            --card-bg: rgba(255, 255, 255, 0.93); /* Un poco de transparencia para dejar traslucir la marca de agua */
-            --text-color: #333333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1 - Lesson 1: Greetings and Introductions</title>
+  <style>
+    /* Estilos Generales Base */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f7f6;
+      color: #333;
+      position: relative;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background-color: var(--bg-color);
-            /* Marca de agua de fondo */
-            background-image: url("english-degradado.jpg");
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: contain;
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-        }
+    /* CAMBIO 1: Logotipo en la esquina superior derecha */
+    .top-logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      max-width: 120px;
+      height: auto;
+      z-index: 10;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            backdrop-filter: blur(2px);
-        }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
 
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    /* CAMBIO 2: Título centrado con inglés arriba y español abajo */
+    .lesson-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-top: 10px;
+    }
+    
+    .lesson-header h1 {
+      margin: 0;
+      font-size: 26px;
+      color: #1a5276;
+    }
 
-        .hero-image {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
+    .lesson-header p.subtitle {
+      margin-top: 6px;
+      font-size: 18px;
+      color: #5d6d7e;
+      font-weight: bold;
+    }
 
-        .step-card {
-            background: rgba(241, 247, 254, 0.9);
-            border-left: 5px solid var(--secondary-color);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 0 8px 8px 0;
-        }
+    /* Estilos de las Secciones */
+    .step-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-left: 4px solid #27ae60;
+      background-color: #fbfcfc;
+      border-radius: 4px;
+    }
 
-        .step-title {
-            color: var(--primary-color);
-            margin-top: 0;
-            font-size: 1.3rem;
-        }
+    .step-title {
+      font-size: 20px;
+      color: #27ae60;
+      margin-top: 0;
+    }
 
-        .dialogue-box {
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 15px;
-        }
+    .conversation-box {
+      background: #eaf2f8;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
 
-        .line {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    .listen-btn {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
 
-        .speaker {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
-        .audio-btn {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: background 0.2s;
-        }
+    .action-btn {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-        .audio-btn:hover {
-            background-color: #2980b9;
-        }
-
-        .question-block {
-            margin-bottom: 15px;
-        }
-
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-
-        .btn-submit {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn-submit:hover {
-            background-color: #27ae60;
-        }
-
-        .mic-btn {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 5px;
-        }
-
-        .feedback {
-            margin-top: 10px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-    </style>
+    /* CAMBIO 3: Estilo para el contenedor de respuesta del Paso 4 */
+    .response-placeholder {
+      background-color: #f2f4f4;
+      border: 1px dashed #bdc3c7;
+      padding: 15px;
+      border-radius: 4px;
+      color: #7f8c8d;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Título principal en inglés (español) -->
-        <h1>Lesson 1: Greetings and Introductions (Lección 1: Saludos y Presentaciones)</h1>
+  <!-- CAMBIO 1: Logo posicionado en la esquina superior derecha -->
+  <img src="logo.png" alt="Logo" class="top-logo">
 
-        <!-- Imagen principal del salón (intacta) -->
-        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80" alt="Modern Classroom" class="hero-image" />
+  <div class="container">
+    
+    <!-- CAMBIO 2: Título centrado (Inglés arriba, Español abajo) -->
+    <header class="lesson-header">
+      <h1>Lesson 1: Greetings and Introductions</h1>
+      <p class="subtitle">(Lección 1: Saludos y Presentaciones)</p>
+    </header>
 
-        <!-- STEP 1 -->
-        <div class="step-card">
-            <h2 class="step-title">Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
-            <p>Read the dialogues and click the listen button to hear the correct pronunciation with two different voices. (Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta con dos voces diferentes.)</p>
-            
-            <h3>Conversation 1</h3>
-            <div class="dialogue-box">
-                <div class="line">
-                    <span><span class="speaker">Student:</span> Good morning teacher, may I come in?</span>
-                    <button class="audio-btn" onclick="speak('Good morning teacher, may I come in?', 'female1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Teacher Marisol:</span> Sure, come in. What's your name?</span>
-                    <button class="audio-btn" onclick="speak('Sure, come in. What\'s your name?', 'female2')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Anna:</span> My name is Anna.</span>
-                    <button class="audio-btn" onclick="speak('My name is Anna.', 'female1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Teacher Marisol:</span> Nice to meet you, I'm teacher Marisol. Can you spell your name?</span>
-                    <button class="audio-btn" onclick="speak('Nice to meet you, I\'m teacher Marisol. Can you spell your name?', 'female2')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Anna:</span> A – N – N – A.</span>
-                    <button class="audio-btn" onclick="speak('A N N A', 'female1')">🔊 Listen</button>
-                </div>
-            </div>
+    <!-- Paso 1 -->
+    <section class="step-section">
+      <h2 class="step-title">Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
+      <p>Read the dialogues and click the listen button to hear the correct pronunciation with two different voices. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta con dos voces diferentes.)</em></p>
+      
+      <div class="conversation-box">
+        <h3>Conversation 1</h3>
+        <p><strong>Student:</strong> Good morning teacher, may I come in? <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Teacher Marisol:</strong> Sure, come in. What's your name? <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Anna:</strong> My name is Anna. <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Anna:</strong> A – N – N – A. <button class="listen-btn">🔊 Listen</button></p>
+      </div>
 
-            <h3>Conversation 2</h3>
-            <div class="dialogue-box">
-                <div class="line">
-                    <span><span class="speaker">Jeffrey:</span> Good evening Abby.</span>
-                    <button class="audio-btn" onclick="speak('Good evening Abby.', 'male1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Abby:</span> Hi Jeffrey, how are you?</span>
-                    <button class="audio-btn" onclick="speak('Hi Jeffrey, how are you?', 'female1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Jeffrey:</span> I'm fine, thank you. This is Alex, a new student.</span>
-                    <button class="audio-btn" onclick="speak('I\'m fine, thank you. This is Alex, a new student.', 'male1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Abby:</span> Nice to meet you, Alex.</span>
-                    <button class="audio-btn" onclick="speak('Nice to meet you, Alex.', 'female1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Alex:</span> Nice to meet you too.</span>
-                    <button class="audio-btn" onclick="speak('Nice to meet you too.', 'male2')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Jeffrey:</span> He wants to book his next appointment.</span>
-                    <button class="audio-btn" onclick="speak('He wants to book his next appointment.', 'male1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Abby:</span> Sure! What is your last name?</span>
-                    <button class="audio-btn" onclick="speak('Sure! What is your last name?', 'female1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Alex:</span> Smith.</span>
-                    <button class="audio-btn" onclick="speak('Smith.', 'male2')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Abby:</span> How do you spell that?</span>
-                    <button class="audio-btn" onclick="speak('How do you spell that?', 'female1')">🔊 Listen</button>
-                </div>
-                <div class="line">
-                    <span><span class="speaker">Alex:</span> S – M – I – T – H.</span>
-                    <button class="audio-btn" onclick="speak('S M I T H', 'male2')">🔊 Listen</button>
-                </div>
-            </div>
-        </div>
+      <div class="conversation-box">
+        <h3>Conversation 2</h3>
+        <p><strong>Jeffrey:</strong> Good evening Abby. <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Abby:</strong> Hi Jeffrey, how are you? <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Abby:</strong> Nice to meet you, Alex. <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Alex:</strong> Nice to meet you too. <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Jeffrey:</strong> He wants to book his next appointment. <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Abby:</strong> Sure! What is your last name? <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Alex:</strong> Smith. <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Abby:</strong> How do you spell that? <button class="listen-btn">🔊 Listen</button></p>
+        <p><strong>Alex:</strong> S – M – I – T – H. <button class="listen-btn">🔊 Listen</button></p>
+      </div>
+    </section>
 
-        <!-- STEP 2 -->
-        <div class="step-card">
-            <h2 class="step-title">Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
-            <ul>
-                <li><strong>Greetings (Saludos):</strong> Good morning, Good evening, Hi</li>
-                <li><strong>Introductions (Presentaciones):</strong> My name is..., This is...</li>
-                <li><strong>Polite Expressions (Expresiones de cortesía):</strong> Nice to meet you, May I come in?, Thank you</li>
-                <li><strong>Spelling (Deletreo):</strong> "How do you spell that?"</li>
-            </ul>
-        </div>
+    <!-- Paso 2 -->
+    <section class="step-section">
+      <h2 class="step-title">Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
+      <ul>
+        <li><strong>Greetings (Saludos):</strong> Good morning, Good evening, Hi</li>
+        <li><strong>Introductions (Presentaciones):</strong> My name is..., This is...</li>
+        <li><strong>Polite Expressions (Expresiones de cortesía):</strong> Nice to meet you, May I come in?, Thank you</li>
+        <li><strong>Spelling (Deletreo):</strong> "How do you spell that?"</li>
+      </ul>
+    </section>
 
-        <!-- STEP 3 -->
-        <div class="step-card">
-            <h2 class="step-title">Step 3: Comprehension Check (Paso 3: Verificación de Comprensión)</h2>
-            <form id="quizForm">
-                <div class="question-block">
-                    <label>1. What is the new student's name in Conversation 1? (¿Cuál es el nombre del nuevo estudiante en la Conversación 1?)</label>
-                    <input type="text" id="q1" placeholder="Type your answer..." />
-                </div>
-                <div class="question-block">
-                    <label>2. What is Alex's last name? (¿Cuál es el apellido de Alex?)</label>
-                    <input type="text" id="q2" placeholder="Type your answer..." />
-                </div>
-                <div class="question-block">
-                    <label>3. How do you spell Alex's last name? (¿Cómo se deletrea el apellido de Alex?)</label>
-                    <input type="text" id="q3" placeholder="Type your answer..." />
-                </div>
-                <button type="button" class="btn-submit" onclick="checkAnswers()">Check Answers (Verificar Respuestas)</button>
-            </form>
-            <div id="quizFeedback" class="feedback"></div>
-        </div>
+    <!-- Paso 3 -->
+    <section class="step-section">
+      <h2 class="step-title">Step 3: Comprehension Check (Paso 3: Verificación de Comprensión)</h2>
+      <form>
+        <label>1. What is the new student's name in Conversation 1? <em>(¿Cuál es el nombre del nuevo estudiante en la Conversación 1?)</em></label>
+        <input type="text" placeholder="Type your answer...">
 
-        <!-- STEP 4 -->
-        <div class="step-card">
-            <h2 class="step-title">Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
-            <p>Answer the question out loud using voice input or type your response below: (Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta a continuación:)</p>
-            <p><strong>Question: "What is your name and how do you spell it?" (Pregunta: "¿Cuál es tu nombre y cómo lo deletreas?")</strong></p>
-            
-            <button class="mic-btn" onclick="startVoiceRecognition()">🎙️ Speak Answer (Voice Input) / Responder con voz</button>
-            <textarea id="speakingAnswer" rows="3" placeholder="Your spoken or written response will appear here..."></textarea>
-            <br/><br/>
-            <button class="btn-submit" onclick="submitSpeaking()">Submit Practice (Enviar Práctica)</button>
-            <div id="speakingFeedback" class="feedback"></div>
-        </div>
+        <label>2. What is Alex's last name? <em>(¿Cuál es el apellido de Alex?)</em></label>
+        <input type="text" placeholder="Type your answer...">
 
-    </div>
+        <label>3. How do you spell Alex's last name? <em>(¿Cómo se deletrea el apellido de Alex?)</em></label>
+        <input type="text" placeholder="Type your answer...">
 
-    <script>
-        // Voice Synthesis (Two Voice Differentiation)
-        function speak(text, voiceType) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                
-                const voices = window.speechSynthesis.getVoices();
-                const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-                
-                if (englishVoices.length > 0) {
-                    if (voiceType.startsWith('female')) {
-                        utterance.voice = englishVoices.find(v => v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Female')) || englishVoices[0];
-                        utterance.pitch = 1.2;
-                    } else {
-                        utterance.voice = englishVoices.find(v => v.name.includes('David') || v.name.includes('Male')) || englishVoices[1] || englishVoices[0];
-                        utterance.pitch = 0.9;
-                    }
-                }
-                
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert('Text-to-speech is not supported in this browser.');
-            }
-        }
+        <button type="button" class="action-btn">Check Answers (Verificar Respuestas)</button>
+      </form>
+    </section>
 
-        // Pre-load voices
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = () => {
-                window.speechSynthesis.getVoices();
-            };
-        }
+    <!-- Paso 4 -->
+    <section class="step-section">
+      <h2 class="step-title">Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
+      <p>Answer the question out loud using voice input or type your response below: <em>(Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta a continuación:)</em></p>
+      <p><strong>Question: "What is your name and how do you spell it?"</strong> <em>(Pregunta: "¿Cuál es tu nombre y cómo lo deletreas?")</em></p>
+      
+      <button type="button" class="action-btn">🎙️ Speak Answer (Voice Input) / Responder con voz</button>
+      
+      <!-- CAMBIO 3: Traducción agregada entre paréntesis en la respuesta -->
+      <div class="response-placeholder">
+        Your spoken or written response will appear here... (Tu respuesta hablada o escrita aparecerá aquí...)
+      </div>
 
-        // Step 3 Answer Validation
-        function checkAnswers() {
-            const q1 = document.getElementById('q1').value.trim().toLowerCase();
-            const q2 = document.getElementById('q2').value.trim().toLowerCase();
-            const q3 = document.getElementById('q3').value.trim().toLowerCase().replace(/[\s-]/g, '');
-            
-            let score = 0;
-            if (q1.includes('anna')) score++;
-            if (q2.includes('smith')) score++;
-            if (q3.includes('smith')) score++;
+      <button type="button" class="action-btn">Submit Practice (Enviar Práctica)</button>
+    </section>
 
-            const feedback = document.getElementById('quizFeedback');
-            if (score === 3) {
-                feedback.style.color = '#2ecc71';
-                feedback.textContent = 'Great job! All answers are correct (3/3).';
-            } else {
-                feedback.style.color = '#e74c3c';
-                feedback.textContent = `You got ${score} out of 3 correct. Please check your answers and try again.`;
-            }
-        }
+  </div>
 
-        // Step 4 Speech Recognition
-        function startVoiceRecognition() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert('Voice recognition is not supported in this browser. Please type your answer or use Chrome.');
-                return;
-            }
-
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'en-US';
-            recognition.interimResults = false;
-
-            recognition.onstart = function() {
-                document.getElementById('speakingFeedback').style.color = '#3498db';
-                document.getElementById('speakingFeedback').textContent = 'Listening... Speak now!';
-            };
-
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript;
-                document.getElementById('speakingAnswer').value = transcript;
-                document.getElementById('speakingFeedback').style.color = '#2ecc71';
-                document.getElementById('speakingFeedback').textContent = 'Voice captured successfully!';
-            };
-
-            recognition.onerror = function(event) {
-                document.getElementById('speakingFeedback').style.color = '#e74c3c';
-                document.getElementById('speakingFeedback').textContent = 'Error capturing voice. Try again or type manually.';
-            };
-
-            recognition.start();
-        }
-
-        function submitSpeaking() {
-            const answer = document.getElementById('speakingAnswer').value.trim();
-            const feedback = document.getElementById('speakingFeedback');
-            if (answer.length > 0) {
-                feedback.style.color = '#2ecc71';
-                feedback.textContent = 'Awesome! Your response has been recorded for review.';
-            } else {
-                feedback.style.color = '#e74c3c';
-                feedback.textContent = 'Please record or type a response first.';
-            }
-        }
-    </script>
 </body>
 </html>
