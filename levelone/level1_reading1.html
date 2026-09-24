@@ -1,250 +1,172 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson 1: Salón de Clases</title>
+  <title>Level 1 - Lesson 1</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f7f6;
-      color: #333333;
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
     }
-    .container {
-      max-width: 750px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
+    h1, h2 {
       color: #2c3e50;
-      text-align: center;
-      margin-bottom: 25px;
     }
-    .step-box {
-      margin-bottom: 30px;
-      padding: 20px;
-      border-left: 5px solid #3498db;
-      background-color: #f8fafc;
-      border-radius: 6px;
-    }
-    .step-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #2c3e50;
-      margin-bottom: 15px;
-    }
-    .dialogue-line {
-      margin: 10px 0;
-      padding: 8px 12px;
-      background: #ffffff;
-      border-radius: 5px;
-      border: 1px solid #e2e8f0;
-    }
-    .speaker-a {
-      font-weight: bold;
-      color: #2980b9;
-    }
-    .speaker-b {
-      font-weight: bold;
-      color: #8e44ad;
-    }
-    button {
-      background-color: #3498db;
-      color: #ffffff;
-      border: none;
-      padding: 10px 18px;
-      margin: 8px 4px 8px 0;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-    .mic-btn {
-      background-color: #e74c3c;
-    }
-    .mic-btn:hover {
-      background-color: #c0392b;
-    }
-    .mic-btn.listening {
-      background-color: #27ae60;
-      animation: pulse 1.5s infinite;
-    }
-    textarea {
+    .classroom-img {
       width: 100%;
-      height: 70px;
-      margin-top: 10px;
-      border-radius: 6px;
-      border: 1px solid #cbd5e1;
-      padding: 10px;
-      font-family: inherit;
-      box-sizing: border-box;
-      background-color: #ffffff;
-      color: #333333;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .feedback-msg {
-      margin-top: 10px;
+    .dialogue-box {
+      background: #fff;
+      border-left: 4px solid #3498db;
+      padding: 15px 20px;
+      margin-bottom: 25px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .speaker {
       font-weight: bold;
-      color: #27ae60;
+      color: #2c3e50;
+    }
+    .line {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    button.play-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    button.play-btn:hover {
+      background-color: #2980b9;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Lesson 1: Salón de Clases</h1>
-<img src="image.png" alt="Salón de clases" style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto 25px auto; border-radius: 8px;">
+  <h1>Lesson 1: Greetings and Introductions</h1>
 
-    <!-- PASO 1: LECTURA CON DOS VOCES -->
-    <div class="step-box">
-      <div class="step-title">Paso 1: Escucha el diálogo</div>
-      <div class="dialogue-line">
-        <span class="speaker-a">Profesor:</span> Buenos días a todos, bienvenidos al salón de clases.
-      </div>
-      <div class="dialogue-line">
-        <span class="speaker-b">Estudiante:</span> Buenos días, profesor. ¿Dónde nos podemos sentar?
-      </div>
-      <div class="dialogue-line">
-        <span class="speaker-a">Profesor:</span> Pueden tomar cualquier asiento disponible adelante.
-      </div>
-      
-      <button onclick="playDialogue()">🔊 Escuchar diálogo completo</button>
+  <!-- Imagen del aula -->
+  <img class="classroom-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1000&auto=format&fit=crop" alt="Modern Classroom">
+
+  <!-- CONVERSATION 1 -->
+  <h2>Conversation 1</h2>
+  <div class="dialogue-box">
+    <div class="line">
+      <span><span class="speaker">Student:</span> Good morning teacher, may I come in?</span>
+      <button class="play-btn" onclick="speak('Good morning teacher, may I come in?', 'female')">🔊 Listen</button>
     </div>
-
-    <!-- PASO 2 Y 3: PREGUNTA Y RESPUESTA POR VOZ -->
-    <div class="step-box">
-      <div class="step-title">Paso 2 y 3: Pregunta y respuesta oral</div>
-      <p>Escucha la pregunta y responde usando tu micrófono:</p>
-      
-      <button onclick="speakText('¿Qué dice el profesor al inicio de la clase?')">🔊 Escuchar pregunta</button>
-      <br><br>
-      
-      <button class="mic-btn" id="micBtn" onclick="toggleSpeechRecognition()">🎙️ Responder con Voz</button>
-      <textarea id="studentResponse" placeholder="Tu respuesta hablada aparecerá aquí..."></textarea>
+    <div class="line">
+      <span><span class="speaker">Teacher Marisol:</span> Sure, come in. What's your name?</span>
+      <button class="play-btn" onclick="speak('Sure, come in. What is your name?', 'female')">🔊 Listen</button>
     </div>
+    <div class="line">
+      <span><span class="speaker">Anna:</span> My name is Anna.</span>
+      <button class="play-btn" onclick="speak('My name is Anna.', 'female')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Teacher Marisol:</span> Nice to meet you, I'm teacher Marisol. Can you spell your name?</span>
+      <button class="play-btn" onclick="speak('Nice to meet you, I am teacher Marisol. Can you spell your name?', 'female')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Anna:</span> A – N – N – A.</span>
+      <button class="play-btn" onclick="speak('A, N, N, A', 'female')">🔊 Listen</button>
+    </div>
+  </div>
 
-    <!-- PASO 4: RETROALIMENTACIÓN -->
-    <div class="step-box">
-      <div class="step-title">Paso 4: Retroalimentación</div>
-      <button onclick="evaluateResponse()">Verificar Respuesta</button>
-      <div class="feedback-msg" id="feedbackArea"></div>
+  <!-- CONVERSATION 2 -->
+  <h2>Conversation 2</h2>
+  <div class="dialogue-box">
+    <div class="line">
+      <span><span class="speaker">Jeffrey:</span> Good evening Abby.</span>
+      <button class="play-btn" onclick="speak('Good evening Abby.', 'male')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Abby:</span> Hi Jeffrey, how are you?</span>
+      <button class="play-btn" onclick="speak('Hi Jeffrey, how are you?', 'female')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Jeffrey:</span> I'm fine, thank you. This is Alex, a new student.</span>
+      <button class="play-btn" onclick="speak('I am fine, thank you. This is Alex, a new student.', 'male')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Abby:</span> Nice to meet you, Alex.</span>
+      <button class="play-btn" onclick="speak('Nice to meet you, Alex.', 'female')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Alex:</span> Nice to meet you too.</span>
+      <button class="play-btn" onclick="speak('Nice to meet you too.', 'male')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Jeffrey:</span> He wants to book his next appointment.</span>
+      <button class="play-btn" onclick="speak('He wants to book his next appointment.', 'male')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Abby:</span> Sure! What is your last name?</span>
+      <button class="play-btn" onclick="speak('Sure! What is your last name?', 'female')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Alex:</span> Smith.</span>
+      <button class="play-btn" onclick="speak('Smith.', 'male')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Abby:</span> How do you spell that?</span>
+      <button class="play-btn" onclick="speak('How do you spell that?', 'female')">🔊 Listen</button>
+    </div>
+    <div class="line">
+      <span><span class="speaker">Alex:</span> S – M – I – T – H.</span>
+      <button class="play-btn" onclick="speak('S, M, I, T, H', 'male')">🔊 Listen</button>
     </div>
   </div>
 
   <script>
-    // Sintetizador de Voz (Text-to-Speech)
-    function speakText(text, voiceIndex = 0) {
-      if (!('speechSynthesis' in window)) {
-        alert("Tu navegador no soporta síntesis de voz.");
-        return;
-      }
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'es-ES';
-
-      const voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('es'));
-      if (voices.length > 0) {
-        utterance.voice = voices[voiceIndex % voices.length];
-      }
-      window.speechSynthesis.speak(utterance);
-    }
-
-    function playDialogue() {
-      const dialogue = [
-        { speaker: 0, text: "Buenos días a todos, bienvenidos al salón de clases." },
-        { speaker: 1, text: "Buenos días, profesor. ¿Dónde nos podemos sentar?" },
-        { speaker: 0, text: "Pueden tomar cualquier asiento disponible adelante." }
-      ];
-
-      let delay = 0;
-      dialogue.forEach(line => {
-        setTimeout(() => {
-          speakText(line.text, line.speaker);
-        }, delay);
-        delay += 3500;
-      });
-    }
-
-    // Reconocimiento de Voz (Speech-to-Text)
-    let recognition;
-    let isListening = false;
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.lang = 'es-ES';
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById('studentResponse').value = transcript;
-        stopListening();
-      };
-
-      recognition.onerror = function() {
-        stopListening();
-      };
-
-      recognition.onend = function() {
-        stopListening();
-      };
-    }
-
-    function toggleSpeechRecognition() {
-      if (!recognition) {
-        alert("El reconocimiento de voz no está soportado en este navegador.");
-        return;
-      }
-      if (isListening) {
-        recognition.stop();
-        stopListening();
+    function speak(text, gender) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        
+        const voices = window.speechSynthesis.getVoices();
+        const enVoices = voices.filter(v => v.lang.startsWith('en'));
+        
+        if (enVoices.length > 0) {
+          if (gender === 'female') {
+            const femaleVoice = enVoices.find(v => v.name.includes('Female') || v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Google US English'));
+            utterance.voice = femaleVoice || enVoices[0];
+          } else {
+            const maleVoice = enVoices.find(v => v.name.includes('Male') || v.name.includes('David') || v.name.includes('Alex'));
+            utterance.voice = maleVoice || enVoices[0];
+          }
+        }
+        
+        window.speechSynthesis.speak(utterance);
       } else {
-        recognition.start();
-        isListening = true;
-        const btn = document.getElementById('micBtn');
-        btn.classList.add('listening');
-        btn.innerText = "🛑 Escuchando... Habla ahora";
+        alert('Your browser does not support text-to-speech.');
       }
     }
 
-    function stopListening() {
-      isListening = false;
-      const btn = document.getElementById('micBtn');
-      btn.classList.remove('listening');
-      btn.innerText = "🎙️ Responder con Voz";
-    }
-
-    // Evaluador de Respuesta
-    function evaluateResponse() {
-      const userText = document.getElementById('studentResponse').value.toLowerCase();
-      const feedback = document.getElementById('feedbackArea');
-
-      if (userText.includes("buenos días") || userText.includes("bienvenidos")) {
-        feedback.innerText = "¡Excelente trabajo! Has identificado correctamente la respuesta.";
-        speakText("¡Excelente trabajo! Has identificado correctamente la respuesta.");
-      } else if (userText.trim() === "") {
-        feedback.innerText = "Por favor graba tu respuesta antes de verificar.";
-      } else {
-        feedback.innerText = "Buen intento. Vuelve a escuchar el diálogo e inténtalo de nuevo.";
-        speakText("Buen intento. Vuelve a escuchar el diálogo e inténtalo de nuevo.");
-      }
-    }
-
-    // Cargar voces en segundo plano
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = function() {
-        window.speechSynthesis.getVoices();
-      };
-    }
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.getVoices();
+    };
   </script>
+
 </body>
 </html>
