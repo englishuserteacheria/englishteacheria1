@@ -23,50 +23,51 @@
   <h1>Lesson 1: Greetings and Introductions</h1>
   <p><em>(Lección 1: Saludos y Presentaciones)</em></p>
   <img src="image.png" alt="Classroom Photo" id="photo" style="max-width: 50%; height: auto; display: block; margin: 0 auto;">
-<!-- ================= VOCABULARY SECTION ================= -->
-<section id="vocabulary-section" style="max-width: 1100px; margin: 20px auto; padding: 20px; font-family: Arial, sans-serif;">
-  
-  <!-- Encabezado con Logo e Instrucciones -->
-  <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0056b3; padding-bottom: 15px; margin-bottom: 20px;">
-    <div>
-      <h2 style="margin: 0; color: #0056b3; font-size: 28px;">Vocabulary - Lesson 1</h2>
-      <p style="margin: 5px 0 0 0; color: #555; font-size: 15px;">
-        Look, listen, match, and repeat. <i>(Observa, escucha, relaciona y repite.)</i>
-      </p>
-    </div>
-    <!-- Reemplaza src con la ruta de tu logo -->
-    <img src="logo.png" alt="Logo" style="max-height: 50px; object-fit: contain;" />
-  </div>
-
-  <!-- Contenedor en Cuadrícula (Grid) -->
-  <div class="vocab-grid">
-
-    <!-- TARJETA DE EJEMPLO 1 -->
-    <div class="vocab-card">
-      <img src="images/pencil.jpg" alt="Pencil" loading="lazy" class="vocab-img" />
-      <div class="vocab-word">Pencil</div>
-      <div class="vocab-actions">
-        <button class="btn-listen" onclick="speakWord('Pencil')">🔊 Listen</button>
-        <button class="btn-practice" onclick="testPronunciation('Pencil', this)">🎙️ Speak</button>
-      </div>
-      <span class="feedback-msg"></span>
+<!-- Inicio de la sección de vocabulario -->
+<div class="vocabulary-grid">
+    
+    <!-- Palabra 1: School bag -->
+    <div class="vocab-item">
+        <img src="../images/school-bag.jpg" alt="School bag">
+        <p>school bag</p>
+        <button class="listen-btn">Listen</button>
+        <button class="practice-btn">Practice</button>
     </div>
 
-    <!-- TARJETA DE EJEMPLO 2 -->
-    <div class="vocab-card">
-      <img src="images/book.jpg" alt="Book" loading="lazy" class="vocab-img" />
-      <div class="vocab-word">Book</div>
-      <div class="vocab-actions">
-        <button class="btn-listen" onclick="speakWord('Book')">🔊 Listen</button>
-        <button class="btn-practice" onclick="testPronunciation('Book', this)">🎙️ Speak</button>
-      </div>
-      <span class="feedback-msg"></span>
+    <!-- Palabra 2: Pencil sharpener -->
+    <div class="vocab-item">
+        <img src="../images/pencil-sharpener.jpg" alt="Pencil sharpener">
+        <p>pencil sharpener</p>
+        <button class="listen-btn">Listen</button>
+        <button class="practice-btn">Practice</button>
     </div>
 
-    <!-- Puedes duplicar <div class="vocab-card">...</div> para agregar hasta 40 o 50 palabras -->
+    <!-- Palabra 3: Pen -->
+    <div class="vocab-item">
+        <img src="../images/pen.jpg" alt="Pen">
+        <p>pen</p>
+        <button class="listen-btn">Listen</button>
+        <button class="practice-btn">Practice</button>
+    </div>
 
-  </div>
-</section>
+    <!-- Palabra 4: Pencil -->
+    <div class="vocab-item">
+        <img src="../images/pencil.jpg" alt="Pencil">
+        <p>pencil</p>
+        <button class="listen-btn">Listen</button>
+        <button class="practice-btn">Practice</button>
+    </div>
+
+    <!-- Palabra 5: Eraser -->
+    <div class="vocab-item">
+        <img src="../images/eraser.jpg" alt="Eraser">
+        <p>eraser</p>
+        <button class="listen-btn">Listen</button>
+        <button class="practice-btn">Practice</button>
+    </div>
+
+</div>
+<!-- Fin de la sección de vocabulario -->
 
 <!-- ESTILOS CSS -->
 <style>
