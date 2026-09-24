@@ -1,172 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 1 - Lesson 1</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 1 - Lesson 1: Greetings and Introductions</title>
   <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #2ecc71;
+      --bg-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
     }
-    h1, h2 {
-      color: #2c3e50;
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    .classroom-img {
+
+    h1 {
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-image {
       width: 100%;
-      max-height: 400px;
+      max-height: 350px;
       object-fit: cover;
       border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .dialogue-box {
-      background: #fff;
-      border-left: 4px solid #3498db;
-      padding: 15px 20px;
       margin-bottom: 25px;
-      border-radius: 4px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-    .speaker {
-      font-weight: bold;
-      color: #2c3e50;
+
+    .step-card {
+      background: #f1f7fe;
+      border-left: 5px solid var(--secondary-color);
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 0 8px 8px 0;
     }
+
+    .step-title {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .dialogue-box {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 15px;
+    }
+
     .line {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
     }
-    button.play-btn {
-      background-color: #3498db;
+
+    .speaker {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .audio-btn {
+      background-color: var(--secondary-color);
       color: white;
       border: none;
-      padding: 6px 14px;
-      border-radius: 4px;
+      padding: 6px 12px;
+      border-radius: 20px;
       cursor: pointer;
-      font-size: 0.9em;
+      font-size: 0.85rem;
       transition: background 0.2s;
-      flex-shrink: 0;
     }
-    button.play-btn:hover {
+
+    .audio-btn:hover {
       background-color: #2980b9;
+    }
+
+    .question-block {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .btn-submit {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-submit:hover {
+      background-color: #27ae60;
+    }
+
+    .mic-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+      color: var(--primary-color);
     }
   </style>
 </head>
 <body>
 
+<div class="container">
   <h1>Lesson 1: Greetings and Introductions</h1>
+  
+  <!-- Image -->
+  <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80" alt="Modern Classroom" class="hero-image" />
 
-  <!-- Imagen del aula -->
-  <img class="classroom-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1000&auto=format&fit=crop" alt="Modern Classroom">
+  <!-- STEP 1 -->
+  <div class="step-card">
+    <h2 class="step-title">Step 1: Read & Listen</h2>
+    <p>Read the dialogues and click the listen button to hear the correct pronunciation with two different voices.</p>
 
-  <!-- CONVERSATION 1 -->
-  <h2>Conversation 1</h2>
-  <div class="dialogue-box">
-    <div class="line">
-      <span><span class="speaker">Student:</span> Good morning teacher, may I come in?</span>
-      <button class="play-btn" onclick="speak('Good morning teacher, may I come in?', 'female')">🔊 Listen</button>
+    <h3>Conversation 1</h3>
+    <div class="dialogue-box">
+      <div class="line">
+        <span><span class="speaker">Student:</span> Good morning teacher, may I come in?</span>
+        <button class="audio-btn" onclick="speak('Good morning teacher, may I come in?', 'female1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Teacher Marisol:</span> Sure, come in. What's your name?</span>
+        <button class="audio-btn" onclick="speak('Sure, come in. What\'s your name?', 'female2')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Anna:</span> My name is Anna.</span>
+        <button class="audio-btn" onclick="speak('My name is Anna.', 'female1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Teacher Marisol:</span> Nice to meet you, I'm teacher Marisol. Can you spell your name?</span>
+        <button class="audio-btn" onclick="speak('Nice to meet you, I\'m teacher Marisol. Can you spell your name?', 'female2')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Anna:</span> A – N – N – A.</span>
+        <button class="audio-btn" onclick="speak('A N N A', 'female1')">🔊 Listen</button>
+      </div>
     </div>
-    <div class="line">
-      <span><span class="speaker">Teacher Marisol:</span> Sure, come in. What's your name?</span>
-      <button class="play-btn" onclick="speak('Sure, come in. What is your name?', 'female')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Anna:</span> My name is Anna.</span>
-      <button class="play-btn" onclick="speak('My name is Anna.', 'female')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Teacher Marisol:</span> Nice to meet you, I'm teacher Marisol. Can you spell your name?</span>
-      <button class="play-btn" onclick="speak('Nice to meet you, I am teacher Marisol. Can you spell your name?', 'female')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Anna:</span> A – N – N – A.</span>
-      <button class="play-btn" onclick="speak('A, N, N, A', 'female')">🔊 Listen</button>
+
+    <h3>Conversation 2</h3>
+    <div class="dialogue-box">
+      <div class="line">
+        <span><span class="speaker">Jeffrey:</span> Good evening Abby.</span>
+        <button class="audio-btn" onclick="speak('Good evening Abby.', 'male1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Abby:</span> Hi Jeffrey, how are you?</span>
+        <button class="audio-btn" onclick="speak('Hi Jeffrey, how are you?', 'female1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Jeffrey:</span> I'm fine, thank you. This is Alex, a new student.</span>
+        <button class="audio-btn" onclick="speak('I\'m fine, thank you. This is Alex, a new student.', 'male1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Abby:</span> Nice to meet you, Alex.</span>
+        <button class="audio-btn" onclick="speak('Nice to meet you, Alex.', 'female1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Alex:</span> Nice to meet you too.</span>
+        <button class="audio-btn" onclick="speak('Nice to meet you too.', 'male2')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Jeffrey:</span> He wants to book his next appointment.</span>
+        <button class="audio-btn" onclick="speak('He wants to book his next appointment.', 'male1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Abby:</span> Sure! What is your last name?</span>
+        <button class="audio-btn" onclick="speak('Sure! What is your last name?', 'female1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Alex:</span> Smith.</span>
+        <button class="audio-btn" onclick="speak('Smith.', 'male2')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Abby:</span> How do you spell that?</span>
+        <button class="audio-btn" onclick="speak('How do you spell that?', 'female1')">🔊 Listen</button>
+      </div>
+      <div class="line">
+        <span><span class="speaker">Alex:</span> S – M – I – T – H.</span>
+        <button class="audio-btn" onclick="speak('S M I T H', 'male2')">🔊 Listen</button>
+      </div>
     </div>
   </div>
 
-  <!-- CONVERSATION 2 -->
-  <h2>Conversation 2</h2>
-  <div class="dialogue-box">
-    <div class="line">
-      <span><span class="speaker">Jeffrey:</span> Good evening Abby.</span>
-      <button class="play-btn" onclick="speak('Good evening Abby.', 'male')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Abby:</span> Hi Jeffrey, how are you?</span>
-      <button class="play-btn" onclick="speak('Hi Jeffrey, how are you?', 'female')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Jeffrey:</span> I'm fine, thank you. This is Alex, a new student.</span>
-      <button class="play-btn" onclick="speak('I am fine, thank you. This is Alex, a new student.', 'male')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Abby:</span> Nice to meet you, Alex.</span>
-      <button class="play-btn" onclick="speak('Nice to meet you, Alex.', 'female')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Alex:</span> Nice to meet you too.</span>
-      <button class="play-btn" onclick="speak('Nice to meet you too.', 'male')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Jeffrey:</span> He wants to book his next appointment.</span>
-      <button class="play-btn" onclick="speak('He wants to book his next appointment.', 'male')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Abby:</span> Sure! What is your last name?</span>
-      <button class="play-btn" onclick="speak('Sure! What is your last name?', 'female')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Alex:</span> Smith.</span>
-      <button class="play-btn" onclick="speak('Smith.', 'male')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Abby:</span> How do you spell that?</span>
-      <button class="play-btn" onclick="speak('How do you spell that?', 'female')">🔊 Listen</button>
-    </div>
-    <div class="line">
-      <span><span class="speaker">Alex:</span> S – M – I – T – H.</span>
-      <button class="play-btn" onclick="speak('S, M, I, T, H', 'male')">🔊 Listen</button>
-    </div>
+  <!-- STEP 2 -->
+  <div class="step-card">
+    <h2 class="step-title">Step 2: Key Vocabulary & Expressions</h2>
+    <ul>
+      <li><strong>Greetings:</strong> Good morning, Good evening, Hi</li>
+      <li><strong>Introductions:</strong> My name is..., This is...</li>
+      <li><strong>Polite Expressions:</strong> Nice to meet you, May I come in?, Thank you</li>
+      <li><strong>Spelling:</strong> "How do you spell that?"</li>
+    </ul>
   </div>
 
-  <script>
-    function speak(text, gender) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        
-        const voices = window.speechSynthesis.getVoices();
-        const enVoices = voices.filter(v => v.lang.startsWith('en'));
-        
-        if (enVoices.length > 0) {
-          if (gender === 'female') {
-            const femaleVoice = enVoices.find(v => v.name.includes('Female') || v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Google US English'));
-            utterance.voice = femaleVoice || enVoices[0];
-          } else {
-            const maleVoice = enVoices.find(v => v.name.includes('Male') || v.name.includes('David') || v.name.includes('Alex'));
-            utterance.voice = maleVoice || enVoices[0];
-          }
+  <!-- STEP 3 -->
+  <div class="step-card">
+    <h2 class="step-title">Step 3: Comprehension Check</h2>
+    <form id="quizForm">
+      <div class="question-block">
+        <label>1. What is the new student's name in Conversation 1?</label>
+        <input type="text" id="q1" placeholder="Type your answer..." />
+      </div>
+      <div class="question-block">
+        <label>2. What is Alex's last name?</label>
+        <input type="text" id="q2" placeholder="Type your answer..." />
+      </div>
+      <div class="question-block">
+        <label>3. How do you spell Alex's last name?</label>
+        <input type="text" id="q3" placeholder="Type your answer..." />
+      </div>
+      <button type="button" class="btn-submit" onclick="checkAnswers()">Check Answers</button>
+    </form>
+    <div id="quizFeedback" class="feedback"></div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card">
+    <h2 class="step-title">Step 4: Speaking & Practice</h2>
+    <p>Answer the question out loud using voice input or type your response below:</p>
+    <p><strong>Question: "What is your name and how do you spell it?"</strong></p>
+    
+    <button class="mic-btn" onclick="startVoiceRecognition()">🎙️ Speak Answer (Voice Input)</button>
+    <textarea id="speakingAnswer" rows="3" placeholder="Your spoken or written response will appear here..."></textarea>
+    <br/><br/>
+    <button class="btn-submit" onclick="submitSpeaking()">Submit Practice</button>
+    <div id="speakingFeedback" class="feedback"></div>
+  </div>
+
+</div>
+
+<script>
+  // Voice Synthesis (Two Voice Differentiation)
+  function speak(text, voiceType) {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+
+      const voices = window.speechSynthesis.getVoices();
+      const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+
+      if (englishVoices.length > 0) {
+        if (voiceType.startsWith('female')) {
+          utterance.voice = englishVoices.find(v => v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Female')) || englishVoices[0];
+          utterance.pitch = 1.2;
+        } else {
+          utterance.voice = englishVoices.find(v => v.name.includes('David') || v.name.includes('Male')) || englishVoices[1] || englishVoices[0];
+          utterance.pitch = 0.9;
         }
-        
-        window.speechSynthesis.speak(utterance);
-      } else {
-        alert('Your browser does not support text-to-speech.');
       }
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert('Text-to-speech is not supported in this browser.');
     }
+  }
 
+  // Pre-load voices
+  if ('speechSynthesis' in window) {
     window.speechSynthesis.onvoiceschanged = () => {
       window.speechSynthesis.getVoices();
     };
-  </script>
+  }
+
+  // Step 3 Answer Validation
+  function checkAnswers() {
+    const q1 = document.getElementById('q1').value.trim().toLowerCase();
+    const q2 = document.getElementById('q2').value.trim().toLowerCase();
+    const q3 = document.getElementById('q3').value.trim().toLowerCase().replace(/[\s-]/g, '');
+
+    let score = 0;
+    if (q1.includes('anna')) score++;
+    if (q2.includes('smith')) score++;
+    if (q3.includes('smith')) score++;
+
+    const feedback = document.getElementById('quizFeedback');
+    if (score === 3) {
+      feedback.style.color = '#2ecc71';
+      feedback.textContent = 'Great job! All answers are correct (3/3).';
+    } else {
+      feedback.style.color = '#e74c3c';
+      feedback.textContent = `You got ${score} out of 3 correct. Please check your answers and try again.`;
+    }
+  }
+
+  // Step 4 Speech Recognition (Free Browser Web Speech API)
+  function startVoiceRecognition() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert('Voice recognition is not supported in this browser. Please type your answer or use Chrome.');
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+
+    recognition.onstart = function() {
+      document.getElementById('speakingFeedback').style.color = '#3498db';
+      document.getElementById('speakingFeedback').textContent = 'Listening... Speak now!';
+    };
+
+    recognition.onresult = function(event) {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById('speakingAnswer').value = transcript;
+      document.getElementById('speakingFeedback').style.color = '#2ecc71';
+      document.getElementById('speakingFeedback').textContent = 'Voice captured successfully!';
+    };
+
+    recognition.onerror = function(event) {
+      document.getElementById('speakingFeedback').style.color = '#e74c3c';
+      document.getElementById('speakingFeedback').textContent = 'Error capturing voice. Try again or type manually.';
+    };
+
+    recognition.start();
+  }
+
+  function submitSpeaking() {
+    const answer = document.getElementById('speakingAnswer').value.trim();
+    const feedback = document.getElementById('speakingFeedback');
+
+    if (answer.length > 0) {
+      feedback.style.color = '#2ecc71';
+      feedback.textContent = 'Awesome! Your response has been recorded for review.';
+    } else {
+      feedback.style.color = '#e74c3c';
+      feedback.textContent = 'Please record or type a response first.';
+    }
+  }
+</script>
 
 </body>
 </html>
