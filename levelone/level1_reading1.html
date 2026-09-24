@@ -23,7 +23,193 @@
   <h1>Lesson 1: Greetings and Introductions</h1>
   <p><em>(Lección 1: Saludos y Presentaciones)</em></p>
   <img src="image.png" alt="Classroom Photo" id="photo" style="max-width: 50%; height: auto; display: block; margin: 0 auto;">
+<!-- ================= VOCABULARY SECTION ================= -->
+<section id="vocabulary-section" style="max-width: 1100px; margin: 20px auto; padding: 20px; font-family: Arial, sans-serif;">
+  
+  <!-- Encabezado con Logo e Instrucciones -->
+  <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0056b3; padding-bottom: 15px; margin-bottom: 20px;">
+    <div>
+      <h2 style="margin: 0; color: #0056b3; font-size: 28px;">Vocabulary - Lesson 1</h2>
+      <p style="margin: 5px 0 0 0; color: #555; font-size: 15px;">
+        Look, listen, match, and repeat. <i>(Observa, escucha, relaciona y repite.)</i>
+      </p>
+    </div>
+    <!-- Reemplaza src con la ruta de tu logo -->
+    <img src="logo.png" alt="Logo" style="max-height: 50px; object-fit: contain;" />
+  </div>
 
+  <!-- Contenedor en Cuadrícula (Grid) -->
+  <div class="vocab-grid">
+
+    <!-- TARJETA DE EJEMPLO 1 -->
+    <div class="vocab-card">
+      <img src="images/pencil.jpg" alt="Pencil" loading="lazy" class="vocab-img" />
+      <div class="vocab-word">Pencil</div>
+      <div class="vocab-actions">
+        <button class="btn-listen" onclick="speakWord('Pencil')">🔊 Listen</button>
+        <button class="btn-practice" onclick="testPronunciation('Pencil', this)">🎙️ Speak</button>
+      </div>
+      <span class="feedback-msg"></span>
+    </div>
+
+    <!-- TARJETA DE EJEMPLO 2 -->
+    <div class="vocab-card">
+      <img src="images/book.jpg" alt="Book" loading="lazy" class="vocab-img" />
+      <div class="vocab-word">Book</div>
+      <div class="vocab-actions">
+        <button class="btn-listen" onclick="speakWord('Book')">🔊 Listen</button>
+        <button class="btn-practice" onclick="testPronunciation('Book', this)">🎙️ Speak</button>
+      </div>
+      <span class="feedback-msg"></span>
+    </div>
+
+    <!-- Puedes duplicar <div class="vocab-card">...</div> para agregar hasta 40 o 50 palabras -->
+
+  </div>
+</section>
+
+<!-- ESTILOS CSS -->
+<style>
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+  }
+
+  .vocab-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .vocab-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+
+  .vocab-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+  }
+
+  .vocab-word {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+  }
+
+  .vocab-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-listen, .btn-practice {
+    flex: 1;
+    padding: 6px 4px;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-listen {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .btn-listen:hover {
+    background-color: #218838;
+  }
+
+  .btn-practice {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .btn-practice:hover {
+    background-color: #0069d9;
+  }
+
+  .feedback-msg {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    min-height: 16px;
+  }
+</style>
+
+<!-- LÓGICA JAVASCRIPT -->
+<script>
+  // 1. Sintetizador de voz nativo (Escuchar pronunciación)
+  function speakWord(word) {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // Detiene cualquier audio previo
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9; // Velocidad ligeramente pausada para aprendizaje
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Tu navegador no soporta la función de voz.");
+    }
+  }
+
+  // 2. Reconocimiento de voz nativo (Práctica y Calificación)
+  function testPronunciation(targetWord, btnElement) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+      alert("Tu navegador no soporta el reconocimiento de voz. Te recomendamos usar Google Chrome.");
+      return;
+    }
+
+    const card = btnElement.closest('.vocab-card');
+    const feedback = card.querySelector('.feedback-msg');
+    
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    feedback.style.color = "#555";
+    feedback.textContent = "Listening...";
+
+    recognition.start();
+
+    recognition.onresult = (event) => {
+      const spokenWord = event.results[0][0].transcript.trim().toLowerCase();
+      const expectedWord = targetWord.trim().toLowerCase();
+
+      if (spokenWord === expectedWord) {
+        feedback.style.color = "#28a745";
+        feedback.textContent = "¡Correct! ✨";
+      } else {
+        feedback.style.color = "#dc3545";
+        feedback.textContent = `Try again (Said: "${spokenWord}")`;
+      }
+    };
+
+    recognition.onerror = (event) => {
+      feedback.style.color = "#dc3545";
+      feedback.textContent = "Error, try again";
+    };
+  }
+</script>
+<!-- ================= END VOCABULARY SECTION ================= -->
   <!-- PASO 1: ESCUCHAR -->
   <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
   <p>Read the dialogues and click the listen button to hear the correct pronunciation. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
