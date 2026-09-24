@@ -28,6 +28,16 @@
 <div id="vocabulary-section">
     <h2 style="font-family: Arial, sans-serif; color: #333;">Vocabulary - Lesson 1</h2>
     
+    <!-- Instrucciones bilingües -->
+    <div style="margin-bottom: 20px; font-family: Arial, sans-serif; color: #444; background-color: #e9ecef; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff;">
+        <p style="margin: 0 0 8px 0; font-size: 15px;">
+            <strong>Instructions:</strong> Listen to the words, relate them to the pictures, and practice your pronunciation.
+        </p>
+        <p style="margin: 0; font-size: 15px;">
+            <strong>Instrucciones:</strong> Escucha las palabras, relaciónalas con las imágenes y practica tu pronunciación.
+        </p>
+    </div>
+    
     <div class="vocabulary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; font-family: Arial, sans-serif; background-color: #f8f9fa; border-radius: 8px;">
         
         <!-- Palabra 1: School bag -->
@@ -77,6 +87,56 @@
     </div>
 </div>
 <!-- Fin de la sección de vocabulario -->
+
+<!-- Código JavaScript necesario para que los botones funcionen y califiquen -->
+<script>
+    // Función para el botón Listen
+    function speakWord(word) {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US'; 
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Función para el botón Practice que evalúa la pronunciación
+    function testPronunciation(word, buttonElement) {
+        const feedbackElement = buttonElement.nextElementSibling;
+        feedbackElement.style.color = '#333';
+        feedbackElement.textContent = 'Escuchando... 🎤';
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        if (!SpeechRecognition) {
+            feedbackElement.style.color = 'red';
+            feedbackElement.textContent = 'Tu navegador no soporta esta función.';
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript.toLowerCase().replace(/[.,!?]/g, '').trim();
+            const targetWord = word.toLowerCase();
+
+            if (transcript === targetWord) {
+                feedbackElement.style.color = 'green';
+                feedbackElement.textContent = '¡Excelente! ⭐';
+            } else {
+                feedbackElement.style.color = 'red';
+                feedbackElement.textContent = `Dijiste: "${transcript}". ¡Intenta de nuevo!`;
+            }
+        };
+
+        recognition.onerror = function(event) {
+            feedbackElement.style.color = 'red';
+            feedbackElement.textContent = 'No se escuchó bien. Intenta otra vez.';
+        };
+    }
+</script>
 
 <!-- Código JavaScript necesario para que los botones funcionen y califiquen -->
 <script>
