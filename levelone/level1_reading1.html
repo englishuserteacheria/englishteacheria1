@@ -1,112 +1,195 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 1 - Lesson 1: Greetings and Introductions</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-        }
-        .header-img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 10px 0;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .audio-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        .audio-btn:hover {
-            background-color: #45a049;
-        }
-        input[type="text"] {
-            padding: 5px;
-            margin: 5px 0;
-        }
-        button.action-btn {
-            background-color: #008CBA;
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1 - Lesson 1: Greetings and Introductions</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+    button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 4px; }
+    .btn-listen { background-color: #4CAF50; color: white; }
+    .btn-action { background-color: #008CBA; color: white; padding: 8px 16px; margin-top: 10px; }
+    .btn-speak { background-color: #ff9800; color: white; padding: 8px 16px; }
+    .input-field { margin: 8px 0; padding: 6px; width: 250px; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+  </style>
 </head>
 <body>
 
-    <!-- Logo de la escuela -->
-    <img src="english-degradado.jpg" alt="School Logo" class="header-img">
+  <!-- ENCABEZADO Y FOTO -->
+  <img src="logo.png" alt="School Logo" id="logo" style="max-height: 80px;"><br>
+  <h1>Lesson 1: Greetings and Introductions</h1>
+  <p><em>(Lección 1: Saludos y Presentaciones)</em></p>
+  <img src="classroom.jpg" alt="Classroom Photo" id="photo" style="max-width: 100%; height: auto;">
 
-    <h1>Lesson 1: Greetings and Introductions</h1>
-    <p><em>(Lección 1: Saludos y Presentaciones)</em></p>
+  <!-- PASO 1: ESCUCHAR -->
+  <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
+  <p>Read the dialogues and click the listen button to hear the correct pronunciation. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
 
-    <!-- Foto del salón -->
-    <img src="image.png" alt="Classroom Photo" class="header-img">
+  <h3>Conversation 1</h3>
+  <p><strong>Student:</strong> Good morning teacher, may I come in? 
+    <button class="btn-listen" onclick="speak('Good morning teacher, may I come in?')">🔊 Listen</button>
+  </p>
+  <p><strong>Teacher Marisol:</strong> Sure, come in. What's your name? 
+    <button class="btn-listen" onclick="speak('Sure, come in. What is your name?')">🔊 Listen</button>
+  </p>
+  <p><strong>Anna:</strong> My name is Anna. 
+    <button class="btn-listen" onclick="speak('My name is Anna.')">🔊 Listen</button>
+  </p>
+  <p><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? 
+    <button class="btn-listen" onclick="speak('Nice to meet you, I am teacher Marisol. Can you spell your name?')">🔊 Listen</button>
+  </p>
+  <p><strong>Anna:</strong> A – N – N – A. 
+    <button class="btn-listen" onclick="speak('A, N, N, A')">🔊 Listen</button>
+  </p>
 
-    <div class="section">
-        <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
-        <p>Read the dialogues and click the listen button to hear the correct pronunciation. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
+  <h3>Conversation 2</h3>
+  <p><strong>Jeffrey:</strong> Good evening Abby. 
+    <button class="btn-listen" onclick="speak('Good evening Abby.')">🔊 Listen</button>
+  </p>
+  <p><strong>Abby:</strong> Hi Jeffrey, how are you? 
+    <button class="btn-listen" onclick="speak('Hi Jeffrey, how are you?')">🔊 Listen</button>
+  </p>
+  <p><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. 
+    <button class="btn-listen" onclick="speak('I am fine, thank you. This is Alex, a new student.')">🔊 Listen</button>
+  </p>
+  <p><strong>Abby:</strong> Nice to meet you, Alex. 
+    <button class="btn-listen" onclick="speak('Nice to meet you, Alex.')">🔊 Listen</button>
+  </p>
+  <p><strong>Alex:</strong> Nice to meet you too. 
+    <button class="btn-listen" onclick="speak('Nice to meet you too.')">🔊 Listen</button>
+  </p>
+  <p><strong>Jeffrey:</strong> He wants to book his next appointment. 
+    <button class="btn-listen" onclick="speak('He wants to book his next appointment.')">🔊 Listen</button>
+  </p>
+  <p><strong>Abby:</strong> Sure! What is your last name? 
+    <button class="btn-listen" onclick="speak('Sure! What is your last name?')">🔊 Listen</button>
+  </p>
+  <p><strong>Alex:</strong> Smith. 
+    <button class="btn-listen" onclick="speak('Smith.')">🔊 Listen</button>
+  </p>
+  <p><strong>Abby:</strong> How do you spell that? 
+    <button class="btn-listen" onclick="speak('How do you spell that?')">🔊 Listen</button>
+  </p>
+  <p><strong>Alex:</strong> S – M – I – T – H. 
+    <button class="btn-listen" onclick="speak('S, M, I, T, H')">🔊 Listen</button>
+  </p>
 
-        <h3>Conversation 1</h3>
-        <p><strong>Student:</strong> Good morning teacher, may I come in? <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Teacher Marisol:</strong> Sure, come in. What's your name? <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Anna:</strong> My name is Anna. <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Anna:</strong> A – N – N – A. <button class="audio-btn">🔊 Listen</button></p>
+  <!-- PASO 2: VOCABULARIO -->
+  <h2>Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
+  <ul>
+    <li><strong>Greetings:</strong> Good morning, Good evening, Hi</li>
+    <li><strong>Introductions:</strong> My name is..., This is...</li>
+    <li><strong>Polite Expressions:</strong> Nice to meet you, May I come in?, Thank you</li>
+    <li><strong>Spelling:</strong> "How do you spell that?"</li>
+  </ul>
 
-        <h3>Conversation 2</h3>
-        <p><strong>Jeffrey:</strong> Good evening Abby. <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> Hi Jeffrey, how are you? <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> Nice to meet you, Alex. <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Alex:</strong> Nice to meet you too. <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Jeffrey:</strong> He wants to book his next appointment. <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> Sure! What is your last name? <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Alex:</strong> Smith. <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> How do you spell that? <button class="audio-btn">🔊 Listen</button></p>
-        <p><strong>Alex:</strong> S – M – I – T – H. <button class="audio-btn">🔊 Listen</button></p>
-    </div>
+  <!-- PASO 3: COMPROBACIÓN -->
+  <h2>Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
+  <ol>
+    <li>What is the new student's name in Conversation 1?<br>
+      <input type="text" id="q1" class="input-field">
+    </li>
+    <li>What is Alex's last name?<br>
+      <input type="text" id="q2" class="input-field">
+    </li>
+    <li>How do you spell Alex's last name?<br>
+      <input type="text" id="q3" class="input-field">
+    </li>
+  </ol>
+  <button class="btn-action" onclick="checkAnswers()">Check Answers</button>
+  <div id="check-feedback" class="feedback"></div>
 
-    <div class="section">
-        <h2>Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
-        <ul>
-            <li><strong>Greetings:</strong> Good morning, Good evening, Hi</li>
-            <li><strong>Introductions:</strong> My name is..., This is...</li>
-            <li><strong>Polite Expressions:</strong> Nice to meet you, May I come in?, Thank you</li>
-            <li><strong>Spelling:</strong> "How do you spell that?"</li>
-        </ul>
-    </div>
+  <!-- PASO 4: PRÁCTICA Y RECONOCIMIENTO DE VOZ -->
+  <h2>Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
+  <p>Answer the question out loud using voice input or type your response below: <em>(Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta abajo:)</em></p>
+  <p><strong>Question: "What is your name and how do you spell it?"</strong></p>
 
-    <div class="section">
-        <h2>Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
-        <ol>
-            <li>What is the new student's name in Conversation 1? <input type="text" id="q1"></li>
-            <li>What is Alex's last name? <input type="text" id="q2"></li>
-            <li>How do you spell Alex's last name? <input type="text" id="q3"></li>
-        </ol>
-        <button class="action-btn">Check Answers</button>
-    </div>
+  <button class="btn-speak" onclick="startDictation()">🎙️ Speak Answer (Voice Input)</button><br><br>
+  <textarea id="practice-answer" rows="3" cols="40" placeholder="Your recorded or typed answer will appear here..."></textarea><br>
+  <button class="btn-action" onclick="submitPractice()">Submit Practice</button>
+  <div id="practice-feedback" class="feedback"></div>
 
-    <div class="section">
-        <h2>Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
-        <p>Answer the question out loud using voice input or type your response below: <em>(Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta abajo:)</em></p>
-        <p><strong>Question: "What is your name and how do you spell it?"</strong></p>
-        <button class="action-btn">🎙️ Speak Answer (Voice Input)</button><br><br>
-        <input type="text" id="speaking-ans" style="width: 300px;"><br><br>
-        <button class="action-btn">Submit Practice</button>
-    </div>
+  <!-- JAVASCRIPT FUNCIONAL -->
+  <script>
+    // 1. Funcionalidad de Escuchar (Audio / Text-to-Speech)
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Detener audios anteriores
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9; // Velocidad ligeramente pausada para aprendizaje
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('Tu navegador no soporta síntesis de voz.');
+      }
+    }
 
+    // 2. Funcionalidad de Verificar Respuestas (Check Answers)
+    function checkAnswers() {
+      const q1 = document.getElementById('q1').value.trim().toLowerCase();
+      const q2 = document.getElementById('q2').value.trim().toLowerCase();
+      const q3 = document.getElementById('q3').value.trim().toLowerCase().replace(/\s+/g, '');
+
+      let score = 0;
+      let total = 3;
+
+      if (q1 === 'anna') score++;
+      if (q2 === 'smith') score++;
+      if (q3 === 's-m-i-t-h' || q3 === 'smith') score++;
+
+      const feedbackEl = document.getElementById('check-feedback');
+      if (score === total) {
+        feedbackEl.className = 'feedback correct';
+        feedbackEl.innerText = `¡Excelente! Obtuviste ${score}/${total} respuestas correctas.`;
+      } else {
+        feedbackEl.className = 'feedback incorrect';
+        feedbackEl.innerText = `Tienes ${score}/${total} respuestas correctas. Revisa tus respuestas e inténtalo de nuevo.`;
+      }
+    }
+
+    // 3. Funcionalidad de Grabación de Voz (Speak Answer - Speech Recognition)
+    function startDictation() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('El reconocimiento de voz no está soportado en este navegador. Intenta con Google Chrome o Microsoft Edge.');
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+
+      const practiceInput = document.getElementById('practice-answer');
+      practiceInput.placeholder = "Listening... Speak now!";
+
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        practiceInput.value = transcript;
+      };
+
+      recognition.onerror = function(event) {
+        alert('Error al reconocer la voz: ' + event.error);
+      };
+    }
+
+    // 4. Funcionalidad de Enviar Práctica (Submit Practice)
+    function submitPractice() {
+      const answer = document.getElementById('practice-answer').value.trim();
+      const feedbackEl = document.getElementById('practice-feedback');
+
+      if (answer.length === 0) {
+        feedbackEl.className = 'feedback incorrect';
+        feedbackEl.innerText = 'Por favor escribe o graba una respuesta antes de enviar.';
+      } else {
+        feedbackEl.className = 'feedback correct';
+        feedbackEl.innerText = '¡Práctica enviada con éxito! Tu respuesta ha sido registrada.';
+      }
+    }
+  </script>
 </body>
 </html>
