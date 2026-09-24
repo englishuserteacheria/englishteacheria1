@@ -28,14 +28,14 @@
     }
     .lesson-title {
       font-size: 2em;
-      margin: 5px 0;
+      margin: 5px 0 0 0;
       color: #111111;
     }
     .lesson-subtitle {
       font-size: 1.1em;
       color: #555555;
-      margin-top: 0;
-      margin-bottom: 15px;
+      margin-top: 5px;
+      margin-bottom: 20px;
       font-weight: normal;
     }
     .classroom-photo {
@@ -139,18 +139,19 @@
 
   <!-- 1. Logo superior -->
   <header>
-    <img src="logo.png" alt="School Logo" class="logo">
+    <img src="../logo.png" alt="School Logo" class="logo">
+    <!-- Título principal -->
     <h1 class="lesson-title">Lesson 1: Greetings and Introductions</h1>
-    <!-- 2. Instrucción en español debajo del título -->
+    <!-- 2. Traducción debajo en un nuevo renglón -->
     <p class="lesson-subtitle">(Lección 1: Saludos y Presentaciones)</p>
   </header>
 
   <!-- 3. Foto del salón -->
-  <img src="classroom.jpg" alt="Classroom Photo" class="classroom-photo">
+  <img src="../classroom.jpg" alt="Classroom Photo" class="classroom-photo">
 
-  <!-- 4. Paso 1 con instrucción bilingüe -->
+  <!-- 4. Paso 1 (Step 1) -->
   <div class="section">
-    <h2 class="section-title">Step 1: Read & Listen <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 1: Lee y Escucha)</span></h2>
+    <h2 class="section-title">Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
     <p>Read the dialogues and click the listen button to hear the correct pronunciation. <br>
     <em style="color: #666;">(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
 
@@ -219,9 +220,9 @@
     </div>
   </div>
 
-  <!-- Paso 2 con instrucción bilingüe -->
+  <!-- Paso 2 (Step 2) -->
   <div class="section">
-    <h2 class="section-title">Step 2: Key Vocabulary & Expressions <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 2: Vocabulario Clave y Expresiones)</span></h2>
+    <h2 class="section-title">Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
     <ul>
       <li><strong>Greetings:</strong> Good morning, Good evening, Hi</li>
       <li><strong>Introductions:</strong> My name is..., This is...</li>
@@ -230,9 +231,9 @@
     </ul>
   </div>
 
-  <!-- Paso 3 con comprobación de respuestas -->
+  <!-- Paso 3 (Step 3) -->
   <div class="section">
-    <h2 class="section-title">Step 3: Comprehension Check <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 3: Comprobación de Comprensión)</span></h2>
+    <h2 class="section-title">Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
     
     <label for="q1">1. What is the new student's name in Conversation 1?</label>
     <input type="text" id="q1" placeholder="Type your answer here...">
@@ -243,31 +244,31 @@
     <label for="q3">3. How do you spell Alex's last name?</label>
     <input type="text" id="q3" placeholder="Type your answer here...">
 
-    <!-- Botón Check Answers funcional -->
+    <!-- Botón de comprobación funcional -->
     <button class="btn-action" onclick="checkAnswers()">Check Answers</button>
     <div id="step3-feedback" class="feedback"></div>
   </div>
 
-  <!-- Paso 4 con reconocimiento de voz y envío de práctica -->
+  <!-- Paso 4 (Step 4) -->
   <div class="section">
-    <h2 class="section-title">Step 4: Speaking & Practice <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 4: Expresión Oral y Práctica)</span></h2>
+    <h2 class="section-title">Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
     <p>Answer the question out loud using voice input or type your response below: <br>
     <em style="color: #666;">(Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta abajo:)</em></p>
     
     <p><strong>Question: "What is your name and how do you spell it?"</strong></p>
     
-    <!-- Botón de voz funcional -->
+    <!-- Botón de voz -->
     <button class="btn-voice" id="btn-record" onclick="startVoiceRecognition()">🎙️ Speak Answer (Voice Input)</button>
     
     <input type="text" id="practice-input" placeholder="Your spoken or written response will appear here..." style="margin-top: 15px;">
     
-    <!-- Botón de enviar práctica funcional -->
+    <!-- Botón para enviar práctica -->
     <button class="btn-action" onclick="submitPractice()">Submit Practice</button>
     <div id="step4-feedback" class="feedback"></div>
   </div>
 
   <script>
-    // 1. Función de Audio (SpeechSynthesis)
+    // Sintesis de Voz (Audio)
     function playAudio(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -280,7 +281,7 @@
       }
     }
 
-    // 2. Función del Botón "Check Answers" (Paso 3)
+    // Comprobar respuestas (Paso 3)
     function checkAnswers() {
       const q1 = document.getElementById('q1').value.trim().toLowerCase();
       const q2 = document.getElementById('q2').value.trim().toLowerCase();
@@ -303,7 +304,7 @@
       }
     }
 
-    // 3. Función del Botón "Speak Answer" (Paso 4 - SpeechRecognition)
+    // Reconocimiento de Voz (Paso 4)
     function startVoiceRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const btn = document.getElementById('btn-record');
@@ -340,7 +341,7 @@
       recognition.start();
     }
 
-    // 4. Función del Botón "Submit Practice" (Paso 4)
+    // Enviar Práctica (Paso 4)
     function submitPractice() {
       const inputVal = document.getElementById('practice-input').value.trim();
       const feedback = document.getElementById('step4-feedback');
