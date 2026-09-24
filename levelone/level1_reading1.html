@@ -11,7 +11,8 @@
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
-      color: #333;
+      color: #333333;
+      background-color: #ffffff;
     }
     header {
       text-align: center;
@@ -21,23 +22,44 @@
       max-width: 180px;
       height: auto;
       margin-bottom: 15px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .hero-photo {
+    .lesson-title {
+      font-size: 2em;
+      margin: 5px 0;
+      color: #111111;
+    }
+    .lesson-subtitle {
+      font-size: 1.1em;
+      color: #555555;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: normal;
+    }
+    .classroom-photo {
       width: 100%;
-      max-height: 300px;
+      max-height: 350px;
       object-fit: cover;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      display: block;
     }
     .section {
-      background: #f9f9f9;
-      border-left: 4px solid #28a745;
-      padding: 15px 20px;
-      margin-bottom: 20px;
-      border-radius: 4px;
+      background: #f8f9fa;
+      border-left: 5px solid #28a745;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .section-title {
+      margin-top: 0;
+      color: #1b5e20;
     }
     .dialogue-line {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -45,53 +67,92 @@
     }
     button.btn-listen {
       background-color: #007bff;
-      color: white;
+      color: #ffffff;
       border: none;
-      padding: 4px 10px;
+      padding: 6px 12px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 0.9em;
+      font-weight: bold;
     }
     button.btn-listen:hover {
       background-color: #0056b3;
     }
     input[type="text"] {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       margin-top: 5px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      border: 1px solid #cccccc;
       border-radius: 4px;
       box-sizing: border-box;
+      font-size: 1em;
+      color: #222222;
+      background-color: #ffffff;
     }
     .btn-action {
       background-color: #28a745;
-      color: white;
+      color: #ffffff;
       border: none;
-      padding: 10px 15px;
+      padding: 12px 20px;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
     }
     .btn-action:hover {
       background-color: #218838;
+    }
+    .btn-voice {
+      background-color: #17a2b8;
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+    }
+    .btn-voice:hover {
+      background-color: #138496;
+    }
+    .feedback {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      display: none;
+    }
+    .feedback-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .feedback-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
     }
   </style>
 </head>
 <body>
 
+  <!-- 1. Logo superior -->
   <header>
-    <!-- Sustituye logo.png por la ruta real de tu archivo de logo -->
-    <img src="logo.png" alt="Logo" class="logo">
-    <h1>Lesson 1: Greetings and Introductions</h1>
+    <img src="logo.png" alt="School Logo" class="logo">
+    <h1 class="lesson-title">Lesson 1: Greetings and Introductions</h1>
+    <!-- 2. Instrucción en español debajo del título -->
+    <p class="lesson-subtitle">(Lección 1: Saludos y Presentaciones)</p>
   </header>
 
-  <!-- Sustituye header-photo.jpg por la ruta real de la foto -->
-  <img src="header-photo.jpg" alt="Lesson Cover" class="hero-photo">
+  <!-- 3. Foto del salón -->
+  <img src="classroom.jpg" alt="Classroom Photo" class="classroom-photo">
 
-  <!-- Step 1 -->
+  <!-- 4. Paso 1 con instrucción bilingüe -->
   <div class="section">
-    <h2>Step 1: Read & Listen</h2>
-    <p>Read the dialogues and click the listen button to hear the correct pronunciation.</p>
+    <h2 class="section-title">Step 1: Read & Listen <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 1: Lee y Escucha)</span></h2>
+    <p>Read the dialogues and click the listen button to hear the correct pronunciation. <br>
+    <em style="color: #666;">(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
 
     <h3>Conversation 1</h3>
     <div class="dialogue-line">
@@ -158,9 +219,9 @@
     </div>
   </div>
 
-  <!-- Step 2 -->
+  <!-- Paso 2 con instrucción bilingüe -->
   <div class="section">
-    <h2>Step 2: Key Vocabulary & Expressions</h2>
+    <h2 class="section-title">Step 2: Key Vocabulary & Expressions <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 2: Vocabulario Clave y Expresiones)</span></h2>
     <ul>
       <li><strong>Greetings:</strong> Good morning, Good evening, Hi</li>
       <li><strong>Introductions:</strong> My name is..., This is...</li>
@@ -169,9 +230,10 @@
     </ul>
   </div>
 
-  <!-- Step 3 -->
+  <!-- Paso 3 con comprobación de respuestas -->
   <div class="section">
-    <h2>Step 3: Comprehension Check</h2>
+    <h2 class="section-title">Step 3: Comprehension Check <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 3: Comprobación de Comprensión)</span></h2>
+    
     <label for="q1">1. What is the new student's name in Conversation 1?</label>
     <input type="text" id="q1" placeholder="Type your answer here...">
 
@@ -181,23 +243,31 @@
     <label for="q3">3. How do you spell Alex's last name?</label>
     <input type="text" id="q3" placeholder="Type your answer here...">
 
-    <button class="btn-action">Check Answers</button>
+    <!-- Botón Check Answers funcional -->
+    <button class="btn-action" onclick="checkAnswers()">Check Answers</button>
+    <div id="step3-feedback" class="feedback"></div>
   </div>
 
-  <!-- Step 4 -->
+  <!-- Paso 4 con reconocimiento de voz y envío de práctica -->
   <div class="section">
-    <h2>Step 4: Speaking & Practice</h2>
-    <p>Answer the question out loud using voice input or type your response below:</p>
+    <h2 class="section-title">Step 4: Speaking & Practice <span style="font-weight: normal; font-size: 0.85em; color: #555;">(Paso 4: Expresión Oral y Práctica)</span></h2>
+    <p>Answer the question out loud using voice input or type your response below: <br>
+    <em style="color: #666;">(Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta abajo:)</em></p>
+    
     <p><strong>Question: "What is your name and how do you spell it?"</strong></p>
     
-    <button class="btn-action" style="background-color: #17a2b8;">🎙️ Speak Answer (Voice Input)</button>
+    <!-- Botón de voz funcional -->
+    <button class="btn-voice" id="btn-record" onclick="startVoiceRecognition()">🎙️ Speak Answer (Voice Input)</button>
     
-    <input type="text" placeholder="Your spoken or written response will appear here..." style="margin-top: 15px;">
+    <input type="text" id="practice-input" placeholder="Your spoken or written response will appear here..." style="margin-top: 15px;">
     
-    <button class="btn-action">Submit Practice</button>
+    <!-- Botón de enviar práctica funcional -->
+    <button class="btn-action" onclick="submitPractice()">Submit Practice</button>
+    <div id="step4-feedback" class="feedback"></div>
   </div>
 
   <script>
+    // 1. Función de Audio (SpeechSynthesis)
     function playAudio(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -207,6 +277,81 @@
         window.speechSynthesis.speak(utterance);
       } else {
         alert('Your browser does not support text-to-speech.');
+      }
+    }
+
+    // 2. Función del Botón "Check Answers" (Paso 3)
+    function checkAnswers() {
+      const q1 = document.getElementById('q1').value.trim().toLowerCase();
+      const q2 = document.getElementById('q2').value.trim().toLowerCase();
+      const q3 = document.getElementById('q3').value.trim().toLowerCase().replace(/[\s–-]/g, '');
+
+      const feedback = document.getElementById('step3-feedback');
+      feedback.style.display = 'block';
+
+      let correctCount = 0;
+      if (q1.includes('anna')) correctCount++;
+      if (q2.includes('smith')) correctCount++;
+      if (q3.includes('smith')) correctCount++;
+
+      if (correctCount === 3) {
+        feedback.className = 'feedback feedback-success';
+        feedback.textContent = '¡Excelente! Todas las respuestas son correctas. (3/3)';
+      } else {
+        feedback.className = 'feedback feedback-error';
+        feedback.textContent = `Tienes ${correctCount} de 3 respuestas correctas. Revisa tus respuestas e inténtalo de nuevo.`;
+      }
+    }
+
+    // 3. Función del Botón "Speak Answer" (Paso 4 - SpeechRecognition)
+    function startVoiceRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const btn = document.getElementById('btn-record');
+      const input = document.getElementById('practice-input');
+
+      if (!SpeechRecognition) {
+        alert('Voice recognition is not supported in this browser. Please use Google Chrome.');
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+
+      recognition.onstart = function() {
+        btn.textContent = '🎙️ Listening... Speak now!';
+        btn.style.backgroundColor = '#dc3545';
+      };
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        input.value = transcript;
+      };
+
+      recognition.onerror = function(event) {
+        alert('Error detecting audio: ' + event.error);
+      };
+
+      recognition.onend = function() {
+        btn.textContent = '🎙️ Speak Answer (Voice Input)';
+        btn.style.backgroundColor = '#17a2b8';
+      };
+
+      recognition.start();
+    }
+
+    // 4. Función del Botón "Submit Practice" (Paso 4)
+    function submitPractice() {
+      const inputVal = document.getElementById('practice-input').value.trim();
+      const feedback = document.getElementById('step4-feedback');
+      feedback.style.display = 'block';
+
+      if (inputVal.length > 2) {
+        feedback.className = 'feedback feedback-success';
+        feedback.textContent = '¡Práctica enviada con éxito! Tu respuesta ha sido registrada.';
+      } else {
+        feedback.className = 'feedback feedback-error';
+        feedback.textContent = 'Por favor habla o escribe una respuesta antes de enviar.';
       }
     }
   </script>
