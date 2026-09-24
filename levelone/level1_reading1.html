@@ -1,211 +1,214 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Level 1 - Lesson 1: Greetings and Introductions</title>
   <style>
-    /* Estilos Generales Base */
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f7f6;
-      color: #333;
-      position: relative;
-    }
-
-    /* CAMBIO 1: Logotipo en la esquina superior derecha */
-    .top-logo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      max-width: 120px;
-      height: auto;
-      z-index: 10;
-    }
-
-    .container {
+      line-height: 1.6;
       max-width: 800px;
       margin: 0 auto;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    /* CAMBIO 2: Título centrado con inglés arriba y español abajo */
-    .lesson-header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding-top: 10px;
-    }
-    
-    .lesson-header h1 {
-      margin: 0;
-      font-size: 26px;
-      color: #1a5276;
-    }
-
-    .lesson-header p.subtitle {
-      margin-top: 6px;
-      font-size: 18px;
-      color: #5d6d7e;
-      font-weight: bold;
-    }
-
-    /* Estilos de las Secciones */
-    .step-section {
-      margin-bottom: 30px;
       padding: 20px;
-      border-left: 4px solid #27ae60;
-      background-color: #fbfcfc;
-      border-radius: 4px;
+      color: #333;
     }
-
-    .step-title {
-      font-size: 20px;
-      color: #27ae60;
-      margin-top: 0;
+    header {
+      text-align: center;
+      margin-bottom: 20px;
     }
-
-    .conversation-box {
-      background: #eaf2f8;
-      padding: 15px;
-      border-radius: 6px;
+    .logo {
+      max-width: 180px;
+      height: auto;
       margin-bottom: 15px;
     }
-
-    .listen-btn {
-      background-color: #2980b9;
+    .hero-photo {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .section {
+      background: #f9f9f9;
+      border-left: 4px solid #28a745;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    .dialogue-line {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    button.btn-listen {
+      background-color: #007bff;
       color: white;
       border: none;
-      padding: 4px 8px;
+      padding: 4px 10px;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 0.9em;
     }
-
+    button.btn-listen:hover {
+      background-color: #0056b3;
+    }
     input[type="text"] {
       width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      margin-bottom: 12px;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
     }
-
-    .action-btn {
-      background-color: #27ae60;
+    .btn-action {
+      background-color: #28a745;
       color: white;
-      padding: 10px 20px;
       border: none;
+      padding: 10px 15px;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 16px;
     }
-
-    /* CAMBIO 3: Estilo para el contenedor de respuesta del Paso 4 */
-    .response-placeholder {
-      background-color: #f2f4f4;
-      border: 1px dashed #bdc3c7;
-      padding: 15px;
-      border-radius: 4px;
-      color: #7f8c8d;
-      font-style: italic;
-      margin-top: 10px;
-      margin-bottom: 15px;
+    .btn-action:hover {
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
 
-  <!-- CAMBIO 1: Logo posicionado en la esquina superior derecha -->
-  <img src="logo.png" alt="Logo" class="top-logo">
+  <header>
+    <!-- Sustituye logo.png por la ruta real de tu archivo de logo -->
+    <img src="logo.png" alt="Logo" class="logo">
+    <h1>Lesson 1: Greetings and Introductions</h1>
+  </header>
 
-  <div class="container">
-    
-    <!-- CAMBIO 2: Título centrado (Inglés arriba, Español abajo) -->
-    <header class="lesson-header">
-      <h1>Lesson 1: Greetings and Introductions</h1>
-      <p class="subtitle">(Lección 1: Saludos y Presentaciones)</p>
-    </header>
+  <!-- Sustituye header-photo.jpg por la ruta real de la foto -->
+  <img src="header-photo.jpg" alt="Lesson Cover" class="hero-photo">
 
-    <!-- Paso 1 -->
-    <section class="step-section">
-      <h2 class="step-title">Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
-      <p>Read the dialogues and click the listen button to hear the correct pronunciation with two different voices. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta con dos voces diferentes.)</em></p>
-      
-      <div class="conversation-box">
-        <h3>Conversation 1</h3>
-        <p><strong>Student:</strong> Good morning teacher, may I come in? <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Teacher Marisol:</strong> Sure, come in. What's your name? <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Anna:</strong> My name is Anna. <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Anna:</strong> A – N – N – A. <button class="listen-btn">🔊 Listen</button></p>
-      </div>
+  <!-- Step 1 -->
+  <div class="section">
+    <h2>Step 1: Read & Listen</h2>
+    <p>Read the dialogues and click the listen button to hear the correct pronunciation.</p>
 
-      <div class="conversation-box">
-        <h3>Conversation 2</h3>
-        <p><strong>Jeffrey:</strong> Good evening Abby. <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> Hi Jeffrey, how are you? <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> Nice to meet you, Alex. <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Alex:</strong> Nice to meet you too. <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Jeffrey:</strong> He wants to book his next appointment. <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> Sure! What is your last name? <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Alex:</strong> Smith. <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Abby:</strong> How do you spell that? <button class="listen-btn">🔊 Listen</button></p>
-        <p><strong>Alex:</strong> S – M – I – T – H. <button class="listen-btn">🔊 Listen</button></p>
-      </div>
-    </section>
+    <h3>Conversation 1</h3>
+    <div class="dialogue-line">
+      <span><strong>Student:</strong> Good morning teacher, may I come in?</span>
+      <button class="btn-listen" onclick="playAudio('Good morning teacher, may I come in?')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Teacher Marisol:</strong> Sure, come in. What's your name?</span>
+      <button class="btn-listen" onclick="playAudio('Sure, come in. What\'s your name?')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Anna:</strong> My name is Anna.</span>
+      <button class="btn-listen" onclick="playAudio('My name is Anna.')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name?</span>
+      <button class="btn-listen" onclick="playAudio('Nice to meet you, I\'m teacher Marisol. Can you spell your name?')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Anna:</strong> A – N – N – A.</span>
+      <button class="btn-listen" onclick="playAudio('A, N, N, A')">🔊 Listen</button>
+    </div>
 
-    <!-- Paso 2 -->
-    <section class="step-section">
-      <h2 class="step-title">Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
-      <ul>
-        <li><strong>Greetings (Saludos):</strong> Good morning, Good evening, Hi</li>
-        <li><strong>Introductions (Presentaciones):</strong> My name is..., This is...</li>
-        <li><strong>Polite Expressions (Expresiones de cortesía):</strong> Nice to meet you, May I come in?, Thank you</li>
-        <li><strong>Spelling (Deletreo):</strong> "How do you spell that?"</li>
-      </ul>
-    </section>
-
-    <!-- Paso 3 -->
-    <section class="step-section">
-      <h2 class="step-title">Step 3: Comprehension Check (Paso 3: Verificación de Comprensión)</h2>
-      <form>
-        <label>1. What is the new student's name in Conversation 1? <em>(¿Cuál es el nombre del nuevo estudiante en la Conversación 1?)</em></label>
-        <input type="text" placeholder="Type your answer...">
-
-        <label>2. What is Alex's last name? <em>(¿Cuál es el apellido de Alex?)</em></label>
-        <input type="text" placeholder="Type your answer...">
-
-        <label>3. How do you spell Alex's last name? <em>(¿Cómo se deletrea el apellido de Alex?)</em></label>
-        <input type="text" placeholder="Type your answer...">
-
-        <button type="button" class="action-btn">Check Answers (Verificar Respuestas)</button>
-      </form>
-    </section>
-
-    <!-- Paso 4 -->
-    <section class="step-section">
-      <h2 class="step-title">Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
-      <p>Answer the question out loud using voice input or type your response below: <em>(Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta a continuación:)</em></p>
-      <p><strong>Question: "What is your name and how do you spell it?"</strong> <em>(Pregunta: "¿Cuál es tu nombre y cómo lo deletreas?")</em></p>
-      
-      <button type="button" class="action-btn">🎙️ Speak Answer (Voice Input) / Responder con voz</button>
-      
-      <!-- CAMBIO 3: Traducción agregada entre paréntesis en la respuesta -->
-      <div class="response-placeholder">
-        Your spoken or written response will appear here... (Tu respuesta hablada o escrita aparecerá aquí...)
-      </div>
-
-      <button type="button" class="action-btn">Submit Practice (Enviar Práctica)</button>
-    </section>
-
+    <h3>Conversation 2</h3>
+    <div class="dialogue-line">
+      <span><strong>Jeffrey:</strong> Good evening Abby.</span>
+      <button class="btn-listen" onclick="playAudio('Good evening Abby.')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Abby:</strong> Hi Jeffrey, how are you?</span>
+      <button class="btn-listen" onclick="playAudio('Hi Jeffrey, how are you?')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student.</span>
+      <button class="btn-listen" onclick="playAudio('I\'m fine, thank you. This is Alex, a new student.')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Abby:</strong> Nice to meet you, Alex.</span>
+      <button class="btn-listen" onclick="playAudio('Nice to meet you, Alex.')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Alex:</strong> Nice to meet you too.</span>
+      <button class="btn-listen" onclick="playAudio('Nice to meet you too.')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Jeffrey:</strong> He wants to book his next appointment.</span>
+      <button class="btn-listen" onclick="playAudio('He wants to book his next appointment.')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Abby:</strong> Sure! What is your last name?</span>
+      <button class="btn-listen" onclick="playAudio('Sure! What is your last name?')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Alex:</strong> Smith.</span>
+      <button class="btn-listen" onclick="playAudio('Smith.')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Abby:</strong> How do you spell that?</span>
+      <button class="btn-listen" onclick="playAudio('How do you spell that?')">🔊 Listen</button>
+    </div>
+    <div class="dialogue-line">
+      <span><strong>Alex:</strong> S – M – I – T – H.</span>
+      <button class="btn-listen" onclick="playAudio('S, M, I, T, H')">🔊 Listen</button>
+    </div>
   </div>
 
+  <!-- Step 2 -->
+  <div class="section">
+    <h2>Step 2: Key Vocabulary & Expressions</h2>
+    <ul>
+      <li><strong>Greetings:</strong> Good morning, Good evening, Hi</li>
+      <li><strong>Introductions:</strong> My name is..., This is...</li>
+      <li><strong>Polite Expressions:</strong> Nice to meet you, May I come in?, Thank you</li>
+      <li><strong>Spelling:</strong> "How do you spell that?"</li>
+    </ul>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="section">
+    <h2>Step 3: Comprehension Check</h2>
+    <label for="q1">1. What is the new student's name in Conversation 1?</label>
+    <input type="text" id="q1" placeholder="Type your answer here...">
+
+    <label for="q2">2. What is Alex's last name?</label>
+    <input type="text" id="q2" placeholder="Type your answer here...">
+
+    <label for="q3">3. How do you spell Alex's last name?</label>
+    <input type="text" id="q3" placeholder="Type your answer here...">
+
+    <button class="btn-action">Check Answers</button>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="section">
+    <h2>Step 4: Speaking & Practice</h2>
+    <p>Answer the question out loud using voice input or type your response below:</p>
+    <p><strong>Question: "What is your name and how do you spell it?"</strong></p>
+    
+    <button class="btn-action" style="background-color: #17a2b8;">🎙️ Speak Answer (Voice Input)</button>
+    
+    <input type="text" placeholder="Your spoken or written response will appear here..." style="margin-top: 15px;">
+    
+    <button class="btn-action">Submit Practice</button>
+  </div>
+
+  <script>
+    function playAudio(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('Your browser does not support text-to-speech.');
+      }
+    }
+  </script>
 </body>
 </html>
