@@ -1,56 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 1 - Reading 1</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; max-width: 800px; }
-        h1, h2 { color: #2c3e50; }
-        .step { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
-        .vocabulary-list { background-color: #f9f9f9; padding: 15px; border-left: 4px solid #3498db; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1: Salón de Clases</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f7f6;
+      color: #333333;
+    }
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .step-box {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-left: 5px solid #3498db;
+      background-color: #f8fafc;
+      border-radius: 6px;
+    }
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+    .dialogue-line {
+      margin: 10px 0;
+      padding: 8px 12px;
+      background: #ffffff;
+      border-radius: 5px;
+      border: 1px solid #e2e8f0;
+    }
+    .speaker-a {
+      font-weight: bold;
+      color: #2980b9;
+    }
+    .speaker-b {
+      font-weight: bold;
+      color: #8e44ad;
+    }
+    button {
+      background-color: #3498db;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      margin: 8px 4px 8px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .mic-btn {
+      background-color: #e74c3c;
+    }
+    .mic-btn:hover {
+      background-color: #c0392b;
+    }
+    .mic-btn.listening {
+      background-color: #27ae60;
+      animation: pulse 1.5s infinite;
+    }
+    textarea {
+      width: 100%;
+      height: 70px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      padding: 10px;
+      font-family: inherit;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      color: #333333;
+    }
+    .feedback-msg {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Reading Lesson 1</h1>
-    
-    <!-- Imagen de la lección -->
-    <img src="tu-imagen-aqui.jpg" alt="Imagen de la lectura" style="max-width: 100%; height: auto; border-radius: 8px;">
+  <div class="container">
+    <h1>Lesson 1: Salón de Clases</h1>
 
-    <!-- Paso 1 -->
-    <div class="step">
-        <h2>Step 1: Introduction</h2>
-        <p>Welcome to your first reading lesson. In this lesson, we will focus on basic greetings and introductions.</p>
+    <!-- PASO 1: LECTURA CON DOS VOCES -->
+    <div class="step-box">
+      <div class="step-title">Paso 1: Escucha el diálogo</div>
+      <div class="dialogue-line">
+        <span class="speaker-a">Profesor:</span> Buenos días a todos, bienvenidos al salón de clases.
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker-b">Estudiante:</span> Buenos días, profesor. ¿Dónde nos podemos sentar?
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker-a">Profesor:</span> Pueden tomar cualquier asiento disponible adelante.
+      </div>
+      
+      <button onclick="playDialogue()">🔊 Escuchar diálogo completo</button>
     </div>
 
-    <!-- Paso 2 -->
-    <div class="step">
-        <h2>Step 2: Vocabulary</h2>
-        <div class="vocabulary-list">
-            <ul>
-                <li><strong>Hello:</strong> Hola</li>
-                <li><strong>Good morning:</strong> Buenos días</li>
-                <li><strong>Friend:</strong> Amigo/a</li>
-            </ul>
-        </div>
+    <!-- PASO 2 Y 3: PREGUNTA Y RESPUESTA POR VOZ -->
+    <div class="step-box">
+      <div class="step-title">Paso 2 y 3: Pregunta y respuesta oral</div>
+      <p>Escucha la pregunta y responde usando tu micrófono:</p>
+      
+      <button onclick="speakText('¿Qué dice el profesor al inicio de la clase?')">🔊 Escuchar pregunta</button>
+      <br><br>
+      
+      <button class="mic-btn" id="micBtn" onclick="toggleSpeechRecognition()">🎙️ Responder con Voz</button>
+      <textarea id="studentResponse" placeholder="Tu respuesta hablada aparecerá aquí..."></textarea>
     </div>
 
-    <!-- Paso 3 -->
-    <div class="step">
-        <h2>Step 3: Reading Practice</h2>
-        <p>Hello! Good morning. My name is Alex. I am a student and this is my friend, Sarah. We are learning English today.</p>
+    <!-- PASO 4: RETROALIMENTACIÓN -->
+    <div class="step-box">
+      <div class="step-title">Paso 4: Retroalimentación</div>
+      <button onclick="evaluateResponse()">Verificar Respuesta</button>
+      <div class="feedback-msg" id="feedbackArea"></div>
     </div>
+  </div>
 
-    <!-- Paso 4 -->
-    <div class="step">
-        <h2>Step 4: Exercises</h2>
-        <p>Answer the following questions based on the text:</p>
-        <ol>
-            <li>What is the boy's name?</li>
-            <li>Who is Sarah?</li>
-        </ol>
-    </div>
+  <script>
+    // Sintetizador de Voz (Text-to-Speech)
+    function speakText(text, voiceIndex = 0) {
+      if (!('speechSynthesis' in window)) {
+        alert("Tu navegador no soporta síntesis de voz.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'es-ES';
 
+      const voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('es'));
+      if (voices.length > 0) {
+        utterance.voice = voices[voiceIndex % voices.length];
+      }
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function playDialogue() {
+      const dialogue = [
+        { speaker: 0, text: "Buenos días a todos, bienvenidos al salón de clases." },
+        { speaker: 1, text: "Buenos días, profesor. ¿Dónde nos podemos sentar?" },
+        { speaker: 0, text: "Pueden tomar cualquier asiento disponible adelante." }
+      ];
+
+      let delay = 0;
+      dialogue.forEach(line => {
+        setTimeout(() => {
+          speakText(line.text, line.speaker);
+        }, delay);
+        delay += 3500;
+      });
+    }
+
+    // Reconocimiento de Voz (Speech-to-Text)
+    let recognition;
+    let isListening = false;
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'es-ES';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('studentResponse').value = transcript;
+        stopListening();
+      };
+
+      recognition.onerror = function() {
+        stopListening();
+      };
+
+      recognition.onend = function() {
+        stopListening();
+      };
+    }
+
+    function toggleSpeechRecognition() {
+      if (!recognition) {
+        alert("El reconocimiento de voz no está soportado en este navegador.");
+        return;
+      }
+      if (isListening) {
+        recognition.stop();
+        stopListening();
+      } else {
+        recognition.start();
+        isListening = true;
+        const btn = document.getElementById('micBtn');
+        btn.classList.add('listening');
+        btn.innerText = "🛑 Escuchando... Habla ahora";
+      }
+    }
+
+    function stopListening() {
+      isListening = false;
+      const btn = document.getElementById('micBtn');
+      btn.classList.remove('listening');
+      btn.innerText = "🎙️ Responder con Voz";
+    }
+
+    // Evaluador de Respuesta
+    function evaluateResponse() {
+      const userText = document.getElementById('studentResponse').value.toLowerCase();
+      const feedback = document.getElementById('feedbackArea');
+
+      if (userText.includes("buenos días") || userText.includes("bienvenidos")) {
+        feedback.innerText = "¡Excelente trabajo! Has identificado correctamente la respuesta.";
+        speakText("¡Excelente trabajo! Has identificado correctamente la respuesta.");
+      } else if (userText.trim() === "") {
+        feedback.innerText = "Por favor graba tu respuesta antes de verificar.";
+      } else {
+        feedback.innerText = "Buen intento. Vuelve a escuchar el diálogo e inténtalo de nuevo.";
+        speakText("Buen intento. Vuelve a escuchar el diálogo e inténtalo de nuevo.");
+      }
+    }
+
+    // Cargar voces en segundo plano
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = function() {
+        window.speechSynthesis.getVoices();
+      };
+    }
+  </script>
 </body>
 </html>
