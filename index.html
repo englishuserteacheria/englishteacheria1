@@ -1,2 +1,181 @@
-<!DOCTYPE html> html lang="es"> head> meta charset="UTF-8"> meta name="viewport" content="width=device-width, initial-scale=1.0"> title>English Teacher IA /head> body> h1>English Teacher IA</h1> p>Tu asistente para aprender inglés.</p> h2>Reading - A1</h2> p>Hello! My name is Sarah. I am a teacher. I live in Mexico.</p> h3>Question</h3> p>What is Sarah?</p> button>Teacher</button> button>Doctor</button> button>Student</button> /body>
-</ /html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English User Teacher IA</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #123c69;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .welcome {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .welcome h2 {
+      margin-bottom: 10px;
+      color: #123c69;
+    }
+
+    .levels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .level {
+      background: white;
+      border-radius: 16px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .level:hover {
+      transform: translateY(-3px);
+    }
+
+    .level h3 {
+      color: #123c69;
+      margin-bottom: 8px;
+    }
+
+    .level p {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .lesson-area {
+      display: none;
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .lesson-area h2 {
+      color: #123c69;
+      margin-bottom: 15px;
+    }
+
+    .lesson {
+      background: #f4f7fb;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .lesson:hover {
+      background: #e8eef7;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>English User Teacher IA</h1>
+    <p>Aprende hablando</p>
+  </header>
+
+  <div class="container">
+
+    <div class="welcome">
+      <h2>Bienvenido</h2>
+      <p>Selecciona tu nivel para comenzar tus lecciones de inglés.</p>
+    </div>
+
+    <div class="levels">
+
+      <div class="level" onclick="showLessons('A1')">
+        <h3>A1</h3>
+        <p>Principiante</p>
+      </div>
+
+      <div class="level" onclick="showLessons('A2')">
+        <h3>A2</h3>
+        <p>Básico</p>
+      </div>
+
+      <div class="level" onclick="showLessons('B1')">
+        <h3>B1</h3>
+        <p>Intermedio</p>
+      </div>
+
+      <div class="level" onclick="showLessons('B2')">
+        <h3>B2</h3>
+        <p>Intermedio avanzado</p>
+      </div>
+
+    </div>
+
+    <div id="lessonArea" class="lesson-area">
+      <h2 id="levelTitle">Lecciones</h2>
+
+      <div class="lesson">Lección 1</div>
+      <div class="lesson">Lección 2</div>
+      <div class="lesson">Lección 3</div>
+      <div class="lesson">Lección 4</div>
+      <div class="lesson">Lección 5</div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function showLessons(level) {
+      const area = document.getElementById("lessonArea");
+      const title = document.getElementById("levelTitle");
+
+      title.textContent = "Lecciones del nivel " + level;
+      area.style.display = "block";
+
+      area.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  </script>
+
+</body>
+</html>
