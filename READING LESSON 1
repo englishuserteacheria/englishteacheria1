@@ -3,48 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Lesson 1 - English Teacher IA</title>
+    <title>Reading Lesson 1</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
-        .conversation { background-color: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
-        .question { margin-bottom: 20px; }
-        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f4f7f6; 
+            color: #333; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        h2 { color: #3498db; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; margin-top: 30px; }
+        .conversation { 
+            background: #e8f4f8; 
+            padding: 20px; 
+            border-radius: 8px; 
+            font-size: 1.1em;
+        }
+        .step { margin-bottom: 40px; }
+        .btn { 
+            background: #3498db; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            font-size: 16px; 
+            transition: background 0.3s;
+        }
+        .btn:hover { background: #2980b9; }
+        .feedback { 
+            display: none; 
+            margin-top: 15px; 
+            padding: 15px; 
+            background: #d4edda; 
+            color: #155724; 
+            border-left: 5px solid #28a745;
+            border-radius: 4px; 
+        }
+        .lesson-img { 
+            width: 100%; 
+            max-height: 400px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            margin: 15px 0; 
+        }
+        .vocab-list { list-style-type: none; padding: 0; }
+        .vocab-list li { 
+            margin-bottom: 15px; 
+            padding: 15px; 
+            background: #fff3cd; 
+            border-left: 5px solid #ffc107; 
+            border-radius: 4px;
+        }
+        .pronunciation-box {
+            font-size: 1.2em;
+            text-align: center;
+            padding: 20px;
+            background: #fdfefe;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Reading Lesson 1: First Day of Class</h1>
 
-<div class="container">
-    <h1>Reading Lesson 1</h1>
-    
-    <h2>Step 1: Listen to the Conversation</h2>
-    <div class="conversation">
-        <p><strong>Teacher Marisol:</strong> Good morning teacher, may I come in?</p>
-        <p><strong>Anna:</strong> Sure, come in. What's your name?</p>
-        <p><strong>Teacher Marisol:</strong> My name is Anna.</p>
-        <p><strong>Anna:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name?</p>
-        <p><strong>Teacher Marisol:</strong> A - N - N - A.</p>
+        <!-- Step 1: Reading -->
+        <div class="step" id="step1">
+            <h2>Step 1: Read the conversation</h2>
+            <p>Read the following dialogue carefully:</p>
+            <div class="conversation">
+                <p><strong>Student:</strong> Good morning, teacher. May I come in?</p>
+                <p><strong>Teacher:</strong> Good morning! Yes, please come in. What is your name?</p>
+                <p><strong>Student:</strong> My name is Alex. Nice to meet you.</p>
+                <p><strong>Teacher:</strong> Nice to meet you too, Alex. Please, sit down.</p>
+            </div>
+        </div>
+
+        <!-- Step 2: Comprehension -->
+        <div class="step" id="step2">
+            <h2>Step 2: Comprehension Check</h2>
+            <p>What does Alex say to ask for permission to enter the classroom?</p>
+            <button class="btn" onclick="document.getElementById('feedback2').style.display='block'">Check Answer</button>
+            <div class="feedback" id="feedback2">
+                <strong>Correct!</strong> Alex says: <em>"May I come in?"</em> Excellent job paying attention to the details.
+            </div>
+        </div>
+
+        <!-- Step 3: Vocabulary and Visuals -->
+        <div class="step" id="step3">
+            <h2>Step 3: Key Vocabulary</h2>
+            <!-- Imagen contextual de Unsplash -->
+            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80" alt="Student and Teacher in a classroom" class="lesson-img" />
+            <p>Let's review some important expressions from the conversation to help you sound more natural:</p>
+            <ul class="vocab-list">
+                <li><strong>"May I come in?"</strong> - A very polite way to ask for permission to enter a room. (<em>¿Puedo pasar?</em>)</li>
+                <li><strong>"Nice to meet you."</strong> - The standard and friendly greeting when you meet someone for the first time. (<em>Un gusto conocerte.</em>)</li>
+            </ul>
+        </div>
+
+        <!-- Step 4: Pronunciation -->
+        <div class="step" id="step4">
+            <h2>Step 4: Pronunciation Practice</h2>
+            <p>Read the phrases aloud. Imagine you are Alex introducing yourself to the teacher. Focus on speaking clearly and with confidence.</p>
+            <div class="pronunciation-box">
+                <p>🗣️ <em>"Good morning, teacher. May I come in?"</em></p>
+                <p>🗣️ <em>"My name is Alex. Nice to meet you."</em></p>
+            </div>
+            <button class="btn" onclick="document.getElementById('feedback4').style.display='block'">I finished practicing!</button>
+            <div class="feedback" id="feedback4">
+                <strong>Outstanding effort!</strong> 🌟 Keep practicing these phrases to sound more natural every day. You have successfully completed Lesson 1!
+            </div>
+        </div>
     </div>
-
-    <h2>Step 2: Comprehension Question</h2>
-    <div class="question">
-        <p>What is the name of the student in the conversation?</p>
-        <input type="text" id="answer" placeholder="Type your answer here...">
-        <br><br>
-        <button onclick="checkAnswer()">Submit Answer</button>
-    </div>
-</div>
-
-<script>
-function checkAnswer() {
-    const answer = document.getElementById('answer').value.toLowerCase();
-    if (answer.includes('anna')) {
-        alert("Correct! Anna is the student.");
-    } else {
-        alert("Incorrect, try again.");
-    }
-}
-</script>
-
 </body>
 </html>
