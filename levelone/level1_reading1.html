@@ -327,6 +327,12 @@
       feedback.style.color = "#dc3545";
       feedback.textContent = "Error, try again";
     };
+    recognition.onend = () => {
+    if (feedback.textContent === "Listening...") {
+      feedback.style.color = "#dc3545";
+      feedback.textContent = "No se detectó voz. Intenta otra vez.";
+    }
+  };
   }
 </script>
 <!-- ================= END VOCABULARY SECTION ================= -->
