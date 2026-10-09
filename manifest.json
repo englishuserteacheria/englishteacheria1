@@ -1,0 +1,15 @@
+{
+  "name": "English User Teacher IA",
+  "short_name": "English User",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#215383",
+  "icons": [
+    {
+      "src": "logoeu.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
