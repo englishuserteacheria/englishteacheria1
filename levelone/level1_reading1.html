@@ -866,7 +866,7 @@
   <script>
     let cachedVoices = [];
     const characterVoiceMap = {};
-    const usedVoiceIndices = new Set();
+    const usedVoiceNames = new Set();
 
     function loadVoices() {
       if ('speechSynthesis' in window) {
@@ -905,26 +905,22 @@
 
       const pool = genderVoices.length > 0 ? genderVoices : englishVoices;
 
-      // Buscar una voz de la alberca que NO haya sido asignada a otro personaje
-      let availableIndex = -1;
+      // Buscar estrictamente una voz de la alberca correspondiente que NO haya sido asignada a nadie más
+      let selectedVoice = null;
       for (let i = 0; i < pool.length; i++) {
-        // Encontrar un índice único dentro de la alberca
-        let candidateIndex = (characterName.length * 7 + i) % pool.length;
-        if (!usedVoiceIndices.has(pool[candidateIndex].name)) {
-          availableIndex = candidateIndex;
+        let candidate = pool[(characterName.length * 3 + i) % pool.length];
+        if (!usedVoiceNames.has(candidate.name)) {
+          selectedVoice = candidate;
           break;
         }
       }
 
-      // Si por alguna razón se agotaron las exclusivas, tomamos una aleatoria de la alberca
-      if (availableIndex === -1) {
-        availableIndex = Math.floor(Math.random() * pool.length);
+      if (!selectedVoice) {
+        selectedVoice = pool.find(v => !usedVoiceNames.has(v.name)) || pool[0];
       }
 
-      const selectedVoice = pool[availableIndex];
-      usedVoiceIndices.add(selectedVoice.name);
+      usedVoiceNames.add(selectedVoice.name);
       characterVoiceMap[characterName] = selectedVoice;
-
       return characterVoiceMap[characterName];
     }
 
