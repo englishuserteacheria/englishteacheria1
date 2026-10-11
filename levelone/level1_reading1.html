@@ -112,6 +112,51 @@
       object-fit: cover;
     }
 
+    /* ESTILOS PARA AVATARES Y FOTO DE CONTEXTO */
+    .avatar-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      vertical-align: middle;
+      margin-right: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .conv-context-img {
+      max-width: 220px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: block;
+      margin: 10px 0 15px 0;
+    }
+
+    .conv-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      background: #ffffff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .conv-dialogues {
+      flex: 1;
+    }
+
+    .conv-media-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+    }
+
     .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
     .vocab-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
     .vocab-img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background-color: #f9f9f9; }
@@ -255,21 +300,28 @@
   <p>Read the dialogues and click the listen button to hear the correct pronunciation. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
 
   <h3>Conversation 1</h3>
-  <p><strong>Ana Student:</strong> Good morning teacher, may I come in? 
-    <button class="btn-listen" onclick="speakCharacter('Good morning teacher, may I come in?', 'Student')">🔊 Listen</button>
-  </p>
-  <p><strong>Teacher Marisol:</strong> Sure, come in. What's your name? 
-    <button class="btn-listen" onclick="speakCharacter('Sure, come in. What is your name?', 'Teacher Marisol')">🔊 Listen</button>
-  </p>
-  <p><strong>Anna:</strong> My name is Anna. 
-    <button class="btn-listen" onclick="speakCharacter('My name is Anna.', 'Anna')">🔊 Listen</button>
-  </p>
-  <p><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? 
-    <button class="btn-listen" onclick="speakCharacter('Nice to meet you, I am teacher Marisol. Can you spell your name?', 'Teacher Marisol')">🔊 Listen</button>
-  </p>
-  <p><strong>Anna:</strong> A – N – N – A. 
-    <button class="btn-listen" onclick="speakCharacter('A, N, N, A', 'Anna')">🔊 Listen</button>
-  </p>
+  <div class="conv-container">
+    <div class="conv-dialogues">
+      <p><img src="../images/ana.jpg" alt="Ana" class="avatar-icon"><strong>Ana Student:</strong> Good morning teacher, may I come in? 
+        <button class="btn-listen" onclick="speakCharacter('Good morning teacher, may I come in?', 'Student')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/marisol.jpg" alt="Teacher Marisol" class="avatar-icon"><strong>Teacher Marisol:</strong> Sure, come in. What's your name? 
+        <button class="btn-listen" onclick="speakCharacter('Sure, come in. What is your name?', 'Teacher Marisol')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/ana.jpg" alt="Ana" class="avatar-icon"><strong>Anna:</strong> My name is Anna. 
+        <button class="btn-listen" onclick="speakCharacter('My name is Anna.', 'Anna')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/marisol.jpg" alt="Teacher Marisol" class="avatar-icon"><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? 
+        <button class="btn-listen" onclick="speakCharacter('Nice to meet you, I am teacher Marisol. Can you spell your name?', 'Teacher Marisol')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/ana.jpg" alt="Ana" class="avatar-icon"><strong>Anna:</strong> A – N – N – A. 
+        <button class="btn-listen" onclick="speakCharacter('A, N, N, A', 'Anna')">🔊 Listen</button>
+      </p>
+    </div>
+    <div class="conv-media-side">
+      <img src="../images/comin.jpg" alt="Come in context" class="conv-context-img">
+    </div>
+  </div>
 
   <h3>Conversation 2</h3>
   <p><strong>Jeffrey:</strong> Good evening Abby. 
