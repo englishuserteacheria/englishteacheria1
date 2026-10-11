@@ -676,69 +676,153 @@
   }
 </script>
 <!-- ================= END VOCABULARY SECTION ================= -->
-  <!-- PASO 1: ESCUCHAR -->
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1 - Lesson 1 and 2: Greetings and Introductions</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+    button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 4px; }
+    .btn-listen { background-color: #4CAF50; color: white; }
+    .btn-action { background-color: #008CBA; color: white; padding: 8px 16px; margin-top: 10px; }
+    .btn-speak { background-color: #ff9800; color: white; padding: 8px 16px; }
+    .input-field { margin: 8px 0; padding: 6px; width: 250px; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+    .vocab-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
+    .vocab-img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background-color: #f9f9f9; }
+    .vocab-word { font-size: 18px; font-weight: bold; color: #333; margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO Y FOTO -->
+  <img src="english-degradado.jpg" alt="School Logo" id="logo" style="max-height: 80px; float: left;">
+  <h1>Lesson 1: Greetings and Introductions</h1>
+  <p><em>(Lección 1 and 2: Saludos y Presentaciones)</em></p>
+  <img src="image.png" alt="Classroom Photo" id="photo" style="max-width: 50%; height: auto; display: block; margin: 0 auto;">
+
+  <!-- SECCIÓN DE VOCABULARIO -->
+  <div id="vocabulary-section">
+      <h2 style="font-family: Arial, sans-serif; color: #333;">Vocabulary - Lesson 1 and 2</h2>
+      <div style="margin-bottom: 20px; font-family: Arial, sans-serif; color: #444; background-color: #e9ecef; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff;">
+          <p style="margin: 0 0 8px 0; font-size: 15px;"><strong>Instructions:</strong> Listen to the words, relate them to the pictures, and practice your pronunciation.</p>
+          <p style="margin: 0; font-size: 15px;"><strong>Instrucciones:</strong> Escucha las palabras, relaciónalas con las imágenes y practica tu pronunciación.</p>
+      </div>
+      
+      <div class="vocab-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
+          <!-- Palabra 1 -->
+          <div class="vocab-item" style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; text-align: center; background: #fff;">
+              <img src="../images/pencilsharpener.jpg" alt="Pencil sharpener" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+              <p style="margin: 10px 0 8px; font-weight: bold; font-size: 14px; color: #333;">Pencil sharpener</p>
+              <button style="background-color: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="speakWord('Pencil sharpener')">Listen</button>
+              <button style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Pencil sharpener', this)">Practice</button>
+              <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+          </div>
+          <!-- (Tu estructura completa de vocabulario existente se mantiene intacta aquí) -->
+      </div>
+  </div>
+
+  <!-- PASO 1: ESCUCHAR Y LEER LAS 4 CONVERSACIONES -->
   <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
   <p>Read the dialogues and click the listen button to hear the correct pronunciation. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
 
   <h3>Conversation 1</h3>
-  <p><strong>Student:</strong> Good morning teacher, may I come in? 
+  <p><strong>Student (Female):</strong> Good morning teacher, may I come in? 
     <button class="btn-listen" onclick="speak('Good morning teacher, may I come in?')">🔊 Listen</button>
   </p>
-  <p><strong>Teacher Marisol:</strong> Sure, come in. What's your name? 
+  <p><strong>Teacher Marisol (Female):</strong> Sure, come in. What's your name? 
     <button class="btn-listen" onclick="speak('Sure, come in. What is your name?')">🔊 Listen</button>
   </p>
-  <p><strong>Anna:</strong> My name is Anna. 
+  <p><strong>Anna (Female):</strong> My name is Anna. 
     <button class="btn-listen" onclick="speak('My name is Anna.')">🔊 Listen</button>
   </p>
-  <p><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? 
+  <p><strong>Teacher Marisol (Female):</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? 
     <button class="btn-listen" onclick="speak('Nice to meet you, I am teacher Marisol. Can you spell your name?')">🔊 Listen</button>
   </p>
-  <p><strong>Anna:</strong> A – N – N – A. 
+  <p><strong>Anna (Female):</strong> A – N – N – A. 
     <button class="btn-listen" onclick="speak('A, N, N, A')">🔊 Listen</button>
   </p>
 
   <h3>Conversation 2</h3>
-  <p><strong>Jeffrey:</strong> Good evening Abby. 
+  <p><strong>Jeffrey (Male):</strong> Good evening Abby. 
     <button class="btn-listen" onclick="speak('Good evening Abby.')">🔊 Listen</button>
   </p>
-  <p><strong>Abby:</strong> Hi Jeffrey, how are you? 
+  <p><strong>Abby (Female):</strong> Hi Jeffrey, how are you? 
     <button class="btn-listen" onclick="speak('Hi Jeffrey, how are you?')">🔊 Listen</button>
   </p>
-  <p><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. 
+  <p><strong>Jeffrey (Male):</strong> I'm fine, thank you. This is Alex, a new student. 
     <button class="btn-listen" onclick="speak('I am fine, thank you. This is Alex, a new student.')">🔊 Listen</button>
   </p>
-  <p><strong>Abby:</strong> Nice to meet you, Alex. 
+  <p><strong>Abby (Female):</strong> Nice to meet you, Alex. 
     <button class="btn-listen" onclick="speak('Nice to meet you, Alex.')">🔊 Listen</button>
   </p>
-  <p><strong>Alex:</strong> Nice to meet you too. 
+  <p><strong>Alex (Male):</strong> Nice to meet you too. 
     <button class="btn-listen" onclick="speak('Nice to meet you too.')">🔊 Listen</button>
   </p>
-  <p><strong>Jeffrey:</strong> He wants to book his next appointment. 
+  <p><strong>Jeffrey (Male):</strong> He wants to book his next appointment. 
     <button class="btn-listen" onclick="speak('He wants to book his next appointment.')">🔊 Listen</button>
   </p>
-  <p><strong>Abby:</strong> Sure! What is your last name? 
+  <p><strong>Abby (Female):</strong> Sure! What is your last name? 
     <button class="btn-listen" onclick="speak('Sure! What is your last name?')">🔊 Listen</button>
   </p>
-  <p><strong>Alex:</strong> Smith. 
+  <p><strong>Alex (Male):</strong> Smith. 
     <button class="btn-listen" onclick="speak('Smith.')">🔊 Listen</button>
   </p>
-  <p><strong>Abby:</strong> How do you spell that? 
+  <p><strong>Abby (Female):</strong> How do you spell that? 
     <button class="btn-listen" onclick="speak('How do you spell that?')">🔊 Listen</button>
   </p>
-  <p><strong>Alex:</strong> S – M – I – T – H. 
+  <p><strong>Alex (Male):</strong> S – M – I – T – H. 
     <button class="btn-listen" onclick="speak('S, M, I, T, H')">🔊 Listen</button>
   </p>
 
-  <!-- PASO 2: VOCABULARIO -->
+  <h3>Conversation 3</h3>
+  <p><strong>Woman (Female):</strong> Can I borrow a pencil, teacher? 
+    <button class="btn-listen" onclick="speak('Can I borrow a pencil, teacher?')">🔊 Listen</button>
+  </p>
+  <p><strong>Man (Male):</strong> Of course, these are my pencils. 
+    <button class="btn-listen" onclick="speak('Of course, these are my pencils.')">🔊 Listen</button>
+  </p>
+  <p><strong>Woman (Female):</strong> Thanks, and what are those? 
+    <button class="btn-listen" onclick="speak('Thanks, and what are those?')">🔊 Listen</button>
+  </p>
+  <p><strong>Man (Male):</strong> They are pens and markers. By the way, this is your book. 
+    <button class="btn-listen" onclick="speak('They are pens and markers. By the way, this is your book.')">🔊 Listen</button>
+  </p>
+  <p><strong>Man (Male):</strong> Oh, what is that? 
+    <button class="btn-listen" onclick="speak('Oh, what is that?')">🔊 Listen</button>
+  </p>
+  <p><strong>Woman (Female):</strong> It is a dictionary. 
+    <button class="btn-listen" onclick="speak('It is a dictionary.')">🔊 Listen</button>
+  </p>
+  <p><strong>Woman (Female):</strong> Cool! Can I borrow it? 
+    <button class="btn-listen" onclick="speak('Cool! Can I borrow it?')">🔊 Listen</button>
+  </p>
+  <p><strong>Woman (Female):</strong> Sure. Is this your eraser? 
+    <button class="btn-listen" onclick="speak('Sure. Is this your eraser?')">🔊 Listen</button>
+  </p>
+  <p><strong>Woman (Female):</strong> Yes, it is, and that is my sharpener. You can borrow them. 
+    <button class="btn-listen" onclick="speak('Yes, it is, and that is my sharpener. You can borrow them.')">🔊 Listen</button>
+  </p>
+  <p><strong>Woman (Female):</strong> Thank you! 
+    <button class="btn-listen" onclick="speak('Thank you!')">🔊 Listen</button>
+  </p>
+
+  <!-- PASO 2: VOCABULARIO CLAVE Y EXPRESIONES AMPLIADO -->
   <h2>Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
   <ul>
-    <li><strong>Greetings:</strong> Good morning, Good evening, Hi</li>
+    <li><strong>Greetings:</strong> Good morning, Good evening, Hi, Thanks, Thank you</li>
     <li><strong>Introductions:</strong> My name is..., This is...</li>
-    <li><strong>Polite Expressions:</strong> Nice to meet you, May I come in?, Thank you</li>
-    <li><strong>Spelling:</strong> "How do you spell that?"</li>
+    <li><strong>Polite Expressions:</strong> Nice to meet you, May I come in?, Sure, You can borrow them</li>
+    <li><strong>Spelling & Questions:</strong> "How do you spell that?", "What is that?", "What are those?"</li>
+    <li><strong>School Supplies & Demonstratives:</strong> Pencil, Pencils, Pen, Pens, Markers, Book, Dictionary, Eraser, Sharpener, This, These, That, Those</li>
   </ul>
 
-  <!-- PASO 3: COMPROBACIÓN -->
+  <!-- PASO 3: COMPROBACIÓN DE COMPRENSIÓN AMPLIADA -->
   <h2>Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
   <ol>
     <li>What is the new student's name in Conversation 1?<br>
@@ -750,47 +834,98 @@
     <li>How do you spell Alex's last name?<br>
       <input type="text" id="q3" class="input-field">
     </li>
+    <li>In Conversation 3, what objects does the woman ask to borrow?<br>
+      <input type="text" id="q4" class="input-field">
+    </li>
+    <li>According to Conversation 3, what item is identified as a dictionary?<br>
+      <input type="text" id="q5" class="input-field">
+    </li>
   </ol>
   <button class="btn-action" onclick="checkAnswers()">Check Answers</button>
   <div id="check-feedback" class="feedback"></div>
 
-  <!-- PASO 4: PRÁCTICA Y RECONOCIMIENTO DE VOZ -->
+  <!-- PASO 4: PRÁCTICA Y RECONOCIMIENTO DE VOZ AMPLIADO -->
   <h2>Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
-  <p>Answer the question out loud using voice input or type your response below: <em>(Responde a la pregunta en voz alta usando la entrada de voz o escribe tu respuesta abajo:)</em></p>
-  <p><strong>Question: "What is your name and how do you spell it?"</strong></p>
+  <p>Answer the questions out loud using voice input or type your response below: <em>(Responde a las preguntas en voz alta usando la entrada de voz o escribe tus respuestas abajo:)</em></p>
+  
+  <p><strong>Question 1: "What is your name and how do you spell it?"</strong></p>
+  <button class="btn-speak" onclick="startDictation('practice-answer-1')">🎙️ Speak Answer (Voice Input)</button><br><br>
+  <textarea id="practice-answer-1" rows="2" cols="40" placeholder="Your answer here..."></textarea><br>
 
-  <button class="btn-speak" onclick="startDictation()">🎙️ Speak Answer (Voice Input)</button><br><br>
-  <textarea id="practice-answer" rows="3" cols="40" placeholder="Your recorded or typed answer will appear here..."></textarea><br>
+  <p><strong>Question 2: "What school supplies do you have on your desk? (Mention a pen, pencil, or book using this or that)."</strong></p>
+  <button class="btn-speak" onclick="startDictation('practice-answer-2')">🎙️ Speak Answer (Voice Input)</button><br><br>
+  <textarea id="practice-answer-2" rows="2" cols="40" placeholder="Your answer here..."></textarea><br>
+
+  <p><strong>Question 3: "Can you ask to borrow a marker or an eraser politely in English?"</strong></p>
+  <button class="btn-speak" onclick="startDictation('practice-answer-3')">🎙️ Speak Answer (Voice Input)</button><br><br>
+  <textarea id="practice-answer-3" rows="2" cols="40" placeholder="Your answer here..."></textarea><br>
+
   <button class="btn-action" onclick="submitPractice()">Submit Practice</button>
   <div id="practice-feedback" class="feedback"></div>
 
-  <!-- JAVASCRIPT FUNCIONAL -->
+  <!-- SCRIPTS JAVASCRIPT -->
   <script>
-    // 1. Funcionalidad de Escuchar (Audio / Text-to-Speech)
-    function speak(text) {
+    function speakWord(word) {
       if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // Detener audios anteriores
-        const utterance = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(word);
         utterance.lang = 'en-US';
-        utterance.rate = 0.9; // Velocidad ligeramente pausada para aprendizaje
+        utterance.rate = 0.9;
         window.speechSynthesis.speak(utterance);
-      } else {
-        alert('Tu navegador no soporta síntesis de voz.');
       }
     }
 
-    // 2. Funcionalidad de Verificar Respuestas (Check Answers)
+    function testPronunciation(targetWord, btnElement) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Tu navegador no soporta reconocimiento de voz.");
+        return;
+      }
+      const card = btnElement.closest('.vocab-item');
+      const feedback = card.querySelector('.feedback-msg');
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      feedback.style.color = "#555";
+      feedback.textContent = "Listening...";
+      recognition.start();
+
+      recognition.onresult = (event) => {
+        const spokenWord = event.results[0][0].transcript.trim().toLowerCase();
+        if (spokenWord === targetWord.trim().toLowerCase()) {
+          feedback.style.color = "#28a745";
+          feedback.textContent = "¡Correct! ✨";
+        } else {
+          feedback.style.color = "#dc3545";
+          feedback.textContent = `Try again (Said: "${spokenWord}")`;
+        }
+      };
+    }
+
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
     function checkAnswers() {
       const q1 = document.getElementById('q1').value.trim().toLowerCase();
       const q2 = document.getElementById('q2').value.trim().toLowerCase();
       const q3 = document.getElementById('q3').value.trim().toLowerCase().replace(/\s+/g, '');
+      const q4 = document.getElementById('q4').value.trim().toLowerCase();
+      const q5 = document.getElementById('q5').value.trim().toLowerCase();
 
       let score = 0;
-      let total = 3;
+      let total = 5;
 
       if (q1 === 'anna') score++;
       if (q2 === 'smith') score++;
       if (q3 === 's-m-i-t-h' || q3 === 'smith') score++;
+      if (q4.includes('pencil') || q4.includes('borrow')) score++;
+      if (q5.includes('dictionary')) score++;
 
       const feedbackEl = document.getElementById('check-feedback');
       if (score === total) {
@@ -802,44 +937,35 @@
       }
     }
 
-    // 3. Funcionalidad de Grabación de Voz (Speak Answer - Speech Recognition)
-    function startDictation() {
+    function startDictation(targetId) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert('El reconocimiento de voz no está soportado en este navegador. Intenta con Google Chrome o Microsoft Edge.');
+        alert('El reconocimiento de voz no está soportado.');
         return;
       }
-
       const recognition = new SpeechRecognition();
       recognition.lang = 'en-US';
-      recognition.interimResults = false;
-
-      const practiceInput = document.getElementById('practice-answer');
+      const practiceInput = document.getElementById(targetId);
       practiceInput.placeholder = "Listening... Speak now!";
-
       recognition.start();
 
       recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        practiceInput.value = transcript;
-      };
-
-      recognition.onerror = function(event) {
-        alert('Error al reconocer la voz: ' + event.error);
+        practiceInput.value = event.results[0][0].transcript;
       };
     }
 
-    // 4. Funcionalidad de Enviar Práctica (Submit Practice)
     function submitPractice() {
-      const answer = document.getElementById('practice-answer').value.trim();
+      const a1 = document.getElementById('practice-answer-1').value.trim();
+      const a2 = document.getElementById('practice-answer-2').value.trim();
+      const a3 = document.getElementById('practice-answer-3').value.trim();
       const feedbackEl = document.getElementById('practice-feedback');
 
-      if (answer.length === 0) {
+      if (a1.length === 0 && a2.length === 0 && a3.length === 0) {
         feedbackEl.className = 'feedback incorrect';
-        feedbackEl.innerText = 'Por favor escribe o graba una respuesta antes de enviar.';
+        feedbackEl.innerText = 'Por favor responde al menos una de las prácticas antes de enviar.';
       } else {
         feedbackEl.className = 'feedback correct';
-        feedbackEl.innerText = '¡Práctica enviada con éxito! Tu respuesta ha sido registrada.';
+        feedbackEl.innerText = '¡Práctica enviada con éxito! Tus respuestas han sido registradas.';
       }
     }
   </script>
