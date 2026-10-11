@@ -47,8 +47,15 @@
         .lessons-section.active { display: block; }
         
         .lesson-list { list-style: none; padding: 0; }
-        .lesson-list li { background: #f0f4f8; padding: 12px; margin-bottom: 8px; border-radius: 4px; }
-        .lesson-list li a { color: #123c69; text-decoration: none; font-weight: bold; }
+        .lesson-list li { padding: 12px; margin-bottom: 8px; border-radius: 4px; border-left: 5px solid transparent; }
+        
+        /* Colores de fondo y bordes específicos para las lecciones según el nivel */
+        #A1 .lesson-list li { background: #ECFDF5; border-left-color: #10B981; border: 1px solid #A7F3D0; }
+        #A2 .lesson-list li { background: #EFF6FF; border-left-color: #3B82F6; border: 1px solid #BFDBFE; }
+        #B1 .lesson-list li { background: #FEF3C7; border-left-color: #F59E0B; border: 1px solid #FDE68A; }
+        #B2 .lesson-list li { background: #F3E8FF; border-left-color: #8B5CF6; border: 1px solid #DDD6FE; }
+
+        .lesson-list li a { color: #123c69; text-decoration: none; font-weight: bold; display: block; }
         .lesson-list li a:hover { text-decoration: underline; }
     </style>
 </head>
