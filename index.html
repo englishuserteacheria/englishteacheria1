@@ -142,17 +142,22 @@
 
     <script>
         function showLevel(levelId) {
-            // Ocultar todas las secciones de lecciones
-            const sections = document.querySelectorAll('.lessons-section');
-            sections.forEach(sec => sec.classList.remove('active'));
-
-            // Mostrar únicamente la sección del nivel al que se dio clic
             const targetSection = document.getElementById(levelId);
             if (targetSection) {
-                targetSection.classList.add('active');
+                const isActive = targetSection.classList.contains('active');
+                
+                // Ocultar todas las secciones
+                const sections = document.querySelectorAll('.lessons-section');
+                sections.forEach(sec => sec.classList.remove('active'));
+
+                // Si no estaba activa, la abrimos. Si ya estaba activa, se quedará cerrada.
+                if (!isActive) {
+                    targetSection.classList.add('active');
+                }
             }
         }
     </script>
 
 </body>
 </html>
+ 
