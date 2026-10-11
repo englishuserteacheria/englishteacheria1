@@ -699,25 +699,7 @@
   </style>
 </head>
 <body>
-
-   <!-- SECCIÓN DE VOCABULARIO -->
-  <div id="vocabulary-section">
-      <h2 style="font-family: Arial, sans-serif; color: #333;">Vocabulary - Lesson 1 and 2</h2>
-      <div style="margin-bottom: 20px; font-family: Arial, sans-serif; color: #444; background-color: #e9ecef; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff;">
-          <p style="margin: 0 0 8px 0; font-size: 15px;"><strong>Instructions:</strong> Listen to the words, relate them to the pictures, and practice your pronunciation.</p>
-          <p style="margin: 0; font-size: 15px;"><strong>Instrucciones:</strong> Escucha las palabras, relaciónalas con las imágenes y practica tu pronunciación.</p>
-      </div>
-      
-      <div class="vocab-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
-          <!-- Palabra 1 -->
-          <div class="vocab-item" style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; text-align: center; background: #fff;">
-              <img src="../images/pencilsharpener.jpg" alt="Pencil sharpener" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-              <p style="margin: 10px 0 8px; font-weight: bold; font-size: 14px; color: #333;">Pencil sharpener</p>
-              <button style="background-color: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="speakWord('Pencil sharpener')">Listen</button>
-              <button style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Pencil sharpener', this)">Practice</button>
-              <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-          </div>
-      </div>
+  </div>
   </div>
 
   <!-- PASO 1: ESCUCHAR Y LEER LAS 4 CONVERSACIONES -->
@@ -726,83 +708,83 @@
 
   <h3>Conversation 1</h3>
   <p><strong>Student:</strong> Good morning teacher, may I come in? 
-    <button class="btn-listen" onclick="speakWithVoice('Good morning teacher, may I come in?', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Good morning teacher, may I come in?', 'Student')">🔊 Listen</button>
   </p>
   <p><strong>Teacher Marisol:</strong> Sure, come in. What's your name? 
-    <button class="btn-listen" onclick="speakWithVoice('Sure, come in. What is your name?', 'female', 1)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Sure, come in. What is your name?', 'Teacher Marisol')">🔊 Listen</button>
   </p>
   <p><strong>Anna:</strong> My name is Anna. 
-    <button class="btn-listen" onclick="speakWithVoice('My name is Anna.', 'female', 2)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('My name is Anna.', 'Anna')">🔊 Listen</button>
   </p>
   <p><strong>Teacher Marisol:</strong> Nice to meet you, I'm teacher Marisol. Can you spell your name? 
-    <button class="btn-listen" onclick="speakWithVoice('Nice to meet you, I am teacher Marisol. Can you spell your name?', 'female', 1)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Nice to meet you, I am teacher Marisol. Can you spell your name?', 'Teacher Marisol')">🔊 Listen</button>
   </p>
   <p><strong>Anna:</strong> A – N – N – A. 
-    <button class="btn-listen" onclick="speakWithVoice('A, N, N, A', 'female', 2)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('A, N, N, A', 'Anna')">🔊 Listen</button>
   </p>
 
   <h3>Conversation 2</h3>
   <p><strong>Jeffrey:</strong> Good evening Abby. 
-    <button class="btn-listen" onclick="speakWithVoice('Good evening Abby.', 'male', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Good evening Abby.', 'Jeffrey')">🔊 Listen</button>
   </p>
   <p><strong>Abby:</strong> Hi Jeffrey, how are you? 
-    <button class="btn-listen" onclick="speakWithVoice('Hi Jeffrey, how are you?', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Hi Jeffrey, how are you?', 'Abby')">🔊 Listen</button>
   </p>
   <p><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. 
-    <button class="btn-listen" onclick="speakWithVoice('I am fine, thank you. This is Alex, a new student.', 'male', 1)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('I am fine, thank you. This is Alex, a new student.', 'Jeffrey')">🔊 Listen</button>
   </p>
   <p><strong>Abby:</strong> Nice to meet you, Alex. 
-    <button class="btn-listen" onclick="speakWithVoice('Nice to meet you, Alex.', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Nice to meet you, Alex.', 'Abby')">🔊 Listen</button>
   </p>
   <p><strong>Alex:</strong> Nice to meet you too. 
-    <button class="btn-listen" onclick="speakWithVoice('Nice to meet you too.', 'male', 2)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Nice to meet you too.', 'Alex')">🔊 Listen</button>
   </p>
   <p><strong>Jeffrey:</strong> He wants to book his next appointment. 
-    <button class="btn-listen" onclick="speakWithVoice('He wants to book his next appointment.', 'male', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('He wants to book his next appointment.', 'Jeffrey')">🔊 Listen</button>
   </p>
   <p><strong>Abby:</strong> Sure! What is your last name? 
-    <button class="btn-listen" onclick="speakWithVoice('Sure! What is your last name?', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Sure! What is your last name?', 'Abby')">🔊 Listen</button>
   </p>
   <p><strong>Alex:</strong> Smith. 
-    <button class="btn-listen" onclick="speakWithVoice('Smith.', 'male', 2)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Smith.', 'Alex')">🔊 Listen</button>
   </p>
   <p><strong>Abby:</strong> How do you spell that? 
-    <button class="btn-listen" onclick="speakWithVoice('How do you spell that?', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('How do you spell that?', 'Abby')">🔊 Listen</button>
   </p>
   <p><strong>Alex:</strong> S – M – I – T – H. 
-    <button class="btn-listen" onclick="speakWithVoice('S, M, I, T, H', 'male', 2)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('S, M, I, T, H', 'Alex')">🔊 Listen</button>
   </p>
 
   <h3>Conversation 3</h3>
   <p><strong>Hanna:</strong> Can I borrow a pencil, teacher? 
-    <button class="btn-listen" onclick="speakWithVoice('Can I borrow a pencil, teacher?', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Can I borrow a pencil, teacher?', 'Hanna')">🔊 Listen</button>
   </p>
   <p><strong>Henry:</strong> Of course, these are my pencils. 
-    <button class="btn-listen" onclick="speakWithVoice('Of course, these are my pencils.', 'male', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Of course, these are my pencils.', 'Henry')">🔊 Listen</button>
   </p>
   <p><strong>Hanna:</strong> Thanks, and what are those? 
-    <button class="btn-listen" onclick="speakWithVoice('Thanks, and what are those?', 'female', 1)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Thanks, and what are those?', 'Hanna')">🔊 Listen</button>
   </p>
   <p><strong>Henry:</strong> They are pens and markers. By the way, this is your book. 
-    <button class="btn-listen" onclick="speakWithVoice('They are pens and markers. By the way, this is your book.', 'male', 1)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('They are pens and markers. By the way, this is your book.', 'Henry')">🔊 Listen</button>
   </p>
   <p><strong>Henry:</strong> Oh, what is that? 
-    <button class="btn-listen" onclick="speakWithVoice('Oh, what is that?', 'male', 1)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Oh, what is that?', 'Henry')">🔊 Listen</button>
   </p>
   <p><strong>Hanna:</strong> It is a dictionary. 
-    <button class="btn-listen" onclick="speakWithVoice('It is a dictionary.', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('It is a dictionary.', 'Hanna')">🔊 Listen</button>
   </p>
   <p><strong>Hanna:</strong> Cool! Can I borrow it? 
-    <button class="btn-listen" onclick="speakWithVoice('Cool! Can I borrow it?', 'female', 1)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Cool! Can I borrow it?', 'Hanna')">🔊 Listen</button>
   </p>
   <p><strong>Hanna:</strong> Sure. Is this your eraser? 
-    <button class="btn-listen" onclick="speakWithVoice('Sure. Is this your eraser?', 'female', 2)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Sure. Is this your eraser?', 'Hanna')">🔊 Listen</button>
   </p>
   <p><strong>Hanna:</strong> Yes, it is, and that is my sharpener. You can borrow them. 
-    <button class="btn-listen" onclick="speakWithVoice('Yes, it is, and that is my sharpener. You can borrow them.', 'female', 2)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Yes, it is, and that is my sharpener. You can borrow them.', 'Hanna')">🔊 Listen</button>
   </p>
   <p><strong>Hanna:</strong> Thank you! 
-    <button class="btn-listen" onclick="speakWithVoice('Thank you!', 'female', 0)">🔊 Listen</button>
+    <button class="btn-listen" onclick="speakCharacter('Thank you!', 'Hanna')">🔊 Listen</button>
   </p>
 
   <!-- PASO 2: VOCABULARIO CLAVE Y EXPRESIONES AMPLIADO -->
@@ -859,6 +841,7 @@
   <!-- SCRIPTS JAVASCRIPT -->
   <script>
     let cachedVoices = [];
+    const characterVoiceMap = {};
 
     function loadVoices() {
       if ('speechSynthesis' in window) {
@@ -871,34 +854,52 @@
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
 
-    function speakWithVoice(text, gender, indexVariant = 0) {
+    function getVoiceForCharacter(characterName) {
+      if (cachedVoices.length === 0) {
+        cachedVoices = window.speechSynthesis.getVoices();
+      }
+
+      if (characterVoiceMap[characterName]) {
+        return characterVoiceMap[characterName];
+      }
+
+      const englishVoices = cachedVoices.filter(v => v.lang.startsWith('en'));
+      if (englishVoices.length === 0) return null;
+
+      const maleNames = ['Jeffrey', 'Alex', 'Henry'];
+      const isMale = maleNames.includes(characterName);
+
+      const genderVoices = englishVoices.filter(v => {
+        const name = v.name.toLowerCase();
+        if (isMale) {
+          return name.includes('male') || name.includes('david') || name.includes('george') || name.includes('daniel') || name.includes('alex') || name.includes('oliver');
+        } else {
+          return name.includes('female') || name.includes('zira') || name.includes('samantha') || name.includes('karen') || name.includes('victoria') || name.includes('moira');
+        }
+      });
+
+      const pool = genderVoices.length > 0 ? genderVoices : englishVoices;
+      
+      let hash = 0;
+      for (let i = 0; i < characterName.length; i++) {
+        hash = characterName.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      const index = Math.abs(hash) % pool.length;
+      
+      characterVoiceMap[characterName] = pool[index];
+      return characterVoiceMap[characterName];
+    }
+
+    function speakCharacter(text, characterName) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'en-US';
         utterance.rate = 0.9;
 
-        if (cachedVoices.length === 0) {
-          cachedVoices = window.speechSynthesis.getVoices();
-        }
-
-        const englishVoices = cachedVoices.filter(v => v.lang.startsWith('en'));
-        
-        if (englishVoices.length > 0) {
-          const genderVoices = englishVoices.filter(v => {
-            const name = v.name.toLowerCase();
-            if (gender === 'female') {
-              return name.includes('female') || name.includes('zira') || name.includes('samantha') || name.includes('karen') || name.includes('victoria') || name.includes('moira');
-            } else {
-              return name.includes('male') || name.includes('david') || name.includes('george') || name.includes('daniel') || name.includes('alex') || name.includes('oliver');
-            }
-          });
-
-          const pool = genderVoices.length > 0 ? genderVoices : englishVoices;
-          const selectedVoice = pool[indexVariant % pool.length];
-          if (selectedVoice) {
-            utterance.voice = selectedVoice;
-          }
+        const assignedVoice = getVoiceForCharacter(characterName);
+        if (assignedVoice) {
+          utterance.voice = assignedVoice;
         }
 
         window.speechSynthesis.speak(utterance);
@@ -906,7 +907,7 @@
     }
 
     function speakWord(word) {
-      speakWithVoice(word, 'female', 0);
+      speakCharacter(word, 'Teacher Marisol');
     }
 
     function testPronunciation(targetWord, btnElement) {
