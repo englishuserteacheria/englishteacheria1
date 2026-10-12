@@ -829,18 +829,19 @@
     let marisolChatInitialized = false;
 
 
-    function toggleMarisolChat() {
-      const chatBox = document.getElementById('marisol-chat-box');
-      if (chatBox.style.display === 'flex') {
+  function toggleMarisolChat() {
+    const chatBox = document.getElementById('marisol-chat-box');
+    if (chatBox.style.display === 'flex') {
         chatBox.style.display = 'none';
-      } else {
+        preferredLanguage = null;
+    } else {
         chatBox.style.display = 'flex';
         if (!marisolChatInitialized) {
-          marisolChatInitialized = true;
-          startMarisolSession();
+            marisolChatInitialized = true;
+            startMarisolSession();
         }
-      }
     }
+} 
 
 
     function appendMarisolMessage(text, sender) {
