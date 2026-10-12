@@ -618,7 +618,6 @@
       if (matchingVoices.length === 0) return cachedVoices[0] || null;
 
       if (langCode.startsWith('es')) {
-        // Buscar voz en español con acento latinoamericano o general
         const latamVoice = matchingVoices.find(v => v.lang.includes('MX') || v.lang.includes('LA') || v.lang.includes('ES'));
         return latamVoice || matchingVoices[0];
       }
@@ -763,7 +762,7 @@
       }
     }
 
-    /* LÓGICA DEL ASISTENTE VIRTUAL (TEACHER MARISOL) */
+    /* LÓGICA CORREGIDA Y ABIERTA DEL ASISTENTE VIRTUAL (TEACHER MARISOL) */
     let studentName = null;
     let preferredLanguage = null; // 'en' o 'es'
     let marisolChatInitialized = false;
@@ -841,6 +840,7 @@
       let reply = "";
       const lowerInput = userInput.toLowerCase();
 
+      // 1. Capturar nombre del alumno
       if (!studentName) {
         studentName = userInput.trim();
         reply = `Nice to meet you, ${studentName}! Would you like our help in English or in Spanish? (¿Prefieres la ayuda en inglés o en español?)`;
@@ -849,33 +849,51 @@
         return;
       }
 
+      // 2. Capturar idioma preferido
       if (!preferredLanguage) {
         if (lowerInput.includes('english') || lowerInput.includes('inglés') || lowerInput.includes('in english')) {
           preferredLanguage = 'en';
-          reply = `Awesome, ${studentName}! Let's practice in US English. Remember to stay focused on the lesson. Do you have any questions about vocabulary, pronunciation, or the comprehension and speaking steps?`;
-          appendMarisolMessage(reply, 'teacher');
-          speakCharacter(reply, 'Teacher Marisol', 'en-US');
+          reply = `Awesome, ${studentName}! Let's practice in US English. Feel free to ask any question about vocabulary, pronunciation, grammar, or exercise checking.`;
         } else {
           preferredLanguage = 'es';
-          reply = `Entendido, ${studentName}. Te guiaré en español con acento mexicano para que practiques cómodamente. ¿Qué duda tienes sobre el vocabulario, la pronunciación o los ejercicios de las lecciones?`;
-          appendMarisolMessage(reply, 'teacher');
-          speakCharacter(reply, 'Teacher Marisol', 'es-MX');
+          reply = `Entendido, ${studentName}. Te guiaré en español para apoyarte. Pregúntame con total libertad cualquier duda sobre palabras, pronunciación o cómo resolver los ejercicios.`;
         }
+        appendMarisolMessage(reply, 'teacher');
+        speakCharacter(reply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
         return;
       }
 
-      if (lowerInput.includes('pronunc') || lowerInput.includes('sound') || lowerInput.includes('cómo se dice')) {
-        reply = preferredLanguage === 'en' 
-          ? `Great question, ${studentName}! Focus on clear US English articulation. Listen to the audio buttons in the vocabulary section for precise practice.` 
-          : `¡Excelente pregunta, ${studentName}! Para mejorar tu pronunciación en inglés americano, asegúrate de articular bien cada sonido y usa los botones de audio del vocabulario.`;
-      } else if (lowerInput.includes('step') || lowerInput.includes('paso') || lowerInput.includes('exercise') || lowerInput.includes('ejercicio') || lowerInput.includes('answer')) {
+      // 3. Lógica abierta y directa para resolver dudas de vocabulario, pronunciación y ejercicios
+      if (lowerInput.includes('escritorio') || lowerInput.includes('desk')) {
         reply = preferredLanguage === 'en'
-          ? `Keep it up, ${studentName}! For steps 3 and 4, review the dialogues carefully. Remember the demonstratives: this, that, these, those.`
-          : `¡Sigue adelante, ${studentName}! Para los pasos de comprensión y expresión oral, recuerda usar correctamente los demostrativos y repasar las conversaciones.`;
-      } else {
+          ? `The word for escritorio is "desk". It is pronounced /dɛsk/ (des-k).`
+          : `Escritorio en inglés se dice "desk" y se pronuncia /dɛsk/ (des-k).`;
+      } 
+      else if (lowerInput.includes('lápiz') || lowerInput.includes('lapiz') || lowerInput.includes('pencil')) {
         reply = preferredLanguage === 'en'
-          ? `I'm here to help you master lesson 1 and 2, ${studentName}! Please ask specifically about pronunciation, vocabulary, or the practice steps.`
-          : `¡Estoy para ayudarte con la lección 1 y 2, ${studentName}! Pregúntame sobre vocabulario, pronunciación o los ejercicios de la página.`;
+          ? `The word for lápiz is "pencil". It is pronounced /ˈpɛnsəl/ (pén-sil).`
+          : `Lápiz en inglés se dice "pencil" y se pronuncia /ˈpɛnsəl/ (pén-sil).`;
+      }
+      else if (lowerInput.includes('borrador') || lowerInput.includes('eraser')) {
+        reply = preferredLanguage === 'en'
+          ? `Borrador se dice "eraser" y se pronuncia /ɪˈreɪsər/ (i-réi-ser).`
+          : `Borrador en inglés se dice "eraser" y se pronuncia /ɪˈreɪsər/ (i-réi-ser).`;
+      }
+      else if (lowerInput.includes('pronunc') || lowerInput.includes('cómo se dice') || lowerInput.includes('como se pronuncia') || lowerInput.includes('sound')) {
+        reply = preferredLanguage === 'en'
+          ? `To pronounce that correctly, ${studentName}, articulate each syllable clearly and check the audio buttons next to the vocabulary images.`
+          : `Para pronunciar correctamente, ${studentName}, articula cada sonido con claridad. También puedes hacer clic en los botones "Listen" de las palabras del vocabulario.`;
+      } 
+      else if (lowerInput.includes('ejercicio') || lowerInput.includes('comprobación') || lowerInput.includes('calific') || lowerInput.includes('respuest')) {
+        reply = preferredLanguage === 'en'
+          ? `For the comprehension check (Step 3), remember: the student's name is Anna, Alex's last name is Smith (S-M-I-T-H), and the dictionary is in Conversation 3!`
+          : `Para la comprobación (Paso 3), recuerda: la estudiante se llama Anna, el apellido de Alex es Smith (S-M-I-T-H), y el diccionario aparece en la Conversación 3. ¡Usa el botón "Check Answers" para calificar tus respuestas!`;
+      } 
+      else {
+        // Respuesta general abierta para cualquier otra consulta del alumno
+        reply = preferredLanguage === 'en'
+          ? `I'm here to help you with anything you need, ${studentName}. Ask me about any vocabulary word, spelling, or how to answer the lesson steps.`
+          : `Estoy aquí para ayudarte en lo que necesites, ${studentName}. Pregúntame sobre cualquier palabra, traducción, regla gramatical o los ejercicios de la lección.`;
       }
 
       appendMarisolMessage(reply, 'teacher');
