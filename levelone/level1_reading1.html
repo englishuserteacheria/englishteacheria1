@@ -453,6 +453,7 @@
       <video src="../images/comein1.mp4" controls class="conv-context-img" style="width: 100%; max-width: 220px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: block; margin: 10px 0 15px 0;"></video>
     </div>
   </div>
+
   <h3>Conversation 2</h3>
   <p><strong>Jeffrey:</strong> Good evening Abby. 
     <button class="btn-listen" onclick="speakCharacter('Good evening Abby.', 'Jeffrey')">🔊 Listen</button>
@@ -689,7 +690,6 @@
       const recognition = new SpeechRecognition();
       recognition.lang = 'en-US';
       
-      // CONFIGURACIÓN MEJORADA: Mayor tiempo de espera para que no se corte rápido
       recognition.continuous = false;
       recognition.interimResults = false;
       if (typeof recognition.maxAlternatives !== 'undefined') {
@@ -747,7 +747,6 @@
       const recognition = new SpeechRecognition();
       recognition.lang = 'en-US';
       
-      // CONFIGURACIÓN MEJORADA: Mayor tiempo de escucha en prácticas
       recognition.continuous = false;
       recognition.interimResults = false;
 
@@ -775,9 +774,9 @@
       }
     }
 
-    /* LÓGICA CORREGIDA Y ABIERTA DEL ASISTENTE VIRTUAL (TEACHER MARISOL) */
+    /* LÓGICA DINÁMICA CORREGIDA DEL ASISTENTE VIRTUAL (TEACHER MARISOL) */
     let studentName = null;
-    let preferredLanguage = null; // 'en' o 'es'
+    let preferredLanguage = null; 
     let marisolChatInitialized = false;
 
     function toggleMarisolChat() {
@@ -817,7 +816,6 @@
       const recognition = new SpeechRecognition();
       recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
       
-      // CONFIGURACIÓN MEJORADA: Mayor tiempo de escucha para el chat flotante
       recognition.continuous = false;
       recognition.interimResults = false;
 
@@ -881,10 +879,10 @@
         return;
       }
 
-      // 3. Lógica abierta y directa corregida (Eliminadas las barras de fonética confusas /.../ y respuestas repetitivas)
+      // 3. Lógica variada y abierta (Respuestas contextuales reales sin bucles)
       if (lowerInput.includes('escritorio') || lowerInput.includes('desk')) {
         reply = preferredLanguage === 'en'
-          ? `The word for escritorio is "desk". It is pronounced: des-k (desk).`
+          ? `The word for escritorio is "desk". It is pronounced: des-k.`
           : `Escritorio en inglés se dice "desk" y se pronuncia: des-k.`;
       } 
       else if (lowerInput.includes('lápiz') || lowerInput.includes('lapiz') || lowerInput.includes('pencil')) {
@@ -902,16 +900,16 @@
           ? `To pronounce that correctly, ${studentName}, articulate each syllable clearly and check the audio buttons next to the vocabulary images.`
           : `Para pronunciar correctamente, ${studentName}, articula cada sonido con claridad por sílabas. También puedes hacer clic en los botones "Listen" de las palabras del vocabulario.`;
       } 
-      else if (lowerInput.includes('ejercicio') || lowerInput.includes('comprobación') || lowerInput.includes('calific') || lowerInput.includes('respuest')) {
+      else if (lowerInput.includes('ejercicio') || lowerInput.includes('comprobación') || lowerInput.includes('calific') || lowerInput.includes('respuest') || lowerInput.includes('heresy') || lowerInput.includes('cinco')) {
         reply = preferredLanguage === 'en'
-          ? `For the comprehension check (Step 3), remember: the student's name is Anna, Alex's last name is Smith (S-M-I-T-H), and the dictionary is in Conversation 3!`
-          : `Para la comprobación (Paso 3), recuerda: la estudiante se llama Anna, el apellido de Alex es Smith (S-M-I-T-H), y el diccionario aparece en la Conversación 3. ¡Usa el botón "Check Answers" para calificar tus respuestas!`;
+          ? `For the comprehension check, remember: the student's name is Anna, Alex's last name is Smith, and the dictionary is in Conversation 3! Use the "Check Answers" button.`
+          : `Para la comprobación (Paso 3), recuerda: la estudiante se llama Anna, el apellido de Alex es Smith, y el diccionario aparece en la Conversación 3. ¡Usa el botón "Check Answers" para calificar!`;
       } 
       else {
-        // Respuesta general abierta y variada (Evita el bucle repetitivo "Estoy aquí para ayudarte")
+        // Respuesta dinámica abierta que cambia según el flujo de la lección
         reply = preferredLanguage === 'en'
-          ? `What specific word, phrase, or lesson exercise would you like to review now, ${studentName}?`
-          : `¿Qué palabra específica, frase o ejercicio de la lección te gustaría revisar o practicar ahora, ${studentName}?`;
+          ? `Great question, ${studentName}! Make sure to practice the dialogues in Step 1 and try the speaking exercises in Step 4.`
+          : `Excelente consulta, ${studentName}. Asegúrate de repasar los diálogos de la lección y practicar la pronunciación con los botones correspondientes. ¿Qué otra duda tienes sobre el tema?`;
       }
 
       appendMarisolMessage(reply, 'teacher');
