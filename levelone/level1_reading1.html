@@ -935,7 +935,7 @@
 
       // Enviar mensaje a la API de Vercel/OpenAI con todo el contexto guardado
       try {
-        const response = await fetch('https://englishteacheria1.vercel.app/', {
+        const response = await fetch('https://englishteacheria1.vercel.app/api', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
