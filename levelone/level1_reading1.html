@@ -269,6 +269,7 @@
       border-top: 1px solid #e2e8f0;
       display: flex;
       gap: 6px;
+      align-items: center;
     }
     .marisol-chat-footer input {
       flex: 1;
@@ -286,6 +287,10 @@
       font-weight: 600;
       cursor: pointer;
       margin: 0;
+    }
+    .marisol-voice-btn {
+      background: #f59e0b !important;
+      padding: 8px 10px !important;
     }
   </style>
 </head>
@@ -572,7 +577,7 @@
       <div class="marisol-chat-header">
         <div style="display: flex; align-items: center;">
           <img src="marisol.jpg" alt="Teacher Marisol">
-          <span>Teacher Marisol (US)</span>
+          <span>Teacher Marisol</span>
         </div>
         <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
       </div>
@@ -581,6 +586,7 @@
       </div>
       <div class="marisol-chat-footer">
         <input type="text" id="marisol-user-input" placeholder="Ask Marisol a question..." onkeypress="handleMarisolKey(event)">
+        <button class="marisol-voice-btn" onclick="startMarisolDictation()" title="Hablar por voz">🎙️</button>
         <button onclick="sendMarisolMessage()">Send</button>
       </div>
     </div>
@@ -603,22 +609,28 @@
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
 
-    function getVoiceForCharacter(characterName) {
+    function getVoiceForCharacter(characterName, langCode = 'en-US') {
       if (cachedVoices.length === 0) {
         cachedVoices = window.speechSynthesis.getVoices();
+      }
+
+      const matchingVoices = cachedVoices.filter(v => v.lang.startsWith(langCode.substring(0, 2)));
+      if (matchingVoices.length === 0) return cachedVoices[0] || null;
+
+      if (langCode.startsWith('es')) {
+        // Buscar voz en español con acento latinoamericano o general
+        const latamVoice = matchingVoices.find(v => v.lang.includes('MX') || v.lang.includes('LA') || v.lang.includes('ES'));
+        return latamVoice || matchingVoices[0];
       }
 
       if (characterVoiceMap[characterName]) {
         return characterVoiceMap[characterName];
       }
 
-      const englishVoices = cachedVoices.filter(v => v.lang.startsWith('en'));
-      if (englishVoices.length === 0) return null;
-
       const maleNames = ['Jeffrey', 'Alex', 'Henry'];
       const isMale = maleNames.includes(characterName);
 
-      const genderVoices = englishVoices.filter(v => {
+      const genderVoices = matchingVoices.filter(v => {
         const name = v.name.toLowerCase();
         if (isMale) {
           return name.includes('male') || name.includes('david') || name.includes('george') || name.includes('daniel') || name.includes('alex') || name.includes('oliver');
@@ -627,7 +639,7 @@
         }
       });
 
-      const pool = genderVoices.length > 0 ? genderVoices : englishVoices;
+      const pool = genderVoices.length > 0 ? genderVoices : matchingVoices;
 
       let selectedVoice = null;
       for (let i = 0; i < pool.length; i++) {
@@ -647,14 +659,14 @@
       return characterVoiceMap[characterName];
     }
 
-    function speakCharacter(text, characterName) {
+    function speakCharacter(text, characterName, langCode = 'en-US') {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
+        utterance.lang = langCode;
         utterance.rate = 0.9;
 
-        const assignedVoice = getVoiceForCharacter(characterName);
+        const assignedVoice = getVoiceForCharacter(characterName, langCode);
         if (assignedVoice) {
           utterance.voice = assignedVoice;
         }
@@ -664,7 +676,7 @@
     }
 
     function speakWord(word) {
-      speakCharacter(word, 'Teacher Marisol');
+      speakCharacter(word, 'Teacher Marisol', 'en-US');
     }
 
     function testPronunciation(targetWord, btnElement) {
@@ -781,7 +793,29 @@
     function startMarisolSession() {
       const welcomeText = "Hello! I am Teacher Marisol. What is your name?";
       appendMarisolMessage(welcomeText, 'teacher');
-      speakCharacter(welcomeText, 'Teacher Marisol');
+      speakCharacter(welcomeText, 'Teacher Marisol', 'en-US');
+    }
+
+    function startMarisolDictation() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('El reconocimiento de voz no está soportado en este navegador.');
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
+      const input = document.getElementById('marisol-user-input');
+      input.placeholder = "Escuchando...";
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        input.value = event.results[0][0].transcript;
+        input.placeholder = "Ask Marisol a question...";
+        sendMarisolMessage();
+      };
+      recognition.onerror = function() {
+        input.placeholder = "Ask Marisol a question...";
+      };
     }
 
     function handleMarisolKey(event) {
@@ -811,7 +845,7 @@
         studentName = userInput.trim();
         reply = `Nice to meet you, ${studentName}! Would you like our help in English or in Spanish? (¿Prefieres la ayuda en inglés o en español?)`;
         appendMarisolMessage(reply, 'teacher');
-        speakCharacter(`Nice to meet you, ${studentName}! Would you like our help in English or in Spanish?`, 'Teacher Marisol');
+        speakCharacter(`Nice to meet you, ${studentName}! Would you like our help in English or in Spanish?`, 'Teacher Marisol', 'en-US');
         return;
       }
 
@@ -819,12 +853,14 @@
         if (lowerInput.includes('english') || lowerInput.includes('inglés') || lowerInput.includes('in english')) {
           preferredLanguage = 'en';
           reply = `Awesome, ${studentName}! Let's practice in US English. Remember to stay focused on the lesson. Do you have any questions about vocabulary, pronunciation, or the comprehension and speaking steps?`;
+          appendMarisolMessage(reply, 'teacher');
+          speakCharacter(reply, 'Teacher Marisol', 'en-US');
         } else {
           preferredLanguage = 'es';
-          reply = `Entendido, ${studentName}. Te guiaré combinando español e inglés para que practiques. ¿Qué duda tienes sobre el vocabulario, la pronunciación o los ejercicios de las lecciones?`;
+          reply = `Entendido, ${studentName}. Te guiaré en español con acento mexicano para que practiques cómodamente. ¿Qué duda tienes sobre el vocabulario, la pronunciación o los ejercicios de las lecciones?`;
+          appendMarisolMessage(reply, 'teacher');
+          speakCharacter(reply, 'Teacher Marisol', 'es-MX');
         }
-        appendMarisolMessage(reply, 'teacher');
-        speakCharacter(reply, 'Teacher Marisol');
         return;
       }
 
@@ -843,7 +879,7 @@
       }
 
       appendMarisolMessage(reply, 'teacher');
-      speakCharacter(reply, 'Teacher Marisol');
+      speakCharacter(reply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
     }
   </script>
 </body>
