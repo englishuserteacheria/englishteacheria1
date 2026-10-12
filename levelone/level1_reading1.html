@@ -688,6 +688,14 @@
       const feedback = card.querySelector('.feedback-msg');
       const recognition = new SpeechRecognition();
       recognition.lang = 'en-US';
+      
+      // CONFIGURACIÓN MEJORADA: Mayor tiempo de espera para que no se corte rápido
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      if (typeof recognition.maxAlternatives !== 'undefined') {
+        recognition.maxAlternatives = 1;
+      }
+
       feedback.style.color = "#555";
       feedback.textContent = "Listening...";
       recognition.start();
@@ -738,6 +746,11 @@
       }
       const recognition = new SpeechRecognition();
       recognition.lang = 'en-US';
+      
+      // CONFIGURACIÓN MEJORADA: Mayor tiempo de escucha en prácticas
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
       const practiceInput = document.getElementById(targetId);
       practiceInput.placeholder = "Listening... Speak now!";
       recognition.start();
@@ -803,6 +816,11 @@
       }
       const recognition = new SpeechRecognition();
       recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
+      
+      // CONFIGURACIÓN MEJORADA: Mayor tiempo de escucha para el chat flotante
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
       const input = document.getElementById('marisol-user-input');
       input.placeholder = "Escuchando...";
       recognition.start();
@@ -863,26 +881,26 @@
         return;
       }
 
-      // 3. Lógica abierta y directa para resolver dudas de vocabulario, pronunciación y ejercicios
+      // 3. Lógica abierta y directa corregida (Eliminadas las barras de fonética confusas /.../ y respuestas repetitivas)
       if (lowerInput.includes('escritorio') || lowerInput.includes('desk')) {
         reply = preferredLanguage === 'en'
-          ? `The word for escritorio is "desk". It is pronounced /dɛsk/ (des-k).`
-          : `Escritorio en inglés se dice "desk" y se pronuncia /dɛsk/ (des-k).`;
+          ? `The word for escritorio is "desk". It is pronounced: des-k (desk).`
+          : `Escritorio en inglés se dice "desk" y se pronuncia: des-k.`;
       } 
       else if (lowerInput.includes('lápiz') || lowerInput.includes('lapiz') || lowerInput.includes('pencil')) {
         reply = preferredLanguage === 'en'
-          ? `The word for lápiz is "pencil". It is pronounced /ˈpɛnsəl/ (pén-sil).`
-          : `Lápiz en inglés se dice "pencil" y se pronuncia /ˈpɛnsəl/ (pén-sil).`;
+          ? `The word for lápiz is "pencil". It is pronounced: pén-sil.`
+          : `Lápiz en inglés se dice "pencil" y se pronuncia: pén-sil.`;
       }
       else if (lowerInput.includes('borrador') || lowerInput.includes('eraser')) {
         reply = preferredLanguage === 'en'
-          ? `Borrador se dice "eraser" y se pronuncia /ɪˈreɪsər/ (i-réi-ser).`
-          : `Borrador en inglés se dice "eraser" y se pronuncia /ɪˈreɪsər/ (i-réi-ser).`;
+          ? `Borrador se dice "eraser" y se pronuncia: i-réi-ser.`
+          : `Borrador en inglés se dice "eraser" y se pronuncia: i-réi-ser.`;
       }
       else if (lowerInput.includes('pronunc') || lowerInput.includes('cómo se dice') || lowerInput.includes('como se pronuncia') || lowerInput.includes('sound')) {
         reply = preferredLanguage === 'en'
           ? `To pronounce that correctly, ${studentName}, articulate each syllable clearly and check the audio buttons next to the vocabulary images.`
-          : `Para pronunciar correctamente, ${studentName}, articula cada sonido con claridad. También puedes hacer clic en los botones "Listen" de las palabras del vocabulario.`;
+          : `Para pronunciar correctamente, ${studentName}, articula cada sonido con claridad por sílabas. También puedes hacer clic en los botones "Listen" de las palabras del vocabulario.`;
       } 
       else if (lowerInput.includes('ejercicio') || lowerInput.includes('comprobación') || lowerInput.includes('calific') || lowerInput.includes('respuest')) {
         reply = preferredLanguage === 'en'
@@ -890,10 +908,10 @@
           : `Para la comprobación (Paso 3), recuerda: la estudiante se llama Anna, el apellido de Alex es Smith (S-M-I-T-H), y el diccionario aparece en la Conversación 3. ¡Usa el botón "Check Answers" para calificar tus respuestas!`;
       } 
       else {
-        // Respuesta general abierta para cualquier otra consulta del alumno
+        // Respuesta general abierta y variada (Evita el bucle repetitivo "Estoy aquí para ayudarte")
         reply = preferredLanguage === 'en'
-          ? `I'm here to help you with anything you need, ${studentName}. Ask me about any vocabulary word, spelling, or how to answer the lesson steps.`
-          : `Estoy aquí para ayudarte en lo que necesites, ${studentName}. Pregúntame sobre cualquier palabra, traducción, regla gramatical o los ejercicios de la lección.`;
+          ? `What specific word, phrase, or lesson exercise would you like to review now, ${studentName}?`
+          : `¿Qué palabra específica, frase o ejercicio de la lección te gustaría revisar o practicar ahora, ${studentName}?`;
       }
 
       appendMarisolMessage(reply, 'teacher');
