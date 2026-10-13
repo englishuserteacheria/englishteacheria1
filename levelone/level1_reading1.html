@@ -827,21 +827,38 @@
     let marisolChatInitialized = false;
 
 
-  function toggleMarisolChat() {
-    const chatBox = document.getElementById('marisol-chat-box');
-    if (chatBox.style.display === 'flex') {
+ function stopMarisolVoice() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function toggleMarisolLanguage() {
+      if (preferredLanguage === 'es') {
+        preferredLanguage = 'en';
+        appendMarisolMessage("Language changed to US English.", 'teacher');
+        speakCharacter("Language changed to US English.", 'Teacher Marisol', 'en-US');
+      } else {
+        preferredLanguage = 'es';
+        appendMarisolMessage("Idioma cambiado a Español.", 'teacher');
+        speakCharacter("Idioma cambiado a Español.", 'Teacher Marisol', 'es-MX');
+      }
+    }
+
+    function toggleMarisolChat() {
+      const chatBox = document.getElementById('marisol-chat-box');
+      if (chatBox.style.display === 'flex') {
         chatBox.style.display = 'none';
         preferredLanguage = null;
-    } else {
+        stopMarisolVoice();
+      } else {
         chatBox.style.display = 'flex';
         if (!marisolChatInitialized) {
-            marisolChatInitialized = true;
-            startMarisolSession();
+          marisolChatInitialized = true;
+          startMarisolSession();
         }
+      }
     }
-} 
-
-
     function appendMarisolMessage(text, sender) {
       const chatBody = document.getElementById('marisol-chat-messages');
       const msgDiv = document.createElement('div');
