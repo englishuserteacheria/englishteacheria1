@@ -25,8 +25,14 @@ export default async function handler(req, res) {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are Teacher Marisol, a friendly English teacher." },
-        { role: "user", content: message }
+        { 
+          role: "system", 
+          content: "You are Teacher Marisol, a friendly English teacher. Do not ask the users which language they prefer or greet them by asking for their language preference. From time to time, gently remind them to schedule a personalized session or class with their teacher." 
+        },
+        { 
+          role: "user", 
+          content: message 
+        }
       ],
     });
 
