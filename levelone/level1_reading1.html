@@ -602,13 +602,13 @@
       <div class="marisol-chat-body" id="marisol-chat-messages">
         <!-- Los mensajes se cargan dinámicamente -->
       </div>
-      <div class="marisol-chat-footer">
-        <input type="text" id="marisol-user-input" placeholder="Ask Marisol a question..." onkeypress="handleMarisolKey(event)">
+     <div class="marisol-chat-footer" style="flex-wrap: wrap; gap: 4px;">
+        <input type="text" id="marisol-user-input" placeholder="Ask Marisol..." onkeypress="handleMarisolKey(event)">
         <button class="marisol-voice-btn" onclick="startMarisolDictation()" title="Hablar por voz">🎙️</button>
+        <button onclick="stopMarisolVoice()" title="Parar voz" style="background: #ef4444; color: white;">⏹️</button>
+        <button onclick="toggleMarisolLanguage()" id="lang-toggle-btn" title="Cambiar Idioma" style="background: #8b5cf6; color: white; font-size: 11px;">ES/EN</button>
         <button onclick="sendMarisolMessage()">Send</button>
       </div>
-    </div>
-  </div>
 
 
   <!-- SCRIPTS JAVASCRIPT -->
