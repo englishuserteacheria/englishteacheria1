@@ -25,11 +25,17 @@
             max-width: 220px; 
             border: 2px solid transparent; 
             cursor: pointer; 
-            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.4s ease; 
         }
         .level-card:hover { 
             transform: translateY(-4px);
             box-shadow: 0 6px 15px rgba(0,0,0,0.08); 
+        }
+
+        /* Clase para el efecto de desvanecimiento */
+        .level-card.fade-out {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Colores profesionales por nivel (Clases juntas sin espacio) */
@@ -72,22 +78,22 @@
         <p>Select your level to begin your English lessons.</p>
 
         <div class="levels">
-            <div class="level-card level-a1" onclick="showLevel('A1')">
+            <div class="level-card level-a1" onclick="handleLevelClick('A1', this)">
                 <div class="level-title">Level 1</div>
                 <div class="level-code">A1</div>
                 <div style="color: #555;">Beginner</div>
             </div>
-            <div class="level-card level-a2" onclick="showLevel('A2')">
+            <div class="level-card level-a2" onclick="handleLevelClick('A2', this)">
                 <div class="level-title">Level 2</div>
                 <div class="level-code">A2</div>
                 <div style="color: #555;">Basic</div>
             </div>
-            <div class="level-card level-b1" onclick="showLevel('B1')">
+            <div class="level-card level-b1" onclick="handleLevelClick('B1', this)">
                 <div class="level-title">Level 3</div>
                 <div class="level-code">B1</div>
                 <div style="color: #555;">Intermediate</div>
             </div>
-            <div class="level-card level-b2" onclick="showLevel('B2')">
+            <div class="level-card level-b2" onclick="handleLevelClick('B2', this)">
                 <div class="level-title">Level 4</div>
                 <div class="level-code">B2</div>
                 <div style="color: #555;">Upper-Intermediate</div>
@@ -173,16 +179,30 @@
     </div>
 
     <script>
+        const clickSound = new Audio('images/audio/introeu.mp4');
+
+        function handleLevelClick(levelId, cardElement) {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(error => {
+                console.log("Reproducción de audio bloqueada por el navegador:", error);
+            });
+
+            cardElement.classList.add('fade-out');
+
+            setTimeout(() => {
+                showLevel(levelId);
+                cardElement.classList.remove('fade-out');
+            }, 400);
+        }
+
         function showLevel(levelId) {
             const targetSection = document.getElementById(levelId);
             if (targetSection) {
                 const isActive = targetSection.classList.contains('active');
                 
-                // Ocultar todas las secciones
                 const sections = document.querySelectorAll('.lessons-section');
                 sections.forEach(sec => sec.classList.remove('active'));
 
-                // Si no estaba activa, la abrimos. Si ya estaba activa, se quedará cerrada.
                 if (!isActive) {
                     targetSection.classList.add('active');
                 }
