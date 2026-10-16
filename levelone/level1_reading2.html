@@ -6,6 +6,11 @@
     <title>Level 1 - Lesson 3 and 4 VERB TO BE</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        body {font-family: 'Inter', Arial, sans-serif; margin: 20px; line-height: 1.6; color: #334155; background-color: #f8fafc;}
+        h1, h2, h3 {font-family: 'Inter', Arial, sans-serif; color: #1e293b;}
+        button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 6px; font-family: 'Inter', Arial, sans-serif; }
+        
+        /* Navigation */
         .lesson-nav-bar {position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid #cbd5e1; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin: -20px -20px 20px -20px;}
         .lesson-nav-bar a {text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 14px; border-radius: 6px; transition: background 0.2s, transform 0.1s;}
         .btn-nav-menu {background: #f1f5f9; color: #123c69; border: 1px solid #cbd5e1;}
@@ -14,317 +19,33 @@
         .btn-nav-action:hover {background: #0d2b4a;}
         .lesson-nav-title {font-size: 15px; color: #475569; font-weight: 600;}
         @media (max-width: 600px) {.lesson-nav-bar { padding: 8px 10px; } .lesson-nav-bar a { font-size: 12px; padding: 6px 10px; } .lesson-nav-title { display: none; } }
-        body {font-family: 'Inter', Arial, sans-serif; margin: 20px; line-height: 1.6; color: #334155; background-color: #f8fafc;}
-        h1, h2, h3 {font-family: 'Inter', Arial, sans-serif; color: #1e293b;}
-        button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 6px; font-family: 'Inter', Arial, sans-serif; }
-        .btn-listen { background-color: #10b981; color: white; }
-        .btn-action { background-color: #0ea5e9; color: white; padding: 10px 20px; margin-top: 10px; font-weight: 600; }
-        .btn-speak { background-color: #f59e0b; color: white; padding: 8px 16px; font-weight: 600; }
-        .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
-        .feedback { font-weight: bold; margin-top: 10px; }
-        .correct { color: #10b981; }
-        .incorrect { color: #ef4444; }
+        
+        /* Video */
         .video-container {position: relative; width: 100%; max-width: 640px; margin: 25px auto; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); background: #000;}
         .video-container iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;}
-        .avatar-icon {width: 28px; height: 28px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);}
-        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; padding: 15px; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px; }
-        .vocab-item { border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; }
-        .vocab-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto; }
+        
+        /* Vocabulary Grid */
+        .vocab-section { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 20px 0; }
+        .vocab-section h3 { grid-column: 1 / -1; margin: 20px 0 10px; font-size: 22px; color: #1e293b; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px; }
+        .vocab-item { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .vocab-item img { max-width: 100%; height: 120px; object-fit: contain; border-radius: 6px; margin: 0 auto; display: block; }
+        .vocab-item p { margin: 15px 0 10px; font-weight: 600; font-size: 14px; color: #1e293b; }
+        
+        /* Buttons & Inputs */
+        .btn-listen { background-color: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin: 0; }
+        .btn-listen:hover { background-color: #2563eb; }
+        .btn-speak { background-color: #f59e0b; color: white; padding: 8px 16px; font-weight: 600; }
+        .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
+        
+        /* Conversations */
         .conv-container { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px; }
+        .avatar-icon {width: 28px; height: 28px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);}
+        
+        /* Marisol Widget */
         #teacher-marisol-widget {position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: 'Inter', Arial, sans-serif;}
         #marisol-floating-btn {width: 65px; height: 65px; border-radius: 50%; border: 3px solid #10b981; background: url('../images/marisol.jpg') center/cover no-repeat; background-color: #e2e8f0; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: transform 0.2s ease; position: relative;}
         #marisol-floating-btn:hover {transform: scale(1.08);}
         .marisol-badge {position: absolute; top: -2px; right: -2px; background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 2px 5px; border-radius: 500px; border: 2px solid #fff;}
         #marisol-chat-box {display: none; position: fixed; bottom: 95px; right: 20px; width: 340px; max-height: 480px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #cbd5e1; flex-direction: column; overflow: hidden;}
         .marisol-chat-header {background: #123c69; color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 14px;}
-        .marisol-chat-header img {width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 8px; border: 1px solid #fff; background-color: #ccc;}
-        .marisol-close-btn {background: none; color: white; font-size: 18px; cursor: pointer; padding: 0; margin: 0; border: none;}
-        .marisol-chat-body {padding: 12px; height: 300px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 10px; font-size: 13px;}
-        .marisol-msg {padding: 8px 12px; border-radius: 8px; max-width: 85%; word-wrap: break-word;}
-        .marisol-msg.teacher {background: #e2e8f0; color: #1e293b; align-self: flex-start; border-left: 3px solid #0ea5e9;}
-        .marisol-msg.student {background: #123c69; color: white; align-self: flex-end;}
-        .marisol-chat-footer {padding: 10px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; gap: 6px; align-items: center;}
-        .marisol-chat-footer input {flex: 1; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px;}
-        .marisol-chat-footer button {background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; margin: 0;}
-        .marisol-voice-btn {background: #f59e0b !important; padding: 8px 10px !important;}
-    </style>
-</head>
-<body>
-
-    <div class="lesson-nav-bar">
-        <a href="level1_reading1.html" class="btn-nav-action">← Prev</a>
-        <a href="../index.html" class="btn-nav-menu">🏠 Main Menu</a>
-        <span class="lesson-nav-title">English User Teacher</span>
-        <a href="level1_reading3.html" class="btn-nav-action">Next →</a>
-    </div>
-
-    <img src="../images/english-degradado.jpg" alt="School Logo" id="logo" style="max-height: 50px; float: left;">
-    <h1 style="margin-top: 15px;">Lesson 3 & 4</h1>
-    <p style="text-align: center;"><em>(Lecciones 3 y 4)</em></p>
-
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/dH1yqXlK_pY" title="Lesson Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-  <style>
-    /* Contenedor principal en formato cuadrícula */
-    .vocab-section {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 20px;
-        padding: 20px;
-    }
-    
-    /* Los títulos deben ocupar toda la fila para separar las secciones */
-    .vocab-section h3 {
-        grid-column: 1 / -1;
-        margin: 20px 0 10px;
-        font-size: 22px;
-        color: #1e293b;
-        border-bottom: 2px solid #cbd5e1;
-        padding-bottom: 5px;
-    }
-
-    /* Estilo de cada tarjeta/cuadro */
-    .vocab-item {
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 15px;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .vocab-item img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 6px;
-    }
-
-    .vocab-item p {
-        margin: 15px 0 10px;
-        font-weight: 600;
-        font-size: 14px;
-        color: #1e293b;
-    }
-
-    .btn-listen {
-        background-color: #3b82f6;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .btn-listen:hover {
-        background-color: #2563eb;
-    }
-</style>
-
-<script>
-    // Función para que los botones de audio funcionen nativamente en el navegador
-    function speakWord(text) {
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US'; // Idioma inglés
-            window.speechSynthesis.speak(utterance);
-        } else {
-            alert('Tu navegador no soporta la lectura de texto por voz.');
-        }
-    }
-</script>
-
-<div class="vocab-section">
-    <!-- Emotions & States (Emociones y Estados) -->
-    <h3>Emotions & States (Emociones y Estados)</h3>
-    <div class="vocab-item"><img src="../images/angry.jpg" alt="Angry"><p>Angry - Enojado/a</p><button class="btn-listen" onclick="speakWord('Angry')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/bored.jpg" alt="Bored"><p>Bored - Aburrido/a</p><button class="btn-listen" onclick="speakWord('Bored')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/excited.jpg" alt="Excited"><p>Excited - Emocionado/a</p><button class="btn-listen" onclick="speakWord('Excited')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/happy.jpg" alt="Happy"><p>Happy - Feliz</p><button class="btn-listen" onclick="speakWord('Happy')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/nervous.jpg" alt="Nervous"><p>Nervous - Nervioso/a</p><button class="btn-listen" onclick="speakWord('Nervous')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/sad.jpg" alt="Sad"><p>Sad - Triste</p><button class="btn-listen" onclick="speakWord('Sad')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/upset.jpg" alt="Upset"><p>Upset - Molesto/a / Disgustado/a</p><button class="btn-listen" onclick="speakWord('Upset')">Listen</button></div>
-
-    <!-- Occupations (Ocupaciones) -->
-    <h3>Occupations (Ocupaciones)</h3>
-    <div class="vocab-item"><img src="../images/architect.jpg" alt="Architect"><p>Architect - Arquitecto/a</p><button class="btn-listen" onclick="speakWord('Architect')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/baker.jpg" alt="Baker"><p>Baker - Panadero/a</p><button class="btn-listen" onclick="speakWord('Baker')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/butcher.jpg" alt="Butcher"><p>Butcher - Carnicero/a</p><button class="btn-listen" onclick="speakWord('Butcher')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/cashier.jpg" alt="Cashier"><p>Cashier - Cajero/a</p><button class="btn-listen" onclick="speakWord('Cashier')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/electrician.jpg" alt="Electrician"><p>Electrician - Electricista</p><button class="btn-listen" onclick="speakWord('Electrician')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/employee.jpg" alt="Employee"><p>Employee - Empleado/a</p><button class="btn-listen" onclick="speakWord('Employee')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/flightattendant.jpg" alt="Flight attendant"><p>Flight attendant - Asistente de vuelo</p><button class="btn-listen" onclick="speakWord('Flight attendant')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/janitor.jpg" alt="Janitor"><p>Janitor - Conserje / Intendente</p><button class="btn-listen" onclick="speakWord('Janitor')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/mechanic.jpg" alt="Mechanic"><p>Mechanic - Mecánico/a</p><button class="btn-listen" onclick="speakWord('Mechanic')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/pilot.jpg" alt="Pilot"><p>Pilot - Piloto</p><button class="btn-listen" onclick="speakWord('Pilot')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/policeofficer.jpg" alt="Police officer"><p>Police officer - Oficial de policía</p><button class="btn-listen" onclick="speakWord('Police officer')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/psychologist.jpg" alt="Psychologist"><p>Psychologist - Psicólogo/a</p><button class="btn-listen" onclick="speakWord('Psychologist')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/receptionist.jpg" alt="Receptionist"><p>Receptionist - Recepcionista</p><button class="btn-listen" onclick="speakWord('Receptionist')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/shoemaker.jpg" alt="Shoemaker"><p>Shoemaker - Zapatero/a</p><button class="btn-listen" onclick="speakWord('Shoemaker')">Listen</button></div>
-
-    <!-- Countries & Nationalities (Países y Nacionalidades) -->
-    <h3>Countries & Nationalities (Países y Nacionalidades)</h3>
-    <div class="vocab-item"><img src="../images/australia.jpg" alt="Australia"><p>Australia - Australian</p><button class="btn-listen" onclick="speakWord('Australia - Australian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/brazil.jpg" alt="Brazil"><p>Brazil - Brazilian</p><button class="btn-listen" onclick="speakWord('Brazil - Brazilian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/britain.jpg" alt="Britain"><p>Britain - British</p><button class="btn-listen" onclick="speakWord('Britain - British')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/canada.jpg" alt="Canada"><p>Canada - Canadian</p><button class="btn-listen" onclick="speakWord('Canada - Canadian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/china.jpg" alt="China"><p>China - Chinese</p><button class="btn-listen" onclick="speakWord('China - Chinese')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/france.jpg" alt="France"><p>France - French</p><button class="btn-listen" onclick="speakWord('France - French')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/germany.jpg" alt="Germany"><p>Germany - German</p><button class="btn-listen" onclick="speakWord('Germany - German')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/italy.jpg" alt="Italy"><p>Italy - Italian</p><button class="btn-listen" onclick="speakWord('Italy - Italian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/japan.jpg" alt="Japan"><p>Japan - Japanese</p><button class="btn-listen" onclick="speakWord('Japan - Japanese')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/korea.jpg" alt="Korea"><p>Korea - Korean</p><button class="btn-listen" onclick="speakWord('Korea - Korean')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/mexico.jpg" alt="Mexico"><p>Mexico - Mexican</p><button class="btn-listen" onclick="speakWord('Mexico - Mexican')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/portugal.jpg" alt="Portugal"><p>Portugal - Portuguese</p><button class="btn-listen" onclick="speakWord('Portugal - Portuguese')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/russia.jpg" alt="Russia"><p>Russia - Russian</p><button class="btn-listen" onclick="speak
-    <div id="conversations-section">
-        <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
-
-        <div class="conv-container">
-            <h3>Conversation 1</h3>
-            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> Hi Angel, is the teacher angry? <button class="btn-listen" onclick="speakWord('Hi Angel, is the teacher angry?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> No, he is not. I think he is stressed or tired. <button class="btn-listen" onclick="speakWord('No, he is not. I think he is stressed or tired.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> Oh… <button class="btn-listen" onclick="speakWord('Oh')">🔊 Listen</button></p>
-            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> Are you tired, too? <button class="btn-listen" onclick="speakWord('Are you tired, too?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> No, I am not, but I am a bit nervous because I’m having an oral exam. <button class="btn-listen" onclick="speakWord('No, I am not, but I am a bit nervous because I am having an oral exam.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> Well, good luck with your exam! <button class="btn-listen" onclick="speakWord('Well, good luck with your exam!')">🔊 Listen</button></p>
-        </div>
-
-        <div class="conv-container">
-            <h3>Conversation 2</h3>
-            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> Hey Anna, are you bored? <button class="btn-listen" onclick="speakWord('Hey Anna, are you bored?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/annaavatar.png" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not… <button class="btn-listen" onclick="speakWord('No, I am not')">🔊 Listen</button></p>
-            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> Then why the long face? Are you sad? <button class="btn-listen" onclick="speakWord('Then why the long face? Are you sad?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/annaavatar.png" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not, I am sick. But, how are you? <button class="btn-listen" onclick="speakWord('No, I am not, I am sick. But, how are you?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> I am happy, it is Friday! <button class="btn-listen" onclick="speakWord('I am happy, it is Friday!')">🔊 Listen</button></p>
-        </div>
-
-        <div class="conv-container">
-            <h3>Conversation 3</h3>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Hello, what’s your name? <button class="btn-listen" onclick="speakWord('Hello, what is your name?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I’m Marco. <button class="btn-listen" onclick="speakWord('I am Marco.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Nice to meet you Marco, I’m Joseph. Where are you from? <button class="btn-listen" onclick="speakWord('Nice to meet you Marco, I am Joseph. Where are you from?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I’m from Italy. <button class="btn-listen" onclick="speakWord('I am from Italy.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Cool! So you are Italian! What city are you from? <button class="btn-listen" onclick="speakWord('Cool! So you are Italian! What city are you from?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I am from Roma, and where are you from? <button class="btn-listen" onclick="speakWord('I am from Roma, and where are you from?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> I’m from Toronto. <button class="btn-listen" onclick="speakWord('I am from Toronto.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> Oh, so you’re Canadian. <button class="btn-listen" onclick="speakWord('Oh, so you are Canadian.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Yes, I am. Well, nice to meet you, see you! <button class="btn-listen" onclick="speakWord('Yes, I am. Well, nice to meet you, see you!')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> Good bye! <button class="btn-listen" onclick="speakWord('Good bye!')">🔊 Listen</button></p>
-        </div>
-
-        <div class="conv-container">
-            <h3>Conversation 4</h3>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Hey Marco, what is your phone number? <button class="btn-listen" onclick="speakWord('Hey Marco, what is your phone number?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> It is 8 3 3 2 1 4 7 2 0 8. <button class="btn-listen" onclick="speakWord('It is 8 3 3 2 1 4 7 2 0 8')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> And what’s your email address? <button class="btn-listen" onclick="speakWord('And what is your email address?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> It is marco_92@english-user.com. <button class="btn-listen" onclick="speakWord('It is marco 92 at english user dot com')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Ok, thank you. <button class="btn-listen" onclick="speakWord('Ok, thank you.')">🔊 Listen</button></p>
-        </div>
-    </div>
-
-    <h2>Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
-    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
-        <ul>
-            <li><strong>Emotions & States:</strong> Angry, Upset, Bored, Excited, Nervous, Happy, Sad, Tired, Sick</li>
-            <li><strong>Occupations:</strong> Police officer, Pilot, Janitor, Architect, Psychologist, Receptionist, Baker, Flight attendant, Employee, Cashier, Shoemaker, Electrician, Mechanic, Butcher</li>
-            <li><strong>Nationalities:</strong> Spanish, British, Mexican, Portuguese, German, Japanese, Canadian, Australian, French, Russian, American, Brazilian, Chinese, Italian, Korean</li>
-            <li><strong>Numbers:</strong> Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty</li>
-        </ul>
-    </div>
-
-    <h2>Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
-    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
-        <p>1. Why is Hanna nervous in Conversation 1? <input type="text" class="input-field" placeholder="Type your answer..."></p>
-        <p>2. How is Alex feeling at the end of Conversation 2? <input type="text" class="input-field" placeholder="Type your answer..."></p>
-        <p>3. Where is Marco from in Conversation 3? <input type="text" class="input-field" placeholder="Type your answer..."></p>
-        <p>4. What is Marco's email address in Conversation 4? <input type="text" class="input-field" placeholder="Type your answer..."></p>
-    </div>
-
-    <h2>Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
-    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
-        <p><em>Question 1: How are you feeling today? Are you happy, sad, or nervous?</em></p>
-        <button class="btn-speak" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
-        <input type="text" class="input-field" placeholder="___Your answer here...___">
-        
-        <p style="margin-top: 15px;"><em>Question 2: What is your nationality and where are you from?</em></p>
-        <button class="btn-speak" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
-        <input type="text" class="input-field" placeholder="___Your answer here...___">
-    </div>
-
-    <div id="teacher-marisol-widget">
-        <div id="marisol-floating-btn" onclick="toggleMarisolChat()">
-            <span class="marisol-badge">1</span>
-        </div>
-        <div id="marisol-chat-box">
-            <div class="marisol-chat-header">
-                <div style="display: flex; align-items: center;">
-                    <img src="../images/marisol.jpg" alt="Teacher Marisol" onerror="this.src=''">
-                    <span>Teacher Marisol</span>
-                </div>
-                <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
-            </div>
-            <div class="marisol-chat-body" id="marisol-chat-body">
-                <div class="marisol-msg teacher">
-                    Hello! I'm Teacher Marisol. How can I help you with Lessons 3 and 4 today?
-                </div>
-            </div>
-            <div class="marisol-chat-footer">
-                <input type="text" id="marisol-chat-input" placeholder="Type your question..." onkeypress="handleMarisolKeyPress(event)">
-                <button class="marisol-voice-btn" onclick="startMarisolVoice()">🎤</button>
-                <button onclick="sendMarisolMsg()">Send</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function speakWord(word) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'en-US';
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert('Sorry, your browser does not support speech synthesis.');
-            }
-        }
-        function toggleMarisolChat() {
-            const chatBox = document.getElementById('marisol-chat-box');
-            const badge = document.querySelector('.marisol-badge');
-            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-                chatBox.style.display = 'flex';
-                if(badge) badge.style.display = 'none';
-            } else {
-                chatBox.style.display = 'none';
-            }
-        }
-        function sendMarisolMsg() {
-            const input = document.getElementById('marisol-chat-input');
-            const msg = input.value.trim();
-            if (!msg) return;
-            appendMarisolMessage(msg, 'student');
-            input.value = '';
-            setTimeout(() => {
-                appendMarisolMessage("Keep practicing your vocabulary and dialogues! You're doing great.", 'teacher');
-            }, 1000);
-        }
-        function appendMarisolMessage(text, sender) {
-            const chatBody = document.getElementById('marisol-chat-body');
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `marisol-msg ${sender}`;
-            msgDiv.textContent = text;
-            chatBody.appendChild(msgDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-        function handleMarisolKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMarisolMsg();
-            }
-        }
-        function startMarisolVoice() {
-            alert("Microphone feature for chat is not integrated yet. Please type your message.");
-        }
-    </script>
-</body>
-</html>
+        .marisol-chat-header img {width:
