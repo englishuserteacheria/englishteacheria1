@@ -1,896 +1,454 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 1 - Lesson 1 and 2: Greetings and Introductions</title>
-  <!-- Importamos fuente moderna y limpia (Inter) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* BARRA DE NAVEGACIÓN FLOTANTE (ESTILO PROFESIONAL) */
-    .lesson-nav-bar {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid #cbd5e1;
-        padding: 12px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        margin: -20px -20px 20px -20px;
-    }
-    .lesson-nav-bar a {
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 8px 14px;
-        border-radius: 6px;
-        transition: background 0.2s, transform 0.1s;
-    }
-    .btn-nav-menu {
-        background: #f1f5f9;
-        color: #123c69;
-        border: 1px solid #cbd5e1;
-    }
-    .btn-nav-menu:hover {
-        background: #e2e8f0;
-    }
-    .btn-nav-action {
-        background: #123c69;
-        color: white;
-    }
-    .btn-nav-action:hover {
-        background: #0d2b4a;
-    }
-    .lesson-nav-title {
-        font-size: 15px;
-        color: #475569;
-        font-weight: 600;
-    }
-    @media (max-width: 600px) {
-        .lesson-nav-bar { padding: 8px 10px; }
-        .lesson-nav-bar a { font-size: 12px; padding: 6px 10px; }
-        .lesson-nav-title { display: none; }
-    }
-
-    body { 
-      font-family: 'Inter', Arial, sans-serif; 
-      margin: 20px; 
-      line-height: 1.6; 
-      color: #334155;
-      background-color: #f8fafc;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Inter', Arial, sans-serif;
-      color: #1e293b;
-    }
-
-    button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 6px; font-family: 'Inter', Arial, sans-serif; }
-    .btn-listen { background-color: #10b981; color: white; }
-    .btn-action { background-color: #0ea5e9; color: white; padding: 10px 20px; margin-top: 10px; font-weight: 600; }
-    .btn-speak { background-color: #f59e0b; color: white; padding: 8px 16px; font-weight: 600; }
-    .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
-    .feedback { font-weight: bold; margin-top: 10px; }
-    .correct { color: #10b981; }
-    .incorrect { color: #ef4444; }
-
-    /* CONTENEDOR RESPONSIVE PARA EL VIDEO DE YOUTUBE */
-    .video-container {
-      position: relative;
-      width: 100%;
-      max-width: 640px;
-      margin: 25px auto;
-      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-      background: #000;
-    }
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* ESTILOS PARA LA FOTO PRINCIPAL REDUCIDA */
-    .main-photo {
-      width: 100%;
-      max-width: 320px;
-      height: auto;
-      display: block;
-      margin: 20px auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      object-fit: cover;
-    }
-
-    /* ESTILOS PARA AVATARES Y FOTO DE CONTEXTO */
-    .avatar-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      object-fit: cover;
-      vertical-align: middle;
-      margin-right: 6px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-
-    .conv-context-img {
-      max-width: 220px;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      display: block;
-      margin: 10px 0 15px 0;
-    }
-
-    .conv-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 20px;
-      background: #ffffff;
-      padding: 15px 20px;
-      border-radius: 10px;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .conv-dialogues {
-      flex: 1;
-    }
-
-    .conv-media-side {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-width: 140px;
-    }
-
-    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
-    .vocab-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
-    .vocab-img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background-color: #f9f9f9; }
-    .vocab-word { font-size: 18px; font-weight: bold; color: #333; margin: 10px 0; }
-
-  /* ESTILOS DEL ASISTENTE FLOTANTE (TEACHER MARISOL) */
-    #teacher-marisol-widget {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      font-family: 'Inter', Arial, sans-serif;
-    }
-    #marisol-floating-btn {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      border: 3px solid #10b981;
-      background: url('../images/marisol.jpg') center/cover no-repeat;
-      background-color: #e2e8f0; /* Fallback color if image is missing */
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      transition: transform 0.2s ease;
-      position: relative;
-    }
-    #marisol-floating-btn:hover {
-      transform: scale(1.08);
-    }
-    .marisol-badge {
-      position: absolute;
-      top: -2px;
-      right: -2px;
-      background: #ef4444;
-      color: white;
-      font-size: 10px;
-      font-weight: bold;
-      padding: 2px 5px;
-      border-radius: 500px;
-      border: 2px solid #fff;
-    }
-    #marisol-chat-box {
-      display: none;
-      position: fixed;
-      bottom: 95px;
-      right: 20px;
-      width: 340px;
-      max-height: 480px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      border: 1px solid #cbd5e1;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .marisol-chat-header {
-      background: #123c69;
-      color: white;
-      padding: 12px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .marisol-chat-header img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 8px;
-      border: 1px solid #fff;
-      background-color: #ccc;
-    }
-    .marisol-close-btn {
-      background: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      padding: 0;
-      margin: 0;
-      border: none;
-    }
-    .marisol-chat-body {
-      padding: 12px;
-      height: 300px;
-      overflow-y: auto;
-      background: #f8fafc;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 13px;
-    }
-    .marisol-msg {
-      padding: 8px 12px;
-      border-radius: 8px;
-      max-width: 85%;
-      word-wrap: break-word;
-    }
-    .marisol-msg.teacher {
-      background: #e2e8f0;
-      color: #1e293b;
-      align-self: flex-start;
-      border-left: 3px solid #0ea5e9;
-    }
-    .marisol-msg.student {
-      background: #123c69;
-      color: white;
-      align-self: flex-end;
-    }
-    .marisol-chat-footer {
-      padding: 10px;
-      background: #ffffff;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-    .marisol-chat-footer input {
-      flex: 1;
-      padding: 8px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 13px;
-    }
-    .marisol-chat-footer button {
-      background: #10b981;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 0;
-    }
-    .marisol-voice-btn {
-      background: #f59e0b !important;
-      padding: 8px 10px !important;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1 - Lesson 3 and 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .lesson-nav-bar {position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid #cbd5e1; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin: -20px -20px 20px -20px;}
+        .lesson-nav-bar a {text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 14px; border-radius: 6px; transition: background 0.2s, transform 0.1s;}
+        .btn-nav-menu {background: #f1f5f9; color: #123c69; border: 1px solid #cbd5e1;}
+        .btn-nav-menu:hover {background: #e2e8f0;}
+        .btn-nav-action {background: #123c69; color: white;}
+        .btn-nav-action:hover {background: #0d2b4a;}
+        .lesson-nav-title {font-size: 15px; color: #475569; font-weight: 600;}
+        @media (max-width: 600px) {.lesson-nav-bar { padding: 8px 10px; } .lesson-nav-bar a { font-size: 12px; padding: 6px 10px; } .lesson-nav-title { display: none; } }
+        body {font-family: 'Inter', Arial, sans-serif; margin: 20px; line-height: 1.6; color: #334155; background-color: #f8fafc;}
+        h1, h2, h3 {font-family: 'Inter', Arial, sans-serif; color: #1e293b;}
+        button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 6px; font-family: 'Inter', Arial, sans-serif; }
+        .btn-listen { background-color: #10b981; color: white; }
+        .btn-action { background-color: #0ea5e9; color: white; padding: 10px 20px; margin-top: 10px; font-weight: 600; }
+        .btn-speak { background-color: #f59e0b; color: white; padding: 8px 16px; font-weight: 600; }
+        .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
+        .feedback { font-weight: bold; margin-top: 10px; }
+        .correct { color: #10b981; }
+        .incorrect { color: #ef4444; }
+        .video-container {position: relative; width: 100%; max-width: 640px; margin: 25px auto; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); background: #000;}
+        .video-container iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;}
+        .avatar-icon {width: 28px; height: 28px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);}
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; padding: 15px; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px; }
+        .vocab-item { border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; }
+        .vocab-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto; }
+        .conv-container { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px; }
+        #teacher-marisol-widget {position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: 'Inter', Arial, sans-serif;}
+        #marisol-floating-btn {width: 65px; height: 65px; border-radius: 50%; border: 3px solid #10b981; background: url('../images/marisol.jpg') center/cover no-repeat; background-color: #e2e8f0; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: transform 0.2s ease; position: relative;}
+        #marisol-floating-btn:hover {transform: scale(1.08);}
+        .marisol-badge {position: absolute; top: -2px; right: -2px; background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 2px 5px; border-radius: 500px; border: 2px solid #fff;}
+        #marisol-chat-box {display: none; position: fixed; bottom: 95px; right: 20px; width: 340px; max-height: 480px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #cbd5e1; flex-direction: column; overflow: hidden;}
+        .marisol-chat-header {background: #123c69; color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 14px;}
+        .marisol-chat-header img {width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 8px; border: 1px solid #fff; background-color: #ccc;}
+        .marisol-close-btn {background: none; color: white; font-size: 18px; cursor: pointer; padding: 0; margin: 0; border: none;}
+        .marisol-chat-body {padding: 12px; height: 300px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 10px; font-size: 13px;}
+        .marisol-msg {padding: 8px 12px; border-radius: 8px; max-width: 85%; word-wrap: break-word;}
+        .marisol-msg.teacher {background: #e2e8f0; color: #1e293b; align-self: flex-start; border-left: 3px solid #0ea5e9;}
+        .marisol-msg.student {background: #123c69; color: white; align-self: flex-end;}
+        .marisol-chat-footer {padding: 10px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; gap: 6px; align-items: center;}
+        .marisol-chat-footer input {flex: 1; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px;}
+        .marisol-chat-footer button {background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; margin: 0;}
+        .marisol-voice-btn {background: #f59e0b !important; padding: 8px 10px !important;}
+    </style>
 </head>
 <body>
-  <!-- BARRA DE NAVEGACIÓN SUPERIOR FIJA -->
-  <div class="lesson-nav-bar">
-      <a href="#" class="btn-nav-action">← Prev</a>
-      <a href="../index.html" class="btn-nav-menu">🏠 Main Menu</a>
-      <span class="lesson-nav-title">English User Teacher</span>
-      <a href="#" class="btn-nav-action">Next →</a>
-  </div>
 
-
-  <!-- ENCABEZADO Y FOTO REDUCIDA -->
-  <img src="english-degradado.jpg" alt="School Logo" id="logo" style="max-height: 50px; float: left;">
-  <h1 style="margin-top: 15px;">Lesson 1 & 2: Greetings and Introductions</h1>
-  <p style="text-align: center;"><em>(Lección 1 and 2: Saludos y Presentaciones)</em></p>
- 
-  <!-- VIDEO DE YOUTUBE INSERTADO -->
-  <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/5CdfASJiI7I" title="Lesson Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-
-<!-- Inicio de la sección de vocabulario -->
-<div id="vocabulary-section">
-    <h2 style="color: #1e293b;">Vocabulary - Lesson 1 and 2</h2>
-    
-    <!-- Instrucciones bilingües -->
-    <div style="margin-bottom: 20px; color: #475569; background-color: #e2e8f0; padding: 15px; border-radius: 8px; border-left: 5px solid #0ea5e9;">
-        <p style="margin: 0 0 8px 0; font-size: 15px;">
-            <strong>Instructions:</strong> Listen to the words, relate them to the pictures, and practice your pronunciation.
-        </p>
-        <p style="margin: 0; font-size: 15px;">
-            <strong>Instrucciones:</strong> Escucha las palabras, relaciónalas con las imágenes y practica tu pronunciación.
-        </p>
+    <div class="lesson-nav-bar">
+        <a href="level1_reading1.html" class="btn-nav-action">← Prev</a>
+        <a href="../index.html" class="btn-nav-menu">🏠 Main Menu</a>
+        <span class="lesson-nav-title">English User Teacher</span>
+        <a href="#" class="btn-nav-action">Next →</a>
     </div>
-    
-    <!-- Categoría 1: Greetings and Expressions (Saludos y Expresiones) -->
-    <h3 style="color: #334155; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px;">Greetings and Expressions (Saludos y Expresiones)</h3>
-    <div class="vocabulary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+
+    <img src="english-degradado.jpg" alt="School Logo" id="logo" style="max-height: 50px; float: left;">
+    <h1 style="margin-top: 15px;">Lesson 3 & 4</h1>
+    <p style="text-align: center;"><em>(Lección 3 y 4)</em></p>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/dH1yqXlK_pY" title="Lesson Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div id="vocabulary-section">
+        <h2 style="color: #1e293b;">Vocabulary - Lesson 3 and 4</h2>
+        <div style="margin-bottom: 20px; color: #475569; background-color: #e2e8f0; padding: 15px; border-radius: 8px; border-left: 5px solid #0ea5e9;">
+            <p style="margin: 0 0 8px 0; font-size: 15px;"><strong>Instructions:</strong> Listen to the words, relate them to the pictures, and practice your pronunciation.</p>
+            <p style="margin: 0; font-size: 15px;"><strong>Instrucciones:</strong> Escucha las palabras, relaciónalas con las imágenes y practica tu pronunciación.</p>
+        </div>
+
+        <div class="vocab-grid">
+            <!-- Angry -->
+            <div class="vocab-item">
+                <img src="../images/angry.jpg" alt="Angry">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Angry</p>
+                <button class="btn-listen" onclick="speakWord('Angry')">Listen</button>
+            </div>
+            <!-- Upset -->
+            <div class="vocab-item">
+                <img src="../images/upset.jpg" alt="Upset">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Upset</p>
+                <button class="btn-listen" onclick="speakWord('Upset')">Listen</button>
+            </div>
+            <!-- Bored -->
+            <div class="vocab-item">
+                <img src="../images/bored.jpg" alt="Bored">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Bored</p>
+                <button class="btn-listen" onclick="speakWord('Bored')">Listen</button>
+            </div>
+            <!-- Excited -->
+            <div class="vocab-item">
+                <img src="../images/excited.jpg" alt="Excited">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Excited</p>
+                <button class="btn-listen" onclick="speakWord('Excited')">Listen</button>
+            </div>
+            <!-- Nervous -->
+            <div class="vocab-item">
+                <img src="../images/nervous.jpg" alt="Nervous">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Nervous</p>
+                <button class="btn-listen" onclick="speakWord('Nervous')">Listen</button>
+            </div>
+            <!-- Police officer -->
+            <div class="vocab-item">
+                <img src="../images/policeofficer.jpg" alt="Police officer">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Police officer</p>
+                <button class="btn-listen" onclick="speakWord('Police officer')">Listen</button>
+            </div>
+            <!-- Pilot -->
+            <div class="vocab-item">
+                <img src="../images/pilot.jpg" alt="Pilot">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Pilot</p>
+                <button class="btn-listen" onclick="speakWord('Pilot')">Listen</button>
+            </div>
+            <!-- Janitor -->
+            <div class="vocab-item">
+                <img src="../images/janitor.jpg" alt="Janitor">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Janitor</p>
+                <button class="btn-listen" onclick="speakWord('Janitor')">Listen</button>
+            </div>
+            <!-- Spain - Spanish -->
+            <div class="vocab-item">
+                <img src="../images/spain.jpg" alt="Spain">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Spain - Spanish</p>
+                <button class="btn-listen" onclick="speakWord('Spain - Spanish')">Listen</button>
+            </div>
+            <!-- Britain - British -->
+            <div class="vocab-item">
+                <img src="../images/britain.jpg" alt="Britain">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Britain - British</p>
+                <button class="btn-listen" onclick="speakWord('Britain - British')">Listen</button>
+            </div>
+            <!-- Mexico - Mexican -->
+            <div class="vocab-item">
+                <img src="../images/mexico.jpg" alt="Mexico">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Mexico - Mexican</p>
+                <button class="btn-listen" onclick="speakWord('Mexico - Mexican')">Listen</button>
+            </div>
+            <!-- Portugal - Portuguesse -->
+            <div class="vocab-item">
+                <img src="../images/portugal.jpg" alt="Portugal">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Portugal - Portuguesse</p>
+                <button class="btn-listen" onclick="speakWord('Portugal - Portuguesse')">Listen</button>
+            </div>
+            <!-- Germany - German -->
+            <div class="vocab-item">
+                <img src="../images/germany.jpg" alt="Germany">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Germany - German</p>
+                <button class="btn-listen" onclick="speakWord('Germany - German')">Listen</button>
+            </div>
+            <!-- Japan - Japanese -->
+            <div class="vocab-item">
+                <img src="../images/japan.jpg" alt="Japan">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Japan - Japanese</p>
+                <button class="btn-listen" onclick="speakWord('Japan - Japanese')">Listen</button>
+            </div>
+            <!-- Canada - Canadian -->
+            <div class="vocab-item">
+                <img src="../images/canada.jpg" alt="Canada">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Canada - Canadian</p>
+                <button class="btn-listen" onclick="speakWord('Canada - Canadian')">Listen</button>
+            </div>
+            <!-- Australia - Australian -->
+            <div class="vocab-item">
+                <img src="../images/australia.jpg" alt="Australia">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Australia - Australian</p>
+                <button class="btn-listen" onclick="speakWord('Australia - Australian')">Listen</button>
+            </div>
+            <!-- France - French -->
+            <div class="vocab-item">
+                <img src="../images/france.jpg" alt="France">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">France - French</p>
+                <button class="btn-listen" onclick="speakWord('France - French')">Listen</button>
+            </div>
+            <!-- Russia - Russian -->
+            <div class="vocab-item">
+                <img src="../images/russia.jpg" alt="Russia">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Russia - Russian</p>
+                <button class="btn-listen" onclick="speakWord('Russia - Russian')">Listen</button>
+            </div>
+            <!-- Happy -->
+            <div class="vocab-item">
+                <img src="../images/happy.jpg" alt="Happy">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Happy</p>
+                <button class="btn-listen" onclick="speakWord('Happy')">Listen</button>
+            </div>
+            <!-- Sad -->
+            <div class="vocab-item">
+                <img src="../images/sad.jpg" alt="Sad">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Sad</p>
+                <button class="btn-listen" onclick="speakWord('Sad')">Listen</button>
+            </div>
+            <!-- Architect -->
+            <div class="vocab-item">
+                <img src="../images/architect.jpg" alt="Architect">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Architect</p>
+                <button class="btn-listen" onclick="speakWord('Architect')">Listen</button>
+            </div>
+            <!-- Psychologist -->
+            <div class="vocab-item">
+                <img src="../images/psychologist.jpg" alt="Psychologist">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Psychologist</p>
+                <button class="btn-listen" onclick="speakWord('Psychologist')">Listen</button>
+            </div>
+            <!-- Receptionist -->
+            <div class="vocab-item">
+                <img src="../images/receptionist.jpg" alt="Receptionist">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Receptionist</p>
+                <button class="btn-listen" onclick="speakWord('Receptionist')">Listen</button>
+            </div>
+            <!-- Baker -->
+            <div class="vocab-item">
+                <img src="../images/baker.jpg" alt="Baker">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Baker</p>
+                <button class="btn-listen" onclick="speakWord('Baker')">Listen</button>
+            </div>
+            <!-- Flight attendant -->
+            <div class="vocab-item">
+                <img src="../images/flightattendant.jpg" alt="Flight attendant">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Flight attendant</p>
+                <button class="btn-listen" onclick="speakWord('Flight attendant')">Listen</button>
+            </div>
+            <!-- Employee -->
+            <div class="vocab-item">
+                <img src="../images/employee.jpg" alt="Employee">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Employee</p>
+                <button class="btn-listen" onclick="speakWord('Employee')">Listen</button>
+            </div>
+            <!-- Cashier -->
+            <div class="vocab-item">
+                <img src="../images/cashier.jpg" alt="Cashier">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Cashier</p>
+                <button class="btn-listen" onclick="speakWord('Cashier')">Listen</button>
+            </div>
+            <!-- Shoemaker -->
+            <div class="vocab-item">
+                <img src="../images/shoemaker.jpg" alt="Shoemaker">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Shoemaker</p>
+                <button class="btn-listen" onclick="speakWord('Shoemaker')">Listen</button>
+            </div>
+            <!-- Electrician -->
+            <div class="vocab-item">
+                <img src="../images/electrician.jpg" alt="Electrician">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Electrician</p>
+                <button class="btn-listen" onclick="speakWord('Electrician')">Listen</button>
+            </div>
+            <!-- Mechanic -->
+            <div class="vocab-item">
+                <img src="../images/mechanic.jpg" alt="Mechanic">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Mechanic</p>
+                <button class="btn-listen" onclick="speakWord('Mechanic')">Listen</button>
+            </div>
+            <!-- Butcher -->
+            <div class="vocab-item">
+                <img src="../images/butcher.jpg" alt="Butcher">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Butcher</p>
+                <button class="btn-listen" onclick="speakWord('Butcher')">Listen</button>
+            </div>
+            <!-- United States Of America - American -->
+            <div class="vocab-item">
+                <img src="../images/usa.jpg" alt="USA">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">USA - American</p>
+                <button class="btn-listen" onclick="speakWord('United States Of America - American')">Listen</button>
+            </div>
+            <!-- Brazil - Brazilian -->
+            <div class="vocab-item">
+                <img src="../images/brazil.jpg" alt="Brazil">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Brazil - Brazilian</p>
+                <button class="btn-listen" onclick="speakWord('Brazil - Brazilian')">Listen</button>
+            </div>
+            <!-- China - Chinese -->
+            <div class="vocab-item">
+                <img src="../images/china.jpg" alt="China">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">China - Chinese</p>
+                <button class="btn-listen" onclick="speakWord('China - Chinese')">Listen</button>
+            </div>
+            <!-- Italy - Italian -->
+            <div class="vocab-item">
+                <img src="../images/italy.jpg" alt="Italy">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Italy - Italian</p>
+                <button class="btn-listen" onclick="speakWord('Italy - Italian')">Listen</button>
+            </div>
+            <!-- Korea - Korean -->
+            <div class="vocab-item">
+                <img src="../images/korea.jpg" alt="Korea">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Korea - Korean</p>
+                <button class="btn-listen" onclick="speakWord('Korea - Korean')">Listen</button>
+            </div>
+            <!-- Numbers: Ten to Twenty & Twenty -->
+            <div class="vocab-item">
+                <img src="../images/numbers.jpg" alt="Numbers">
+                <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Ten to Twenty & Twenty</p>
+                <button class="btn-listen" onclick="speakWord('Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty')">Listen</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="conversations-section">
+        <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
+
+        <!-- Conversation 1 -->
+        <div class="conv-container">
+            <h3>Conversation 1</h3>
+            <p><strong><img src="../images/hanna.jpg" class="avatar-icon" alt="Hanna">Hanna:</strong> Hi Angel, is the teacher angry? <button class="btn-listen" onclick="speakWord('Hi Angel, is the teacher angry?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/angel.jpg" class="avatar-icon" alt="Alex">Alex:</strong> No, he is not. I think he is stressed or tired <button class="btn-listen" onclick="speakWord('No, he is not. I think he is stressed or tired')">🔊 Listen</button></p>
+            <p><strong><img src="../images/hanna.jpg" class="avatar-icon" alt="Hanna">Hanna:</strong> Oh… <button class="btn-listen" onclick="speakWord('Oh')">🔊 Listen</button></p>
+            <p><strong><img src="../images/angel.jpg" class="avatar-icon" alt="Alex">Alex:</strong> Are you tired, too? <button class="btn-listen" onclick="speakWord('Are you tired, too?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/hanna.jpg" class="avatar-icon" alt="Hanna">Hanna:</strong> No, I am not, but I am a bit nervous because I´m having oral exam. <button class="btn-listen" onclick="speakWord('No, I am not, but I am a bit nervous because I am having oral exam.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/angel.jpg" class="avatar-icon" alt="Alex">Alex:</strong> Well, good luck with your exam! <button class="btn-listen" onclick="speakWord('Well, good luck with your exam!')">🔊 Listen</button></p>
+        </div>
+
+        <!-- Conversation 2 -->
+        <div class="conv-container">
+            <h3>Conversation 2</h3>
+            <p><strong><img src="../images/alex.jpg" class="avatar-icon" alt="Alex">Alex:</strong> Hey Anna, are you bored? <button class="btn-listen" onclick="speakWord('Hey Anna, are you bored?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/anna.jpg" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not… <button class="btn-listen" onclick="speakWord('No, I am not')">🔊 Listen</button></p>
+            <p><strong><img src="../images/alex.jpg" class="avatar-icon" alt="Alex">Alex:</strong> Then why the long face? Are you sad? <button class="btn-listen" onclick="speakWord('Then why the long face? Are you sad?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/anna.jpg" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not, I am sick. But, how are you? <button class="btn-listen" onclick="speakWord('No, I am not, I am sick. But, how are you?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/alex.jpg" class="avatar-icon" alt="Alex">Alex:</strong> I am happy, it is Friday! <button class="btn-listen" onclick="speakWord('I am happy, it is Friday!')">🔊 Listen</button></p>
+        </div>
+
+        <!-- Conversation 3 -->
+        <div class="conv-container">
+            <h3>Conversation 3</h3>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> Hello, what’s your name? <button class="btn-listen" onclick="speakWord('Hello, what is your name?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marco.jpg" class="avatar-icon" alt="Marco">Marco:</strong> I’m Marco. <button class="btn-listen" onclick="speakWord('I am Marco.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> Nice to meet you Marco, I’m Joseph. Where are you from? <button class="btn-listen" onclick="speakWord('Nice to meet you Marco, I am Joseph. Where are you from?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marco.jpg" class="avatar-icon" alt="Marco">Marco:</strong> I’m from Italy. <button class="btn-listen" onclick="speakWord('I am from Italy.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> Cool! So you are Italian! What city are you from? <button class="btn-listen" onclick="speakWord('Cool! So you are Italian! What city are you from?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marco.jpg" class="avatar-icon" alt="Marco">Marco:</strong> I am from Roma, and where are you from? <button class="btn-listen" onclick="speakWord('I am from Roma, and where are you from?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> I’m from Toronto. <button class="btn-listen" onclick="speakWord('I am from Toronto.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marco.jpg" class="avatar-icon" alt="Marco">Marco:</strong> Oh, so you’re Canadian. <button class="btn-listen" onclick="speakWord('Oh, so you are Canadian.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> Yes, I am. Well, nice to meet you, see you! <button class="btn-listen" onclick="speakWord('Yes, I am. Well, nice to meet you, see you!')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marco.jpg" class="avatar-icon" alt="Marco">Marco:</strong> Good bye! <button class="btn-listen" onclick="speakWord('Good bye!')">🔊 Listen</button></p>
+        </div>
+
+        <!-- Conversation 4 -->
+        <div class="conv-container">
+            <h3>Conversation 4</h3>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> Hey Marco, what is your phone number? <button class="btn-listen" onclick="speakWord('Hey Marco, what is your phone number?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marco.jpg" class="avatar-icon" alt="Marco">Marco:</strong> It is 8 3 3 2 1 4 7 2 0 8 <button class="btn-listen" onclick="speakWord('It is 8 3 3 2 1 4 7 2 0 8')">🔊 Listen</button></p>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> And what’s your email address? <button class="btn-listen" onclick="speakWord('And what is your email address?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marco.jpg" class="avatar-icon" alt="Marco">Marco:</strong> It is marco_92@english-user.com <button class="btn-listen" onclick="speakWord('It is marco 92 at english user dot com')">🔊 Listen</button></p>
+            <p><strong><img src="../images/joseph.jpg" class="avatar-icon" alt="Joseph">Joseph:</strong> Ok, thank you. <button class="btn-listen" onclick="speakWord('Ok, thank you.')">🔊 Listen</button></p>
+        </div>
+    </div>
+
+    <h2>Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
+    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+        <ul>
+            <li><strong>Emotions & States:</strong> Angry, Upset, Bored, Excited, Nervous, Happy, Sad, Tired, Sick</li>
+            <li><strong>Occupations:</strong> Police officer, Pilot, Janitor, Architect, Psychologist, Receptionist, Baker, Flight attendant, Employee, Cashier, Shoemaker, Electrician, Mechanic, Butcher</li>
+            <li><strong>Nationalities:</strong> Spanish, British, Mexican, Portuguese, German, Japanese, Canadian, Australian, French, Russian, American, Brazilian, Chinese, Italian, Korean</li>
+            <li><strong>Numbers:</strong> Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty</li>
+        </ul>
+    </div>
+
+    <h2>Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
+    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+        <p>1. Why is Hanna nervous in Conversation 1? <input type="text" class="input-field" placeholder="Type your answer..."></p>
+        <p>2. How is Alex feeling at the end of Conversation 2? <input type="text" class="input-field" placeholder="Type your answer..."></p>
+        <p>3. Where is Marco from in Conversation 3? <input type="text" class="input-field" placeholder="Type your answer..."></p>
+        <p>4. What is Marco's email address in Conversation 4? <input type="text" class="input-field" placeholder="Type your answer..."></p>
+    </div>
+
+    <h2>Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
+    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+        <p><em>Question 1: How are you feeling today? Are you happy, sad, or nervous?</em></p>
+        <button class="btn-speak" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
+        <input type="text" class="input-field" placeholder="___Your answer here...___">
         
-        <!-- Fine, thank you -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/finethankyou.jpg" alt="Fine, thank you" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">fine, thank you</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('fine, thank you')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('fine, thank you', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
+        <p style="margin-top: 15px;"><em>Question 2: What is your nationality and where are you from?</em></p>
+        <button class="btn-speak" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
+        <input type="text" class="input-field" placeholder="___Your answer here...___">
+    </div>
 
-        <!-- Good evening -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/goodevening.jpg" alt="Good evening" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">good evening</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('good evening')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('good evening', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+    <div id="teacher-marisol-widget">
+        <div id="marisol-floating-btn" onclick="toggleMarisolChat()">
+            <span class="marisol-badge">1</span>
         </div>
-
-        <!-- Good morning -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/goodmorning.jpg" alt="Good morning" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">good morning</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('good morning')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('good morning', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Goodbye -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/goodbye.jpg" alt="Goodbye" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">goodbye</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('goodbye')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('goodbye', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Have a good night -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/haveagoodnight.jpg" alt="Have a good night" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">have a good night</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('have a good night')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('have a good night', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Hello -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/hello.jpg" alt="Hello" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">hello</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('hello')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('hello', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Hi -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/hi.jpg" alt="Hi" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">hi</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('hi')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('hi', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- How are you -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/howareyou.jpg" alt="How are you" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">how are you</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('how are you')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('how are you', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- How're things -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/howarethings.jpg" alt="How're things" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">how're things</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('how\'re things')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('how\'re things', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- I've been better -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/ivebeenbetter.jpg" alt="I've been better" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">i've been better</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('i\'ve been better')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('i\'ve been better', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Long time no see -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/longtimenosee.jpg" alt="Long time no see" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">long time no see</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('long time no see')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('long time no see', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Not bad -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/notbad.jpg" alt="Not bad" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">not bad</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('not bad')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('not bad', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Pretty good -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/prettygood.jpg" alt="Pretty good" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">pretty good</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('pretty good')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('pretty good', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- See you tomorrow -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/seeyoutomorrow.jpg" alt="See you tomorrow" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">see you tomorrow</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('see you tomorrow')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('see you tomorrow', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Very well, thanks -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/verywellthanks.jpg" alt="Very well, thanks" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">very well, thanks</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('very well, thanks')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('very well, thanks', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- What's new -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/whatsnew.jpg" alt="What's new" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">what's new</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('what\'s new')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('what\'s new', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- What's up -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/whatsup.jpg" alt="What's up" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">what's up</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('what\'s up')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('what\'s up', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        <div id="marisol-chat-box">
+            <div class="marisol-chat-header">
+                <div style="display: flex; align-items: center;">
+                    <img src="../images/marisol.jpg" alt="Teacher Marisol" onerror="this.src=''">
+                    <span>Teacher Marisol</span>
+                </div>
+                <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
+            </div>
+            <div class="marisol-chat-body" id="marisol-chat-body">
+                <div class="marisol-msg teacher">
+                    Hello! I'm Teacher Marisol. How can I help you with Lessons 3 and 4 today?
+                </div>
+            </div>
+            <div class="marisol-chat-footer">
+                <input type="text" id="marisol-chat-input" placeholder="Type your question..." onkeypress="handleMarisolKeyPress(event)">
+                <button class="marisol-voice-btn" onclick="startMarisolVoice()">🎤</button>
+                <button onclick="sendMarisolMsg()">Send</button>
+            </div>
         </div>
     </div>
 
-    <!-- Categoría 2: Classroom Objects (Objetos del Salón de Clases) -->
-    <h3 style="color: #334155; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px;">Classroom Objects (Objetos del Salón de Clases)</h3>
-    <div class="vocabulary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
-
-        <!-- Boards -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/boards.jpg" alt="boards" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">boards</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('boards')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('boards', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Book -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/book.jpg" alt="book" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">book</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('book')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('book', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Books -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/books.jpg" alt="books" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">books</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('books')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('books', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Chair -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/chair.jpg" alt="chair" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">chair</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('chair')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('chair', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Chairs -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/chairs.jpg" alt="chairs" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">chairs</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('chairs')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('chairs', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Clock -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/clock.jpg" alt="clock" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">clock</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('clock')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('clock', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Desk -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/desk.jpg" alt="desk" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">desk</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('desk')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('desk', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Desks -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/desks.jpg" alt="desks" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">desks</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('desks')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('desks', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Dictionary -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/dictionary.jpg" alt="dictionary" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">dictionary</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('dictionary')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('dictionary', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Dictionaries -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/dictionaries.jpg" alt="dictionaries" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">dictionaries</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('dictionaries')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('dictionaries', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Eraser -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/eraser.jpg" alt="eraser" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">eraser</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('eraser')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('eraser', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Erasers -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/erasers.jpg" alt="erasers" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">erasers</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('erasers')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('erasers', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Glasses -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/glasses.jpg" alt="glasses" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">glasses</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('glasses')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('glasses', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Key -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/key.jpg" alt="key" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">key</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('key')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('key', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Keys -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/keys.jpg" alt="keys" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">keys</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('keys')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('keys', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Laptop -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/laptop.jpg" alt="laptop" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">laptop</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('laptop')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('laptop', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Marker -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/marker.jpg" alt="marker" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">marker</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('marker')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('marker', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Markers -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/markers.jpg" alt="markers" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">markers</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('markers')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('markers', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Mechanical pencil -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/mechanicalpencil.jpg" alt="Mechanical pencil" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">mechanical pencil</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('mechanical pencil')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('mechanical pencil', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Notebook -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/notebook.jpg" alt="notebook" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">notebook</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('notebook')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('notebook', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Notebooks -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/notebooks.jpg" alt="notebooks" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">notebooks</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('notebooks')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('notebooks', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Pen -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/pen.jpg" alt="Pen" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">pen</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('pen')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('pen', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Pens -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/pens.jpg" alt="pens" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">pens</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('pens')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('pens', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Pencil -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/pencil.jpg" alt="Pencil" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">pencil</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('pencil')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('pencil', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Pencils -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/pencils.jpg" alt="pencils" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">pencils</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('pencils')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('pencils', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Pencil sharpener -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/pencilsharpener.jpg" alt="Pencil sharpener" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">pencil sharpener</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('pencil sharpener')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('pencil sharpener', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Ruler -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/ruler.jpg" alt="ruler" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">ruler</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('ruler')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('ruler', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Rulers -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/rulers.jpg" alt="rulers" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">rulers</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('rulers')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('rulers', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- School bag -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/schoolbag.jpg" alt="School bag" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">school bag</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('school bag')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('school bag', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-
-        <!-- Schoolbags -->
-        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/schoolbags.jpg" alt="schoolbags" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
-            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">schoolbags</p>
-            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('schoolbags')">Listen</button>
-            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('schoolbags', this)">Practice</button>
-            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
-        </div>
-    </div>
-</div> <!-- Fin de la sección de vocabulario -->
-
-  <!-- WIDGET PROFESORA MARISOL -->
-  <div id="teacher-marisol-widget">
-      <div id="marisol-floating-btn" onclick="toggleMarisolChat()">
-          <span class="marisol-badge">1</span>
-      </div>
-      
-      <div id="marisol-chat-box">
-          <div class="marisol-chat-header">
-              <div style="display: flex; align-items: center;">
-                  <img src="../images/marisol.jpg" alt="Teacher Marisol" onerror="this.src=''">
-                  <span>Teacher Marisol</span>
-              </div>
-              <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
-          </div>
-          <div class="marisol-chat-body" id="marisol-chat-body">
-              <div class="marisol-msg teacher">
-                  Hello! I'm Teacher Marisol. How can I help you with Lesson 1 and 2 today?
-              </div>
-          </div>
-          <div class="marisol-chat-footer">
-              <input type="text" id="marisol-chat-input" placeholder="Type your question..." onkeypress="handleMarisolKeyPress(event)">
-              <button class="marisol-voice-btn" onclick="startMarisolVoice()">🎤</button>
-              <button onclick="sendMarisolMsg()">Send</button>
-          </div>
-      </div>
-  </div>
-
-  <!-- JAVASCRIPT LOGIC -->
-  <script>
-      // Función para pronunciar la palabra
-      function speakWord(word) {
-          if ('speechSynthesis' in window) {
-              const utterance = new SpeechSynthesisUtterance(word);
-              utterance.lang = 'en-US';
-              window.speechSynthesis.speak(utterance);
-          } else {
-              alert('Sorry, your browser does not support speech synthesis.');
-          }
-      }
-
-      // Función para evaluar la pronunciación del usuario
-      function testPronunciation(expectedWord, btnElement) {
-          const feedbackDiv = btnElement.nextElementSibling;
-          feedbackDiv.textContent = "Listening...";
-          feedbackDiv.className = "feedback-msg";
-
-          // Inicializar reconocimiento de voz
-          const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-          if (!SpeechRecognition) {
-              feedbackDiv.textContent = "Speech recognition not supported in this browser.";
-              feedbackDiv.className = "feedback-msg incorrect";
-              return;
-          }
-
-          const recognition = new SpeechRecognition();
-          recognition.lang = 'en-US';
-          recognition.interimResults = false;
-          recognition.maxAlternatives = 1;
-
-          recognition.start();
-
-          recognition.onresult = function(event) {
-              const transcript = event.results[0][0].transcript.toLowerCase().replace(/[.,!?]/g, '').trim();
-              const expectedClean = expectedWord.toLowerCase().replace(/[.,!?]/g, '').trim();
-
-              if (transcript === expectedClean) {
-                  feedbackDiv.textContent = `Excellent! You said: "${transcript}"`;
-                  feedbackDiv.className = "feedback-msg correct";
-              } else {
-                  feedbackDiv.textContent = `You said: "${transcript}". Try again!`;
-                  feedbackDiv.className = "feedback-msg incorrect";
-              }
-          };
-
-          recognition.onerror = function(event) {
-              feedbackDiv.textContent = "Error listening to microphone.";
-              feedbackDiv.className = "feedback-msg incorrect";
-          };
-      }
-
-      // Lógica del Chat de Marisol
-      function toggleMarisolChat() {
-          const chatBox = document.getElementById('marisol-chat-box');
-          const badge = document.querySelector('.marisol-badge');
-          
-          if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-              chatBox.style.display = 'flex';
-              if(badge) badge.style.display = 'none'; // Esconder la notificación
-          } else {
-              chatBox.style.display = 'none';
-          }
-      }
-
-      function sendMarisolMsg() {
-          const input = document.getElementById('marisol-chat-input');
-          const msg = input.value.trim();
-          if (!msg) return;
-
-          appendMarisolMessage(msg, 'student');
-          input.value = '';
-
-          // Simular respuesta automática
-          setTimeout(() => {
-              appendMarisolMessage("Keep practicing your vocabulary! You're doing a great job.", 'teacher');
-          }, 1000);
-      }
-
-      function appendMarisolMessage(text, sender) {
-          const chatBody = document.getElementById('marisol-chat-body');
-          const msgDiv = document.createElement('div');
-          msgDiv.className = `marisol-msg ${sender}`;
-          msgDiv.textContent = text;
-          chatBody.appendChild(msgDiv);
-          chatBody.scrollTop = chatBody.scrollHeight;
-      }
-
-      function handleMarisolKeyPress(event) {
-          if (event.key === 'Enter') {
-              sendMarisolMsg();
-          }
-      }
-
-      function startMarisolVoice() {
-          alert("Microphone feature for chat is not integrated yet. Please type your message.");
-      }
-  </script>
-
+    <script>
+        function speakWord(word) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Sorry, your browser does not support speech synthesis.');
+            }
+        }
+        function toggleMarisolChat() {
+            const chatBox = document.getElementById('marisol-chat-box');
+            const badge = document.querySelector('.marisol-badge');
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'flex';
+                if(badge) badge.style.display = 'none';
+            } else {
+                chatBox.style.display = 'none';
+            }
+        }
+        function sendMarisolMsg() {
+            const input = document.getElementById('marisol-chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            appendMarisolMessage(msg, 'student');
+            input.value = '';
+            setTimeout(() => {
+                appendMarisolMessage("Keep practicing your vocabulary and dialogues! You're doing great.", 'teacher');
+            }, 1000);
+        }
+        function appendMarisolMessage(text, sender) {
+            const chatBody = document.getElementById('marisol-chat-body');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `marisol-msg ${sender}`;
+            msgDiv.textContent = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        function handleMarisolKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMarisolMsg();
+            }
+        }
+        function startMarisolVoice() {
+            alert("Microphone feature for chat is not integrated yet. Please type your message.");
+        }
+    </script>
 </body>
 </html>
