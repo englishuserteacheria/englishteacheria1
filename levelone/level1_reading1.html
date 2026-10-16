@@ -1012,70 +1012,83 @@
   </div>
 
 
-  <h3>Conversation 2</h3>
-  <p><strong>Jeffrey:</strong> Good evening Abby. 
-    <button class="btn-listen" onclick="speakCharacter('Good evening Abby.', 'Jeffrey')">🔊 Listen</button>
-  </p>
-  <p><strong>Abby:</strong> Hi Jeffrey, how are you? 
-    <button class="btn-listen" onclick="speakCharacter('Hi Jeffrey, how are you?', 'Abby')">🔊 Listen</button>
-  </p>
-  <p><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. 
-    <button class="btn-listen" onclick="speakCharacter('I am fine, thank you. This is Alex, a new student.', 'Jeffrey')">🔊 Listen</button>
-  </p>
-  <p><strong>Abby:</strong> Nice to meet you, Alex. 
-    <button class="btn-listen" onclick="speakCharacter('Nice to meet you, Alex.', 'Abby')">🔊 Listen</button>
-  </p>
-  <p><strong>Alex:</strong> Nice to meet you too. 
-    <button class="btn-listen" onclick="speakCharacter('Nice to meet you too.', 'Alex')">🔊 Listen</button>
-  </p>
-  <p><strong>Jeffrey:</strong> He wants to book his next appointment. 
-    <button class="btn-listen" onclick="speakCharacter('He wants to book his next appointment.', 'Jeffrey')">🔊 Listen</button>
-  </p>
-  <p><strong>Abby:</strong> Sure! What is your last name? 
-    <button class="btn-listen" onclick="speakCharacter('Sure! What is your last name?', 'Abby')">🔊 Listen</button>
-  </p>
-  <p><strong>Alex:</strong> Smith. 
-    <button class="btn-listen" onclick="speakCharacter('Smith.', 'Alex')">🔊 Listen</button>
-  </p>
-  <p><strong>Abby:</strong> How do you spell that? 
-    <button class="btn-listen" onclick="speakCharacter('How do you spell that?', 'Abby')">🔊 Listen</button>
-  </p>
-  <p><strong>Alex:</strong> S – M – I – T – H. 
-    <button class="btn-listen" onclick="speakCharacter('S, M, I, T, H', 'Alex')">🔊 Listen</button>
-  </p>
-
+ <h3>Conversation 2</h3>
+  <div class="conv-container">
+    <div class="conv-dialogues">
+      <p><img src="../images/jeffreyavatar.png" alt="Jeffrey" class="avatar-icon"><strong>Jeffrey:</strong> Good evening Abby. 
+        <button class="btn-listen" onclick="speakCharacter('Good evening Abby.', 'Jeffrey')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/abbyavatar.png" alt="Abby" class="avatar-icon"><strong>Abby:</strong> Hi Jeffrey, how are you? 
+        <button class="btn-listen" onclick="speakCharacter('Hi Jeffrey, how are you?', 'Abby')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/jeffreyavatar.png" alt="Jeffrey" class="avatar-icon"><strong>Jeffrey:</strong> I'm fine, thank you. This is Alex, a new student. 
+        <button class="btn-listen" onclick="speakCharacter('I am fine, thank you. This is Alex, a new student.', 'Jeffrey')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/abbyavatar.png" alt="Abby" class="avatar-icon"><strong>Abby:</strong> Nice to meet you, Alex. 
+        <button class="btn-listen" onclick="speakCharacter('Nice to meet you, Alex.', 'Abby')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> Nice to meet you too. 
+        <button class="btn-listen" onclick="speakCharacter('Nice to meet you too.', 'Alex')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/jeffreyavatar.png" alt="Jeffrey" class="avatar-icon"><strong>Jeffrey:</strong> He wants to book his next appointment. 
+        <button class="btn-listen" onclick="speakCharacter('He wants to book his next appointment.', 'Jeffrey')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/abbyavatar.png" alt="Abby" class="avatar-icon"><strong>Abby:</strong> Sure! What is your last name? 
+        <button class="btn-listen" onclick="speakCharacter('Sure! What is your last name?', 'Abby')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> Smith. 
+        <button class="btn-listen" onclick="speakCharacter('Smith.', 'Alex')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/abbyavatar.png" alt="Abby" class="avatar-icon"><strong>Abby:</strong> How do you spell that? 
+        <button class="btn-listen" onclick="speakCharacter('How do you spell that?', 'Abby')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> S – M – I – T – H. 
+        <button class="btn-listen" onclick="speakCharacter('S, M, I, T, H', 'Alex')">🔊 Listen</button>
+      </p>
+    </div>
+    <div class="conv-media-side">
+      <video src="../images/conversacion2.mp4" controls class="conv-context-img" style="width: 100%; max-width: 220px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: block; margin: 10px 0 15px 0;"></video>
+    </div>
+  </div>
 
   <h3>Conversation 3</h3>
-  <p><strong>Hanna:</strong> Can I borrow a pencil, teacher? 
-    <button class="btn-listen" onclick="speakCharacter('Can I borrow a pencil, teacher?', 'Hanna')">🔊 Listen</button>
-  </p>
-  <p><strong>Henry:</strong> Of course, these are my pencils. 
-    <button class="btn-listen" onclick="speakCharacter('Of course, these are my pencils.', 'Henry')">🔊 Listen</button>
-  </p>
-  <p><strong>Hanna:</strong> Thanks, and what are those? 
-    <button class="btn-listen" onclick="speakCharacter('Thanks, and what are those?', 'Hanna')">🔊 Listen</button>
-  </p>
-  <p><strong>Henry:</strong> They are pens and markers. By the way, this is your book. 
-    <button class="btn-listen" onclick="speakCharacter('They are pens and markers. By the way, this is your book.', 'Henry')">🔊 Listen</button>
-  </p>
-  <p><strong>Hanna:</strong> Oh, what is that? 
-    <button class="btn-listen" onclick="speakCharacter('Oh, what is that?', 'Hanna')">🔊 Listen</button>
-  </p>
-  <p><strong>Henry:</strong> It is a dictionary. 
-    <button class="btn-listen" onclick="speakCharacter('It is a dictionary.', 'Henry')">🔊 Listen</button>
-  </p>
-  <p><strong>Hanna:</strong> Cool! Can I borrow it? 
-    <button class="btn-listen" onclick="speakCharacter('Cool! Can I borrow it?', 'Hanna')">🔊 Listen</button>
-  </p>
-  <p><strong>Henry:</strong> Sure. Is this your eraser? 
-    <button class="btn-listen" onclick="speakCharacter('Sure. Is this your eraser?', 'Henry')">🔊 Listen</button>
-  </p>
-  <p><strong>Hanna:</strong> Yes, it is, and that is my sharpener. You can borrow them. 
-    <button class="btn-listen" onclick="speakCharacter('Yes, it is, and that is my sharpener. You can borrow them.', 'Hanna')">🔊 Listen</button>
-  </p>
-  <p><strong>Hanna:</strong> Thank you! 
-    <button class="btn-listen" onclick="speakCharacter('Thank you!', 'Hanna')">🔊 Listen</button>
-  </p>
+  <div class="conv-container">
+    <div class="conv-dialogues">
+      <p><img src="../images/hannaavatar.png" alt="Hanna" class="avatar-icon"><strong>Hanna:</strong> Can I borrow a pencil, teacher? 
+        <button class="btn-listen" onclick="speakCharacter('Can I borrow a pencil, teacher?', 'Hanna')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/henryavatar.png" alt="Henry" class="avatar-icon"><strong>Henry:</strong> Of course, these are my pencils. 
+        <button class="btn-listen" onclick="speakCharacter('Of course, these are my pencils.', 'Henry')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/hannaavatar.png" alt="Hanna" class="avatar-icon"><strong>Hanna:</strong> Thanks, and what are those? 
+        <button class="btn-listen" onclick="speakCharacter('Thanks, and what are those?', 'Hanna')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/henryavatar.png" alt="Henry" class="avatar-icon"><strong>Henry:</strong> They are pens and markers. By the way, this is your book. 
+        <button class="btn-listen" onclick="speakCharacter('They are pens and markers. By the way, this is your book.', 'Henry')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/hannaavatar.png" alt="Hanna" class="avatar-icon"><strong>Hanna:</strong> Oh, what is that? 
+        <button class="btn-listen" onclick="speakCharacter('Oh, what is that?', 'Hanna')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/henryavatar.png" alt="Henry" class="avatar-icon"><strong>Henry:</strong> It is a dictionary. 
+        <button class="btn-listen" onclick="speakCharacter('It is a dictionary.', 'Henry')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/hannaavatar.png" alt="Hanna" class="avatar-icon"><strong>Hanna:</strong> Cool! Can I borrow it? 
+        <button class="btn-listen" onclick="speakCharacter('Cool! Can I borrow it?', 'Hanna')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/henryavatar.png" alt="Henry" class="avatar-icon"><strong>Henry:</strong> Sure. Is this your eraser? 
+        <button class="btn-listen" onclick="speakCharacter('Sure. Is this your eraser?', 'Henry')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/hannaavatar.png" alt="Hanna" class="avatar-icon"><strong>Hanna:</strong> Yes, it is, and that is my sharpener. You can borrow them. 
+        <button class="btn-listen" onclick="speakCharacter('Yes, it is, and that is my sharpener. You can borrow them.', 'Hanna')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/hannaavatar.png" alt="Hanna" class="avatar-icon"><strong>Hanna:</strong> Thank you! 
+        <button class="btn-listen" onclick="speakCharacter('Thank you!', 'Hanna')">🔊 Listen</button>
+      </p>
+    </div>
+    <div class="conv-media-side">
+      <video src="../images/conversacion3.mp4" controls class="conv-context-img" style="width: 100%; max-width: 220px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: block; margin: 10px 0 15px 0;"></video>
+    </div>
+  </div>
 
 
   <!-- PASO 2: VOCABULARIO CLAVE Y EXPRESIONES AMPLIADO -->
