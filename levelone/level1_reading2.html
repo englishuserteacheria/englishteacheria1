@@ -66,7 +66,7 @@
         <iframe src="https://www.youtube.com/embed/dH1yqXlK_pY" title="Lesson Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-  <style>
+ <style>
     /* Contenedor principal en formato cuadrícula */
     .vocab-section {
         display: grid;
@@ -111,74 +111,6 @@
     .btn-listen {
         background-color: #3b82f6;
         color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .btn-listen:hover {
-        background-color: #2563eb;
-    }
-</style>
-
-<script>
-    // Función para que los botones de audio funcionen nativamente en el navegador
-    function speakWord(text) {
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US'; // Idioma inglés
-            window.speechSynthesis.speak(utterance);
-        } else {
-            alert('Tu navegador no soporta la lectura de texto por voz.');
-        }
-    }
-</script>
-
-<div class="vocab-section">
-    <!-- Emotions & States (Emociones y Estados) -->
-    <h3>Emotions & States (Emociones y Estados)</h3>
-    <div class="vocab-item"><img src="../images/angry.jpg" alt="Angry"><p>Angry - Enojado/a</p><button class="btn-listen" onclick="speakWord('Angry')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/bored.jpg" alt="Bored"><p>Bored - Aburrido/a</p><button class="btn-listen" onclick="speakWord('Bored')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/excited.jpg" alt="Excited"><p>Excited - Emocionado/a</p><button class="btn-listen" onclick="speakWord('Excited')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/happy.jpg" alt="Happy"><p>Happy - Feliz</p><button class="btn-listen" onclick="speakWord('Happy')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/nervous.jpg" alt="Nervous"><p>Nervous - Nervioso/a</p><button class="btn-listen" onclick="speakWord('Nervous')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/sad.jpg" alt="Sad"><p>Sad - Triste</p><button class="btn-listen" onclick="speakWord('Sad')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/upset.jpg" alt="Upset"><p>Upset - Molesto/a / Disgustado/a</p><button class="btn-listen" onclick="speakWord('Upset')">Listen</button></div>
-
-    <!-- Occupations (Ocupaciones) -->
-    <h3>Occupations (Ocupaciones)</h3>
-    <div class="vocab-item"><img src="../images/architect.jpg" alt="Architect"><p>Architect - Arquitecto/a</p><button class="btn-listen" onclick="speakWord('Architect')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/baker.jpg" alt="Baker"><p>Baker - Panadero/a</p><button class="btn-listen" onclick="speakWord('Baker')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/butcher.jpg" alt="Butcher"><p>Butcher - Carnicero/a</p><button class="btn-listen" onclick="speakWord('Butcher')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/cashier.jpg" alt="Cashier"><p>Cashier - Cajero/a</p><button class="btn-listen" onclick="speakWord('Cashier')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/electrician.jpg" alt="Electrician"><p>Electrician - Electricista</p><button class="btn-listen" onclick="speakWord('Electrician')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/employee.jpg" alt="Employee"><p>Employee - Empleado/a</p><button class="btn-listen" onclick="speakWord('Employee')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/flightattendant.jpg" alt="Flight attendant"><p>Flight attendant - Asistente de vuelo</p><button class="btn-listen" onclick="speakWord('Flight attendant')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/janitor.jpg" alt="Janitor"><p>Janitor - Conserje / Intendente</p><button class="btn-listen" onclick="speakWord('Janitor')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/mechanic.jpg" alt="Mechanic"><p>Mechanic - Mecánico/a</p><button class="btn-listen" onclick="speakWord('Mechanic')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/pilot.jpg" alt="Pilot"><p>Pilot - Piloto</p><button class="btn-listen" onclick="speakWord('Pilot')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/policeofficer.jpg" alt="Police officer"><p>Police officer - Oficial de policía</p><button class="btn-listen" onclick="speakWord('Police officer')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/psychologist.jpg" alt="Psychologist"><p>Psychologist - Psicólogo/a</p><button class="btn-listen" onclick="speakWord('Psychologist')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/receptionist.jpg" alt="Receptionist"><p>Receptionist - Recepcionista</p><button class="btn-listen" onclick="speakWord('Receptionist')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/shoemaker.jpg" alt="Shoemaker"><p>Shoemaker - Zapatero/a</p><button class="btn-listen" onclick="speakWord('Shoemaker')">Listen</button></div>
-
-    <!-- Countries & Nationalities (Países y Nacionalidades) -->
-    <h3>Countries & Nationalities (Países y Nacionalidades)</h3>
-    <div class="vocab-item"><img src="../images/australia.jpg" alt="Australia"><p>Australia - Australian</p><button class="btn-listen" onclick="speakWord('Australia - Australian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/brazil.jpg" alt="Brazil"><p>Brazil - Brazilian</p><button class="btn-listen" onclick="speakWord('Brazil - Brazilian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/britain.jpg" alt="Britain"><p>Britain - British</p><button class="btn-listen" onclick="speakWord('Britain - British')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/canada.jpg" alt="Canada"><p>Canada - Canadian</p><button class="btn-listen" onclick="speakWord('Canada - Canadian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/china.jpg" alt="China"><p>China - Chinese</p><button class="btn-listen" onclick="speakWord('China - Chinese')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/france.jpg" alt="France"><p>France - French</p><button class="btn-listen" onclick="speakWord('France - French')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/germany.jpg" alt="Germany"><p>Germany - German</p><button class="btn-listen" onclick="speakWord('Germany - German')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/italy.jpg" alt="Italy"><p>Italy - Italian</p><button class="btn-listen" onclick="speakWord('Italy - Italian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/japan.jpg" alt="Japan"><p>Japan - Japanese</p><button class="btn-listen" onclick="speakWord('Japan - Japanese')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/korea.jpg" alt="Korea"><p>Korea - Korean</p><button class="btn-listen" onclick="speakWord('Korea - Korean')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/mexico.jpg" alt="Mexico"><p>Mexico - Mexican</p><button class="btn-listen" onclick="speakWord('Mexico - Mexican')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/portugal.jpg" alt="Portugal"><p>Portugal - Portuguese</p><button class="btn-listen" onclick="speakWord('Portugal - Portuguese')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/russia.jpg" alt="Russia"><p>Russia - Russian</p><button class="btn-listen" onclick="speak
     <div id="conversations-section">
         <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
 
