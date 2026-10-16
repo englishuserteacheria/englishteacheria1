@@ -67,19 +67,59 @@
     </div>
 
   <style>
-    .vocab-section h3 {
-        margin: 20px 0 10px;
-        font-size: 18px;
-        color: #1e293b;
+    /* Contenedor principal en formato cuadrícula */
+    .vocab-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 20px;
     }
+    
+    /* Los títulos deben ocupar toda la fila para separar las secciones */
+    .vocab-section h3 {
+        grid-column: 1 / -1;
+        margin: 20px 0 10px;
+        font-size: 22px;
+        color: #1e293b;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 5px;
+    }
+
+    /* Estilo de cada tarjeta/cuadro */
+    .vocab-item {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .vocab-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+    }
+
     .vocab-item p {
-        margin: 10px 0 8px;
+        margin: 15px 0 10px;
         font-weight: 600;
         font-size: 14px;
         color: #1e293b;
     }
+
     .btn-listen {
+        background-color: #3b82f6;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
         cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-listen:hover {
+        background-color: #2563eb;
     }
 </style>
 
@@ -138,14 +178,7 @@
     <div class="vocab-item"><img src="../images/korea.jpg" alt="Korea"><p>Korea - Korean</p><button class="btn-listen" onclick="speakWord('Korea - Korean')">Listen</button></div>
     <div class="vocab-item"><img src="../images/mexico.jpg" alt="Mexico"><p>Mexico - Mexican</p><button class="btn-listen" onclick="speakWord('Mexico - Mexican')">Listen</button></div>
     <div class="vocab-item"><img src="../images/portugal.jpg" alt="Portugal"><p>Portugal - Portuguese</p><button class="btn-listen" onclick="speakWord('Portugal - Portuguese')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/russia.jpg" alt="Russia"><p>Russia - Russian</p><button class="btn-listen" onclick="speakWord('Russia - Russian')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/spain.jpg" alt="Spain"><p>Spain - Spanish</p><button class="btn-listen" onclick="speakWord('Spain - Spanish')">Listen</button></div>
-    <div class="vocab-item"><img src="../images/usa.jpg" alt="USA"><p>USA - American</p><button class="btn-listen" onclick="speakWord('United States Of America - American')">Listen</button></div>
-
-    <!-- Numbers (Números) -->
-    <h3>Numbers (Números)</h3>
-    <div class="vocab-item"><img src="../images/numbers.jpg" alt="Numbers"><p>Ten to Twenty</p><button class="btn-listen" onclick="speakWord('Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty')">Listen</button></div>
-</div>
+    <div class="vocab-item"><img src="../images/russia.jpg" alt="Russia"><p>Russia - Russian</p><button class="btn-listen" onclick="speak
     <div id="conversations-section">
         <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
 
