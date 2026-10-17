@@ -312,8 +312,7 @@
         <button class="btn-speak btn-small" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
         <input type="text" class="input-field" placeholder="___Your answer here...___">
     </div>
-
-    <!-- Marisol Widget -->
+<!-- Marisol Widget -->
     <div id="teacher-marisol-widget">
         <div onclick="toggleMarisolChat()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
             <div class="marisol-avatar-wrapper">
@@ -328,59 +327,24 @@
                     <img src="../images/marisolavatar.png" alt="Teacher Marisol" onerror="this.src=''">
                     <span>Teacher Marisol</span>
                 </div>
-                <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
-            </div>
-            <div class="marisol-chat-body" id="marisol-chat-body">
-                <div class="marisol-msg teacher">
-                    Hello! I'm Teacher Marisol. How can I help you with Lessons 3 and 4 today?
+                <div style="display: flex; gap: 8px;">
+                    <button onclick="toggleMarisolLanguage()" title="Cambiar Idioma" style="background:none; border:none; color:white; cursor:pointer; font-size:16px;">🌐</button>
+                    <button onclick="stopMarisolVoice()" title="Parar Voz" style="background:none; border:none; color:white; cursor:pointer; font-size:16px;">⏹️</button>
+                    <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
                 </div>
             </div>
+            <div class="marisol-chat-body" id="marisol-chat-messages">
+                <!-- El mensaje de bienvenida se inyecta automáticamente desde el script al abrir -->
+            </div>
             <div class="marisol-chat-footer">
-                <input type="text" id="marisol-chat-input" placeholder="Type your question..." onkeypress="handleMarisolKeyPress(event)">
-                <button class="marisol-voice-btn" onclick="startMarisolVoice()">🎤</button>
-                <button onclick="sendMarisolMsg()">Send</button>
+                <input type="text" id="marisol-user-input" placeholder="Type your question..." onkeypress="handleMarisolKey(event)">
+                <button class="marisol-voice-btn" onclick="startMarisolDictation()">🎤</button>
+                <button onclick="sendMarisolMessage()">Send</button>
             </div>
         </div>
     </div>
 
-    <script>
-        function toggleMarisolChat() {
-            const chatBox = document.getElementById('marisol-chat-box');
-            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-                chatBox.style.display = 'flex';
-            } else {
-                chatBox.style.display = 'none';
-            }
-        }
-        function sendMarisolMsg() {
-            const input = document.getElementById('marisol-chat-input');
-            const msg = input.value.trim();
-            if (!msg) return;
-            appendMarisolMessage(msg, 'student');
-            input.value = '';
-            setTimeout(() => {
-                appendMarisolMessage("Keep practicing your vocabulary and dialogues! You're doing great.", 'teacher');
-            }, 1000);
-        }
-        function appendMarisolMessage(text, sender) {
-            const chatBody = document.getElementById('marisol-chat-body');
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `marisol-msg ${sender}`;
-            msgDiv.textContent = text;
-            chatBody.appendChild(msgDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-        function handleMarisolKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMarisolMsg();
-            }
-        }
-        function startMarisolVoice() {
-            alert("Microphone feature for chat is not integrated yet. Please type your message.");
-        }
-    </script>
-</body>
-  <script>
+<script>
 let cachedVoices = [];
 const characterVoiceMap = {};
 const usedVoiceNames = new Set();
@@ -579,5 +543,6 @@ async function sendMarisolMessage() {
         appendMarisolMessage(errorMsg, 'teacher');
     }
 }
-</script>  
+</script>
+</body>
 </html>
