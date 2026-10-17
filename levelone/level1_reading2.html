@@ -1511,7 +1511,7 @@
         studentName = text;
         const reply = `Nice to meet you, ${studentName}! Would you like our help in English or in Spanish? (¿Prefieres la ayuda en inglés o en español?)`;
         appendMarisolMessage(reply, 'teacher');
-        speakCharacter(reply, 'Teacher Marisol', 'en-US');
+        speakCharacter(`Nice to meet you, ${studentName}! Would you like our help in English or in Spanish?`, 'Teacher Marisol', 'en-US');
         return;
       }
 
