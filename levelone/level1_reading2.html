@@ -1230,40 +1230,50 @@
       const recognition = new SpeechRecognition();
       activeRecognition = recognition;
       recognition.lang = 'en-US';
-      
       recognition.continuous = false;
       recognition.interimResults = false;
-      if (typeof recognition.maxAlternatives !== 'undefined') {
-        recognition.maxAlternatives = 1;
-      }
+      recognition.maxAlternatives = 5;
 
       const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+      const homophones = { to: 'two', too: 'two', for: 'four', fore: 'four', won: 'one', ate: 'eight' };
+      const targetClean = targetWord.trim().toLowerCase();
+      const targetIsNumber = numberWords.indexOf(targetClean) !== -1;
+
       const normalize = (t) => {
         let clean = t.trim().toLowerCase().replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ');
         if (/^\d+$/.test(clean) && numberWords[parseInt(clean, 10)]) {
           clean = numberWords[parseInt(clean, 10)];
         }
+        if (targetIsNumber && homophones[clean]) {
+          clean = homophones[clean];
+        }
         return clean;
       };
 
       let gotResult = false;
+      let safetyTimer = null;
       feedback.style.color = "#555";
       feedback.textContent = "Listening...";
 
       recognition.onresult = (event) => {
         gotResult = true;
-        const spokenWord = normalize(event.results[0][0].transcript);
-        if (spokenWord === normalize(targetWord)) {
+        clearTimeout(safetyTimer);
+        const alternatives = [];
+        for (let i = 0; i < event.results[0].length; i++) {
+          alternatives.push(normalize(event.results[0][i].transcript));
+        }
+        if (alternatives.indexOf(normalize(targetWord)) !== -1) {
           feedback.style.color = "#10b981";
           feedback.textContent = "¡Correct! ✨";
         } else {
           feedback.style.color = "#ef4444";
-          feedback.textContent = `Try again (Said: "${spokenWord}")`;
+          feedback.textContent = `Try again (Said: "${alternatives[0]}")`;
         }
       };
 
       recognition.onerror = (event) => {
         gotResult = true;
+        clearTimeout(safetyTimer);
         if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
           feedback.textContent = "";
           alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
@@ -1282,8 +1292,10 @@
       };
 
       recognition.onend = () => {
+        clearTimeout(safetyTimer);
         if (!gotResult) {
-          feedback.textContent = "";
+          feedback.style.color = "#ef4444";
+          feedback.textContent = "No speech detected. Try again.";
         }
         if (activeRecognition === recognition) {
           activeRecognition = null;
@@ -1292,6 +1304,7 @@
 
       try {
         recognition.start();
+        safetyTimer = setTimeout(() => { try { recognition.stop(); } catch (e) {} }, 8000);
       } catch (e) {
         feedback.textContent = "";
         alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
@@ -1417,6 +1430,32 @@
       }
     }
 
+    function cleanForSpeech(text) {
+      return String(text)
+        .replace(/\/[^\/\n]*[\u0250-\u02FF\u1D00-\u1DBF][^\/\n]*\//g, ' ')
+        .replace(/\[[^\]\n]*[\u0250-\u02FF\u1D00-\u1DBF][^\]\n]*\]/g, ' ')
+        .replace(/\([^)\n]*[\u0250-\u02FF\u1D00-\u1DBF][^)\n]*\)/g, ' ')
+        .replace(/[\u0250-\u02FF\u1D00-\u1DBF]/g, '')
+        .replace(/^\s*[-•]\s+/gm, '')
+        .replace(/\//g, ' ')
+        .replace(/[*#_`~>|\\^=<>{}\[\]"]/g, ' ')
+        .replace(/\s+([.,!?;:])/g, '$1')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function extractStudentName(raw) {
+      let t = raw.trim().replace(/[.,!?;:]+$/g, '');
+      t = t.replace(/^(hello|hi|hey|hola)[,!\s]+/i, '');
+      t = t.replace(/^(my name is|my name's|i am|i'm|im|it is|it's|this is|call me|me llamo|mi nombre es|mi nombre|yo soy|soy|me dicen|puedes llamarme|llámame|llamame)\s+/i, '');
+      t = t.split(/\s+(?:and|y|but|pero)\s+/i)[0];
+      t = t.split(/\s+/).slice(0, 3).join(' ');
+      t = t.replace(/(^|\s)(\S)/g, (m0, a, b) => a + b.toUpperCase());
+      return t || raw.trim();
+    }
+
+    let marisolMic = null;
+
     function toggleMarisolLanguage() {
       if (preferredLanguage === 'es') {
         preferredLanguage = 'en';
@@ -1457,6 +1496,7 @@
       const welcomeText = "Hello! I am Teacher Marisol. What is your name?";
       appendMarisolMessage(welcomeText, 'teacher');
       speakCharacter(welcomeText, 'Teacher Marisol', 'en-US');
+      document.getElementById('marisol-user-input').addEventListener('input', stopMarisolVoice);
     }
 
 
@@ -1466,26 +1506,93 @@
         alert('El reconocimiento de voz no está soportado en este navegador.');
         return;
       }
-      const recognition = new SpeechRecognition();
-      recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
-      
-      recognition.continuous = false;
-      recognition.interimResults = false;
 
+      stopMarisolVoice();
+
+      if (marisolMic) {
+        marisolMic.finish();
+        return;
+      }
+      if (activeRecognition) {
+        try { activeRecognition.abort(); } catch (e) {}
+      }
+
+      const recognition = new SpeechRecognition();
+      activeRecognition = recognition;
+      recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
+      recognition.continuous = true;
+      recognition.interimResults = true;
 
       const input = document.getElementById('marisol-user-input');
-      input.placeholder = "Escuchando...";
-      recognition.start();
+      const defaultPlaceholder = "Ask Marisol a question...";
+      let sent = false;
+      let finished = false;
+      let silenceTimer = null;
+      let startTimer = null;
 
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        clearTimeout(silenceTimer);
+        clearTimeout(startTimer);
+        try { recognition.stop(); } catch (e) {}
+      };
+      marisolMic = { finish: finish };
+
+      input.placeholder = preferredLanguage === 'en' ? "Listening..." : "Escuchando...";
+
+      recognition.onspeechstart = function() {
+        stopMarisolVoice();
+      };
 
       recognition.onresult = function(event) {
-        input.value = event.results[0][0].transcript;
-        input.placeholder = "Ask Marisol a question...";
-        sendMarisolMessage();
+        clearTimeout(startTimer);
+        clearTimeout(silenceTimer);
+        let finalText = '';
+        let interimText = '';
+        for (let i = 0; i < event.results.length; i++) {
+          const piece = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalText += piece + ' ';
+          } else {
+            interimText += piece;
+          }
+        }
+        input.value = (finalText + interimText).trim();
+        silenceTimer = setTimeout(finish, 3000);
       };
-      recognition.onerror = function() {
-        input.placeholder = "Ask Marisol a question...";
+
+      recognition.onerror = function(event) {
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
+        } else if (event.error === 'audio-capture') {
+          alert('No se encontró un micrófono conectado.');
+        }
+        finish();
       };
+
+      recognition.onend = function() {
+        clearTimeout(silenceTimer);
+        clearTimeout(startTimer);
+        marisolMic = null;
+        if (activeRecognition === recognition) {
+          activeRecognition = null;
+        }
+        input.placeholder = defaultPlaceholder;
+        if (!sent && input.value.trim()) {
+          sent = true;
+          sendMarisolMessage();
+        }
+      };
+
+      try {
+        recognition.start();
+        startTimer = setTimeout(finish, 10000);
+      } catch (e) {
+        marisolMic = null;
+        input.placeholder = defaultPlaceholder;
+        alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
+      }
     }
 
 
@@ -1502,13 +1609,14 @@
       if (!text) return;
 
 
+      stopMarisolVoice();
       appendMarisolMessage(text, 'student');
       input.value = '';
 
 
       // Capturar nombre del alumno en el primer turno si no existe
       if (!studentName) {
-        studentName = text;
+        studentName = extractStudentName(text);
         const reply = `Nice to meet you, ${studentName}! Would you like our help in English or in Spanish? (¿Prefieres la ayuda en inglés o en español?)`;
         appendMarisolMessage(reply, 'teacher');
         speakCharacter(`Nice to meet you, ${studentName}! Would you like our help in English or in Spanish?`, 'Teacher Marisol', 'en-US');
@@ -1548,8 +1656,9 @@
 
         const data = await response.json();
         if (data.reply) {
-          appendMarisolMessage(data.reply, 'teacher');
-          speakCharacter(data.reply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
+          const cleanReply = cleanForSpeech(data.reply);
+          appendMarisolMessage(cleanReply, 'teacher');
+          speakCharacter(cleanReply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
         } else {
           const fallback = preferredLanguage === 'es' ? 'Lo siento, hubo un error procesando tu respuesta.' : 'Sorry, there was an error processing your request.';
           appendMarisolMessage(fallback, 'teacher');
