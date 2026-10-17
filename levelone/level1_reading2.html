@@ -6,6 +6,7 @@
     <title>Level 1 - Lesson 3 and 4 VERB TO BE</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base & Typography */
         body {font-family: 'Inter', Arial, sans-serif; margin: 20px; line-height: 1.6; color: #334155; background-color: #f8fafc;}
         h1, h2, h3 {font-family: 'Inter', Arial, sans-serif; color: #1e293b;}
         button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 6px; font-family: 'Inter', Arial, sans-serif; }
@@ -36,6 +37,7 @@
         .btn-listen:hover { background-color: #059669; }
         .btn-speak { background-color: #0ea5e9; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 6px; margin-left: 0; transition: background 0.2s; }
         .btn-speak:hover { background-color: #0284c7; }
+        .btn-small { width: auto; padding: 4px 8px; font-size: 12px; } /* Optimizacion para converaciones */
         .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
         
         /* Practice Feedback Message */
@@ -43,8 +45,8 @@
         .practice-feedback.success { color: #10b981; }
         .practice-feedback.error { color: #ef4444; }
 
-        /* Conversations */
-        .conv-container { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px; }
+        /* Sections & Containers */
+        .conv-container, .step-container { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px; }
         .avatar-icon {width: 28px; height: 28px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);}
         
         /* Marisol Widget */
@@ -79,10 +81,12 @@
     <h1 style="margin-top: 15px;">Lesson 3 & 4</h1>
     <p style="text-align: center;"><em>(Lecciones 3 y 4)</em></p>
 
+    <!-- Video Section -->
     <div class="video-container">
         <iframe src="https://www.youtube.com/embed/dH1yqXlK_pY" title="Lesson Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
+    <!-- Core Audio/Speech Scripts -->
     <script>
         function speakWord(text) {
             if ('speechSynthesis' in window) {
@@ -95,12 +99,13 @@
         }
 
         function practiceWord(expectedWord, buttonElement) {
-            if (!('webkitSpeechRecognition' in window)) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!SpeechRecognition) {
                 alert('Tu navegador no soporta reconocimiento de voz. Te recomendamos usar Google Chrome.');
                 return;
             }
 
-            // Find or create feedback container right below the button
             let feedbackEl = buttonElement.nextElementSibling;
             if (!feedbackEl || !feedbackEl.classList.contains('practice-feedback')) {
                 feedbackEl = document.createElement('span');
@@ -108,7 +113,7 @@
                 buttonElement.parentNode.insertBefore(feedbackEl, buttonElement.nextSibling);
             }
 
-            const recognition = new webkitSpeechRecognition();
+            const recognition = new SpeechRecognition();
             recognition.lang = 'en-US';
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
@@ -140,6 +145,7 @@
         }
     </script>
 
+    <!-- Vocabulary Section -->
     <div class="vocab-section">
         <!-- Emotions & States (Emociones y Estados) -->
         <h3>Emotions & States (Emociones y Estados)</h3>
@@ -210,54 +216,56 @@
         <div class="vocab-item"><img src="../images/twenty.jpg" alt="Twenty"><p>Twenty - Veinte</p><button class="btn-listen" onclick="speakWord('Twenty')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Twenty', this)">🎙️ Practice</button></div>
     </div>
 
+    <!-- Step 1: Conversations -->
     <div id="conversations-section">
         <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
 
         <div class="conv-container">
             <h3>Conversation 1</h3>
-            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> Hi Angel, is the teacher angry? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Hi Angel, is the teacher angry?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> No, he is not. I think he is stressed or tired. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('No, he is not. I think he is stressed or tired.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> Oh… <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Oh')">🔊 Listen</button></p>
-            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> Are you tired, too? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Are you tired, too?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> No, I am not, but I am a bit nervous because I’m having an oral exam. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('No, I am not, but I am a bit nervous because I am having an oral exam.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> Well, good luck with your exam! <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Well, good luck with your exam!')">🔊 Listen</button></p>
+            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> Hi Angel, is the teacher angry? <button class="btn-listen btn-small" onclick="speakWord('Hi Angel, is the teacher angry?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> No, he is not. I think he is stressed or tired. <button class="btn-listen btn-small" onclick="speakWord('No, he is not. I think he is stressed or tired.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> Oh… <button class="btn-listen btn-small" onclick="speakWord('Oh')">🔊 Listen</button></p>
+            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> Are you tired, too? <button class="btn-listen btn-small" onclick="speakWord('Are you tired, too?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/hannaavatar.png" class="avatar-icon" alt="Hanna">Hanna:</strong> No, I am not, but I am a bit nervous because I’m having an oral exam. <button class="btn-listen btn-small" onclick="speakWord('No, I am not, but I am a bit nervous because I am having an oral exam.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/angelavatar.png" class="avatar-icon" alt="Angel">Angel:</strong> Well, good luck with your exam! <button class="btn-listen btn-small" onclick="speakWord('Well, good luck with your exam!')">🔊 Listen</button></p>
         </div>
 
         <div class="conv-container">
             <h3>Conversation 2</h3>
-            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> Hey Anna, are you bored? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Hey Anna, are you bored?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/annaavatar.png" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not… <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('No, I am not')">🔊 Listen</button></p>
-            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> Then why the long face? Are you sad? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Then why the long face? Are you sad?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/annaavatar.png" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not, I am sick. But, how are you? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('No, I am not, I am sick. But, how are you?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> I am happy, it is Friday! <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('I am happy, it is Friday!')">🔊 Listen</button></p>
+            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> Hey Anna, are you bored? <button class="btn-listen btn-small" onclick="speakWord('Hey Anna, are you bored?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/annaavatar.png" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not… <button class="btn-listen btn-small" onclick="speakWord('No, I am not')">🔊 Listen</button></p>
+            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> Then why the long face? Are you sad? <button class="btn-listen btn-small" onclick="speakWord('Then why the long face? Are you sad?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/annaavatar.png" class="avatar-icon" alt="Anna">Anna:</strong> No, I am not, I am sick. But, how are you? <button class="btn-listen btn-small" onclick="speakWord('No, I am not, I am sick. But, how are you?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/alexavatar.png" class="avatar-icon" alt="Alex">Alex:</strong> I am happy, it is Friday! <button class="btn-listen btn-small" onclick="speakWord('I am happy, it is Friday!')">🔊 Listen</button></p>
         </div>
 
         <div class="conv-container">
             <h3>Conversation 3</h3>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Hello, what’s your name? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Hello, what is your name?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I’m Marco. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('I am Marco.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Nice to meet you Marco, I’m Joseph. Where are you from? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Nice to meet you Marco, I am Joseph. Where are you from?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I’m from Italy. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('I am from Italy.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Cool! So you are Italian! What city are you from? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Cool! So you are Italian! What city are you from?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I am from Roma, and where are you from? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('I am from Roma, and where are you from?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> I’m from Toronto. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('I am from Toronto.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> Oh, so you’re Canadian. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Oh, so you are Canadian.')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Yes, I am. Well, nice to meet you, see you! <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Yes, I am. Well, nice to meet you, see you!')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> Good bye! <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Good bye!')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Hello, what’s your name? <button class="btn-listen btn-small" onclick="speakWord('Hello, what is your name?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I’m Marco. <button class="btn-listen btn-small" onclick="speakWord('I am Marco.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Nice to meet you Marco, I’m Joseph. Where are you from? <button class="btn-listen btn-small" onclick="speakWord('Nice to meet you Marco, I am Joseph. Where are you from?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I’m from Italy. <button class="btn-listen btn-small" onclick="speakWord('I am from Italy.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Cool! So you are Italian! What city are you from? <button class="btn-listen btn-small" onclick="speakWord('Cool! So you are Italian! What city are you from?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> I am from Roma, and where are you from? <button class="btn-listen btn-small" onclick="speakWord('I am from Roma, and where are you from?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> I’m from Toronto. <button class="btn-listen btn-small" onclick="speakWord('I am from Toronto.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> Oh, so you’re Canadian. <button class="btn-listen btn-small" onclick="speakWord('Oh, so you are Canadian.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Yes, I am. Well, nice to meet you, see you! <button class="btn-listen btn-small" onclick="speakWord('Yes, I am. Well, nice to meet you, see you!')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> Good bye! <button class="btn-listen btn-small" onclick="speakWord('Good bye!')">🔊 Listen</button></p>
         </div>
 
         <div class="conv-container">
             <h3>Conversation 4</h3>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Hey Marco, what is your phone number? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Hey Marco, what is your phone number?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> It is 8 3 3 2 1 4 7 2 0 8. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('It is 8 3 3 2 1 4 7 2 0 8')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> And what’s your email address? <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('And what is your email address?')">🔊 Listen</button></p>
-            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> It is marco_92@english-user.com. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('It is marco 92 at english user dot com')">🔊 Listen</button></p>
-            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Ok, thank you. <button class="btn-listen" style="width:auto; padding:4px 8px; font-size:12px;" onclick="speakWord('Ok, thank you.')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Hey Marco, what is your phone number? <button class="btn-listen btn-small" onclick="speakWord('Hey Marco, what is your phone number?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> It is 8 3 3 2 1 4 7 2 0 8. <button class="btn-listen btn-small" onclick="speakWord('It is 8 3 3 2 1 4 7 2 0 8')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> And what’s your email address? <button class="btn-listen btn-small" onclick="speakWord('And what is your email address?')">🔊 Listen</button></p>
+            <p><strong><img src="../images/marcoavatar.png" class="avatar-icon" alt="Marco">Marco:</strong> It is marco_92@english-user.com. <button class="btn-listen btn-small" onclick="speakWord('It is marco 92 at english user dot com')">🔊 Listen</button></p>
+            <p><strong><img src="../images/josephavatar.png" class="avatar-icon" alt="Joseph">Joseph:</strong> Ok, thank you. <button class="btn-listen btn-small" onclick="speakWord('Ok, thank you.')">🔊 Listen</button></p>
         </div>
     </div>
 
+    <!-- Step 2: Vocabulary Summary -->
     <h2>Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
-    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+    <div class="step-container">
         <ul>
             <li><strong>Emotions & States:</strong> Angry, Bored, Excited, Happy, Nervous, Sad, Sick, Tired, Upset</li>
             <li><strong>Occupations:</strong> Architect, Baker, Butcher, Cashier, Electrician, Employee, Flight attendant, Janitor, Mechanic, Pilot, Police officer, Psychologist, Receptionist, Shoemaker</li>
@@ -266,25 +274,28 @@
         </ul>
     </div>
 
+    <!-- Step 3: Comprehension Check -->
     <h2>Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
-    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+    <div class="step-container">
         <p>1. Why is Hanna nervous in Conversation 1? <input type="text" class="input-field" placeholder="Type your answer..."></p>
         <p>2. How is Alex feeling at the end of Conversation 2? <input type="text" class="input-field" placeholder="Type your answer..."></p>
         <p>3. Where is Marco from in Conversation 3? <input type="text" class="input-field" placeholder="Type your answer..."></p>
         <p>4. What is Marco's email address in Conversation 4? <input type="text" class="input-field" placeholder="Type your answer..."></p>
     </div>
 
+    <!-- Step 4: Speaking Practice -->
     <h2>Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
-    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+    <div class="step-container">
         <p><em>Question 1: How are you feeling today? Are you happy, sad, or nervous?</em></p>
-        <button class="btn-speak" style="width:auto; margin-top:0;" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
+        <button class="btn-speak btn-small" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
         <input type="text" class="input-field" placeholder="___Your answer here...___">
         
         <p style="margin-top: 15px;"><em>Question 2: What is your nationality and where are you from?</em></p>
-        <button class="btn-speak" style="width:auto; margin-top:0;" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
+        <button class="btn-speak btn-small" onclick="alert('Voice recognition simulation: Practice speaking out loud!')">🎙️ Speak Answer (Voice Input)</button>
         <input type="text" class="input-field" placeholder="___Your answer here...___">
     </div>
 
+    <!-- Marisol Widget -->
     <div id="teacher-marisol-widget">
         <div id="marisol-floating-btn" onclick="toggleMarisolChat()">
             <span class="marisol-badge">1</span>
