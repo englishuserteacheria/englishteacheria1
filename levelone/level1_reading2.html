@@ -380,4 +380,204 @@
         }
     </script>
 </body>
+  <script>
+let cachedVoices = [];
+const characterVoiceMap = {};
+const usedVoiceNames = new Set();
+let studentName = null;
+let preferredLanguage = null;
+let marisolChatInitialized = false;
+
+function loadVoices() {
+    if ('speechSynthesis' in window) {
+        cachedVoices = window.speechSynthesis.getVoices();
+    }
+}
+if ('speechSynthesis' in window) {
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+function getVoiceForCharacter(characterName, langCode = 'en-US') {
+    if (cachedVoices.length === 0) cachedVoices = window.speechSynthesis.getVoices();
+    const matchingVoices = cachedVoices.filter(v => v.lang.startsWith(langCode.substring(0, 2)));
+    if (matchingVoices.length === 0) return cachedVoices[0] || null;
+    if (langCode.startsWith('es')) {
+        const latamVoice = matchingVoices.find(v => v.lang.includes('MX') || v.lang.includes('LA') || v.lang.includes('ES'));
+        return latamVoice || matchingVoices[0];
+    }
+    const maleNames = ['Jeffrey', 'Alex', 'Henry'];
+    const isMale = maleNames.includes(characterName);
+    const genderVoices = matchingVoices.filter(v => {
+        const name = v.name.toLowerCase();
+        if (isMale) {
+            return name.includes('male') || name.includes('david') || name.includes('george') || name.includes('daniel') || name.includes('alex') || name.includes('oliver');
+        } else {
+            return name.includes('female') || name.includes('zira') || name.includes('samantha') || name.includes('karen') || name.includes('victoria') || name.includes('moira');
+        }
+    });
+    const pool = genderVoices.length > 0 ? genderVoices : matchingVoices;
+    let selectedVoice = null;
+    for (let i = 0; i < pool.length; i++) {
+        let candidate = pool[(characterName.length * 3 + i) % pool.length];
+        if (!usedVoiceNames.has(candidate.name)) {
+            selectedVoice = candidate;
+            break;
+        }
+    }
+    if (!selectedVoice) {
+        selectedVoice = pool.find(v => !usedVoiceNames.has(v.name)) || pool[0];
+    }
+    usedVoiceNames.add(selectedVoice.name);
+    characterVoiceMap[characterName] = selectedVoice;
+    return characterVoiceMap[characterName];
+}
+
+function speakCharacter(text, characterName, langCode = 'en-US') {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = langCode;
+        utterance.rate = 0.9;
+        const assignedVoice = getVoiceForCharacter(characterName, langCode);
+        if (assignedVoice) {
+            utterance.voice = assignedVoice;
+        }
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+function speakWord(word) {
+    speakCharacter(word, 'Teacher Marisol', 'en-US');
+}
+
+function stopMarisolVoice() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+}
+
+function toggleMarisolLanguage() {
+    if (preferredLanguage === 'es') {
+        preferredLanguage = 'en';
+        appendMarisolMessage("Language changed to US English.", 'teacher');
+        speakCharacter("Language changed to US English.", 'Teacher Marisol', 'en-US');
+    } else {
+        preferredLanguage = 'es';
+        appendMarisolMessage("Idioma cambiado a Español.", 'teacher');
+        speakCharacter("Idioma cambiado a Español.", 'Teacher Marisol', 'es-MX');
+    }
+}
+
+function toggleMarisolChat() {
+    const chatBox = document.getElementById('marisol-chat-box');
+    if (chatBox.style.display === 'flex') {
+        chatBox.style.display = 'none';
+        preferredLanguage = null;
+        stopMarisolVoice();
+    } else {
+        chatBox.style.display = 'flex';
+        if (!marisolChatInitialized) {
+            marisolChatInitialized = true;
+            startMarisolSession();
+        }
+    }
+}
+
+function appendMarisolMessage(text, sender) {
+    const chatBody = document.getElementById('marisol-chat-messages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `marisol-msg ${sender}`;
+    msgDiv.innerText = text;
+    chatBody.appendChild(msgDiv);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function startMarisolSession() {
+    const welcomeText = "Hello! I am Teacher Marisol. What is your name?";
+    appendMarisolMessage(welcomeText, 'teacher');
+    speakCharacter(welcomeText, 'Teacher Marisol', 'en-US');
+}
+
+function startMarisolDictation() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert('El reconocimiento de voz no está soportado en este navegador.');
+        return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    const input = document.getElementById('marisol-user-input');
+    input.placeholder = "Escuchando...";
+    recognition.start();
+    recognition.onresult = function(event) {
+        input.value = event.results[0][0].transcript;
+        input.placeholder = "Ask Marisol a question...";
+        sendMarisolMessage();
+    };
+    recognition.onerror = function() {
+        input.placeholder = "Ask Marisol a question...";
+    };
+}
+
+function handleMarisolKey(event) {
+    if (event.key === 'Enter') {
+        sendMarisolMessage();
+    }
+}
+
+async function sendMarisolMessage() {
+    const input = document.getElementById('marisol-user-input');
+    const text = input.value.trim();
+    if (!text) return;
+    appendMarisolMessage(text, 'student');
+    input.value = '';
+    
+    if (!studentName) {
+        studentName = text;
+        const reply = `Nice to meet you, ${studentName}! Would you like our help in English or in Spanish? (¿Prefieres la ayuda en inglés o en español?)`;
+        appendMarisolMessage(reply, 'teacher');
+        speakCharacter(reply, 'Teacher Marisol', 'en-US');
+        return;
+    }
+    
+    if (!preferredLanguage) {
+        const lowerInput = text.toLowerCase();
+        if (lowerInput.includes('english') || lowerInput.includes('inglés') || lowerInput.includes('in english')) {
+            preferredLanguage = 'en';
+        } else {
+            preferredLanguage = 'es';
+        }
+        const reply = preferredLanguage === 'en' ? `Awesome, ${studentName}! Let's practice in US English. Feel free to ask any question about vocabulary, grammar, or your lesson.` : `Entendido, ${studentName}. Te guiaré en español. Pregúntame con total libertad cualquier duda relacionada con las lecciones.`;
+        appendMarisolMessage(reply, 'teacher');
+        speakCharacter(reply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
+        return;
+    }
+    
+    try {
+        const response = await fetch('https://englishteacheria1.vercel.app/api/marisol', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: text,
+                studentName: studentName,
+                language: preferredLanguage
+            })
+        });
+        const data = await response.json();
+        if (data.reply) {
+            appendMarisolMessage(data.reply, 'teacher');
+            speakCharacter(data.reply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
+        } else {
+            const fallback = preferredLanguage === 'es' ? 'Lo siento, hubo un error procesando tu respuesta.' : 'Sorry, there was an error processing your request.';
+            appendMarisolMessage(fallback, 'teacher');
+        }
+    } catch (error) {
+        const errorMsg = preferredLanguage === 'es' ? 'Error de conexión con la asistente.' : 'Connection error with the assistant.';
+        appendMarisolMessage(errorMsg, 'teacher');
+    }
+}
+</script>  
 </html>
