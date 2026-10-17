@@ -20,26 +20,29 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body;
+    const { message, studentName, language } = req.body;
+    const name = String(studentName || "").slice(0, 40) || "the student";
+    const replyLanguage = language === "es"
+      ? "Spanish (Mexico), using English only for the words or phrases being taught"
+      : "simple US English";
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { 
-          role: "system", 
-          content: "You are Teacher Marisol, a friendly English teacher. Do not ask the users which language they prefer or greet them by asking for their language preference. From time to time, gently remind them to schedule a personalized session or class with their teacher." 
+        {
+          role: "system",
+          content: `You are Teacher Marisol, a friendly and encouraging virtual English teacher for English User students. The student's name is ${name}. Reply in ${replyLanguage}. Never ask which language the student prefers and never greet them by asking for a language preference. You are a virtual assistant, so never offer classes, sessions or appointments with yourself. From time to time, not in every reply, when the student needs more practice or help, end with ONE short motivational sentence that uses the student's name, reminds them that practicing English is important for their goals and projects, and invites them to schedule a class with a human English User teacher. Keep it concrete, with no long speeches.`
         },
-        { 
-          role: "user", 
-          content: message 
+        {
+          role: "user",
+          content: message
         }
       ],
     });
 
-    const reply = completion.choices[0].message.content;
-    return res.status(200).json({ reply });
+    return res.status(200).json({ reply: completion.choices[0].message.content });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: 'Error processing request' });
   }
 }
