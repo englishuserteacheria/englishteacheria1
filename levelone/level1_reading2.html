@@ -28,16 +28,21 @@
         .vocab-section { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 20px 0; }
         .vocab-section h3 { grid-column: 1 / -1; margin: 20px 0 10px; font-size: 22px; color: #1e293b; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px; }
         .vocab-item { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .vocab-item img { width: 100%; height: 80px; object-fit: contain; border-radius: 6px; margin: 0 auto; display: block; }
+        .vocab-item img { width: 120px; height: 120px; object-fit: cover; border-radius: 6px; margin: 0 auto; display: block; }
         .vocab-item p { margin: 15px 0 10px; font-weight: 600; font-size: 14px; color: #1e293b; }
         
         /* Buttons & Inputs */
-        .btn-listen { background-color: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin: 0; }
-        .btn-listen:hover { background-color: #059669; }
-        .btn-speak { background-color: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 6px; margin-left: 0; }
-        .btn-speak:hover { background-color: #2563eb; }
+        .btn-listen { background-color: #123c69; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; margin: 0; transition: background 0.2s; }
+        .btn-listen:hover { background-color: #0d2b4a; }
+        .btn-speak { background-color: #f59e0b; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 6px; margin-left: 0; transition: background 0.2s; }
+        .btn-speak:hover { background-color: #d97706; }
         .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
         
+        /* Practice Feedback Message */
+        .practice-feedback { font-size: 13px; font-weight: 600; margin-top: 6px; display: block; }
+        .practice-feedback.success { color: #10b981; }
+        .practice-feedback.error { color: #ef4444; }
+
         /* Conversations */
         .conv-container { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px; }
         .avatar-icon {width: 28px; height: 28px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);}
@@ -89,11 +94,20 @@
             }
         }
 
-        function practiceWord(expectedWord) {
+        function practiceWord(expectedWord, buttonElement) {
             if (!('webkitSpeechRecognition' in window)) {
                 alert('Tu navegador no soporta reconocimiento de voz. Te recomendamos usar Google Chrome.');
                 return;
             }
+
+            // Find or create feedback container right below the button
+            let feedbackEl = buttonElement.nextElementSibling;
+            if (!feedbackEl || !feedbackEl.classList.contains('practice-feedback')) {
+                feedbackEl = document.createElement('span');
+                feedbackEl.className = 'practice-feedback';
+                buttonElement.parentNode.insertBefore(feedbackEl, buttonElement.nextSibling);
+            }
+
             const recognition = new webkitSpeechRecognition();
             recognition.lang = 'en-US';
             recognition.interimResults = false;
@@ -102,22 +116,26 @@
             recognition.start();
 
             recognition.onstart = function() {
-                alert('Micrófono activado. Por favor, di la palabra: ' + expectedWord);
+                feedbackEl.textContent = 'Listening... Speak now.';
+                feedbackEl.className = 'practice-feedback';
             };
 
             recognition.onresult = function(event) {
                 const speechResult = event.results[0][0].transcript.toLowerCase();
-                const expected = expectedWord.toLowerCase().split(' - ')[0]; // Compara con la primera palabra si es compuesta
+                const expected = expectedWord.toLowerCase().split(' - ')[0];
                 
                 if (speechResult.includes(expected)) {
-                    alert('¡Excelente! Escuché: ' + speechResult);
+                    feedbackEl.textContent = '¡Correcto! Escuché: ' + speechResult;
+                    feedbackEl.className = 'practice-feedback success';
                 } else {
-                    alert('Casi. Escuché: ' + speechResult + '. Intenta de nuevo.');
+                    feedbackEl.textContent = 'Intenta de nuevo. Escuché: ' + speechResult;
+                    feedbackEl.className = 'practice-feedback error';
                 }
             };
 
             recognition.onerror = function(event) {
-                alert('Error en el reconocimiento: ' + event.error);
+                feedbackEl.textContent = 'Error en el reconocimiento: ' + event.error;
+                feedbackEl.className = 'practice-feedback error';
             };
         }
     </script>
@@ -125,46 +143,46 @@
     <div class="vocab-section">
         <!-- Emotions & States (Emociones y Estados) -->
         <h3>Emotions & States (Emociones y Estados)</h3>
-        <div class="vocab-item"><img src="../images/angry.jpg" alt="Angry"><p>Angry - Enojado/a</p><button class="btn-listen" onclick="speakWord('Angry')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Angry')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/bored.jpg" alt="Bored"><p>Bored - Aburrido/a</p><button class="btn-listen" onclick="speakWord('Bored')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Bored')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/excited.jpg" alt="Excited"><p>Excited - Emocionado/a</p><button class="btn-listen" onclick="speakWord('Excited')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Excited')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/happy.jpg" alt="Happy"><p>Happy - Feliz</p><button class="btn-listen" onclick="speakWord('Happy')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Happy')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/nervous.jpg" alt="Nervous"><p>Nervous - Nervioso/a</p><button class="btn-listen" onclick="speakWord('Nervous')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Nervous')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/sad.jpg" alt="Sad"><p>Sad - Triste</p><button class="btn-listen" onclick="speakWord('Sad')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Sad')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/upset.jpg" alt="Upset"><p>Upset - Molesto/a</p><button class="btn-listen" onclick="speakWord('Upset')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Upset')">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/angry.jpg" alt="Angry"><p>Angry - Enojado/a</p><button class="btn-listen" onclick="speakWord('Angry')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Angry', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/bored.jpg" alt="Bored"><p>Bored - Aburrido/a</p><button class="btn-listen" onclick="speakWord('Bored')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Bored', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/excited.jpg" alt="Excited"><p>Excited - Emocionado/a</p><button class="btn-listen" onclick="speakWord('Excited')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Excited', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/happy.jpg" alt="Happy"><p>Happy - Feliz</p><button class="btn-listen" onclick="speakWord('Happy')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Happy', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/nervous.jpg" alt="Nervous"><p>Nervous - Nervioso/a</p><button class="btn-listen" onclick="speakWord('Nervous')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Nervous', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/sad.jpg" alt="Sad"><p>Sad - Triste</p><button class="btn-listen" onclick="speakWord('Sad')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Sad', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/upset.jpg" alt="Upset"><p>Upset - Molesto/a</p><button class="btn-listen" onclick="speakWord('Upset')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Upset', this)">🎙️ Practice</button></div>
 
         <!-- Occupations (Ocupaciones) -->
         <h3>Occupations (Ocupaciones)</h3>
-        <div class="vocab-item"><img src="../images/architect.jpg" alt="Architect"><p>Architect - Arquitecto/a</p><button class="btn-listen" onclick="speakWord('Architect')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Architect')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/baker.jpg" alt="Baker"><p>Baker - Panadero/a</p><button class="btn-listen" onclick="speakWord('Baker')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Baker')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/butcher.jpg" alt="Butcher"><p>Butcher - Carnicero/a</p><button class="btn-listen" onclick="speakWord('Butcher')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Butcher')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/cashier.jpg" alt="Cashier"><p>Cashier - Cajero/a</p><button class="btn-listen" onclick="speakWord('Cashier')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Cashier')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/electrician.jpg" alt="Electrician"><p>Electrician - Electricista</p><button class="btn-listen" onclick="speakWord('Electrician')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Electrician')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/employee.jpg" alt="Employee"><p>Employee - Empleado/a</p><button class="btn-listen" onclick="speakWord('Employee')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Employee')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/flightattendant.jpg" alt="Flight attendant"><p>Flight attendant - Asistente de vuelo</p><button class="btn-listen" onclick="speakWord('Flight attendant')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Flight attendant')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/janitor.jpg" alt="Janitor"><p>Janitor - Conserje</p><button class="btn-listen" onclick="speakWord('Janitor')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Janitor')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/mechanic.jpg" alt="Mechanic"><p>Mechanic - Mecánico/a</p><button class="btn-listen" onclick="speakWord('Mechanic')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Mechanic')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/pilot.jpg" alt="Pilot"><p>Pilot - Piloto</p><button class="btn-listen" onclick="speakWord('Pilot')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Pilot')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/policeofficer.jpg" alt="Police officer"><p>Police officer - Oficial de policía</p><button class="btn-listen" onclick="speakWord('Police officer')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Police officer')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/psychologist.jpg" alt="Psychologist"><p>Psychologist - Psicólogo/a</p><button class="btn-listen" onclick="speakWord('Psychologist')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Psychologist')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/receptionist.jpg" alt="Receptionist"><p>Receptionist - Recepcionista</p><button class="btn-listen" onclick="speakWord('Receptionist')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Receptionist')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/shoemaker.jpg" alt="Shoemaker"><p>Shoemaker - Zapatero/a</p><button class="btn-listen" onclick="speakWord('Shoemaker')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Shoemaker')">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/architect.jpg" alt="Architect"><p>Architect - Arquitecto/a</p><button class="btn-listen" onclick="speakWord('Architect')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Architect', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/baker.jpg" alt="Baker"><p>Baker - Panadero/a</p><button class="btn-listen" onclick="speakWord('Baker')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Baker', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/butcher.jpg" alt="Butcher"><p>Butcher - Carnicero/a</p><button class="btn-listen" onclick="speakWord('Butcher')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Butcher', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/cashier.jpg" alt="Cashier"><p>Cashier - Cajero/a</p><button class="btn-listen" onclick="speakWord('Cashier')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Cashier', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/electrician.jpg" alt="Electrician"><p>Electrician - Electricista</p><button class="btn-listen" onclick="speakWord('Electrician')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Electrician', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/employee.jpg" alt="Employee"><p>Employee - Empleado/a</p><button class="btn-listen" onclick="speakWord('Employee')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Employee', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/flightattendant.jpg" alt="Flight attendant"><p>Flight attendant - Asistente de vuelo</p><button class="btn-listen" onclick="speakWord('Flight attendant')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Flight attendant', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/janitor.jpg" alt="Janitor"><p>Janitor - Conserje</p><button class="btn-listen" onclick="speakWord('Janitor')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Janitor', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/mechanic.jpg" alt="Mechanic"><p>Mechanic - Mecánico/a</p><button class="btn-listen" onclick="speakWord('Mechanic')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Mechanic', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/pilot.jpg" alt="Pilot"><p>Pilot - Piloto</p><button class="btn-listen" onclick="speakWord('Pilot')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Pilot', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/policeofficer.jpg" alt="Police officer"><p>Police officer - Oficial de policía</p><button class="btn-listen" onclick="speakWord('Police officer')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Police officer', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/psychologist.jpg" alt="Psychologist"><p>Psychologist - Psicólogo/a</p><button class="btn-listen" onclick="speakWord('Psychologist')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Psychologist', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/receptionist.jpg" alt="Receptionist"><p>Receptionist - Recepcionista</p><button class="btn-listen" onclick="speakWord('Receptionist')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Receptionist', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/shoemaker.jpg" alt="Shoemaker"><p>Shoemaker - Zapatero/a</p><button class="btn-listen" onclick="speakWord('Shoemaker')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Shoemaker', this)">🎙️ Practice</button></div>
 
         <!-- Countries & Nationalities (Países y Nacionalidades) -->
         <h3>Countries & Nationalities (Países y Nacionalidades)</h3>
-        <div class="vocab-item"><img src="../images/australia.jpg" alt="Australia"><p>Australia - Australian</p><button class="btn-listen" onclick="speakWord('Australia - Australian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Australia')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/brazil.jpg" alt="Brazil"><p>Brazil - Brazilian</p><button class="btn-listen" onclick="speakWord('Brazil - Brazilian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Brazil')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/britain.jpg" alt="Britain"><p>Britain - British</p><button class="btn-listen" onclick="speakWord('Britain - British')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Britain')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/canada.jpg" alt="Canada"><p>Canada - Canadian</p><button class="btn-listen" onclick="speakWord('Canada - Canadian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Canada')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/china.jpg" alt="China"><p>China - Chinese</p><button class="btn-listen" onclick="speakWord('China - Chinese')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('China')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/france.jpg" alt="France"><p>France - French</p><button class="btn-listen" onclick="speakWord('France - French')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('France')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/germany.jpg" alt="Germany"><p>Germany - German</p><button class="btn-listen" onclick="speakWord('Germany - German')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Germany')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/italy.jpg" alt="Italy"><p>Italy - Italian</p><button class="btn-listen" onclick="speakWord('Italy - Italian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Italy')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/japan.jpg" alt="Japan"><p>Japan - Japanese</p><button class="btn-listen" onclick="speakWord('Japan - Japanese')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Japan')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/korea.jpg" alt="Korea"><p>Korea - Korean</p><button class="btn-listen" onclick="speakWord('Korea - Korean')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Korea')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/mexico.jpg" alt="Mexico"><p>Mexico - Mexican</p><button class="btn-listen" onclick="speakWord('Mexico - Mexican')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Mexico')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/portugal.jpg" alt="Portugal"><p>Portugal - Portuguese</p><button class="btn-listen" onclick="speakWord('Portugal - Portuguese')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Portugal')">🎙️ Practice</button></div>
-        <div class="vocab-item"><img src="../images/russia.jpg" alt="Russia"><p>Russia - Russian</p><button class="btn-listen" onclick="speakWord('Russia - Russian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Russia')">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/australia.jpg" alt="Australia"><p>Australia - Australian</p><button class="btn-listen" onclick="speakWord('Australia - Australian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Australia', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/brazil.jpg" alt="Brazil"><p>Brazil - Brazilian</p><button class="btn-listen" onclick="speakWord('Brazil - Brazilian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Brazil', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/britain.jpg" alt="Britain"><p>Britain - British</p><button class="btn-listen" onclick="speakWord('Britain - British')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Britain', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/canada.jpg" alt="Canada"><p>Canada - Canadian</p><button class="btn-listen" onclick="speakWord('Canada - Canadian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Canada', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/china.jpg" alt="China"><p>China - Chinese</p><button class="btn-listen" onclick="speakWord('China - Chinese')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('China', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/france.jpg" alt="France"><p>France - French</p><button class="btn-listen" onclick="speakWord('France - French')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('France', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/germany.jpg" alt="Germany"><p>Germany - German</p><button class="btn-listen" onclick="speakWord('Germany - German')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Germany', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/italy.jpg" alt="Italy"><p>Italy - Italian</p><button class="btn-listen" onclick="speakWord('Italy - Italian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Italy', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/japan.jpg" alt="Japan"><p>Japan - Japanese</p><button class="btn-listen" onclick="speakWord('Japan - Japanese')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Japan', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/korea.jpg" alt="Korea"><p>Korea - Korean</p><button class="btn-listen" onclick="speakWord('Korea - Korean')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Korea', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/mexico.jpg" alt="Mexico"><p>Mexico - Mexican</p><button class="btn-listen" onclick="speakWord('Mexico - Mexican')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Mexico', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/portugal.jpg" alt="Portugal"><p>Portugal - Portuguese</p><button class="btn-listen" onclick="speakWord('Portugal - Portuguese')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Portugal', this)">🎙️ Practice</button></div>
+        <div class="vocab-item"><img src="../images/russia.jpg" alt="Russia"><p>Russia - Russian</p><button class="btn-listen" onclick="speakWord('Russia - Russian')">🔊 Listen</button><button class="btn-speak" onclick="practiceWord('Russia', this)">🎙️ Practice</button></div>
     </div>
 
     <div id="conversations-section">
