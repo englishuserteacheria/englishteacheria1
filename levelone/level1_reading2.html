@@ -660,7 +660,7 @@
 
         <!-- United States of America - American -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/usa.jpg" alt="United States of America - American" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/unitedstates.jpg" alt="United States of America - American" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">United States of America - American</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('United States of America American')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('United States of America American', this)">Practice</button>
@@ -1307,6 +1307,24 @@
     }
 
 
+    const successMessages = [
+      "¡Perfecto! ✨ Sigue con la siguiente palabra.",
+      "¡Muy bien! 🎉 Continúa practicando.",
+      "¡Excelente pronunciación! 👏 Vamos con la próxima.",
+      "¡Así se hace! ✅ Sigue adelante.",
+      "¡Genial! 🙌 Avanza a la siguiente."
+    ];
+    const tryAgainMessages = [
+      "Casi, inténtalo una vez más 💪",
+      "Vas bien, sigue practicando 🙂",
+      "No pasa nada, inténtalo de nuevo o pasa a la siguiente palabra",
+      "Sigue intentando, cada práctica ayuda 🌱",
+      "Un poco más de práctica y lo tendrás 👍"
+    ];
+    function pickEncouragement(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
     function testPronunciation(targetWord, btnElement) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
@@ -1323,111 +1341,177 @@
         try { activeRecognition.abort(); } catch (e) {}
       }
 
-      const recognition = new SpeechRecognition();
-      activeRecognition = recognition;
-      recognition.lang = 'en-US';
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 5;
-
       const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
-      const homophones = { to: 'two', too: 'two', for: 'four', fore: 'four', won: 'one', ate: 'eight' };
+      const homophones = { to: 'two', too: 'two', for: 'four', fore: 'four', won: 'one', ate: 'eight', eye: 'i', aye: 'i', hee: 'he', wee: 'we' };
       const targetClean = targetWord.trim().toLowerCase();
-      const targetIsNumber = numberWords.indexOf(targetClean) !== -1;
 
       const normalize = (t) => {
         let clean = t.trim().toLowerCase().replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ');
         if (/^\d+$/.test(clean) && numberWords[parseInt(clean, 10)]) {
           clean = numberWords[parseInt(clean, 10)];
         }
-        if (targetIsNumber && homophones[clean]) {
-          clean = homophones[clean];
+        if (homophones[clean] === targetClean) {
+          clean = targetClean;
         }
         return clean;
       };
+      const isHit = (alt) => alt === targetClean || alt.split(' ').indexOf(targetClean) !== -1;
 
-      let gotResult = false;
-      let safetyTimer = null;
-      feedback.style.color = "#555";
-      feedback.textContent = "Listening...";
+      let attempts = 0;
+      const maxAttempts = 2;
 
-      recognition.onresult = (event) => {
-        gotResult = true;
-        clearTimeout(safetyTimer);
-        const alternatives = [];
-        for (let i = 0; i < event.results[0].length; i++) {
-          alternatives.push(normalize(event.results[0][i].transcript));
-        }
-        if (alternatives.indexOf(normalize(targetWord)) !== -1) {
-          feedback.style.color = "#10b981";
-          feedback.textContent = "¡Correct! ✨";
-        } else {
-          feedback.style.color = "#ef4444";
-          feedback.textContent = `Try again (Said: "${alternatives[0]}")`;
+      const startListening = () => {
+        attempts++;
+        const recognition = new SpeechRecognition();
+        activeRecognition = recognition;
+        recognition.lang = 'en-US';
+        recognition.continuous = false;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 5;
+
+        let gotResult = false;
+        let matched = false;
+        let handledError = false;
+        let safetyTimer = null;
+
+        feedback.style.color = "#555";
+        feedback.textContent = "Listening...";
+
+        recognition.onresult = (event) => {
+          if (matched) return;
+          gotResult = true;
+          const last = event.results[event.results.length - 1];
+          const alternatives = [];
+          for (let j = 0; j < last.length; j++) {
+            alternatives.push(normalize(last[j].transcript));
+          }
+          if (alternatives.some(isHit)) {
+            matched = true;
+            clearTimeout(safetyTimer);
+            feedback.style.color = "#10b981";
+            feedback.textContent = pickEncouragement(successMessages);
+            try { recognition.stop(); } catch (e) {}
+          } else if (last.isFinal) {
+            clearTimeout(safetyTimer);
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          }
+        };
+
+        recognition.onerror = (event) => {
+          if (event.error === 'no-speech') {
+            return;
+          }
+          handledError = true;
+          clearTimeout(safetyTimer);
+          if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+            feedback.textContent = "";
+            alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
+          } else if (event.error === 'audio-capture') {
+            feedback.textContent = "";
+            alert('No se encontró un micrófono conectado.');
+          } else if (event.error === 'aborted') {
+            feedback.textContent = "";
+          } else {
+            feedback.style.color = "#ef4444";
+            feedback.textContent = "Error: " + event.error;
+          }
+        };
+
+        recognition.onend = () => {
+          clearTimeout(safetyTimer);
+          if (activeRecognition === recognition) {
+            activeRecognition = null;
+          }
+          if (!gotResult && !handledError) {
+            if (attempts < maxAttempts) {
+              startListening();
+            } else {
+              feedback.style.color = "#f59e0b";
+              feedback.textContent = pickEncouragement(tryAgainMessages);
+            }
+          } else if (gotResult && !matched && feedback.textContent === "Listening...") {
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          }
+        };
+
+        try {
+          recognition.start();
+          safetyTimer = setTimeout(() => { try { recognition.stop(); } catch (e) {} }, 6000);
+        } catch (e) {
+          feedback.textContent = "";
+          alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
         }
       };
 
-      recognition.onerror = (event) => {
-        gotResult = true;
-        clearTimeout(safetyTimer);
-        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
-          feedback.textContent = "";
-          alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
-        } else if (event.error === 'no-speech') {
-          feedback.style.color = "#ef4444";
-          feedback.textContent = "No speech detected. Try again.";
-        } else if (event.error === 'audio-capture') {
-          feedback.textContent = "";
-          alert('No se encontró un micrófono conectado.');
-        } else if (event.error !== 'aborted') {
-          feedback.style.color = "#ef4444";
-          feedback.textContent = "Error: " + event.error;
-        } else {
-          feedback.textContent = "";
-        }
-      };
-
-      recognition.onend = () => {
-        clearTimeout(safetyTimer);
-        if (!gotResult) {
-          feedback.style.color = "#ef4444";
-          feedback.textContent = "No speech detected. Try again.";
-        }
-        if (activeRecognition === recognition) {
-          activeRecognition = null;
-        }
-      };
-
-      try {
-        recognition.start();
-        safetyTimer = setTimeout(() => { try { recognition.stop(); } catch (e) {} }, 8000);
-      } catch (e) {
-        feedback.textContent = "";
-        alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
-      }
+      startListening();
     }
 
 
     function checkAnswers() {
-      const q1 = document.getElementById('q1').value.trim().toLowerCase();
-      const q2 = document.getElementById('q2').value.trim().toLowerCase();
-      const q3 = document.getElementById('q3').value.trim().toLowerCase();
-      const q4 = document.getElementById('q4').value.trim().toLowerCase();
-      const q5 = document.getElementById('q5').value.trim().toLowerCase();
-      const q6 = document.getElementById('q6').value.trim().toLowerCase().replace(/\s+/g, '');
+      // Normaliza: minúsculas, sin acentos, sin signos, espacios simples
+      const norm = (t) => t.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ').trim();
 
+      // Distancia de edición (tolera 1-2 errores de dedo)
+      const lev = (a, b) => {
+        const d = [];
+        for (let i = 0; i <= a.length; i++) { d[i] = [i]; }
+        for (let j = 1; j <= b.length; j++) { d[0][j] = j; }
+        for (let i = 1; i <= a.length; i++) {
+          for (let j = 1; j <= b.length; j++) {
+            d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+          }
+        }
+        return d[a.length][b.length];
+      };
+
+      const hasKeyword = (text, keywords) => {
+        const words = norm(text).split(' ').filter(Boolean);
+        return keywords.some(k => words.some(w => {
+          const tol = k.length <= 4 ? 0 : (k.length <= 7 ? 1 : 2);
+          return w === k || lev(w, k) <= tol;
+        }));
+      };
+
+      const emailOk = (text) => {
+        const flat = text.toLowerCase().replace(/[^a-z0-9]/g, '');
+        return flat === 'marco92englishusercom' || flat === 'marco92englishuser';
+      };
+
+      const checks = [
+        (t) => hasKeyword(t, ['exam', 'examen', 'test', 'oral']),
+        (t) => hasKeyword(t, ['sick', 'ill', 'unwell']),
+        (t) => hasKeyword(t, ['friday', 'viernes']),
+        (t) => hasKeyword(t, ['roma', 'rome']),
+        (t) => hasKeyword(t, ['toronto']),
+        (t) => emailOk(t)
+      ];
 
       let score = 0;
-      let total = 6;
+      const total = checks.length;
 
-
-      if (q1.includes('exam')) score++;
-      if (q2.includes('sick')) score++;
-      if (q3.includes('friday')) score++;
-      if (q4.includes('roma') || q4.includes('rome')) score++;
-      if (q5.includes('toronto')) score++;
-      if (q6 === 'marco_92@english-user.com') score++;
-
+      checks.forEach((check, i) => {
+        const input = document.getElementById('q' + (i + 1));
+        let mark = document.getElementById('mark-q' + (i + 1));
+        if (!mark) {
+          mark = document.createElement('span');
+          mark.id = 'mark-q' + (i + 1);
+          mark.style.cssText = 'margin-left:10px;font-weight:bold;';
+          input.insertAdjacentElement('afterend', mark);
+          input.addEventListener('input', () => { mark.textContent = ''; });
+        }
+        const value = input.value.trim();
+        if (value && check(value)) {
+          score++;
+          mark.textContent = '✅';
+        } else {
+          mark.textContent = '❌';
+        }
+      });
 
       const feedbackEl = document.getElementById('check-feedback');
       if (score === total) {
@@ -1435,7 +1519,7 @@
         feedbackEl.innerText = `¡Excelente! Obtuviste ${score}/${total} respuestas correctas.`;
       } else {
         feedbackEl.className = 'feedback incorrect';
-        feedbackEl.innerText = `Tienes ${score}/${total} respuestas correctas. Revisa tus respuestas e inténtalo de nuevo.`;
+        feedbackEl.innerText = `Tienes ${score}/${total} respuestas correctas. Corrige las marcadas con ❌ y presiona Check Answers otra vez.`;
       }
     }
 
