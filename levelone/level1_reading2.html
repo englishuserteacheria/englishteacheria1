@@ -1492,6 +1492,7 @@
       ];
 
       let score = 0;
+      let firstWrong = null;
       const total = checks.length;
 
       checks.forEach((check, i) => {
@@ -1508,10 +1509,19 @@
         if (value && check(value)) {
           score++;
           mark.textContent = '✅';
+          input.readOnly = true;
+          input.style.backgroundColor = '#dcfce7';
+          input.style.borderColor = '#10b981';
         } else {
           mark.textContent = '❌';
+          input.value = '';
+          input.readOnly = false;
+          input.style.backgroundColor = '';
+          input.style.borderColor = '';
+          if (!firstWrong) { firstWrong = input; }
         }
       });
+      if (firstWrong) { firstWrong.focus(); }
 
       const feedbackEl = document.getElementById('check-feedback');
       if (score === total) {
@@ -1519,7 +1529,7 @@
         feedbackEl.innerText = `¡Excelente! Obtuviste ${score}/${total} respuestas correctas.`;
       } else {
         feedbackEl.className = 'feedback incorrect';
-        feedbackEl.innerText = `Tienes ${score}/${total} respuestas correctas. Corrige las marcadas con ❌ y presiona Check Answers otra vez.`;
+        feedbackEl.innerText = `Tienes ${score}/${total} respuestas correctas. Las marcadas con ❌ se limpiaron: escríbelas de nuevo y presiona Check Answers otra vez. ¡Tú puedes! 💪`;
       }
     }
 
