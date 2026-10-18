@@ -1551,6 +1551,7 @@
     }
 
     let marisolMic = null;
+    let marisolHistory = [];
 
     function toggleMarisolLanguage() {
       if (preferredLanguage === 'es') {
@@ -1745,7 +1746,8 @@
           body: JSON.stringify({
             message: text,
             studentName: studentName,
-            language: preferredLanguage
+            language: preferredLanguage,
+            history: marisolHistory.slice(-10)
           })
         });
 
@@ -1753,6 +1755,9 @@
         const data = await response.json();
         if (data.reply) {
           const cleanReply = cleanForSpeech(data.reply);
+          marisolHistory.push({ role: 'user', content: text });
+          marisolHistory.push({ role: 'assistant', content: cleanReply });
+          if (marisolHistory.length > 12) { marisolHistory = marisolHistory.slice(-12); }
           appendMarisolMessage(cleanReply, 'teacher');
           speakCharacter(cleanReply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
         } else {
