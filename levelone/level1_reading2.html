@@ -1314,6 +1314,11 @@
       "¡Así se hace! ✅ Sigue adelante.",
       "¡Genial! 🙌 Avanza a la siguiente."
     ];
+    const finalAttemptMessages = [
+      "No te preocupes, sigue practicando 🙂 Puedes continuar con la siguiente palabra.",
+      "Está bien, cada práctica cuenta 🌱 Continúa con la siguiente palabra.",
+      "Tranquilo, lo lograrás con más práctica 👍 Sigue con la siguiente palabra."
+    ];
     const tryAgainMessages = [
       "Casi, inténtalo una vez más 💪",
       "Vas bien, sigue practicando 🙂",
@@ -1358,7 +1363,7 @@
       const isHit = (alt) => alt === targetClean || alt.split(' ').indexOf(targetClean) !== -1;
 
       let attempts = 0;
-      const maxAttempts = 2;
+      const maxAttempts = 3;
 
       const startListening = () => {
         attempts++;
@@ -1394,7 +1399,7 @@
           } else if (last.isFinal) {
             clearTimeout(safetyTimer);
             feedback.style.color = "#f59e0b";
-            feedback.textContent = pickEncouragement(tryAgainMessages);
+            feedback.textContent = attempts < maxAttempts ? pickEncouragement(tryAgainMessages) : pickEncouragement(finalAttemptMessages);
           }
         };
 
@@ -1428,11 +1433,16 @@
               startListening();
             } else {
               feedback.style.color = "#f59e0b";
-              feedback.textContent = pickEncouragement(tryAgainMessages);
+              feedback.textContent = pickEncouragement(finalAttemptMessages);
             }
           } else if (gotResult && !matched && feedback.textContent === "Listening...") {
-            feedback.style.color = "#f59e0b";
-            feedback.textContent = pickEncouragement(tryAgainMessages);
+            if (attempts < maxAttempts) {
+              feedback.style.color = "#f59e0b";
+              feedback.textContent = pickEncouragement(tryAgainMessages);
+            } else {
+              feedback.style.color = "#f59e0b";
+              feedback.textContent = pickEncouragement(finalAttemptMessages);
+            }
           }
         };
 
