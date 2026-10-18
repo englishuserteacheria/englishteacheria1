@@ -1362,11 +1362,20 @@
       };
       const isHit = (alt) => alt === targetClean || alt.split(' ').indexOf(targetClean) !== -1;
 
-      let attempts = 0;
       const maxAttempts = 3;
+      let attempts = parseInt(card.dataset.attempts || "0", 10);
+
+      // 4th click: no more listening, give the instruction and disable the button
+      if (attempts >= maxAttempts) {
+        feedback.style.color = "#f59e0b";
+        feedback.textContent = pickEncouragement(finalAttemptMessages);
+        btnElement.disabled = true;
+        return;
+      }
+      attempts++;
+      card.dataset.attempts = String(attempts);
 
       const startListening = () => {
-        attempts++;
         const recognition = new SpeechRecognition();
         activeRecognition = recognition;
         recognition.lang = 'en-US';
@@ -1395,11 +1404,13 @@
             clearTimeout(safetyTimer);
             feedback.style.color = "#10b981";
             feedback.textContent = pickEncouragement(successMessages);
+            card.dataset.attempts = "0";
+            btnElement.disabled = false;
             try { recognition.stop(); } catch (e) {}
           } else if (last.isFinal) {
             clearTimeout(safetyTimer);
             feedback.style.color = "#f59e0b";
-            feedback.textContent = attempts < maxAttempts ? pickEncouragement(tryAgainMessages) : pickEncouragement(finalAttemptMessages);
+            feedback.textContent = pickEncouragement(tryAgainMessages);
           }
         };
 
@@ -1429,20 +1440,11 @@
             activeRecognition = null;
           }
           if (!gotResult && !handledError) {
-            if (attempts < maxAttempts) {
-              startListening();
-            } else {
-              feedback.style.color = "#f59e0b";
-              feedback.textContent = pickEncouragement(finalAttemptMessages);
-            }
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
           } else if (gotResult && !matched && feedback.textContent === "Listening...") {
-            if (attempts < maxAttempts) {
-              feedback.style.color = "#f59e0b";
-              feedback.textContent = pickEncouragement(tryAgainMessages);
-            } else {
-              feedback.style.color = "#f59e0b";
-              feedback.textContent = pickEncouragement(finalAttemptMessages);
-            }
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
           }
         };
 
@@ -1501,6 +1503,24 @@
         (t) => emailOk(t)
       ];
 
+      // Pista leve (intento 4) y respuesta correcta a mostrar (intento 5+)
+      const hints = [
+        'Pista: vuelve a leer lo que dice Abby en la Conversación 1.',
+        'Pista: vuelve a leer lo que dice Anna en la Conversación 2.',
+        'Pista: vuelve a leer lo que dice Jeffrey en la Conversación 2.',
+        'Pista: vuelve a leer lo que dice Marco en la Conversación 3.',
+        'Pista: vuelve a leer lo que dice Joseph en la Conversación 3.',
+        'Pista: vuelve a leer lo que dice Marco en la Conversación 4.'
+      ];
+      const correctAnswers = [
+        'an oral exam (un examen oral)',
+        'she is sick (está enferma)',
+        'it is Friday (es viernes)',
+        'Rome (Roma)',
+        'Toronto',
+        'marco_92@english-user.com'
+      ];
+
       let score = 0;
       let firstWrong = null;
       const total = checks.length;
@@ -1515,6 +1535,14 @@
           input.insertAdjacentElement('afterend', mark);
           input.addEventListener('input', () => { mark.textContent = ''; });
         }
+        let helpEl = document.getElementById('help-q' + (i + 1));
+        if (!helpEl) {
+          helpEl = document.createElement('div');
+          helpEl.id = 'help-q' + (i + 1);
+          helpEl.style.cssText = 'margin-top:4px;font-size:13px;color:#2563eb;';
+          mark.insertAdjacentElement('afterend', helpEl);
+        }
+
         const value = input.value.trim();
         if (value && check(value)) {
           score++;
@@ -1522,12 +1550,23 @@
           input.readOnly = true;
           input.style.backgroundColor = '#dcfce7';
           input.style.borderColor = '#10b981';
+          helpEl.textContent = '';
+          input.dataset.tries = '0';
         } else {
+          const tries = parseInt(input.dataset.tries || '0', 10) + 1;
+          input.dataset.tries = String(tries);
           mark.textContent = '❌';
           input.value = '';
           input.readOnly = false;
           input.style.backgroundColor = '';
           input.style.borderColor = '';
+          if (tries >= 5) {
+            helpEl.textContent = `Respuesta correcta: ${correctAnswers[i]}. Si tienes dudas, coméntalo con tu maestro.`;
+          } else if (tries >= 4) {
+            helpEl.textContent = hints[i];
+          } else {
+            helpEl.textContent = '';
+          }
           if (!firstWrong) { firstWrong = input; }
         }
       });
