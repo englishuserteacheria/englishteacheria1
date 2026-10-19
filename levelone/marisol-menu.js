@@ -53,7 +53,7 @@
     '#marisol-menu .mm-chevron{font-size:11px;transition:transform .2s;}' +
     '#marisol-menu.mm-collapsed .mm-chevron{transform:rotate(-90deg);}' +
     '#marisol-menu.mm-collapsed .mm-grid{display:none;}' +
-    '#marisol-menu .mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;max-height:160px;overflow-y:auto;}' +
+    '#marisol-menu .mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;}' +
     '#marisol-menu .mm-btn{margin:0;padding:6px 8px;border-radius:10px;border:1px solid #cbd5e1;background:#ffffff;color:#123c69;font-family:inherit;font-size:11px;font-weight:600;line-height:1.25;text-align:left;cursor:pointer;}' +
     '#marisol-menu .mm-btn:hover{background:#e0f2fe;}' +
     '#marisol-menu .mm-btn:focus-visible,#marisol-menu .mm-toggle:focus-visible{outline:2px solid #0ea5e9;outline-offset:1px;}' +
@@ -61,13 +61,16 @@
     '#marisol-menu .mm-other{background:#123c69;color:#ffffff;border-color:#123c69;}' +
     '#marisol-menu .mm-other:hover{background:#0d2b4a;}' +
     '#marisol-menu .mm-other .mm-es{color:#cbd5e1;}' +
+    '#marisol-menu .mm-btn:disabled{opacity:.45;cursor:not-allowed;}' +
+    '#marisol-menu .mm-hint{display:none;margin:2px 2px 4px;font-size:10px;color:#64748b;}' +
+    '#marisol-menu.mm-waiting .mm-hint{display:block;}' +
+    '#marisol-menu.mm-waiting .mm-btn:hover{background:#ffffff;}' +
     '@media (max-width:420px){#marisol-chat-box{right:10px;width:calc(100vw - 20px);}}';
   document.head.appendChild(style);
 
   /* ---------- Menú ---------- */
   var menu = document.createElement('div');
   menu.id = 'marisol-menu';
-  menu.style.display = 'none';
 
   var toggle = document.createElement('button');
   toggle.type = 'button';
@@ -86,8 +89,15 @@
   });
   menu.appendChild(toggle);
 
+  var hint = document.createElement('div');
+  hint.className = 'mm-hint';
+  hint.textContent = "Answer Marisol's first questions to unlock (Responde primero a Marisol para activar)";
+  menu.appendChild(hint);
+
   var grid = document.createElement('div');
   grid.className = 'mm-grid';
+  /* con las 10 opciones (modo full) la lista hace scroll dentro de su recuadro */
+  if (mode === 'full') { grid.style.maxHeight = '188px'; grid.style.overflowY = 'auto'; }
   menu.appendChild(grid);
 
   keys.forEach(function (k) {
@@ -116,7 +126,10 @@
   }
 
   function refresh() {
-    menu.style.display = ready() ? 'block' : 'none';
+    var ok = ready();
+    menu.classList.toggle('mm-waiting', !ok);
+    var btns = grid.querySelectorAll('.mm-btn');
+    for (var i = 0; i < btns.length; i++) { btns[i].disabled = !ok; }
   }
 
   function speak(text, rate) {
@@ -135,6 +148,7 @@
   }
 
   function handleClick(item) {
+    if (!ready()) { return; }
     if (typeof stopMarisolVoice === 'function') { stopMarisolVoice(); }
 
     if (item.type === 'fill') {
@@ -169,7 +183,17 @@
   var originalToggle = window.toggleMarisolChat;
   if (typeof originalToggle === 'function') {
     window.toggleMarisolChat = function () {
+      /* El código de la lección borra el idioma al cerrar el chat; aquí se conserva
+         para que el menú no se bloquee y la siguiente pregunta no se confunda con
+         la respuesta de idioma. */
+      var keepLang = null;
+      try { keepLang = preferredLanguage; } catch (e) {}
       originalToggle();
+      try { if (keepLang) { preferredLanguage = keepLang; } } catch (e) {}
+      if (box.style.display === 'flex') {
+        menu.classList.remove('mm-collapsed');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
       refresh();
     };
   }
