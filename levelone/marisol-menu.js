@@ -38,21 +38,30 @@
   var input = document.getElementById('marisol-user-input');
   if (!footer || !input) { return; }
 
-  /* ---------- Estilos ---------- */
+  /* ---------- Estilos ----------
+     La ventana del chat nunca puede ser más alta que la pantalla:
+     el encabezado (detener voz, idioma, cerrar) y el campo de texto
+     siempre quedan visibles; lo que se encoge es la zona de mensajes. */
   var style = document.createElement('style');
   style.textContent =
-    '#marisol-chat-box{max-height:none;}' +
-    '#marisol-chat-box .marisol-chat-body{height:200px;}' +
-    '#marisol-menu{padding:8px 10px 6px;background:#f1f5f9;border-top:1px solid #e2e8f0;}' +
-    '#marisol-menu .mm-title{font-size:11px;font-weight:700;color:#475569;margin-bottom:6px;}' +
-    '#marisol-menu .mm-grid{display:flex;flex-wrap:wrap;gap:5px;}' +
-    '#marisol-menu .mm-btn{margin:0;padding:5px 9px;border-radius:14px;border:1px solid #cbd5e1;background:#ffffff;color:#123c69;font-family:inherit;font-size:11px;font-weight:600;line-height:1.25;text-align:left;cursor:pointer;}' +
+    '#marisol-chat-box{max-height:calc(100vh - 120px);}' +
+    '#marisol-chat-box .marisol-chat-header{flex-shrink:0;}' +
+    '#marisol-chat-box .marisol-chat-body{height:230px;min-height:90px;flex:0 1 auto;}' +
+    '#marisol-chat-box .marisol-chat-footer{flex-shrink:0;}' +
+    '#marisol-menu{flex:0 0 auto;padding:4px 10px 8px;background:#f1f5f9;border-top:1px solid #e2e8f0;}' +
+    '#marisol-menu .mm-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;margin:0;padding:4px 2px;background:none;border:none;color:#475569;font-family:inherit;font-size:11px;font-weight:700;text-align:left;cursor:pointer;}' +
+    '#marisol-menu .mm-chevron{font-size:11px;transition:transform .2s;}' +
+    '#marisol-menu.mm-collapsed .mm-chevron{transform:rotate(-90deg);}' +
+    '#marisol-menu.mm-collapsed .mm-grid{display:none;}' +
+    '#marisol-menu .mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;max-height:160px;overflow-y:auto;}' +
+    '#marisol-menu .mm-btn{margin:0;padding:6px 8px;border-radius:10px;border:1px solid #cbd5e1;background:#ffffff;color:#123c69;font-family:inherit;font-size:11px;font-weight:600;line-height:1.25;text-align:left;cursor:pointer;}' +
     '#marisol-menu .mm-btn:hover{background:#e0f2fe;}' +
-    '#marisol-menu .mm-btn:focus-visible{outline:2px solid #0ea5e9;outline-offset:1px;}' +
+    '#marisol-menu .mm-btn:focus-visible,#marisol-menu .mm-toggle:focus-visible{outline:2px solid #0ea5e9;outline-offset:1px;}' +
     '#marisol-menu .mm-es{display:block;font-size:10px;font-weight:400;color:#64748b;}' +
     '#marisol-menu .mm-other{background:#123c69;color:#ffffff;border-color:#123c69;}' +
     '#marisol-menu .mm-other:hover{background:#0d2b4a;}' +
-    '#marisol-menu .mm-other .mm-es{color:#cbd5e1;}';
+    '#marisol-menu .mm-other .mm-es{color:#cbd5e1;}' +
+    '@media (max-width:420px){#marisol-chat-box{right:10px;width:calc(100vw - 20px);}}';
   document.head.appendChild(style);
 
   /* ---------- Menú ---------- */
@@ -60,10 +69,22 @@
   menu.id = 'marisol-menu';
   menu.style.display = 'none';
 
-  var title = document.createElement('div');
-  title.className = 'mm-title';
-  title.textContent = 'Quick questions (Preguntas rápidas)';
-  menu.appendChild(title);
+  var toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'mm-toggle';
+  toggle.setAttribute('aria-expanded', 'true');
+  var toggleText = document.createElement('span');
+  toggleText.textContent = 'Quick questions (Preguntas rápidas)';
+  var chevron = document.createElement('span');
+  chevron.className = 'mm-chevron';
+  chevron.textContent = '▾';
+  toggle.appendChild(toggleText);
+  toggle.appendChild(chevron);
+  toggle.addEventListener('click', function () {
+    var collapsed = menu.classList.toggle('mm-collapsed');
+    toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+  });
+  menu.appendChild(toggle);
 
   var grid = document.createElement('div');
   grid.className = 'mm-grid';
