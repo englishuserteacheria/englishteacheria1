@@ -64,6 +64,83 @@
 
         .lesson-list li a { color: #123c69; text-decoration: none; font-weight: bold; display: block; }
         .lesson-list li a:hover { text-decoration: underline; }
+
+        /* ===== GUÍA DEL ALUMNO (botón + ventana de video) ===== */
+        .guide-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 8px 28px 8px 10px;
+            background: #ffffff;
+            color: #15803d;
+            border: 2px solid #16a34a;
+            border-radius: 999px;
+            font-family: Arial, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        .guide-btn:hover {
+            background: #f0fdf4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(22, 163, 74, 0.18);
+        }
+        .guide-btn:focus-visible { outline: 3px solid #86efac; outline-offset: 3px; }
+        .guide-btn-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .guide-btn-icon svg { width: 20px; height: 20px; margin-left: 3px; fill: #ffffff; }
+
+        .guide-modal {
+            display: none;
+            position: fixed;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .guide-modal.open { display: flex; }
+        .guide-modal-box { position: relative; width: 100%; max-width: 900px; }
+        .guide-close {
+            position: absolute;
+            top: -46px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 38px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .guide-video-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .guide-video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .guide-soon {
+            position: absolute;
+            top: 50%; left: 0; right: 0;
+            transform: translateY(-50%);
+            color: #ffffff;
+            font-size: 1.1rem;
+            padding: 0 20px;
+        }
     </style>
 </head>
 <body>
@@ -77,6 +154,14 @@
     <div class="container">
         <h2>Welcome!</h2>
         <p>Select your level to begin your English lessons.</p>
+
+        <!-- BOTÓN GUÍA DEL ALUMNO -->
+        <button type="button" class="guide-btn" onclick="openGuideVideo()">
+            <span class="guide-btn-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l16 9-16 9V3z"/></svg>
+            </span>
+            <span>Ver guía del alumno</span>
+        </button>
 
         <div class="levels">
             <div class="level-card level-a1" onclick="handleLevelClick('A1', this)">
@@ -108,8 +193,8 @@
                 <li><a href="levelone/level1_reading1.html">Lesson 1 & 2</a></li>
                 <li><a href="levelone/level1_reading2.html">Lesson 3 & 4</a></li>
                 <li><a href="levelone/level1_reading3.html">Lesson 5 & 6</a></li>
-                <li><a href="#">Lesson 7 & 8</a></li>
-                <li><a href="#">Lesson 9 & 10</a></li>
+                <li><a href="levelone/level1_reading4.html">Lesson 7 & 8</a></li>
+                <li><a href="levelone/level1_reading5.html">Lesson 9 & 10</a></li>
                 <li><strong>Review 1-10</strong></li>
                 <li><a href="#">Lesson 11 & 12</a></li>
                 <li><a href="#">Lesson 13 & 14</a></li>
@@ -179,6 +264,14 @@
 
     </div>
 
+    <!-- VENTANA EMERGENTE DEL VIDEO GUÍA DEL ALUMNO -->
+    <div id="guideModal" class="guide-modal" role="dialog" aria-modal="true" aria-label="Guía del alumno" onclick="closeGuideVideo()">
+        <div class="guide-modal-box" onclick="event.stopPropagation()">
+            <button type="button" class="guide-close" onclick="closeGuideVideo()" aria-label="Cerrar">&times;</button>
+            <div class="guide-video-wrap" id="guideVideoWrap"></div>
+        </div>
+    </div>
+
     <script>
         const clickSound = new Audio('images/audio/introeu.mp4');
 
@@ -209,6 +302,30 @@
                 }
             }
         }
+
+        /* ===== VIDEO GUÍA DEL ALUMNO ===== */
+        // PEGA AQUÍ EL ID DE TU VIDEO DE YOUTUBE (lo que va después de youtu.be/ y antes del signo ?)
+        const GUIDE_VIDEO_ID = 'PEGA_AQUI_EL_ID_DEL_VIDEO';
+
+        function openGuideVideo() {
+            const modal = document.getElementById('guideModal');
+            const wrap = document.getElementById('guideVideoWrap');
+            if (GUIDE_VIDEO_ID === 'PEGA_AQUI_EL_ID_DEL_VIDEO') {
+                wrap.innerHTML = '<p class="guide-soon">La guía del alumno estará disponible muy pronto.</p>';
+            } else {
+                wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + GUIDE_VIDEO_ID + '?autoplay=1&rel=0" title="Guía del alumno" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+            }
+            modal.classList.add('open');
+        }
+
+        function closeGuideVideo() {
+            document.getElementById('guideModal').classList.remove('open');
+            document.getElementById('guideVideoWrap').innerHTML = '';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { closeGuideVideo(); }
+        });
     </script>
 
 </body>
