@@ -141,6 +141,19 @@
             font-size: 1.1rem;
             padding: 0 20px;
         }
+
+        /* ===== CLAVES DE DESBLOQUEO ===== */
+        .lock-icon { margin-right: 8px; }
+        .lesson-list li a.is-locked { color: #6b7280; }
+        .unlock-box { background: #ffffff; border-radius: 12px; padding: 24px; max-width: 380px; width: 100%; text-align: center; }
+        .unlock-box h4 { margin: 0 0 8px; color: #123c69; font-size: 20px; }
+        .unlock-box p { margin: 0 0 14px; color: #374151; font-size: 15px; }
+        .unlock-box input { width: 100%; box-sizing: border-box; padding: 12px; font-size: 18px; text-align: center; text-transform: uppercase; border: 2px solid #A7F3D0; border-radius: 8px; }
+        .unlock-error { color: #b91c1c; font-size: 14px; min-height: 20px; margin: 8px 0; }
+        .unlock-actions { display: flex; gap: 10px; justify-content: center; }
+        .unlock-actions button { padding: 10px 18px; font-size: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+        .unlock-ok { background: #10B981; color: #ffffff; }
+        .unlock-cancel { background: #e5e7eb; color: #123c69; }
     </style>
 </head>
 <body>
@@ -190,17 +203,17 @@
         <div id="A1" class="lessons-section">
             <h3>Level A1 Lessons</h3>
             <ul class="lesson-list">
-                <li><a href="levelone/level1_reading1.html">Lesson 1 & 2</a></li>
-                <li><a href="levelone/level1_reading2.html">Lesson 3 & 4</a></li>
-                <li><a href="levelone/level1_reading3.html">Lesson 5 & 6</a></li>
-                <li><a href="levelone/level1_reading4.html">Lesson 7 & 8</a></li>
-                <li><a href="levelone/level1_reading5.html">Lesson 9 & 10</a></li>
+                <li><a href="levelone/level1_reading1.html">Lesson 1 & 2 — Greetings and Introductions</a></li>
+                <li><a href="levelone/level1_reading2.html" data-pair="2">Lesson 3 & 4 — Verb To Be</a></li>
+                <li><a href="levelone/level1_reading3.html" data-pair="3">Lesson 5 & 6 — Family and Clothes</a></li>
+                <li><a href="levelone/level1_reading4.html" data-pair="4">Lesson 7 & 8 — Daily Activities and Free Time</a></li>
+                <li><a href="levelone/level1_reading5.html" data-pair="5">Lesson 9 & 10 — Things You Do and Food</a></li>
                 <li><strong>Review 1-10</strong></li>
-                <li><a href="#">Lesson 11 & 12</a></li>
-                <li><a href="#">Lesson 13 & 14</a></li>
-                <li><a href="#">Lesson 15 & 16</a></li>
-                <li><a href="#">Lesson 17 & 18</a></li>
-                <li><a href="#">Lesson 19 & 20</a></li>
+                <li><a href="#" data-pair="6">Lesson 11 & 12</a></li>
+                <li><a href="#" data-pair="7">Lesson 13 & 14</a></li>
+                <li><a href="#" data-pair="8">Lesson 15 & 16</a></li>
+                <li><a href="#" data-pair="9">Lesson 17 & 18</a></li>
+                <li><a href="#" data-pair="10">Lesson 19 & 20</a></li>
                 <li><strong>Review 11-20</strong></li>
             </ul>
         </div>
@@ -272,6 +285,19 @@
         </div>
     </div>
 
+    <div id="unlockModal" class="guide-modal" role="dialog" aria-modal="true" aria-label="Clave de la lección" onclick="closeUnlock()">
+        <div class="unlock-box" onclick="event.stopPropagation()">
+            <h4>🔒 Lección bloqueada</h4>
+            <p>Escribe la clave que te dio tu maestro.</p>
+            <input type="text" id="unlockInput" placeholder="Ej. SOL-1234" autocomplete="off" onkeydown="if(event.key==='Enter'){checkUnlock();}">
+            <div class="unlock-error" id="unlockError"></div>
+            <div class="unlock-actions">
+                <button type="button" class="unlock-ok" onclick="checkUnlock()">Entrar</button>
+                <button type="button" class="unlock-cancel" onclick="closeUnlock()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const clickSound = new Audio('images/audio/introeu.mp4');
 
@@ -305,12 +331,12 @@
 
         /* ===== VIDEO GUÍA DEL ALUMNO ===== */
         // PEGA AQUÍ EL ID DE TU VIDEO DE YOUTUBE (lo que va después de youtu.be/ y antes del signo ?)
-        const GUIDE_VIDEO_ID = 'PEGA_AQUI_EL_ID_DEL_VIDEO';
+        const GUIDE_VIDEO_ID = 'sHHLyqvYD_Y';
 
         function openGuideVideo() {
             const modal = document.getElementById('guideModal');
             const wrap = document.getElementById('guideVideoWrap');
-            if (GUIDE_VIDEO_ID === 'https://youtu.be/sHHLyqvYD_Y') {
+            if (GUIDE_VIDEO_ID === 'PEGA_AQUI_EL_ID_DEL_VIDEO') {
                 wrap.innerHTML = '<p class="guide-soon">La guía del alumno estará disponible muy pronto.</p>';
             } else {
                 wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + GUIDE_VIDEO_ID + '?autoplay=1&rel=0" title="Guía del alumno" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
@@ -326,6 +352,91 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') { closeGuideVideo(); }
         });
+
+        /* ===== CLAVES DE DESBLOQUEO (nivel A1) =====
+           Cada par de lecciones tiene una clave. Aquí solo se guarda su "huella" (hash),
+           no la clave en texto. Para cambiar las claves del mes, reemplaza este bloque.
+           El par 1 (lecciones 1 y 2) siempre está abierto. */
+        const UNLOCK_HASHES = {
+            2: '41cb3f6952ab0d0dcd19876317de838130f4be5742e3d88105a80a719f9dc70f',
+            3: '803c884144cd0780da65ca4e545f92f473cc206710a934aae1f41a45c4170131',
+            4: '842bc90dcbc383d2d46e56855cd25db6658631d56ceac818c04f3379653e05fa',
+            5: 'f630c6bdfadfb56eccbeac3f1661f5afe9b19efc499788b56f7b08699171abba',
+            6: 'cc12f25f45c8fbd9cde352e6173a710cce9a833f375cff7ebe6a0ed3bf8bd632',
+            7: '73af59813fae796e038798007d554fcd8725abdf397924323896e4ef54130d58',
+            8: '418931271733aa1caee3b802f423199de2f7d3dec3f40e3ccb9c94520798c547',
+            9: '0131c60522b1d2b038209ebb47275bb53bfaed67754bc7993159686b311a8b38',
+            10: '5ab88b7aa03927ea6801908adda07123a9b9b59e9aee3d16f3b64a762a4a6d55'
+        };
+        const UNLOCK_STORAGE = 'eut_unlocked_pairs';
+        let pendingPair = null;
+        let pendingHref = null;
+
+        function getUnlocked() {
+            try { return JSON.parse(localStorage.getItem(UNLOCK_STORAGE)) || []; } catch (e) { return []; }
+        }
+        function saveUnlocked(list) {
+            try { localStorage.setItem(UNLOCK_STORAGE, JSON.stringify(list)); } catch (e) {}
+        }
+        async function sha256Hex(text) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+        function refreshLocks() {
+            const unlocked = getUnlocked();
+            document.querySelectorAll('a[data-pair]').forEach(a => {
+                const pair = a.getAttribute('data-pair');
+                const isOpen = unlocked.indexOf(pair) !== -1;
+                let icon = a.querySelector('.lock-icon');
+                if (!icon) {
+                    icon = document.createElement('span');
+                    icon.className = 'lock-icon';
+                    a.insertBefore(icon, a.firstChild);
+                }
+                icon.textContent = isOpen ? '🔓' : '🔒';
+                a.classList.toggle('is-locked', !isOpen);
+            });
+        }
+        function openUnlock(pair, href) {
+            pendingPair = pair;
+            pendingHref = href;
+            document.getElementById('unlockInput').value = '';
+            document.getElementById('unlockError').textContent = '';
+            document.getElementById('unlockModal').classList.add('open');
+            setTimeout(function () { document.getElementById('unlockInput').focus(); }, 50);
+        }
+        function closeUnlock() {
+            document.getElementById('unlockModal').classList.remove('open');
+        }
+        async function checkUnlock() {
+            const typed = document.getElementById('unlockInput').value.trim().toUpperCase();
+            const hash = await sha256Hex('eut|p' + pendingPair + '|' + typed);
+            if (typed && hash === UNLOCK_HASHES[pendingPair]) {
+                const list = getUnlocked();
+                if (list.indexOf(pendingPair) === -1) { list.push(pendingPair); }
+                saveUnlocked(list);
+                refreshLocks();
+                closeUnlock();
+                if (pendingHref && pendingHref !== '#') { window.location.href = pendingHref; }
+            } else {
+                document.getElementById('unlockError').textContent = 'Clave incorrecta. Pídesela a tu maestro.';
+            }
+        }
+        document.addEventListener('click', function (e) {
+            const a = e.target.closest('a[data-pair]');
+            if (!a) return;
+            const pair = a.getAttribute('data-pair');
+            if (getUnlocked().indexOf(pair) === -1) {
+                e.preventDefault();
+                openUnlock(pair, a.getAttribute('href'));
+            } else if (a.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { closeUnlock(); }
+        });
+        document.addEventListener('DOMContentLoaded', refreshLocks);
     </script>
 
 </body>
