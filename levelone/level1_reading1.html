@@ -1949,7 +1949,7 @@
   <div class="eut-teacher-box" onclick="event.stopPropagation()">
     <h3 id="eutTeacherTitle">Confirmación del maestro</h3>
     <p>Maestro: escribe tu clave para confirmar que el alumno completó su clase guiada.</p>
-    <input type="text" id="eutTeacherInput" placeholder="Clave del maestro" autocomplete="off" onkeydown="if(event.key==='Enter'){eutCheckTeacher();}">
+    <input type="password" id="eutTeacherInput" placeholder="Clave del maestro" autocomplete="off" onkeydown="if(event.key==='Enter'){eutCheckTeacher();}">
     <div class="eut-teacher-error" id="eutTeacherError"></div>
     <div class="eut-teacher-actions">
       <button type="button" class="eut-teacher-ok" onclick="eutCheckTeacher()">Confirmar</button>

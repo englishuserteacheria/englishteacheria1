@@ -316,9 +316,26 @@
 .eut-teacher-ok { background: #10B981; color: #ffffff; }
 .eut-teacher-cancel { background: #e5e7eb; color: #123c69; }
 .eut-next-badge { display: inline-block; margin: 0 0 12px; padding: 5px 14px; background: #A7F3D0; color: #123c69; border-radius: 999px; font-size: 14px; font-weight: 700; }
+
+/* CANDADO DE PÁGINA: pide la clave si este par no fue desbloqueado en este dispositivo */
+html.eut-locked body > *:not(#eutGate) { visibility: hidden !important; }
+#eutGate { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 20000; background: #123c69; align-items: center; justify-content: center; padding: 16px; font-family: Arial, sans-serif; }
+html.eut-locked #eutGate { display: flex; visibility: visible !important; }
+#eutGate .g-box { background: #fff; border-radius: 12px; padding: 26px 24px; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+#eutGate h3 { margin: 0 0 8px; color: #123c69; font-size: 22px; }
+#eutGate p { margin: 0 0 14px; color: #475569; font-size: 15px; }
+#eutGate input { width: 100%; padding: 11px; font-size: 18px; text-align: center; text-transform: uppercase; border: 2px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; }
+#eutGate .g-err { min-height: 20px; color: #b91c1c; font-weight: 700; font-size: 14px; margin: 8px 0; }
+#eutGate button { background: #123c69; color: #fff; border: none; border-radius: 8px; padding: 11px 20px; font-size: 16px; font-weight: 700; cursor: pointer; margin: 3px; }
+#eutGate a { display: inline-block; margin-top: 8px; color: #123c69; font-size: 14px; }
 </style>
 </head>
 <body>
+<script>
+/* Candado de página (par v1) */
+(function () { try { var l = JSON.parse(localStorage.getItem('eut_unlocked_pairs')) || []; if (l.indexOf('v1') === -1) { document.documentElement.classList.add('eut-locked'); } } catch (e) { document.documentElement.classList.add('eut-locked'); } })();
+</script>
+
 <div class="lesson-nav-bar">
     <a href="level1_reading5.html" class="btn-nav-action">← Prev</a>
     <a href="../index.html" class="btn-nav-menu">🏠 Main Menu</a>
@@ -1313,7 +1330,7 @@
   <div class="eut-teacher-box" onclick="event.stopPropagation()">
     <h3 id="eutTeacherTitle">Confirmación del maestro</h3>
     <p>Maestro: escribe tu clave para confirmar que el alumno completó su clase guiada.</p>
-    <input type="text" id="eutTeacherInput" placeholder="Clave del maestro" autocomplete="off" onkeydown="if(event.key==='Enter'){eutCheckTeacher();}">
+    <input type="password" id="eutTeacherInput" placeholder="Clave del maestro" autocomplete="off" onkeydown="if(event.key==='Enter'){eutCheckTeacher();}">
     <div class="eut-teacher-error" id="eutTeacherError"></div>
     <div class="eut-teacher-actions">
       <button type="button" class="eut-teacher-ok" onclick="eutCheckTeacher()">Confirmar</button>
@@ -1366,5 +1383,29 @@ function eutCloseNext() { document.getElementById('eutNextOverlay').classList.re
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { eutCloseNext(); eutCloseTeacher(); } });
 </script>
 <script src="marisol-menu.js" data-menu="basic"></script>
+<div id="eutGate" role="dialog" aria-modal="true" aria-labelledby="eutGateTitle">
+  <div class="g-box">
+    <h3 id="eutGateTitle">🔒 Clase bloqueada</h3>
+    <p>Escribe la clave que te dio tu maestro para abrir esta clase.</p>
+    <input type="text" id="eutGateInput" placeholder="Clave" autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter'){eutGateCheck();}">
+    <div class="g-err" id="eutGateError"></div>
+    <button type="button" onclick="eutGateCheck()">Abrir</button><br>
+    <a href="../index.html">← Volver al menú</a>
+  </div>
+</div>
+<script>
+(function () {
+  var PAIR = 'v1';
+  async function h(t) { var b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function (x) { return x.toString(16).padStart(2, '0'); }).join(''); }
+  window.eutGateCheck = async function () {
+    var typed = document.getElementById('eutGateInput').value.trim().toUpperCase();
+    var exp = window.EUT_KEYS && window.EUT_KEYS.pairs && window.EUT_KEYS.pairs[PAIR];
+    if (typed && exp && (await h('eut|p' + PAIR + '|' + typed)) === exp) {
+      try { var l = JSON.parse(localStorage.getItem('eut_unlocked_pairs')) || []; if (l.indexOf(PAIR) === -1) { l.push(PAIR); } localStorage.setItem('eut_unlocked_pairs', JSON.stringify(l)); } catch (e) {}
+      document.documentElement.classList.remove('eut-locked');
+    } else { document.getElementById('eutGateError').textContent = 'Clave incorrecta. Pídesela a tu maestro.'; }
+  };
+})();
+</script>
 </body>
 </html>
