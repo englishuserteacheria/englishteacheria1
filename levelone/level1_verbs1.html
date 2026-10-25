@@ -293,6 +293,20 @@
       padding: 8px 10px !important;
     }
   </style>
+<style>
+/* ===== VENTANA FINAL: SIGUIENTE CLASE / PLATAFORMA (NEXT CLASS) ===== */
+#eutNextOverlay { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 10001; background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 16px; }
+#eutNextOverlay.open { display: flex; }
+.eut-next-box { background: #ffffff; border-radius: 12px; max-width: 560px; width: 100%; max-height: 92vh; overflow-y: auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.eut-next-box img { display: block; width: 100%; height: auto; background: #f1f5f9; }
+.eut-next-body { padding: 20px 22px 24px; }
+.eut-next-body h3 { margin: 0 0 8px; font-size: 22px; color: #123c69; }
+.eut-next-body p { margin: 0 0 16px; font-size: 15px; line-height: 1.5; color: #374151; }
+.eut-next-cta { display: inline-block; background: #123c69; color: #ffffff; text-decoration: none; border-radius: 6px; padding: 12px 22px; font-size: 16px; font-weight: 700; }
+.eut-next-cta:hover { background: #0d2d50; }
+.eut-next-later { display: block; margin: 12px auto 0; background: none; border: none; color: #123c69; font-size: 14px; text-decoration: underline; cursor: pointer; }
+.eut-next-cta:focus-visible, .eut-next-later:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+</style>
 </head>
 <body>
 <div class="lesson-nav-bar">
@@ -585,6 +599,7 @@
 <div id="recall-box" style="margin-top:15px;"></div>
 <h2>Step 3: Tell Your Teacher (Paso 3: Díselo a tu maestro)</h2>
 <p>Say the three forms of the verbs your teacher chooses. <em>(Di las tres formas de los verbos que tu maestro elija.)</em></p>
+<div style="text-align:center;margin:16px 0 24px;"><button type="button" onclick="eutShowNext()" style="background:#059669;color:#fff;border:none;border-radius:8px;padding:12px 26px;font-size:16px;font-weight:700;cursor:pointer;">Terminé, continuar <span style="font-weight:400;">(I finished, continue)</span></button></div>
 <style>
 #teacher-marisol-widget {
   position: fixed;
@@ -1283,6 +1298,28 @@
       }
     }
   </script>
+<div id="eutNextOverlay" role="dialog" aria-modal="true" aria-labelledby="eutNextTitle" onclick="eutCloseNext()">
+  <div class="eut-next-box" onclick="event.stopPropagation()">
+    <img src="../images/plataforma-login.jpg" alt="Pantalla de inicio de sesión de la plataforma English User" onerror="this.style.display='none'">
+    <div class="eut-next-body">
+      <h3 id="eutNextTitle">¡Excelente trabajo! Sigue avanzando</h3>
+      <p>Reserva ahora tu cita para tu siguiente clase y continúa con tus actividades. Entra a tu plataforma con tu usuario y contraseña.</p>
+      <a id="eutNextCta" class="eut-next-cta" href="#" target="_blank" rel="noopener noreferrer">Reservar mi siguiente clase</a>
+      <button type="button" class="eut-next-later" onclick="eutCloseNext()">Ahora no</button>
+    </div>
+  </div>
+</div>
+<script>
+/* CONFIGURACIÓN: enlace de tu plataforma (único lugar para cambiarlo en esta página) */
+var EUT_PLATFORM_URL = 'https://englishuser.azurewebsites.net/Account/Login';
+function eutShowNext() {
+  var cta = document.getElementById('eutNextCta');
+  if (EUT_PLATFORM_URL) { cta.href = EUT_PLATFORM_URL; }
+  document.getElementById('eutNextOverlay').classList.add('open');
+}
+function eutCloseNext() { document.getElementById('eutNextOverlay').classList.remove('open'); }
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { eutCloseNext(); } });
+</script>
 <script src="marisol-menu.js" data-menu="basic"></script>
 </body>
 </html>
