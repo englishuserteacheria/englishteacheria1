@@ -154,6 +154,58 @@
         .unlock-actions button { padding: 10px 18px; font-size: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
         .unlock-ok { background: #10B981; color: #ffffff; }
         .unlock-cancel { background: #e5e7eb; color: #123c69; }
+
+        /* ===== TARJETAS DE PAR: TRADUCCIÓN, OBJETIVO, AUDIO, CLASE GUIADA ===== */
+        .pair-card { position: relative; }
+        .pair-card > a { padding-right: 170px; }
+        .es-title { display: block; margin-top: 3px; font-size: 0.92em; font-weight: 400; color: #123c69; opacity: 0.8; }
+        .es-goal { display: block; margin-top: 4px; font-size: 0.92em; color: #123c69; opacity: 0.85; }
+        .title-audio-wrap { position: absolute; top: 10px; right: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+        .title-audio { display: inline-flex; align-items: center; gap: 6px; background: #ffffff; color: #123c69; border: 1px solid #123c69; border-radius: 6px; padding: 6px 12px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
+        .title-audio:hover:not(:disabled) { background: #f1f5f9; }
+        .title-audio:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+        .title-audio:disabled { opacity: 0.55; cursor: not-allowed; }
+        .title-audio.is-playing { background: #123c69; color: #ffffff; }
+        .audio-note { font-size: 11px; color: #123c69; opacity: 0.75; }
+        .guided-tag { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 4px 12px 4px 8px; background: #A7F3D0; color: #123c69; border-radius: 999px; font-size: 13px; font-weight: 600; }
+        .guided-tag svg, .guided-check svg { display: block; }
+        .guided-notice { position: relative; display: flex; align-items: center; gap: 14px; margin-top: 12px; padding: 14px 44px 14px 14px; background: #ffffff; border: 1px solid #A7F3D0; border-radius: 8px; }
+        .guided-check { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: #10B981; display: flex; align-items: center; justify-content: center; }
+        .guided-text { flex: 1 1 auto; min-width: 0; }
+        .guided-text p { margin: 0; }
+        .guided-text .g-title { font-size: 18px; font-weight: 700; color: #123c69; }
+        .guided-text .g-line1 { font-size: 14px; font-weight: 600; color: #123c69; margin-top: 2px; }
+        .guided-text .g-line2 { font-size: 14px; color: #123c69; opacity: 0.85; margin-top: 2px; }
+        .guided-cta { flex: 0 0 auto; background: #123c69; color: #ffffff; border: none; border-radius: 6px; padding: 10px 16px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
+        .guided-cta:hover { background: #0d2d50; }
+        .guided-cta:focus-visible, .guided-close:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+        .guided-close { position: absolute; top: 6px; right: 8px; width: 28px; height: 28px; border: none; background: transparent; color: #123c69; font-size: 22px; line-height: 1; cursor: pointer; border-radius: 4px; }
+        .guided-close:hover { background: #f1f5f9; }
+        .guided-foot { margin: 8px 0 0; font-size: 13px; font-style: italic; color: #123c69; opacity: 0.85; }
+        .platform-box { background: #ffffff; border-radius: 12px; max-width: 640px; width: 100%; overflow: hidden; position: relative; text-align: center; }
+        .platform-box img { display: block; width: 100%; height: auto; background: #f1f5f9; }
+        .platform-body { padding: 20px 22px 24px; }
+        .platform-body h4 { margin: 0 0 8px; font-size: 20px; color: #123c69; }
+        .platform-body p { margin: 0 0 16px; font-size: 15px; color: #123c69; opacity: 0.9; }
+        .platform-open { display: inline-block; background: #123c69; color: #ffffff; text-decoration: none; border-radius: 6px; padding: 12px 22px; font-size: 15px; font-weight: 700; }
+        .platform-open:hover { background: #0d2d50; }
+        .platform-open:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+        .platform-open.is-disabled { opacity: 0.5; pointer-events: none; }
+        .platform-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 12px 22px; border-bottom: 1px solid #e2e8f0; }
+        .platform-head h4 { margin: 0; font-size: 18px; color: #123c69; }
+        .platform-close { width: 34px; height: 34px; border: none; border-radius: 50%; background: transparent; color: #123c69; font-size: 24px; line-height: 1; cursor: pointer; }
+        .platform-close:hover { background: #f1f5f9; }
+        .platform-close:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+        @media (max-width: 600px) {
+            .pair-card > a { padding-right: 0; }
+            .title-audio-wrap { position: static; flex-direction: row; align-items: center; gap: 8px; margin-top: 8px; }
+            .pair-card { display: flex; flex-direction: column; align-items: flex-start; }
+            .title-audio-wrap { order: 1; }
+            .guided-tag, .guided-foot { order: 2; }
+            .guided-notice { order: 2; align-self: stretch; }
+            .guided-notice { flex-wrap: wrap; padding-right: 40px; }
+            .guided-cta { width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -203,18 +255,40 @@
         <div id="A1" class="lessons-section">
             <h3>Level A1 Lessons</h3>
             <ul class="lesson-list">
-                <li><a href="levelone/level1_reading1.html">Lesson 1 & 2 — Greetings and Introductions</a></li>
-                <li><a href="levelone/level1_reading2.html" data-pair="2">Lesson 3 & 4 — Verb To Be</a></li>
-                <li><a href="levelone/level1_reading3.html" data-pair="3">Lesson 5 & 6 — Family and Clothes</a></li>
-                <li><a href="levelone/level1_reading4.html" data-pair="4">Lesson 7 & 8 — Daily Activities and Free Time</a></li>
-                <li><a href="levelone/level1_reading5.html" data-pair="5">Lesson 9 & 10 — Things You Do and Food</a></li>
-                <li><a href="levelone/level1_verbs1.html" data-pair="v1">Verbs 1 — Irregular and Regular Verbs</a></li>
+                <li class="pair-card" data-card="1"><a href="levelone/level1_reading1.html">Lesson 1 & 2 — Greetings and Introductions</a>
+                    <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="1" aria-label="Escuchar título: Greetings and Introductions"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="1"></span></span>
+                    <span class="es-title">Lecciones 1 y 2 — Saludos y presentaciones</span>
+                    <span class="es-goal">Aprenderás a saludar, presentarte y preguntar el nombre de otra persona.</span>
+                </li>
+                <li class="pair-card" data-card="2"><a href="levelone/level1_reading2.html" data-pair="2">Lesson 3 & 4 — Verb To Be</a>
+                    <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="2" aria-label="Escuchar título: Verb To Be"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="2"></span></span>
+                    <span class="es-title">Lecciones 3 y 4 — El verbo “to be” (ser o estar)</span>
+                </li>
+                <li class="pair-card" data-card="3"><a href="levelone/level1_reading3.html" data-pair="3">Lesson 5 & 6 — Family and Clothes</a>
+                    <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="3" aria-label="Escuchar título: Family and Clothes"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="3"></span></span>
+                    <span class="es-title">Lecciones 5 y 6 — La familia y la ropa</span>
+                </li>
+                <li class="pair-card" data-card="4"><a href="levelone/level1_reading4.html" data-pair="4">Lesson 7 & 8 — Daily Activities and Free Time</a>
+                    <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="4" aria-label="Escuchar título: Daily Activities and Free Time"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="4"></span></span>
+                    <span class="es-title">Lecciones 7 y 8 — Actividades diarias y tiempo libre</span>
+                </li>
+                <li class="pair-card" data-card="5"><a href="levelone/level1_reading5.html" data-pair="5">Lesson 9 & 10 — Things You Do and Food</a>
+                    <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="5" aria-label="Escuchar título: Things You Do and Food"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="5"></span></span>
+                    <span class="es-title">Lecciones 9 y 10 — Cosas que haces y comida</span>
+                </li>
+                <li class="pair-card" data-card="v1"><a href="levelone/level1_verbs1.html" data-pair="v1">Verbs 1 — Irregular and Regular Verbs</a>
+                    <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="v1" aria-label="Escuchar título: Irregular and Regular Verbs"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="v1"></span></span>
+                    <span class="es-title">Verbos 1 — Verbos irregulares y regulares</span>
+                </li>
                 <li><a href="#" data-pair="6">Lesson 11 & 12</a></li>
                 <li><a href="#" data-pair="7">Lesson 13 & 14</a></li>
                 <li><a href="#" data-pair="8">Lesson 15 & 16</a></li>
                 <li><a href="#" data-pair="9">Lesson 17 & 18</a></li>
                 <li><a href="#" data-pair="10">Lesson 19 & 20</a></li>
-                <li><a href="#" data-pair="v2">Verbs 2 — Irregular and Regular Verbs</a></li>
+                <li class="pair-card" data-card="v2"><a href="#" data-pair="v2">Verbs 2 — Irregular and Regular Verbs</a>
+                    <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="v2" aria-label="Escuchar título: Irregular and Regular Verbs"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="v2"></span></span>
+                    <span class="es-title">Verbos 2 — Verbos irregulares y regulares</span>
+                </li>
             </ul>
         </div>
 
@@ -294,6 +368,20 @@
             <div class="unlock-actions">
                 <button type="button" class="unlock-ok" onclick="checkUnlock()">Entrar</button>
                 <button type="button" class="unlock-cancel" onclick="closeUnlock()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="platformModal" class="guide-modal" role="dialog" aria-modal="true" aria-labelledby="platformTitle" onclick="closePlatform()">
+        <div class="platform-box" onclick="event.stopPropagation()">
+            <div class="platform-head">
+                <h4 id="platformTitle">Continúa en tu plataforma</h4>
+                <button type="button" class="platform-close" aria-label="Cerrar" onclick="closePlatform()">×</button>
+            </div>
+            <img src="images/plataforma-login.jpg" alt="Pantalla de inicio de sesión de la plataforma English User" onerror="this.style.display='none'">
+            <div class="platform-body">
+                <p>Inicia sesión con tu usuario y contraseña para seguir con tus actividades. Se abrirá en una pestaña nueva.</p>
+                <a id="platformOpen" class="platform-open" href="#" target="_blank" rel="noopener noreferrer">Abrir mi plataforma</a>
             </div>
         </div>
     </div>
@@ -439,6 +527,107 @@
             if (e.key === 'Escape') { closeUnlock(); }
         });
         document.addEventListener('DOMContentLoaded', refreshLocks);
+
+        /* ===== CLASE GUIADA, AUDIO DE TÍTULOS Y ENLACE A LA PLATAFORMA =====
+           CONFIGURACIÓN (único lugar para editar):
+           1) PLATFORM_URL: enlace de inicio de sesión de tu plataforma.
+           2) TITLE_AUDIO: nombre del archivo de audio de cada título (carpeta audio/titulos/).
+              Mientras un valor sea '' el botón "Escuchar título" queda desactivado.
+           3) EUT_GUIDED.provider / EUT_GUIDED.acknowledge: se conectan a la fuente real de
+              confirmación del maestro. Mientras sean null, no se muestra etiqueta ni aviso. */
+        const PLATFORM_URL = 'https://englishuser.azurewebsites.net/Account/Login';
+        const TITLE_AUDIO_BASE = 'audio/titulos/';
+        const TITLE_AUDIO = {
+            '1': '',   // greetings-and-introductions.mp3
+            '2': '',   // verb-to-be.mp3
+            '3': '',   // family-and-clothes.mp3
+            '4': '',   // daily-activities-and-free-time.mp3
+            '5': '',   // things-you-do-and-food.mp3
+            'v1': '',  // irregular-and-regular-verbs.mp3
+            'v2': ''   // irregular-and-regular-verbs.mp3
+        };
+        window.EUT_GUIDED = { provider: null, acknowledge: null };
+
+        let titleAudio = null, titleAudioBtn = null;
+        function stopTitleAudio() {
+            if (titleAudio) { try { titleAudio.pause(); } catch (e) {} }
+            if (titleAudioBtn) { titleAudioBtn.classList.remove('is-playing'); }
+            titleAudio = null; titleAudioBtn = null;
+        }
+        function playTitleAudio(id, btn) {
+            const file = TITLE_AUDIO[id];
+            if (!file) { return; }
+            stopTitleAudio();
+            const note = document.querySelector('[data-audio-note="' + id + '"]');
+            if (note) { note.textContent = ''; }
+            const audio = new Audio(TITLE_AUDIO_BASE + file);
+            audio.preload = 'none';
+            titleAudio = audio; titleAudioBtn = btn;
+            btn.classList.add('is-playing');
+            audio.addEventListener('ended', stopTitleAudio);
+            audio.addEventListener('error', function () {
+                stopTitleAudio();
+                if (note) { note.textContent = 'No se pudo reproducir el audio'; }
+            });
+            const p = audio.play();
+            if (p && p.catch) { p.catch(function () { stopTitleAudio(); if (note) { note.textContent = 'No se pudo reproducir el audio'; } }); }
+        }
+        function setupTitleAudio() {
+            document.querySelectorAll('.title-audio').forEach(function (btn) {
+                const id = btn.getAttribute('data-audio');
+                if (!TITLE_AUDIO[id]) {
+                    btn.disabled = true;
+                    const note = document.querySelector('[data-audio-note="' + id + '"]');
+                    if (note) { note.textContent = 'Audio aún no disponible'; }
+                }
+                btn.addEventListener('click', function () { playTitleAudio(id, btn); });
+            });
+        }
+
+        function openPlatform() {
+            const link = document.getElementById('platformOpen');
+            if (PLATFORM_URL) { link.href = PLATFORM_URL; link.classList.remove('is-disabled'); link.removeAttribute('aria-disabled'); }
+            else { link.removeAttribute('href'); link.classList.add('is-disabled'); link.setAttribute('aria-disabled', 'true'); }
+            document.getElementById('platformModal').classList.add('open');
+        }
+        function closePlatform() { document.getElementById('platformModal').classList.remove('open'); }
+
+        const CHECK_SVG = '<svg width="__W__" height="__W__" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+        function renderGuided() {
+            const G = window.EUT_GUIDED || {};
+            document.querySelectorAll('li[data-card]').forEach(function (li) {
+                const id = li.getAttribute('data-card');
+                const old = li.querySelectorAll('.guided-tag, .guided-notice, .guided-foot');
+                old.forEach(function (n) { n.remove(); });
+                const st = (typeof G.provider === 'function') ? G.provider(id) : null;
+                if (!st || !st.completed) { return; }
+                const tag = document.createElement('span');
+                tag.className = 'guided-tag';
+                tag.innerHTML = '<span style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:#10B981;align-items:center;justify-content:center;">' + CHECK_SVG.replace(/__W__/g, '12') + '</span>Clase guiada completada';
+                tag.insertAdjacentHTML('afterbegin', '');
+                li.appendChild(tag);
+                if (st.acknowledged) { return; }
+                const box = document.createElement('div');
+                box.className = 'guided-notice';
+                box.setAttribute('role', 'status');
+                box.innerHTML = '<span class="guided-check">' + CHECK_SVG.replace(/__W__/g, '22') + '</span>' +
+                    '<div class="guided-text"><p class="g-title">¡Buen comienzo!</p><p class="g-line1">Completaste tu clase guiada con tu maestro.</p><p class="g-line2">Continúa con tus siguientes actividades en la plataforma.</p></div>' +
+                    '<button type="button" class="guided-cta">Continuar mis actividades</button>' +
+                    '<button type="button" class="guided-close" aria-label="Cerrar aviso">×</button>';
+                const foot = document.createElement('p');
+                foot.className = 'guided-foot';
+                foot.textContent = 'El par de lecciones se completa con las actividades y la evaluación escrita y oral.';
+                li.appendChild(box); li.appendChild(foot);
+                function ack() {
+                    box.remove(); foot.remove();
+                    if (typeof G.acknowledge === 'function') { G.acknowledge(id); }
+                }
+                box.querySelector('.guided-close').addEventListener('click', ack);
+                box.querySelector('.guided-cta').addEventListener('click', function () { ack(); openPlatform(); });
+            });
+        }
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closePlatform(); } });
+        document.addEventListener('DOMContentLoaded', function () { setupTitleAudio(); renderGuided(); });
     </script>
 
 </body>
