@@ -14,5 +14,5 @@ window.EUT_KEYS = {
     "v1": "6e3f4a9ba59f128b58deefbf4bfca264f7085d168a8b457d3449b3d0e3de9ea4",
     "v2": "8f3a40b37c99446bfecf0c9dc0f9e9b02bb9b7a1a97406ad76a73b679da7ce96"
   },
-  "teacher": "225e19f72ca440b013e8eb6eb46b49ecffb8cb742a87c42b0aeb0741df86673c"
+  "teacher": "f574b2fd97fe6a9f36bfff1818367b7ff2fa2cc79f84d42bd9ee91e9a556a6df"
 };
