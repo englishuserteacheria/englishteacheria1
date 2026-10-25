@@ -546,7 +546,7 @@
 <div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">cooked</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('cooked')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('cooked', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
 </div>
 <div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
-<img src="../images/watch.jpg" alt="watch" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<img src="../images/watchtv.jpg" alt="watch" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
 <p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to watch</p>
 <p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">mirar</p>
 <div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">watch</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('watch')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('watch', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
@@ -580,8 +580,8 @@
 </div>
 </div>
 <h2>Step 2: Remember the Verbs (Paso 2: Recuerda los verbos)</h2>
-<p>Choose a block. Write the three forms. If you miss one, you will see the answer and the verb comes back. Each verb needs 3 correct answers, with fewer hints each time. <em>(Elige un bloque. Escribe las tres formas. Si fallas, verás la respuesta y el verbo regresa. Cada verbo necesita 3 aciertos, con menos pistas cada vez.)</em></p>
-<div><button class="btn-action" style="margin:4px;" onclick="startRecall(0)">Block 1</button><button class="btn-action" style="margin:4px;" onclick="startRecall(1)">Block 2</button><button class="btn-action" style="margin:4px;" onclick="startRecall(2)">Block 3</button><button class="btn-action" style="margin:4px;" onclick="startRecall(3)">Block 4</button></div>
+<p><strong>How it works:</strong> Each block has 8 verbs. Choose a block. You will see a picture: write the three forms of that verb (infinitive, simple past, past participle) and press <strong>Check</strong>. The boxes you got right turn <strong style="color:#059669;">green ✓</strong> and lock. The boxes that need work turn <strong style="color:#dc2626;">red ✗</strong>: fix only those. Each box gives you 3 tries; after the third, you see the answer. If you get all three forms right without seeing an answer, the verb comes back later with fewer hints. A verb is mastered after <strong>3 correct rounds</strong>. When you master all 8 verbs, the block is completed. From Block 2 on, you first review the verbs of the previous block.</p><p><em><strong>Cómo funciona:</strong> Cada bloque tiene 8 verbos. Elige un bloque. Verás una imagen: escribe las tres formas de ese verbo (infinitivo, pasado simple, participio) y presiona <strong>Check</strong>. Las casillas correctas se ponen <strong style="color:#059669;">verdes ✓</strong> y se bloquean. Las que necesitan trabajo se ponen <strong style="color:#dc2626;">rojas ✗</strong>: corrige solo esas. Cada casilla te da 3 intentos; después del tercero, ves la respuesta. Si aciertas las tres formas sin ver ninguna respuesta, el verbo regresa más tarde con menos pistas. Un verbo queda dominado con <strong>3 rondas correctas</strong>. Cuando dominas los 8 verbos, el bloque queda completado. Desde el Bloque 2, primero repasas los verbos del bloque anterior.</em></p>
+<div><button class="btn-action" id="blk0" style="margin:4px;" onclick="startRecall(0)">Block 1 (run – do)</button><button class="btn-action" id="blk1" style="margin:4px;" onclick="startRecall(1)">Block 2 (drive – make)</button><button class="btn-action" id="blk2" style="margin:4px;" onclick="startRecall(2)">Block 3 (drink – fall)</button><button class="btn-action" id="blk3" style="margin:4px;" onclick="startRecall(3)">Block 4 (work – play)</button></div>
 <div id="recall-box" style="margin-top:15px;"></div>
 <h2>Step 3: Tell Your Teacher (Paso 3: Díselo a tu maestro)</h2>
 <p>Say the three forms of the verbs your teacher chooses. <em>(Di las tres formas de los verbos que tu maestro elija.)</em></p>
@@ -913,49 +913,116 @@
 
 
     const VERB_DATA = [{"k":"run","es":"correr","b":0,"f":[{"d":"run","s":"run","ok":["run"],"p":"run"},{"d":"ran","s":"ran","ok":["ran"],"p":"ran"},{"d":"run","s":"run","ok":["run"],"p":"run"}]},{"k":"write","es":"escribir","b":0,"f":[{"d":"write","s":"write","ok":["write"],"p":"write"},{"d":"wrote","s":"wrote","ok":["wrote"],"p":"wrote"},{"d":"written","s":"written","ok":["written"],"p":"written"}]},{"k":"get","es":"conseguir/obtener","b":0,"f":[{"d":"get","s":"get","ok":["get"],"p":"get"},{"d":"got","s":"got","ok":["got"],"p":"got"},{"d":"gotten","s":"gotten","ok":["gotten","got"],"p":"gotten"}]},{"k":"go","es":"ir","b":0,"f":[{"d":"go","s":"go","ok":["go"],"p":"go"},{"d":"went","s":"went","ok":["went"],"p":"went"},{"d":"gone","s":"gone","ok":["gone"],"p":"gone"}]},{"k":"have","es":"tener / tomar (alimentos)","b":0,"f":[{"d":"have","s":"have","ok":["have"],"p":"have"},{"d":"had","s":"had","ok":["had"],"p":"had"},{"d":"had","s":"had","ok":["had"],"p":"had"}]},{"k":"take","es":"tomar/llevar","b":0,"f":[{"d":"take","s":"take","ok":["take"],"p":"take"},{"d":"took","s":"took","ok":["took"],"p":"took"},{"d":"taken","s":"taken","ok":["taken"],"p":"taken"}]},{"k":"eat","es":"comer","b":0,"f":[{"d":"eat","s":"eat","ok":["eat"],"p":"eat"},{"d":"ate","s":"ate","ok":["ate"],"p":"ate"},{"d":"eaten","s":"eaten","ok":["eaten"],"p":"eaten"}]},{"k":"do","es":"hacer (una actividad)","b":0,"f":[{"d":"do","s":"do","ok":["do"],"p":"do"},{"d":"did","s":"did","ok":["did"],"p":"did"},{"d":"done","s":"done","ok":["done"],"p":"done"}]},{"k":"drive","es":"conducir","b":1,"f":[{"d":"drive","s":"drive","ok":["drive"],"p":"drive"},{"d":"drove","s":"drove","ok":["drove"],"p":"drove"},{"d":"driven","s":"driven","ok":["driven"],"p":"driven"}]},{"k":"ride","es":"montar","b":1,"f":[{"d":"ride","s":"ride","ok":["ride"],"p":"ride"},{"d":"rode","s":"rode","ok":["rode"],"p":"rode"},{"d":"ridden","s":"ridden","ok":["ridden"],"p":"ridden"}]},{"k":"read","es":"leer","b":1,"f":[{"d":"read","s":"read","ok":["read"],"p":"read"},{"d":"read","s":"red","ok":["read"],"p":"red"},{"d":"read","s":"red","ok":["read"],"p":"red"}]},{"k":"build","es":"construir","b":1,"f":[{"d":"build","s":"build","ok":["build"],"p":"build"},{"d":"built","s":"built","ok":["built"],"p":"built"},{"d":"built","s":"built","ok":["built"],"p":"built"}]},{"k":"swim","es":"nadar","b":1,"f":[{"d":"swim","s":"swim","ok":["swim"],"p":"swim"},{"d":"swam","s":"swam","ok":["swam"],"p":"swam"},{"d":"swum","s":"swum","ok":["swum"],"p":"swum"}]},{"k":"speak","es":"hablar","b":1,"f":[{"d":"speak","s":"speak","ok":["speak"],"p":"speak"},{"d":"spoke","s":"spoke","ok":["spoke"],"p":"spoke"},{"d":"spoken","s":"spoken","ok":["spoken"],"p":"spoken"}]},{"k":"come","es":"venir","b":1,"f":[{"d":"come","s":"come","ok":["come"],"p":"come"},{"d":"came","s":"came","ok":["came"],"p":"came"},{"d":"come","s":"come","ok":["come"],"p":"come"}]},{"k":"make","es":"hacer (crear)","b":1,"f":[{"d":"make","s":"make","ok":["make"],"p":"make"},{"d":"made","s":"made","ok":["made"],"p":"made"},{"d":"made","s":"made","ok":["made"],"p":"made"}]},{"k":"drink","es":"beber","b":2,"f":[{"d":"drink","s":"drink","ok":["drink"],"p":"drink"},{"d":"drank","s":"drank","ok":["drank"],"p":"drank"},{"d":"drunk","s":"drunk","ok":["drunk"],"p":"drunk"}]},{"k":"buy","es":"comprar","b":2,"f":[{"d":"buy","s":"buy","ok":["buy"],"p":"buy"},{"d":"bought","s":"bought","ok":["bought"],"p":"bought"},{"d":"bought","s":"bought","ok":["bought"],"p":"bought"}]},{"k":"find","es":"encontrar","b":2,"f":[{"d":"find","s":"find","ok":["find"],"p":"find"},{"d":"found","s":"found","ok":["found"],"p":"found"},{"d":"found","s":"found","ok":["found"],"p":"found"}]},{"k":"lose","es":"perder","b":2,"f":[{"d":"lose","s":"lose","ok":["lose"],"p":"lose"},{"d":"lost","s":"lost","ok":["lost"],"p":"lost"},{"d":"lost","s":"lost","ok":["lost"],"p":"lost"}]},{"k":"give","es":"dar","b":2,"f":[{"d":"give","s":"give","ok":["give"],"p":"give"},{"d":"gave","s":"gave","ok":["gave"],"p":"gave"},{"d":"given","s":"given","ok":["given"],"p":"given"}]},{"k":"be","es":"ser/estar/tener","b":2,"f":[{"d":"be","s":"be","ok":["be"],"p":"be"},{"d":"was/were","s":"was, were","ok":["was/were","was","were","was","were"],"p":"was"},{"d":"been","s":"been","ok":["been"],"p":"been"}]},{"k":"break","es":"romper","b":2,"f":[{"d":"break","s":"break","ok":["break"],"p":"break"},{"d":"broke","s":"broke","ok":["broke"],"p":"broke"},{"d":"broken","s":"broken","ok":["broken"],"p":"broken"}]},{"k":"fall","es":"caer","b":2,"f":[{"d":"fall","s":"fall","ok":["fall"],"p":"fall"},{"d":"fell","s":"fell","ok":["fell"],"p":"fell"},{"d":"fallen","s":"fallen","ok":["fallen"],"p":"fallen"}]},{"k":"work","es":"trabajar","b":3,"f":[{"d":"work","s":"work","ok":["work"],"p":"work"},{"d":"worked","s":"worked","ok":["worked"],"p":"worked"},{"d":"worked","s":"worked","ok":["worked"],"p":"worked"}]},{"k":"check","es":"revisar","b":3,"f":[{"d":"check","s":"check","ok":["check"],"p":"check"},{"d":"checked","s":"checked","ok":["checked"],"p":"checked"},{"d":"checked","s":"checked","ok":["checked"],"p":"checked"}]},{"k":"help","es":"ayudar","b":3,"f":[{"d":"help","s":"help","ok":["help"],"p":"help"},{"d":"helped","s":"helped","ok":["helped"],"p":"helped"},{"d":"helped","s":"helped","ok":["helped"],"p":"helped"}]},{"k":"cook","es":"cocinar","b":3,"f":[{"d":"cook","s":"cook","ok":["cook"],"p":"cook"},{"d":"cooked","s":"cooked","ok":["cooked"],"p":"cooked"},{"d":"cooked","s":"cooked","ok":["cooked"],"p":"cooked"}]},{"k":"watch","es":"mirar","b":3,"f":[{"d":"watch","s":"watch","ok":["watch"],"p":"watch"},{"d":"watched","s":"watched","ok":["watched"],"p":"watched"},{"d":"watched","s":"watched","ok":["watched"],"p":"watched"}]},{"k":"walk","es":"caminar","b":3,"f":[{"d":"walk","s":"walk","ok":["walk"],"p":"walk"},{"d":"walked","s":"walked","ok":["walked"],"p":"walked"},{"d":"walked","s":"walked","ok":["walked"],"p":"walked"}]},{"k":"listen","es":"escuchar","b":3,"f":[{"d":"listen","s":"listen","ok":["listen"],"p":"listen"},{"d":"listened","s":"listened","ok":["listened"],"p":"listened"},{"d":"listened","s":"listened","ok":["listened"],"p":"listened"}]},{"k":"play","es":"jugar/tocar (instrumento musical)","b":3,"f":[{"d":"play","s":"play","ok":["play"],"p":"play"},{"d":"played","s":"played","ok":["played"],"p":"played"},{"d":"played","s":"played","ok":["played"],"p":"played"}]}];
-    let rq = [], rTotal = 0, rDone = 0, rCur = null;
+    let rq = [], rTotal = 0, rDone = 0, rCur = null, curBlock = 0;
     function norm(s) { return s.toLowerCase().trim().replace(/^to\s+/, '').replace(/\s+/g, ' '); }
-    function startRecall(b) {
+    const VP_KEY = 'eut_verbs1_progress';
+    const BLOCK_NAMES = ['run – do', 'drive – make', 'drink – fall', 'work – play'];
+    function vpGet() { try { return JSON.parse(localStorage.getItem(VP_KEY)) || {}; } catch (e) { return {}; } }
+    function vpSet(o) { try { localStorage.setItem(VP_KEY, JSON.stringify(o)); } catch (e) {} }
+    function saveProgress(includeCur) {
+      const o = vpGet();
+      const list = (includeCur && rCur) ? [rCur].concat(rq) : rq;
+      o[curBlock] = { q: list.map(x => [x.v.k, x.c]), done: rDone, total: rTotal, fin: false };
+      vpSet(o); refreshBlockButtons();
+    }
+    function saveDone() {
+      const o = vpGet(); o[curBlock] = { q: [], done: rTotal, total: rTotal, fin: true };
+      vpSet(o); refreshBlockButtons();
+    }
+    function refreshBlockButtons() {
+      const o = vpGet();
+      [0, 1, 2, 3].forEach(b => {
+        const el = document.getElementById('blk' + b); if (!el) { return; }
+        const p = o[b];
+        el.textContent = 'Block ' + (b + 1) + ' (' + BLOCK_NAMES[b] + ')' + (p ? (p.fin ? ' ✓ Completed' : ' ▶ ' + p.done + '/' + p.total) : '');
+        el.style.backgroundColor = (p && p.fin) ? '#059669' : '';
+      });
+    }
+    function startRecall(b, fresh) {
+      curBlock = b;
+      const p = vpGet()[b];
+      if (p && !p.fin && !fresh && p.q.length) {
+        rq = p.q.map(a => ({ v: VERB_DATA.find(v => v.k === a[0]), c: a[1] }));
+        rTotal = p.total; rDone = p.done; showRecall(); return;
+      }
       const cur = VERB_DATA.filter(v => v.b === b).map(v => ({ v: v, c: 0 }));
       const prev = b > 0 ? VERB_DATA.filter(v => v.b === b - 1).map(v => ({ v: v, c: 2 })) : [];
       rq = prev.concat(cur); rTotal = rq.length; rDone = 0; showRecall();
     }
+    let rAtt = 0, rLocked = [false, false, false], rRevealed = false, rFinished = false;
+    const RC_OK = { border: '#10b981', bg: '#ecfdf5' }, RC_BAD = { border: '#ef4444', bg: '#fef2f2' };
+    function rcShowAnswer(i) { const v = rCur.v; return i === 0 ? v.k : v.f[i].d; }
+    function rcMark(i, state) {
+      const inp = document.getElementById('rc' + i), lb = document.getElementById('rl' + i);
+      const c = state === 'ok' ? RC_OK : RC_BAD;
+      inp.style.borderColor = c.border; inp.style.backgroundColor = c.bg; inp.style.borderWidth = '2px';
+      if (state === 'ok') { lb.innerHTML = labsOf(i) + ' <span style="color:#059669;font-weight:700;">✓</span>'; }
+      else if (state === 'bad') { lb.innerHTML = labsOf(i) + ' <span style="color:#dc2626;font-weight:700;">✗ Try again (Inténtalo de nuevo)</span>'; }
+      else { lb.innerHTML = labsOf(i) + ' <span style="color:#dc2626;font-weight:700;">✗ Answer (Respuesta)</span>'; }
+    }
+    function labsOf(i) { return ['Infinitive', 'Simple Past', 'Past Participle'][i]; }
     function showRecall() {
       const box = document.getElementById('recall-box');
       if (rq.length === 0) {
-        box.innerHTML = '<div class="feedback correct">¡Muy bien! Ahora díselo a tu maestro.</div>';
+        saveDone();
+        const nb = curBlock < 3 ? '<button class="btn-action" onclick="startRecall(' + (curBlock + 1) + ')">Go to Block ' + (curBlock + 2) + ' → (Ir al Bloque ' + (curBlock + 2) + ')</button>' : '';
+        box.innerHTML = '<div style="border:2px solid #10b981;background:#ecfdf5;border-radius:8px;padding:16px;max-width:420px;">' +
+          '<p style="margin:0 0 4px;font-size:18px;font-weight:700;color:#065f46;">✓ Block ' + (curBlock + 1) + ' completed! (¡Bloque ' + (curBlock + 1) + ' completado!)</p>' +
+          '<p style="margin:0 0 6px;color:#065f46;">You mastered all the verbs in this block. <em>(Dominaste todos los verbos de este bloque.)</em></p>' +
+          '<p style="margin:0 0 8px;color:#374151;font-size:14px;">Next: say these verbs to your teacher in Step 3. <em>(Siguiente: di estos verbos a tu maestro en el Paso 3.)</em></p>' + nb + '</div>';
         return;
       }
       rCur = rq.shift();
+      rAtt = 0; rLocked = [false, false, false]; rRevealed = false; rFinished = false;
+      saveProgress(true);
       const v = rCur.v, lvl = Math.min(rCur.c, 2);
       const ph = f => lvl === 0 ? f.d.charAt(0) + '…' : '…';
-      const labs = ['Infinitive', 'Simple Past', 'Past Participle'];
       let h = '<div style="border:1px solid #cbd5e1;border-radius:8px;padding:12px;background:#fff;max-width:420px;">';
-      h += '<p style="margin:0 0 6px;font-size:13px;color:#64748b;">Mastered: ' + rDone + ' / ' + rTotal + '</p>';
-      h += '<img src="../images/' + v.k + '.jpg" alt="" style="width:100%;height:150px;object-fit:cover;border-radius:6px;background:#f9f9f9;">';
+      h += '<p style="margin:0 0 6px;font-size:13px;color:#64748b;">Verbs mastered (Verbos dominados): ' + rDone + ' of ' + rTotal + (rCur.c === 2 && v.b < curBlock ? ' · <strong>Review of the previous block (Repaso del bloque anterior)</strong>' : '') + ' · <a href="#" onclick="startRecall(curBlock, true); return false;">Start over (Empezar de nuevo)</a></p>';
+      h += '<img src="../images/' + (v.k === 'watch' ? 'watchtv' : v.k) + '.jpg" alt="" style="width:100%;height:150px;object-fit:cover;border-radius:6px;background:#f9f9f9;">';
       if (lvl < 2) { h += '<p style="text-align:center;margin:8px 0;color:#64748b;">' + v.es + '</p>'; }
-      v.f.forEach((f, i) => { h += '<p style="margin:6px 0 2px;font-size:12px;">' + labs[i] + '</p><input type="text" id="rc' + i + '" class="input-field" placeholder="' + ph(f) + '" autocomplete="off" autocapitalize="off" onkeydown="if(event.key===\'Enter\'){checkRecall();}">'; });
-      h += '<div id="rc-fb" style="margin:10px 0;font-weight:bold;min-height:20px;"></div>';
+      v.f.forEach((f, i) => { h += '<p id="rl' + i + '" style="margin:6px 0 2px;font-size:12px;">' + labsOf(i) + '</p><input type="text" id="rc' + i + '" class="input-field" placeholder="' + ph(f) + '" autocomplete="off" autocapitalize="off" onkeydown="if(event.key===\'Enter\'){checkRecall();}">'; });
+      h += '<div id="rc-fb" aria-live="polite" style="margin:10px 0;font-weight:bold;min-height:20px;"></div>';
       h += '<button class="btn-action" id="rc-check" onclick="checkRecall()">Check</button> <button class="btn-action" id="rc-next" style="display:none;" onclick="showRecall()">Next →</button></div>';
       box.innerHTML = h;
       document.getElementById('rc0').focus();
     }
     function checkRecall() {
-      if (document.getElementById('rc-check').style.display === 'none') { return; }
+      if (rFinished) { return; }
       const v = rCur.v, fb = document.getElementById('rc-fb');
-      const all = v.f.every((f, i) => f.ok.map(norm).indexOf(norm(document.getElementById('rc' + i).value)) !== -1);
-      if (all) {
+      rAtt++;
+      v.f.forEach((f, i) => {
+        if (rLocked[i]) { return; }
+        const inp = document.getElementById('rc' + i);
+        if (f.ok.map(norm).indexOf(norm(inp.value)) !== -1) { rLocked[i] = true; inp.disabled = true; rcMark(i, 'ok'); }
+        else { rcMark(i, 'bad'); }
+      });
+      let pending = rLocked.map((l, i) => l ? -1 : i).filter(i => i >= 0);
+      if (pending.length && rAtt >= 3) {
+        pending.forEach(i => { const inp = document.getElementById('rc' + i); inp.value = rcShowAnswer(i); inp.disabled = true; rLocked[i] = true; rcMark(i, 'show'); });
+        rRevealed = true; pending = [];
+      }
+      if (pending.length) {
+        fb.style.color = '#b45309';
+        fb.textContent = 'Fix the red boxes. (Corrige las casillas rojas.) Try ' + rAtt + ' of 3 (Intento ' + rAtt + ' de 3)';
+        document.getElementById('rc' + pending[0]).focus();
+        return;
+      }
+      rFinished = true;
+      if (!rRevealed) {
         rCur.c++;
-        if (rCur.c >= 3) { rDone++; fb.style.color = '#10b981'; fb.textContent = '✓ Mastered! (¡Dominado!)'; }
-        else { rq.push(rCur); fb.style.color = '#10b981'; fb.textContent = '✓ Correct! (¡Correcto!)'; }
+        if (rCur.c >= 3) { rDone++; fb.style.color = '#059669'; fb.textContent = '✓ Mastered! (¡Dominado!)'; }
+        else { rq.push(rCur); fb.style.color = '#059669'; fb.textContent = '✓ Correct! It will come back with fewer hints. (¡Correcto! Regresará con menos pistas.)'; }
       } else {
-        rq.push(rCur); fb.style.color = '#ef4444';
-        fb.textContent = 'Answer (Respuesta): ' + v.f.map((f, i) => i === 0 ? v.k : f.d).join(' – ');
+        rq.push(rCur); fb.style.color = '#dc2626';
+        fb.textContent = 'You saw the answer, so this verb will come back. (Viste la respuesta, así que este verbo regresará.)';
         speakWord(v.k + '. ' + v.f[1].s + '. ' + v.f[2].s);
       }
       document.getElementById('rc-check').style.display = 'none';
       document.getElementById('rc-next').style.display = 'inline-block';
+      saveProgress(false);
     }
+    refreshBlockButtons();
 
     /* LÓGICA CONECTADA A LA API DE OPENAI (TEACHER MARISOL) */
     let studentName = null;
