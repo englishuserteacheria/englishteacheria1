@@ -285,7 +285,7 @@
                 <li><a href="#" data-pair="8">Lesson 15 & 16</a></li>
                 <li><a href="#" data-pair="9">Lesson 17 & 18</a></li>
                 <li><a href="#" data-pair="10">Lesson 19 & 20</a></li>
-                <li class="pair-card" data-card="v2"><a href="#" data-pair="v2">Verbs 2 — Irregular and Regular Verbs</a>
+                <li class="pair-card" data-card="v2"><a href="levelone/level1_verbs2.html" data-pair="v2">Verbs 2 — Irregular and Regular Verbs</a>
                     <span class="title-audio-wrap"><button type="button" class="title-audio" data-audio="v2" aria-label="Escuchar título: Irregular and Regular Verbs"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><span>Escuchar título</span></button><span class="audio-note" data-audio-note="v2"></span></span>
                     <span class="es-title">Verbos 2 — Verbos irregulares y regulares</span>
                 </li>
@@ -386,6 +386,7 @@
         </div>
     </div>
 
+    <script src="claves-config.js"></script>
     <script>
         const clickSound = new Audio('images/audio/introeu.mp4');
 
@@ -445,7 +446,9 @@
            Cada par de lecciones tiene una clave. Aquí solo se guarda su "huella" (hash),
            no la clave en texto. Para cambiar las claves del mes, reemplaza este bloque.
            El par 1 (lecciones 1 y 2) siempre está abierto. */
-        const UNLOCK_HASHES = {
+        // Las claves del mes se leen de claves-config.js (generado con generador_claves.html).
+        // Si ese archivo no cargara, se usan estas claves de respaldo.
+        const UNLOCK_HASHES = (window.EUT_KEYS && window.EUT_KEYS.pairs) ? window.EUT_KEYS.pairs : {
             2: '41cb3f6952ab0d0dcd19876317de838130f4be5742e3d88105a80a719f9dc70f',
             3: '803c884144cd0780da65ca4e545f92f473cc206710a934aae1f41a45c4170131',
             4: '842bc90dcbc383d2d46e56855cd25db6658631d56ceac818c04f3379653e05fa',
