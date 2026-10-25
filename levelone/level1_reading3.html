@@ -293,6 +293,20 @@
       padding: 8px 10px !important;
     }
   </style>
+<style>
+/* ===== VENTANA FINAL: SIGUIENTE CLASE / PLATAFORMA (NEXT CLASS) ===== */
+#eutNextOverlay { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 10001; background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 16px; }
+#eutNextOverlay.open { display: flex; }
+.eut-next-box { background: #ffffff; border-radius: 12px; max-width: 560px; width: 100%; max-height: 92vh; overflow-y: auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.eut-next-box img { display: block; width: 100%; height: auto; background: #f1f5f9; }
+.eut-next-body { padding: 20px 22px 24px; }
+.eut-next-body h3 { margin: 0 0 8px; font-size: 22px; color: #123c69; }
+.eut-next-body p { margin: 0 0 16px; font-size: 15px; line-height: 1.5; color: #374151; }
+.eut-next-cta { display: inline-block; background: #123c69; color: #ffffff; text-decoration: none; border-radius: 6px; padding: 12px 22px; font-size: 16px; font-weight: 700; }
+.eut-next-cta:hover { background: #0d2d50; }
+.eut-next-later { display: block; margin: 12px auto 0; background: none; border: none; color: #123c69; font-size: 14px; text-decoration: underline; cursor: pointer; }
+.eut-next-cta:focus-visible, .eut-next-later:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+</style>
 </head>
 <body>
   <!-- BARRA DE NAVEGACIÓN SUPERIOR FIJA -->
@@ -687,7 +701,7 @@
         </div>
         <!-- A blouse -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/ablouse.jpg" alt="A blouse" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/blouse.jpg" alt="A blouse" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">A blouse</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('A blouse')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('A blouse', this)">Practice</button>
@@ -695,7 +709,7 @@
         </div>
         <!-- A coat -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/acoat.jpg" alt="A coat" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/coat.jpg" alt="A coat" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">A coat</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('A coat')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('A coat', this)">Practice</button>
@@ -703,7 +717,7 @@
         </div>
         <!-- A dress -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/adress.jpg" alt="A dress" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/dress.jpg" alt="A dress" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">A dress</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('A dress')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('A dress', this)">Practice</button>
@@ -783,7 +797,7 @@
         </div>
         <!-- A suitcase -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/asuitcase.jpg" alt="A suitcase" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/suitcase.jpg" alt="A suitcase" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">A suitcase</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('A suitcase')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('A suitcase', this)">Practice</button>
@@ -799,7 +813,7 @@
         </div>
         <!-- A t-shirt -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/atshirt.jpg" alt="A t-shirt" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/tshirt.jpg" alt="A t-shirt" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">A t-shirt</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('A t-shirt')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('A t-shirt', this)">Practice</button>
@@ -807,7 +821,7 @@
         </div>
         <!-- A tie -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/atie.jpg" alt="A tie" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/tie.jpg" alt="A tie" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">A tie</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('A tie')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('A tie', this)">Practice</button>
@@ -815,7 +829,7 @@
         </div>
         <!-- A wallet -->
         <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <img src="../images/awallet.jpg" alt="A wallet" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <img src="../images/wallet.jpg" alt="A wallet" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
             <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">A wallet</p>
             <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('A wallet')">Listen</button>
             <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('A wallet', this)">Practice</button>
@@ -981,37 +995,37 @@
 <h3>Conversation 1</h3>
   <div class="conv-container">
     <div class="conv-dialogues">
-      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> Hey Sally, look at these photos I took on the weekend! 
+      <p><img src="../images/avataramanda.jpg" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> Hey Sally, look at these photos I took on the weekend! 
         <button class="btn-listen" onclick="speakCharacter('Hey Sally, look at these photos I took on the weekend!', 'Amanda')">🔊 Listen</button>
       </p>
-      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Oh, who is that? 
+      <p><img src="../images/avatarsally.jpg" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Oh, who is that? 
         <button class="btn-listen" onclick="speakCharacter('Oh, who is that?', 'Sally')">🔊 Listen</button>
       </p>
-      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> That’s my sister, her name is Sandy. 
+      <p><img src="../images/avataramanda.jpg" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> That’s my sister, her name is Sandy. 
         <button class="btn-listen" onclick="speakCharacter('That’s my sister, her name is Sandy.', 'Amanda')">🔊 Listen</button>
       </p>
-      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> And who are they? 
+      <p><img src="../images/avatarsally.jpg" alt="Sally" class="avatar-icon"><strong>Sally:</strong> And who are they? 
         <button class="btn-listen" onclick="speakCharacter('And who are they?', 'Sally')">🔊 Listen</button>
       </p>
-      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> They are my grandparents, their names are Joseph and Lia. 
+      <p><img src="../images/avataramanda.jpg" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> They are my grandparents, their names are Joseph and Lia. 
         <button class="btn-listen" onclick="speakCharacter('They are my grandparents, their names are Joseph and Lia.', 'Amanda')">🔊 Listen</button>
       </p>
-      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> How old are they? 
+      <p><img src="../images/avatarsally.jpg" alt="Sally" class="avatar-icon"><strong>Sally:</strong> How old are they? 
         <button class="btn-listen" onclick="speakCharacter('How old are they?', 'Sally')">🔊 Listen</button>
       </p>
-      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> They are 75 and 77 years old. 
+      <p><img src="../images/avataramanda.jpg" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> They are 75 and 77 years old. 
         <button class="btn-listen" onclick="speakCharacter('They are 75 and 77 years old.', 'Amanda')">🔊 Listen</button>
       </p>
-      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Is this your brother? 
+      <p><img src="../images/avatarsally.jpg" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Is this your brother? 
         <button class="btn-listen" onclick="speakCharacter('Is this your brother?', 'Sally')">🔊 Listen</button>
       </p>
-      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> No, he is not, he is my cousin. 
+      <p><img src="../images/avataramanda.jpg" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> No, he is not, he is my cousin. 
         <button class="btn-listen" onclick="speakCharacter('No, he is not, he is my cousin.', 'Amanda')">🔊 Listen</button>
       </p>
-      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Oh, and what is his occupation? 
+      <p><img src="../images/avatarsally.jpg" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Oh, and what is his occupation? 
         <button class="btn-listen" onclick="speakCharacter('Oh, and what is his occupation?', 'Sally')">🔊 Listen</button>
       </p>
-      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> He is a doctor. 
+      <p><img src="../images/avataramanda.jpg" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> He is a doctor. 
         <button class="btn-listen" onclick="speakCharacter('He is a doctor.', 'Amanda')">🔊 Listen</button>
       </p>
     </div>
@@ -1632,6 +1646,7 @@
       } else {
         feedbackEl.className = 'feedback correct';
         feedbackEl.innerText = '¡Muy bien! Ahora léele tus respuestas a tu maestro.';
+        setTimeout(eutShowNext, 400);
       }
     }
 
@@ -1892,6 +1907,28 @@
       }
     }
   </script>
+<div id="eutNextOverlay" role="dialog" aria-modal="true" aria-labelledby="eutNextTitle" onclick="eutCloseNext()">
+  <div class="eut-next-box" onclick="event.stopPropagation()">
+    <img src="../images/plataforma-login.jpg" alt="Pantalla de inicio de sesión de la plataforma English User" onerror="this.style.display='none'">
+    <div class="eut-next-body">
+      <h3 id="eutNextTitle">¡Excelente trabajo! Sigue avanzando</h3>
+      <p>Reserva ahora tu cita para tu siguiente clase y continúa con tus actividades. Entra a tu plataforma con tu usuario y contraseña.</p>
+      <a id="eutNextCta" class="eut-next-cta" href="#" target="_blank" rel="noopener noreferrer">Reservar mi siguiente clase</a>
+      <button type="button" class="eut-next-later" onclick="eutCloseNext()">Ahora no</button>
+    </div>
+  </div>
+</div>
+<script>
+/* CONFIGURACIÓN: enlace de tu plataforma (único lugar para cambiarlo en esta página) */
+var EUT_PLATFORM_URL = 'https://englishuser.azurewebsites.net/Account/Login';
+function eutShowNext() {
+  var cta = document.getElementById('eutNextCta');
+  if (EUT_PLATFORM_URL) { cta.href = EUT_PLATFORM_URL; }
+  document.getElementById('eutNextOverlay').classList.add('open');
+}
+function eutCloseNext() { document.getElementById('eutNextOverlay').classList.remove('open'); }
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { eutCloseNext(); } });
+</script>
 <script src="marisol-menu.js" data-menu="basic"></script>
 </body>
 </html>
