@@ -1,18 +1,19 @@
-/* claves-config.js — generado por generador_claves.html (NUEVAS 2026). Súbelo a la RAÍZ del sitio, junto al index.html. */
+/* claves-config.js — REINICIO DE EMERGENCIA: todos los alumnos tendrán que escribir sus claves otra vez — REGENERAR TODO 2026 — generado por generador_claves.html. Súbelo a la RAÍZ del sitio, junto al index.html. */
 window.EUT_KEYS = {
-  "month": "NUEVAS 2026",
+  "month": "REGENERAR TODO 2026",
+  "reset": 1792913872584,
   "pairs": {
-    "2": "2367af7142c659e926d29067f9a56c3d3db073fc6e34cab66d46262ce5b185a4",
-    "3": "a0376c600dd6597883b3bbfbe61997ab12b7bca7402cf0fc87941a9ca2bd4fb4",
-    "4": "d896b75c53d9cc12202bfd55912e1a2941c40d3920a1e39399a4221065d498a0",
-    "5": "485bee8656c5c67ecce74c3c8f2bdd9c89dd19851350e0c9b507c952f44ce762",
-    "6": "ed46b1bf0934ac57963eb13f9e986e96c7d3acb046f59990fa4b1f8c7c4faa5d",
-    "7": "e4f540754eddd4ade2cdb7aacde6b5a0bccd8383354d73ac88539df9978cd202",
-    "8": "d06f31b14f9c2ba5b8166ed4433552c248273ac8b60a9fe8195a390350cadb8b",
-    "9": "458843a0beabe5abee2473fed52dd5fb3c807ace5c875fc71fc2f6f2d142d778",
-    "10": "7278a36635b99fde1f47321351627028d2397072d5df660d0312a066d6e0f979",
-    "v1": "bb4f9944bc01a3baefffb6018e05ce86e786219f82fb81ec0c181fc5416c9fca",
-    "v2": "6b84ad6f455463d4a2a6c006921de5f4088febb35f34fd001764b4dffd203465"
+    "2": "8dc5222c8e548b6f0c5944a36d4284da3a6be6d163fd26eb26046ae859c185f0",
+    "3": "5728fb4813c4d1c4a8a6a4656e820edb0bef8ea8acd011c4e58a89682426557d",
+    "4": "19d3b8a41beb03e09f2adf6929bda6308af9221be423b08dafd00ecad359acca",
+    "5": "fc689dcf1098fe9aed536887cd0f649ba658886fc8d0351163ac58dc9e57fd47",
+    "6": "1c24e0f50ffdac052bfcea03bc2cbcdb0d9e62b25d85be1571e0467c9c6a059a",
+    "7": "02061c6480747f73125eeb24472457a3f3d4dd2d7d232bce73538593bc7b1163",
+    "8": "53d8948e1db34c133dd99394f88eaeab715d60a572dfe66e17404afde868830a",
+    "9": "605841dc21ae0e6616e1d3a46e4fc4b430ece0960775cfec5c5d37ba80ff05ef",
+    "10": "3f6b4a77f122d96c6e50bc5ce877c46a6f5f9d5f9158a575dbcac655c2375373",
+    "v1": "781ff45ff2fd333c6094ba0f128323cc3f4e15a5f823d3e00af83f1f28bb837e",
+    "v2": "9de53e84c6e83484c85fe6eb3478e5770b1a15e34a3ca86be1510b472465afba"
   },
-  "teacher": "3d568bc23264bffac749e106c285b1221451b74a66a788c17f7c897c3d231397"
+  "teacher": "2c549ccc5c71609e553d6efd960eac3283860821f4d892d3d47eb923ea1563a3"
 };
