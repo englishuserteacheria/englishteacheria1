@@ -331,7 +331,10 @@ html.eut-locked #eutGate { display: flex; visibility: visible !important; }
 </style>
 </head>
 <body>
+<script src="../claves-config.js"></script>
 <script>
+/* Reinicio de emergencia: si claves-config.js trae un número de reinicio nuevo, se borra lo desbloqueado en este dispositivo. */
+(function () { try { var r = Number(window.EUT_KEYS && window.EUT_KEYS.reset) || 0; if (r) { var s = Number(localStorage.getItem('eut_reset_seen')) || 0; if (r > s) { localStorage.removeItem('eut_unlocked_pairs'); localStorage.setItem('eut_reset_seen', String(r)); } } } catch (e) {} })();
 /* Candado de página (par 4) */
 (function () { try { var l = JSON.parse(localStorage.getItem('eut_unlocked_pairs')) || []; if (l.indexOf('4') === -1) { document.documentElement.classList.add('eut-locked'); } } catch (e) { document.documentElement.classList.add('eut-locked'); } })();
 </script>
