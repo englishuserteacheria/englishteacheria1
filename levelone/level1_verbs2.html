@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1 - Verbs 2: Irregular and Regular Verbs</title>
+  <!-- Importamos fuente moderna y limpia (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* BARRA DE NAVEGACIÓN FLOTANTE (ESTILO PROFESIONAL) */
+    .lesson-nav-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #cbd5e1;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin: -20px -20px 20px -20px;
+    }
+    .lesson-nav-bar a {
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 6px;
+        transition: background 0.2s, transform 0.1s;
+    }
+    .btn-nav-menu {
+        background: #f1f5f9;
+        color: #123c69;
+        border: 1px solid #cbd5e1;
+    }
+    .btn-nav-menu:hover {
+        background: #e2e8f0;
+    }
+    .btn-nav-action {
+        background: #123c69;
+        color: white;
+    }
+    .btn-nav-action:hover {
+        background: #0d2b4a;
+    }
+    .lesson-nav-title {
+        font-size: 15px;
+        color: #475569;
+        font-weight: 600;
+    }
+    @media (max-width: 600px) {
+        .lesson-nav-bar { padding: 8px 10px; }
+        .lesson-nav-bar a { font-size: 12px; padding: 6px 10px; }
+        .lesson-nav-title { display: none; }
+    }
+
+    body { 
+      font-family: 'Inter', Arial, sans-serif; 
+      margin: 20px; 
+      line-height: 1.6; 
+      color: #334155;
+      background-color: #f8fafc;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b;
+    }
+
+    button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 6px; font-family: 'Inter', Arial, sans-serif; }
+    .btn-listen { background-color: #10b981; color: white; }
+    .btn-action { background-color: #0ea5e9; color: white; padding: 10px 20px; margin-top: 10px; font-weight: 600; }
+    .btn-speak { background-color: #f59e0b; color: white; padding: 8px 16px; font-weight: 600; }
+    .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+    .correct { color: #10b981; }
+    .incorrect { color: #ef4444; }
+
+    /* CONTENEDOR RESPONSIVE PARA EL VIDEO DE YOUTUBE */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      margin: 25px auto;
+      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      background: #000;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ESTILOS PARA LA FOTO PRINCIPAL REDUCIDA */
+    .main-photo {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      object-fit: cover;
+    }
+
+    /* ESTILOS PARA AVATARES Y FOTO DE CONTEXTO */
+    .avatar-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      vertical-align: middle;
+      margin-right: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .conv-context-img {
+      max-width: 220px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: block;
+      margin: 10px 0 15px 0;
+    }
+
+    .conv-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      background: #ffffff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .conv-dialogues {
+      flex: 1;
+    }
+
+    .conv-media-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+    .vocab-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
+    .vocab-img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background-color: #f9f9f9; }
+    .vocab-word { font-size: 18px; font-weight: bold; color: #333; margin: 10px 0; }
+
+    /* ESTILOS DEL ASISTENTE FLOTANTE (TEACHER MARISOL) */
+    #teacher-marisol-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    #marisol-floating-btn {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: 3px solid #10b981;
+      background: url('../images/marisol.jpg') center/cover no-repeat;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+    #marisol-floating-btn:hover {
+      transform: scale(1.08);
+    }
+    .marisol-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: #ef4444;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 500px;
+      border: 2px solid #fff;
+    }
+    #marisol-chat-box {
+      display: none;
+      position: fixed;
+      bottom: 95px;
+      right: 20px;
+      width: 340px;
+      max-height: 480px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border: 1px solid #cbd5e1;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .marisol-chat-header {
+      background: #123c69;
+      color: white;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .marisol-chat-header img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 8px;
+      border: 1px solid #fff;
+    }
+    .marisol-close-btn {
+      background: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+    .marisol-chat-body {
+      padding: 12px;
+      height: 300px;
+      overflow-y: auto;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .marisol-msg {
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 85%;
+      word-wrap: break-word;
+    }
+    .marisol-msg.teacher {
+      background: #e2e8f0;
+      color: #1e293b;
+      align-self: flex-start;
+      border-left: 3px solid #0ea5e9;
+    }
+    .marisol-msg.student {
+      background: #123c69;
+      color: white;
+      align-self: flex-end;
+    }
+    .marisol-chat-footer {
+      padding: 10px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .marisol-chat-footer input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .marisol-chat-footer button {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0;
+    }
+    .marisol-voice-btn {
+      background: #f59e0b !important;
+      padding: 8px 10px !important;
+    }
+  </style>
+<style>
+/* ===== VENTANA FINAL: CLAVE DEL MAESTRO + SIGUIENTE CLASE / PLATAFORMA ===== */
+#eutNextOverlay, #eutTeacherOverlay { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 10001; background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 16px; }
+#eutNextOverlay.open, #eutTeacherOverlay.open { display: flex; }
+.eut-next-box { background: #ffffff; border-radius: 12px; max-width: 560px; width: 100%; max-height: 92vh; overflow-y: auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.eut-next-box img { display: block; width: 100%; height: auto; background: #f1f5f9; }
+.eut-next-body { padding: 20px 22px 24px; }
+.eut-next-body h3 { margin: 0 0 8px; font-size: 22px; color: #123c69; }
+.eut-next-body p { margin: 0 0 16px; font-size: 15px; line-height: 1.5; color: #374151; }
+.eut-next-cta { display: inline-block; background: #123c69; color: #ffffff; text-decoration: none; border-radius: 6px; padding: 12px 22px; font-size: 16px; font-weight: 700; }
+.eut-next-cta:hover { background: #0d2d50; }
+.eut-next-later { display: block; margin: 12px auto 0; background: none; border: none; color: #123c69; font-size: 14px; text-decoration: underline; cursor: pointer; }
+.eut-next-cta:focus-visible, .eut-next-later:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+.eut-teacher-box { background: #ffffff; border-radius: 12px; max-width: 400px; width: 100%; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.eut-teacher-box h3 { margin: 0 0 8px; font-size: 20px; color: #123c69; }
+.eut-teacher-box p { margin: 0 0 14px; font-size: 15px; color: #374151; line-height: 1.5; }
+.eut-teacher-box input { width: 100%; padding: 12px; font-size: 18px; text-align: center; text-transform: uppercase; border: 2px solid #A7F3D0; border-radius: 8px; box-sizing: border-box; }
+.eut-teacher-error { color: #b91c1c; font-size: 14px; min-height: 20px; margin: 8px 0; }
+.eut-teacher-actions { display: flex; gap: 10px; justify-content: center; }
+.eut-teacher-actions button { padding: 10px 18px; font-size: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+.eut-teacher-ok { background: #10B981; color: #ffffff; }
+.eut-teacher-cancel { background: #e5e7eb; color: #123c69; }
+.eut-next-badge { display: inline-block; margin: 0 0 12px; padding: 5px 14px; background: #A7F3D0; color: #123c69; border-radius: 999px; font-size: 14px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="lesson-nav-bar">
+    <a href="level1_reading10.html" class="btn-nav-action">← Prev</a>
+    <a href="../index.html" class="btn-nav-menu">🏠 Main Menu</a>
+    <span class="lesson-nav-title">English User Teacher</span>
+    <a href="../index.html" class="btn-nav-action">Next →</a>
+</div>
+<img src="english-degradado.jpg" alt="School Logo" id="logo" style="max-height: 50px; float: left;">
+<h1 style="margin-top: 15px;">Verbs 2</h1>
+<p style="text-align: center;"><em>(Verbos 2: Irregulares y Regulares)</em></p>
+<div id="vocabulary-section">
+<h2 style="color:#1e293b;">Step 1: Study the Verbs (Paso 1: Estudia los verbos)</h2>
+<div style="margin-bottom:20px;color:#475569;background:#e2e8f0;padding:15px;border-radius:8px;border-left:5px solid #0ea5e9;">
+<p style="margin:0 0 8px;font-size:15px;"><strong>Instructions:</strong> Look at the picture and imagine yourself doing the action (or do it with your hand). Listen, then repeat the three forms out loud.</p>
+<p style="margin:0;font-size:15px;"><strong>Instrucciones:</strong> Mira la imagen e imagina que tú haces la acción (o hazla con la mano). Escucha y repite en voz alta las tres formas.</p>
+</div>
+<h3 style="color:#334155;margin-top:30px;border-bottom:2px solid #cbd5e1;padding-bottom:5px;">Block 1: Irregular Verbs (Bloque 1)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:15px;padding:15px;background:#fff;border-radius:8px;border:1px solid #e2e8f0;margin-bottom:25px;">
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/bring.jpg" alt="bring" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to bring</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">traer</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">bring</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('bring')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('bring', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">brought</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('brought')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('brought', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">brought</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('brought')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('brought', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/catch.jpg" alt="catch" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to catch</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">atrapar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">catch</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('catch')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('catch', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">caught</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('caught')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('caught', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">caught</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('caught')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('caught', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/dream.jpg" alt="dream" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to dream</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">soñar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">dream</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('dream')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('dream', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">dreamt</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('dreamt')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('dreamt', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">dreamt</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('dreamt')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('dreamt', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/hurt.jpg" alt="hurt" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to hurt</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">doler/lastimar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">hurt</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hurt')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hurt', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">hurt</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hurt')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hurt', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">hurt</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hurt')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hurt', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/put.jpg" alt="put" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to put</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">poner/colocar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">put</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('put')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('put', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">put</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('put')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('put', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">put</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('put')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('put', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/think.jpg" alt="think" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to think</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">pensar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">think</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('think')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('think', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">thought</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('thought')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('thought', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">thought</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('thought')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('thought', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/tell.jpg" alt="tell" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to tell</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">decir/contar/platicar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">tell</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('tell')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('tell', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">told</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('told')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('told', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">told</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('told')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('told', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/say.jpg" alt="say" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to say</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">decir</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">say</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('say')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('say', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">said</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('said')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('said', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">said</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('said')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('said', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+</div>
+<h3 style="color:#334155;margin-top:30px;border-bottom:2px solid #cbd5e1;padding-bottom:5px;">Block 2: Irregular Verbs (Bloque 2)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:15px;padding:15px;background:#fff;border-radius:8px;border:1px solid #e2e8f0;margin-bottom:25px;">
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/begin.jpg" alt="begin" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to begin</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">comenzar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">begin</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('begin')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('begin', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">began</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('began')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('began', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">begun</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('begun')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('begun', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/become.jpg" alt="become" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to become</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">volverse/convertirse</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">become</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('become')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('become', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">became</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('became')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('became', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">become</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('become')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('become', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/choose.jpg" alt="choose" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to choose</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">elegir</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">choose</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('choose')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('choose', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">chose</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('chose')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('chose', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">chosen</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('chosen')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('chosen', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/cut.jpg" alt="cut" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to cut</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">cortar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">cut</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('cut')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('cut', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">cut</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('cut')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('cut', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">cut</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('cut')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('cut', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/feel.jpg" alt="feel" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to feel</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">sentir</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">feel</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('feel')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('feel', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">felt</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('felt')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('felt', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">felt</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('felt')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('felt', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/fly.jpg" alt="fly" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to fly</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">volar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">fly</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('fly')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('fly', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">flew</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('flew')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('flew', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">flown</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('flown')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('flown', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/forget.jpg" alt="forget" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to forget</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">olvidar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">forget</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('forget')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('forget', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">forgot</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('forgot')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('forgot', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">forgotten</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('forgotten')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('forgotten', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/hear.jpg" alt="hear" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to hear</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">oír</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">hear</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hear')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hear', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">heard</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('heard')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('heard', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">heard</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('heard')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('heard', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+</div>
+<h3 style="color:#334155;margin-top:30px;border-bottom:2px solid #cbd5e1;padding-bottom:5px;">Block 3: Irregular Verbs (Bloque 3)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:15px;padding:15px;background:#fff;border-radius:8px;border:1px solid #e2e8f0;margin-bottom:25px;">
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/hit.jpg" alt="hit" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to hit</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">golpear</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">hit</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hit')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hit', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">hit</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hit')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hit', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">hit</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hit')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hit', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/hold.jpg" alt="hold" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to hold</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">mantener/sostener</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">hold</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hold')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hold', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">held</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('held')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('held', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">held</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('held')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('held', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/keep.jpg" alt="keep" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to keep</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">mantener/guardar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">keep</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('keep')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('keep', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">kept</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('kept')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('kept', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">kept</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('kept')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('kept', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/meet.jpg" alt="meet" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to meet</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">reunirse/encontrarse con alguien</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">meet</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('meet')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('meet', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">met</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('met')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('met', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">met</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('met')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('met', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/leave.jpg" alt="leave" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to leave</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">dejar/salir</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">leave</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('leave')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('leave', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">left</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('left')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('left', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">left</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('left')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('left', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/know.jpg" alt="know" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to know</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">saber/conocer (información)</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">know</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('know')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('know', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">knew</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('knew')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('knew', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">known</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('known')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('known', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/lend.jpg" alt="lend" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to lend</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">prestar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">lend</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('lend')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('lend', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">lent</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('lent')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('lent', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">lent</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('lent')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('lent', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/pay.jpg" alt="pay" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to pay</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">pagar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">pay</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('pay')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('pay', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">paid</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('paid')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('paid', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">paid</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('paid')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('paid', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+</div>
+<h3 style="color:#334155;margin-top:30px;border-bottom:2px solid #cbd5e1;padding-bottom:5px;">Block 4: Regular Verbs (Bloque 4: verbos regulares, terminan en -ed o -d)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:15px;padding:15px;background:#fff;border-radius:8px;border:1px solid #e2e8f0;margin-bottom:25px;">
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/fix.jpg" alt="fix" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to fix</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">reparar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">fix</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('fix')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('fix', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">fixed</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('fixed')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('fixed', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">fixed</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('fixed')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('fixed', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/want.jpg" alt="want" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to want</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">querer</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">want</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('want')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('want', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">wanted</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('wanted')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('wanted', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">wanted</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('wanted')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('wanted', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/like.jpg" alt="like" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to like</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">gustar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">like</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('like')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('like', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">liked</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('liked')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('liked', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">liked</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('liked')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('liked', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/hate.jpg" alt="hate" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to hate</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">odiar/detestar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">hate</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hate')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hate', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">hated</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hated')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hated', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">hated</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('hated')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('hated', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/love.jpg" alt="love" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to love</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">amar/encantar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">love</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('love')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('love', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">loved</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('loved')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('loved', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">loved</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('loved')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('loved', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/use.jpg" alt="use" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to use</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">usar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">use</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('use')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('use', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">used</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('used')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('used', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">used</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('used')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('used', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/need.jpg" alt="need" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to need</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">necesitar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">need</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('need')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('need', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">needed</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('needed')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('needed', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">needed</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('needed')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('needed', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+<div style="border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05);">
+<img src="../images/call.jpg" alt="call" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#f9f9f9;">
+<p style="margin:8px 0 2px;font-weight:700;font-size:17px;color:#1e293b;text-align:center;">to call</p>
+<p style="margin:0 0 6px;font-size:13px;color:#64748b;text-align:center;">llamar</p>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Infinitive</span><strong style="flex:1;font-size:15px;">call</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('call')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('call', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Simple Past</span><strong style="flex:1;font-size:15px;">called</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('called')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('called', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+<div class="vocab-item" style="border-top:1px solid #e2e8f0;padding:6px 0;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><span style="font-size:11px;color:#64748b;width:78px;">Past Participle</span><strong style="flex:1;font-size:15px;">called</strong><button style="background:#10b981;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="speakWord('called')">Listen</button><button style="background:#0ea5e9;border:none;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="testPronunciation('called', this)">Practice</button></div><div class="feedback-msg" style="font-size:12px;font-weight:bold;min-height:14px;"></div></div>
+</div>
+</div>
+</div>
+<h2>Step 2: Remember the Verbs (Paso 2: Recuerda los verbos)</h2>
+<p><strong>How it works:</strong> Each block has 8 verbs. Choose a block. You will see a picture: write the three forms of that verb (infinitive, simple past, past participle) and press <strong>Check</strong>. The boxes you got right turn <strong style="color:#059669;">green ✓</strong> and lock. The boxes that need work turn <strong style="color:#dc2626;">red ✗</strong>: fix only those. Each box gives you 3 tries; after the third, you see the answer. If you get all three forms right without seeing an answer, the verb comes back later with fewer hints. A verb is mastered after <strong>3 correct rounds</strong> (the counter “Correct rounds” goes up with each one). When you master all 8 verbs, the block is completed. From Block 2 on, you first review the verbs of the previous block.</p><p><em><strong>Cómo funciona:</strong> Cada bloque tiene 8 verbos. Elige un bloque. Verás una imagen: escribe las tres formas de ese verbo (infinitivo, pasado simple, participio) y presiona <strong>Check</strong>. Las casillas correctas se ponen <strong style="color:#059669;">verdes ✓</strong> y se bloquean. Las que necesitan trabajo se ponen <strong style="color:#dc2626;">rojas ✗</strong>: corrige solo esas. Cada casilla te da 3 intentos; después del tercero, ves la respuesta. Si aciertas las tres formas sin ver ninguna respuesta, el verbo regresa más tarde con menos pistas. Un verbo queda dominado con <strong>3 rondas correctas</strong> (el contador “Rondas correctas” sube con cada una). Cuando dominas los 8 verbos, el bloque queda completado. Desde el Bloque 2, primero repasas los verbos del bloque anterior.</em></p>
+<div><button class="btn-action" id="blk0" style="margin:4px;" onclick="startRecall(0)">Block 1 (bring – say)</button><button class="btn-action" id="blk1" style="margin:4px;" onclick="startRecall(1)">Block 2 (begin – hear)</button><button class="btn-action" id="blk2" style="margin:4px;" onclick="startRecall(2)">Block 3 (hit – pay)</button><button class="btn-action" id="blk3" style="margin:4px;" onclick="startRecall(3)">Block 4 (fix – call)</button></div>
+<div id="recall-box" style="margin-top:15px;"></div>
+<h2>Step 3: Tell Your Teacher (Paso 3: Díselo a tu maestro)</h2>
+<p>Say the three forms of the verbs your teacher chooses. <em>(Di las tres formas de los verbos que tu maestro elija.)</em></p>
+<div style="text-align:center;margin:16px 0 24px;"><button type="button" onclick="eutShowNext()" style="background:#059669;color:#fff;border:none;border-radius:8px;padding:12px 26px;font-size:16px;font-weight:700;cursor:pointer;">Terminé, continuar <span style="font-weight:400;">(I finished, continue)</span></button></div>
+<style>
+#teacher-marisol-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+.marisol-avatar-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.marisol-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.marisol-label {
+  background-color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  pointer-events: none;
+}
+</style>
+
+<div id="teacher-marisol-widget">
+  <div onclick="toggleMarisolChat()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+    <div class="marisol-avatar-wrapper">
+      <img src="../images/marisolavatar.png" alt="Teacher Marisol" class="marisol-avatar">
+    </div>
+    <div class="marisol-label">Ask Marisol</div>
+  </div>
+  
+  <div id="marisol-chat-box" style="display: none;">
+    <div class="marisol-chat-header">
+      <div style="display: flex; align-items: center;">
+        <img src="../images/marisolavatar.png" alt="Teacher Marisol">
+        <span>Teacher Marisol</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <button onclick="stopMarisolVoice()" title="Parar voz" style="background: #ef4444; color: white; border: none; margin: 0; width: 26px; height: 26px; border-radius: 6px; padding: 0; font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;">⏹️</button>
+        <button onclick="toggleMarisolLanguage()" id="lang-toggle-btn" title="Cambiar Idioma" style="background: #8b5cf6; color: white; border: none; margin: 0; width: 26px; height: 26px; border-radius: 6px; padding: 0; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">🌐</button>
+        <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
+      </div>
+    </div>
+    <div class="marisol-chat-body" id="marisol-chat-messages">
+      <!-- Los mensajes se cargan dinámicamente -->
+    </div>
+    <div class="marisol-chat-footer" style="flex-wrap: wrap; gap: 4px;">
+      <input type="text" id="marisol-user-input" placeholder="Ask Marisol..." onkeypress="handleMarisolKey(event)">
+      <button class="marisol-voice-btn" onclick="startMarisolDictation()" title="Hablar por voz">🎙️</button>
+      <button onclick="sendMarisolMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+  <!-- SCRIPTS JAVASCRIPT -->
+  <script>
+    let activeRecognition = null;
+    let cachedVoices = [];
+    const characterVoiceMap = {};
+    const usedVoiceNames = new Set();
+
+
+    function loadVoices() {
+      if ('speechSynthesis' in window) {
+        cachedVoices = window.speechSynthesis.getVoices();
+      }
+    }
+
+
+    if ('speechSynthesis' in window) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+
+    function getVoiceForCharacter(characterName, langCode = 'en-US') {
+      if (cachedVoices.length === 0) {
+        cachedVoices = window.speechSynthesis.getVoices();
+      }
+
+
+      const matchingVoices = cachedVoices.filter(v => v.lang.startsWith(langCode.substring(0, 2)));
+      if (matchingVoices.length === 0) return cachedVoices[0] || null;
+
+
+      if (langCode.startsWith('es')) {
+        const latamVoice = matchingVoices.find(v => v.lang.includes('MX') || v.lang.includes('LA') || v.lang.includes('ES'));
+        return latamVoice || matchingVoices[0];
+      }
+
+
+      if (characterVoiceMap[characterName]) {
+        return characterVoiceMap[characterName];
+      }
+
+
+      const maleNames = ['Jeffrey', 'Alex', 'Henry', 'Angel', 'Joseph', 'Marco'];
+      const isMale = maleNames.includes(characterName);
+
+
+      const genderVoices = matchingVoices.filter(v => {
+        const name = v.name.toLowerCase();
+        if (isMale) {
+          return name.includes('male') || name.includes('david') || name.includes('george') || name.includes('daniel') || name.includes('alex') || name.includes('oliver');
+        } else {
+          return name.includes('female') || name.includes('zira') || name.includes('samantha') || name.includes('karen') || name.includes('victoria') || name.includes('moira');
+        }
+      });
+
+
+      const pool = genderVoices.length > 0 ? genderVoices : matchingVoices;
+
+
+      let selectedVoice = null;
+      for (let i = 0; i < pool.length; i++) {
+        let candidate = pool[(characterName.length * 3 + i) % pool.length];
+        if (!usedVoiceNames.has(candidate.name)) {
+          selectedVoice = candidate;
+          break;
+        }
+      }
+
+
+      if (!selectedVoice) {
+        selectedVoice = pool.find(v => !usedVoiceNames.has(v.name)) || pool[0];
+      }
+
+
+      usedVoiceNames.add(selectedVoice.name);
+      characterVoiceMap[characterName] = selectedVoice;
+      return characterVoiceMap[characterName];
+    }
+
+
+    function speakCharacter(text, characterName, langCode = 'en-US') {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = langCode;
+        utterance.rate = 0.9;
+
+
+        const assignedVoice = getVoiceForCharacter(characterName, langCode);
+        if (assignedVoice) {
+          utterance.voice = assignedVoice;
+        }
+
+
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+
+    function speakWord(word) {
+      speakCharacter(word, 'Teacher Marisol', 'en-US');
+    }
+
+
+    const successMessages = [
+      "¡Perfecto! ✨ Sigue con la siguiente palabra.",
+      "¡Muy bien! 🎉 Continúa practicando.",
+      "¡Excelente pronunciación! 👏 Vamos con la próxima.",
+      "¡Así se hace! ✅ Sigue adelante.",
+      "¡Genial! 🙌 Avanza a la siguiente."
+    ];
+    const finalAttemptMessages = [
+      "No te preocupes, sigue practicando 🙂 Puedes continuar con la siguiente palabra.",
+      "Está bien, cada práctica cuenta 🌱 Continúa con la siguiente palabra.",
+      "Tranquilo, lo lograrás con más práctica 👍 Sigue con la siguiente palabra."
+    ];
+    const tryAgainMessages = [
+      "Casi, inténtalo una vez más 💪",
+      "Vas bien, sigue practicando 🙂",
+      "No pasa nada, inténtalo de nuevo o pasa a la siguiente palabra",
+      "Sigue intentando, cada práctica ayuda 🌱",
+      "Un poco más de práctica y lo tendrás 👍"
+    ];
+    function pickEncouragement(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function testPronunciation(targetWord, btnElement) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Tu navegador no soporta reconocimiento de voz. Usa Google Chrome o Microsoft Edge.");
+        return;
+      }
+      const card = btnElement.closest('.vocab-item');
+      const feedback = card.querySelector('.feedback-msg');
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      if (activeRecognition) {
+        try { activeRecognition.abort(); } catch (e) {}
+      }
+
+      const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+      const homophones = { to: 'two', too: 'two', for: 'four', fore: 'four', won: 'one', ate: 'eight', eye: 'i', aye: 'i', hee: 'he', wee: 'we' };
+      const targetClean = targetWord.trim().toLowerCase();
+
+      const normalize = (t) => {
+        let clean = t.trim().toLowerCase().replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ');
+        if (/^\d+$/.test(clean) && numberWords[parseInt(clean, 10)]) {
+          clean = numberWords[parseInt(clean, 10)];
+        }
+        if (homophones[clean] === targetClean) {
+          clean = targetClean;
+        }
+        return clean;
+      };
+      const isHit = (alt) => alt === targetClean || alt.split(' ').indexOf(targetClean) !== -1;
+
+      const maxAttempts = 3;
+      let attempts = parseInt(card.dataset.attempts || "0", 10);
+
+      // 4th click: no more listening, give the instruction and disable the button
+      if (attempts >= maxAttempts) {
+        feedback.style.color = "#f59e0b";
+        feedback.textContent = pickEncouragement(finalAttemptMessages);
+        btnElement.disabled = true;
+        return;
+      }
+      attempts++;
+      card.dataset.attempts = String(attempts);
+
+      const startListening = () => {
+        const recognition = new SpeechRecognition();
+        activeRecognition = recognition;
+        recognition.lang = 'en-US';
+        recognition.continuous = false;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 5;
+
+        let gotResult = false;
+        let matched = false;
+        let handledError = false;
+        let safetyTimer = null;
+
+        feedback.style.color = "#555";
+        feedback.textContent = "Listening...";
+
+        recognition.onresult = (event) => {
+          if (matched) return;
+          gotResult = true;
+          const last = event.results[event.results.length - 1];
+          const alternatives = [];
+          for (let j = 0; j < last.length; j++) {
+            alternatives.push(normalize(last[j].transcript));
+          }
+          if (alternatives.some(isHit)) {
+            matched = true;
+            clearTimeout(safetyTimer);
+            feedback.style.color = "#10b981";
+            feedback.textContent = pickEncouragement(successMessages);
+            card.dataset.attempts = "0";
+            btnElement.disabled = false;
+            try { recognition.stop(); } catch (e) {}
+          } else if (last.isFinal) {
+            clearTimeout(safetyTimer);
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          }
+        };
+
+        recognition.onerror = (event) => {
+          if (event.error === 'no-speech') {
+            return;
+          }
+          handledError = true;
+          clearTimeout(safetyTimer);
+          if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+            feedback.textContent = "";
+            alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
+          } else if (event.error === 'audio-capture') {
+            feedback.textContent = "";
+            alert('No se encontró un micrófono conectado.');
+          } else if (event.error === 'aborted') {
+            feedback.textContent = "";
+          } else {
+            feedback.style.color = "#ef4444";
+            feedback.textContent = "Error: " + event.error;
+          }
+        };
+
+        recognition.onend = () => {
+          clearTimeout(safetyTimer);
+          if (activeRecognition === recognition) {
+            activeRecognition = null;
+          }
+          if (!gotResult && !handledError) {
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          } else if (gotResult && !matched && feedback.textContent === "Listening...") {
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          }
+        };
+
+        try {
+          recognition.start();
+          safetyTimer = setTimeout(() => { try { recognition.stop(); } catch (e) {} }, 6000);
+        } catch (e) {
+          feedback.textContent = "";
+          alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
+        }
+      };
+
+      startListening();
+    }
+
+
+
+    const VERB_DATA = [{"k":"bring","es":"traer","b":0,"f":[{"d":"bring","s":"bring","ok":["bring"],"p":"bring"},{"d":"brought","s":"brought","ok":["brought"],"p":"brought"},{"d":"brought","s":"brought","ok":["brought"],"p":"brought"}]},{"k":"catch","es":"atrapar","b":0,"f":[{"d":"catch","s":"catch","ok":["catch"],"p":"catch"},{"d":"caught","s":"caught","ok":["caught"],"p":"caught"},{"d":"caught","s":"caught","ok":["caught"],"p":"caught"}]},{"k":"dream","es":"soñar","b":0,"f":[{"d":"dream","s":"dream","ok":["dream"],"p":"dream"},{"d":"dreamt","s":"dreamt","ok":["dreamt","dreamed"],"p":"dreamt"},{"d":"dreamt","s":"dreamt","ok":["dreamt","dreamed"],"p":"dreamt"}]},{"k":"hurt","es":"doler/lastimar","b":0,"f":[{"d":"hurt","s":"hurt","ok":["hurt"],"p":"hurt"},{"d":"hurt","s":"hurt","ok":["hurt"],"p":"hurt"},{"d":"hurt","s":"hurt","ok":["hurt"],"p":"hurt"}]},{"k":"put","es":"poner/colocar","b":0,"f":[{"d":"put","s":"put","ok":["put"],"p":"put"},{"d":"put","s":"put","ok":["put"],"p":"put"},{"d":"put","s":"put","ok":["put"],"p":"put"}]},{"k":"think","es":"pensar","b":0,"f":[{"d":"think","s":"think","ok":["think"],"p":"think"},{"d":"thought","s":"thought","ok":["thought"],"p":"thought"},{"d":"thought","s":"thought","ok":["thought"],"p":"thought"}]},{"k":"tell","es":"decir/contar/platicar","b":0,"f":[{"d":"tell","s":"tell","ok":["tell"],"p":"tell"},{"d":"told","s":"told","ok":["told"],"p":"told"},{"d":"told","s":"told","ok":["told"],"p":"told"}]},{"k":"say","es":"decir","b":0,"f":[{"d":"say","s":"say","ok":["say"],"p":"say"},{"d":"said","s":"said","ok":["said"],"p":"said"},{"d":"said","s":"said","ok":["said"],"p":"said"}]},{"k":"begin","es":"comenzar","b":1,"f":[{"d":"begin","s":"begin","ok":["begin"],"p":"begin"},{"d":"began","s":"began","ok":["began"],"p":"began"},{"d":"begun","s":"begun","ok":["begun"],"p":"begun"}]},{"k":"become","es":"volverse/convertirse","b":1,"f":[{"d":"become","s":"become","ok":["become"],"p":"become"},{"d":"became","s":"became","ok":["became"],"p":"became"},{"d":"become","s":"become","ok":["become"],"p":"become"}]},{"k":"choose","es":"elegir","b":1,"f":[{"d":"choose","s":"choose","ok":["choose"],"p":"choose"},{"d":"chose","s":"chose","ok":["chose"],"p":"chose"},{"d":"chosen","s":"chosen","ok":["chosen"],"p":"chosen"}]},{"k":"cut","es":"cortar","b":1,"f":[{"d":"cut","s":"cut","ok":["cut"],"p":"cut"},{"d":"cut","s":"cut","ok":["cut"],"p":"cut"},{"d":"cut","s":"cut","ok":["cut"],"p":"cut"}]},{"k":"feel","es":"sentir","b":1,"f":[{"d":"feel","s":"feel","ok":["feel"],"p":"feel"},{"d":"felt","s":"felt","ok":["felt"],"p":"felt"},{"d":"felt","s":"felt","ok":["felt"],"p":"felt"}]},{"k":"fly","es":"volar","b":1,"f":[{"d":"fly","s":"fly","ok":["fly"],"p":"fly"},{"d":"flew","s":"flew","ok":["flew"],"p":"flew"},{"d":"flown","s":"flown","ok":["flown"],"p":"flown"}]},{"k":"forget","es":"olvidar","b":1,"f":[{"d":"forget","s":"forget","ok":["forget"],"p":"forget"},{"d":"forgot","s":"forgot","ok":["forgot"],"p":"forgot"},{"d":"forgotten","s":"forgotten","ok":["forgotten"],"p":"forgotten"}]},{"k":"hear","es":"oír","b":1,"f":[{"d":"hear","s":"hear","ok":["hear"],"p":"hear"},{"d":"heard","s":"heard","ok":["heard"],"p":"heard"},{"d":"heard","s":"heard","ok":["heard"],"p":"heard"}]},{"k":"hit","es":"golpear","b":2,"f":[{"d":"hit","s":"hit","ok":["hit"],"p":"hit"},{"d":"hit","s":"hit","ok":["hit"],"p":"hit"},{"d":"hit","s":"hit","ok":["hit"],"p":"hit"}]},{"k":"hold","es":"mantener/sostener","b":2,"f":[{"d":"hold","s":"hold","ok":["hold"],"p":"hold"},{"d":"held","s":"held","ok":["held"],"p":"held"},{"d":"held","s":"held","ok":["held"],"p":"held"}]},{"k":"keep","es":"mantener/guardar","b":2,"f":[{"d":"keep","s":"keep","ok":["keep"],"p":"keep"},{"d":"kept","s":"kept","ok":["kept"],"p":"kept"},{"d":"kept","s":"kept","ok":["kept"],"p":"kept"}]},{"k":"meet","es":"reunirse/encontrarse con alguien","b":2,"f":[{"d":"meet","s":"meet","ok":["meet"],"p":"meet"},{"d":"met","s":"met","ok":["met"],"p":"met"},{"d":"met","s":"met","ok":["met"],"p":"met"}]},{"k":"leave","es":"dejar/salir","b":2,"f":[{"d":"leave","s":"leave","ok":["leave"],"p":"leave"},{"d":"left","s":"left","ok":["left"],"p":"left"},{"d":"left","s":"left","ok":["left"],"p":"left"}]},{"k":"know","es":"saber/conocer (información)","b":2,"f":[{"d":"know","s":"know","ok":["know"],"p":"know"},{"d":"knew","s":"knew","ok":["knew"],"p":"knew"},{"d":"known","s":"known","ok":["known"],"p":"known"}]},{"k":"lend","es":"prestar","b":2,"f":[{"d":"lend","s":"lend","ok":["lend"],"p":"lend"},{"d":"lent","s":"lent","ok":["lent"],"p":"lent"},{"d":"lent","s":"lent","ok":["lent"],"p":"lent"}]},{"k":"pay","es":"pagar","b":2,"f":[{"d":"pay","s":"pay","ok":["pay"],"p":"pay"},{"d":"paid","s":"paid","ok":["paid"],"p":"paid"},{"d":"paid","s":"paid","ok":["paid"],"p":"paid"}]},{"k":"fix","es":"reparar","b":3,"f":[{"d":"fix","s":"fix","ok":["fix"],"p":"fix"},{"d":"fixed","s":"fixed","ok":["fixed"],"p":"fixed"},{"d":"fixed","s":"fixed","ok":["fixed"],"p":"fixed"}]},{"k":"want","es":"querer","b":3,"f":[{"d":"want","s":"want","ok":["want"],"p":"want"},{"d":"wanted","s":"wanted","ok":["wanted"],"p":"wanted"},{"d":"wanted","s":"wanted","ok":["wanted"],"p":"wanted"}]},{"k":"like","es":"gustar","b":3,"f":[{"d":"like","s":"like","ok":["like"],"p":"like"},{"d":"liked","s":"liked","ok":["liked"],"p":"liked"},{"d":"liked","s":"liked","ok":["liked"],"p":"liked"}]},{"k":"hate","es":"odiar/detestar","b":3,"f":[{"d":"hate","s":"hate","ok":["hate"],"p":"hate"},{"d":"hated","s":"hated","ok":["hated"],"p":"hated"},{"d":"hated","s":"hated","ok":["hated"],"p":"hated"}]},{"k":"love","es":"amar/encantar","b":3,"f":[{"d":"love","s":"love","ok":["love"],"p":"love"},{"d":"loved","s":"loved","ok":["loved"],"p":"loved"},{"d":"loved","s":"loved","ok":["loved"],"p":"loved"}]},{"k":"use","es":"usar","b":3,"f":[{"d":"use","s":"use","ok":["use"],"p":"use"},{"d":"used","s":"used","ok":["used"],"p":"used"},{"d":"used","s":"used","ok":["used"],"p":"used"}]},{"k":"need","es":"necesitar","b":3,"f":[{"d":"need","s":"need","ok":["need"],"p":"need"},{"d":"needed","s":"needed","ok":["needed"],"p":"needed"},{"d":"needed","s":"needed","ok":["needed"],"p":"needed"}]},{"k":"call","es":"llamar","b":3,"f":[{"d":"call","s":"call","ok":["call"],"p":"call"},{"d":"called","s":"called","ok":["called"],"p":"called"},{"d":"called","s":"called","ok":["called"],"p":"called"}]}];
+    let rq = [], rTotal = 0, rDone = 0, rCur = null, curBlock = 0;
+    function norm(s) { return s.toLowerCase().trim().replace(/^to\s+/, '').replace(/\s+/g, ' '); }
+    const VP_KEY = 'eut_verbs2_progress';
+    const BLOCK_NAMES = ['bring – say', 'begin – hear', 'hit – pay', 'fix – call'];
+    function vpGet() { try { return JSON.parse(localStorage.getItem(VP_KEY)) || {}; } catch (e) { return {}; } }
+    function vpSet(o) { try { localStorage.setItem(VP_KEY, JSON.stringify(o)); } catch (e) {} }
+    function saveProgress(includeCur) {
+      const o = vpGet();
+      const list = (includeCur && rCur) ? [rCur].concat(rq) : rq;
+      o[curBlock] = { q: list.map(x => [x.v.k, x.c]), done: rDone, total: rTotal, fin: false };
+      vpSet(o); refreshBlockButtons();
+    }
+    function saveDone() {
+      const o = vpGet(); o[curBlock] = { q: [], done: rTotal, total: rTotal, fin: true };
+      vpSet(o); refreshBlockButtons();
+    }
+    function refreshBlockButtons() {
+      const o = vpGet();
+      [0, 1, 2, 3].forEach(b => {
+        const el = document.getElementById('blk' + b); if (!el) { return; }
+        const p = o[b];
+        el.textContent = 'Block ' + (b + 1) + ' (' + BLOCK_NAMES[b] + ')' + (p ? (p.fin ? ' ✓ Completed' : ' ▶ ' + p.done + '/' + p.total) : '');
+        el.style.backgroundColor = (p && p.fin) ? '#059669' : '';
+      });
+    }
+    function startRecall(b, fresh) {
+      curBlock = b;
+      const p = vpGet()[b];
+      if (p && !p.fin && !fresh && p.q.length) {
+        rq = p.q.map(a => ({ v: VERB_DATA.find(v => v.k === a[0]), c: a[1] }));
+        rTotal = p.total; rDone = p.done; showRecall(); return;
+      }
+      const cur = VERB_DATA.filter(v => v.b === b).map(v => ({ v: v, c: 0 }));
+      const prev = b > 0 ? VERB_DATA.filter(v => v.b === b - 1).map(v => ({ v: v, c: 2 })) : [];
+      rq = prev.concat(cur); rTotal = rq.length; rDone = 0; showRecall();
+    }
+    let rAtt = 0, rLocked = [false, false, false], rRevealed = false, rFinished = false;
+    const RC_OK = { border: '#10b981', bg: '#ecfdf5' }, RC_BAD = { border: '#ef4444', bg: '#fef2f2' };
+    function rcShowAnswer(i) { const v = rCur.v; return i === 0 ? v.k : v.f[i].d; }
+    function rcMark(i, state) {
+      const inp = document.getElementById('rc' + i), lb = document.getElementById('rl' + i);
+      const c = state === 'ok' ? RC_OK : RC_BAD;
+      inp.style.borderColor = c.border; inp.style.backgroundColor = c.bg; inp.style.borderWidth = '2px';
+      if (state === 'ok') { lb.innerHTML = labsOf(i) + ' <span style="color:#059669;font-weight:700;">✓</span>'; }
+      else if (state === 'bad') { lb.innerHTML = labsOf(i) + ' <span style="color:#dc2626;font-weight:700;">✗ Try again (Inténtalo de nuevo)</span>'; }
+      else { lb.innerHTML = labsOf(i) + ' <span style="color:#dc2626;font-weight:700;">✗ Answer (Respuesta)</span>'; }
+    }
+    function labsOf(i) { return ['Infinitive', 'Simple Past', 'Past Participle'][i]; }
+    function showRecall() {
+      const box = document.getElementById('recall-box');
+      if (rq.length === 0) {
+        saveDone();
+        const nb = curBlock < 3 ? '<button class="btn-action" onclick="startRecall(' + (curBlock + 1) + ')">Go to Block ' + (curBlock + 2) + ' → (Ir al Bloque ' + (curBlock + 2) + ')</button>' : '';
+        box.innerHTML = '<div style="border:2px solid #10b981;background:#ecfdf5;border-radius:8px;padding:16px;max-width:420px;">' +
+          '<p style="margin:0 0 4px;font-size:18px;font-weight:700;color:#065f46;">✓ Block ' + (curBlock + 1) + ' completed! (¡Bloque ' + (curBlock + 1) + ' completado!)</p>' +
+          '<p style="margin:0 0 6px;color:#065f46;">You mastered all the verbs in this block. <em>(Dominaste todos los verbos de este bloque.)</em></p>' +
+          '<p style="margin:0 0 8px;color:#374151;font-size:14px;">Next: say these verbs to your teacher in Step 3. <em>(Siguiente: di estos verbos a tu maestro en el Paso 3.)</em></p>' + nb + '</div>';
+        return;
+      }
+      rCur = rq.shift();
+      rAtt = 0; rLocked = [false, false, false]; rRevealed = false; rFinished = false;
+      saveProgress(true);
+      const v = rCur.v, lvl = Math.min(rCur.c, 2);
+      const ph = f => lvl === 0 ? f.d.charAt(0) + '…' : '…';
+      let h = '<div style="border:1px solid #cbd5e1;border-radius:8px;padding:12px;background:#fff;max-width:420px;">';
+      const rNeed = curBlock > 0 ? 32 : 24;
+      const rRemain = [rCur].concat(rq).reduce((a, x) => a + (3 - Math.min(x.c, 3)), 0);
+      const rGot = Math.max(0, rNeed - rRemain);
+      h += '<p style="margin:0 0 6px;font-size:13px;color:#64748b;">Correct rounds (Rondas correctas): <strong>' + rGot + ' of ' + rNeed + '</strong> · Verbs mastered (Verbos dominados): ' + rDone + ' of ' + rTotal + (rCur.c === 2 && v.b < curBlock ? ' · <strong>Review of the previous block (Repaso del bloque anterior)</strong>' : '') + ' · <a href="#" onclick="startRecall(curBlock, true); return false;">Start over (Empezar de nuevo)</a></p>';
+      h += '<img src="../images/' + v.k + '.jpg" alt="" style="width:100%;height:150px;object-fit:cover;border-radius:6px;background:#f9f9f9;">';
+      if (lvl < 2) { h += '<p style="text-align:center;margin:8px 0;color:#374151;font-size:17px;font-weight:600;">' + v.es + '</p>'; }
+      v.f.forEach((f, i) => { h += '<p id="rl' + i + '" style="margin:6px 0 2px;font-size:12px;">' + labsOf(i) + '</p><input type="text" id="rc' + i + '" class="input-field" placeholder="' + ph(f) + '" autocomplete="off" autocapitalize="off" onkeydown="if(event.key===\'Enter\'){checkRecall();}">'; });
+      h += '<div id="rc-fb" aria-live="polite" style="margin:10px 0;font-weight:bold;min-height:20px;"></div>';
+      h += '<button class="btn-action" id="rc-check" onclick="checkRecall()">Check</button> <button class="btn-action" id="rc-next" style="display:none;" onclick="showRecall()">Next →</button></div>';
+      box.innerHTML = h;
+      document.getElementById('rc0').focus();
+    }
+    function checkRecall() {
+      if (rFinished) { return; }
+      const v = rCur.v, fb = document.getElementById('rc-fb');
+      rAtt++;
+      v.f.forEach((f, i) => {
+        if (rLocked[i]) { return; }
+        const inp = document.getElementById('rc' + i);
+        if (f.ok.map(norm).indexOf(norm(inp.value)) !== -1) { rLocked[i] = true; inp.disabled = true; rcMark(i, 'ok'); }
+        else { rcMark(i, 'bad'); }
+      });
+      let pending = rLocked.map((l, i) => l ? -1 : i).filter(i => i >= 0);
+      if (pending.length && rAtt >= 3) {
+        pending.forEach(i => { const inp = document.getElementById('rc' + i); inp.value = rcShowAnswer(i); inp.disabled = true; rLocked[i] = true; rcMark(i, 'show'); });
+        rRevealed = true; pending = [];
+      }
+      if (pending.length) {
+        fb.style.color = '#b45309';
+        fb.innerHTML = 'Fix the red boxes. (Corrige las casillas rojas.) Try ' + rAtt + ' of 3 (Intento ' + rAtt + ' de 3)<br><span style="color:#374151;font-weight:600;">Verb being asked (Verbo que se pide): ' + v.es + '</span>';
+        document.getElementById('rc' + pending[0]).focus();
+        return;
+      }
+      rFinished = true;
+      if (!rRevealed) {
+        rCur.c++;
+        if (rCur.c >= 3) { rDone++; fb.style.color = '#059669'; fb.textContent = '✓ Mastered! (¡Dominado!)'; }
+        else { rq.push(rCur); fb.style.color = '#059669'; fb.textContent = '✓ Correct! It will come back with fewer hints. (¡Correcto! Regresará con menos pistas.)'; }
+      } else {
+        rq.push(rCur); fb.style.color = '#dc2626';
+        fb.textContent = 'You saw the answer, so this verb will come back. (Viste la respuesta, así que este verbo regresará.)';
+        speakWord(v.k + '. ' + v.f[1].s + '. ' + v.f[2].s);
+      }
+      document.getElementById('rc-check').style.display = 'none';
+      document.getElementById('rc-next').style.display = 'inline-block';
+      saveProgress(false);
+    }
+    refreshBlockButtons();
+
+    /* LÓGICA CONECTADA A LA API DE OPENAI (TEACHER MARISOL) */
+    let studentName = null;
+    let preferredLanguage = null; 
+    let marisolChatInitialized = false;
+
+
+ function stopMarisolVoice() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function cleanForSpeech(text) {
+      return String(text)
+        .replace(/\/[^\/\n]*[\u0250-\u02FF\u1D00-\u1DBF][^\/\n]*\//g, ' ')
+        .replace(/\[[^\]\n]*[\u0250-\u02FF\u1D00-\u1DBF][^\]\n]*\]/g, ' ')
+        .replace(/\([^)\n]*[\u0250-\u02FF\u1D00-\u1DBF][^)\n]*\)/g, ' ')
+        .replace(/[\u0250-\u02FF\u1D00-\u1DBF]/g, '')
+        .replace(/^\s*[-•]\s+/gm, '')
+        .replace(/\//g, ' ')
+        .replace(/[*#_`~>|\\^=<>{}\[\]"]/g, ' ')
+        .replace(/\s+([.,!?;:])/g, '$1')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function extractStudentName(raw) {
+      let t = raw.trim().replace(/[.,!?;:]+$/g, '');
+      t = t.replace(/^(hello|hi|hey|hola)[,!\s]+/i, '');
+      t = t.replace(/^(my name is|my name's|i am|i'm|im|it is|it's|this is|call me|me llamo|mi nombre es|mi nombre|yo soy|soy|me dicen|puedes llamarme|llámame|llamame)\s+/i, '');
+      t = t.split(/\s+(?:and|y|but|pero)\s+/i)[0];
+      t = t.split(/\s+/).slice(0, 3).join(' ');
+      t = t.replace(/(^|\s)(\S)/g, (m0, a, b) => a + b.toUpperCase());
+      return t || raw.trim();
+    }
+
+    let marisolMic = null;
+    let marisolHistory = [];
+
+    function toggleMarisolLanguage() {
+      if (preferredLanguage === 'es') {
+        preferredLanguage = 'en';
+        appendMarisolMessage("Language changed to US English.", 'teacher');
+        speakCharacter("Language changed to US English.", 'Teacher Marisol', 'en-US');
+      } else {
+        preferredLanguage = 'es';
+        appendMarisolMessage("Idioma cambiado a Español.", 'teacher');
+        speakCharacter("Idioma cambiado a Español.", 'Teacher Marisol', 'es-MX');
+      }
+    }
+
+    function toggleMarisolChat() {
+      const chatBox = document.getElementById('marisol-chat-box');
+      if (chatBox.style.display === 'flex') {
+        chatBox.style.display = 'none';
+        preferredLanguage = null;
+        stopMarisolVoice();
+      } else {
+        chatBox.style.display = 'flex';
+        if (!marisolChatInitialized) {
+          marisolChatInitialized = true;
+          startMarisolSession();
+        }
+      }
+    }
+    function appendMarisolMessage(text, sender) {
+      const chatBody = document.getElementById('marisol-chat-messages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `marisol-msg ${sender}`;
+      msgDiv.innerText = text;
+      chatBody.appendChild(msgDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+
+    function startMarisolSession() {
+      const welcomeText = "Hello! I am Teacher Marisol. What is your name?";
+      appendMarisolMessage(welcomeText, 'teacher');
+      speakCharacter(welcomeText, 'Teacher Marisol', 'en-US');
+      document.getElementById('marisol-user-input').addEventListener('input', stopMarisolVoice);
+    }
+
+
+    function startMarisolDictation() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('El reconocimiento de voz no está soportado en este navegador.');
+        return;
+      }
+
+      stopMarisolVoice();
+
+      if (marisolMic) {
+        marisolMic.finish();
+        return;
+      }
+      if (activeRecognition) {
+        try { activeRecognition.abort(); } catch (e) {}
+      }
+
+      const recognition = new SpeechRecognition();
+      activeRecognition = recognition;
+      recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      const input = document.getElementById('marisol-user-input');
+      const defaultPlaceholder = "Ask Marisol a question...";
+      let sent = false;
+      let finished = false;
+      let silenceTimer = null;
+      let startTimer = null;
+
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        clearTimeout(silenceTimer);
+        clearTimeout(startTimer);
+        try { recognition.stop(); } catch (e) {}
+      };
+      marisolMic = { finish: finish };
+
+      input.placeholder = preferredLanguage === 'en' ? "Listening..." : "Escuchando...";
+
+      recognition.onspeechstart = function() {
+        stopMarisolVoice();
+      };
+
+      recognition.onresult = function(event) {
+        clearTimeout(startTimer);
+        clearTimeout(silenceTimer);
+        let finalText = '';
+        let interimText = '';
+        for (let i = 0; i < event.results.length; i++) {
+          const piece = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalText += piece + ' ';
+          } else {
+            interimText += piece;
+          }
+        }
+        input.value = (finalText + interimText).trim();
+        silenceTimer = setTimeout(finish, 3000);
+      };
+
+      recognition.onerror = function(event) {
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
+        } else if (event.error === 'audio-capture') {
+          alert('No se encontró un micrófono conectado.');
+        }
+        finish();
+      };
+
+      recognition.onend = function() {
+        clearTimeout(silenceTimer);
+        clearTimeout(startTimer);
+        marisolMic = null;
+        if (activeRecognition === recognition) {
+          activeRecognition = null;
+        }
+        input.placeholder = defaultPlaceholder;
+        if (!sent && input.value.trim()) {
+          sent = true;
+          sendMarisolMessage();
+        }
+      };
+
+      try {
+        recognition.start();
+        startTimer = setTimeout(finish, 10000);
+      } catch (e) {
+        marisolMic = null;
+        input.placeholder = defaultPlaceholder;
+        alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
+      }
+    }
+
+
+    function handleMarisolKey(event) {
+      if (event.key === 'Enter') {
+        sendMarisolMessage();
+      }
+    }
+
+
+    async function sendMarisolMessage() {
+      const input = document.getElementById('marisol-user-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+
+      stopMarisolVoice();
+      appendMarisolMessage(text, 'student');
+      input.value = '';
+
+
+      // Capturar nombre del alumno en el primer turno si no existe
+      if (!studentName) {
+        studentName = extractStudentName(text);
+        const reply = `Nice to meet you, ${studentName}! Would you like our help in English or in Spanish? (¿Prefieres la ayuda en inglés o en español?)`;
+        appendMarisolMessage(reply, 'teacher');
+        speakCharacter(`Nice to meet you, ${studentName}! Would you like our help in English or in Spanish?`, 'Teacher Marisol', 'en-US');
+        return;
+      }
+
+
+      // Capturar idioma preferido en el segundo turno si no existe
+      if (!preferredLanguage) {
+        const lowerInput = text.toLowerCase();
+        if (lowerInput.includes('english') || lowerInput.includes('inglés') || lowerInput.includes('in english')) {
+          preferredLanguage = 'en';
+        } else {
+          preferredLanguage = 'es';
+        }
+        const reply = preferredLanguage === 'en'
+          ? `Awesome, ${studentName}! Let's practice in US English. Feel free to ask any question about vocabulary, grammar, or your lesson.`
+          : `Entendido, ${studentName}. Te guiaré en español. Pregúntame con total libertad cualquier duda relacionada con las lecciones.`;
+        appendMarisolMessage(reply, 'teacher');
+        speakCharacter(reply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
+        return;
+      }
+
+
+      // Enviar mensaje a la API de Vercel/OpenAI con todo el contexto guardado
+      try {
+        const response = await fetch('https://englishteacheria1.vercel.app/api/marisol', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: text,
+            studentName: studentName,
+            language: preferredLanguage,
+            history: marisolHistory.slice(-10)
+          })
+        });
+
+
+        const data = await response.json();
+        if (data.reply) {
+          const cleanReply = cleanForSpeech(data.reply);
+          marisolHistory.push({ role: 'user', content: text });
+          marisolHistory.push({ role: 'assistant', content: cleanReply });
+          if (marisolHistory.length > 12) { marisolHistory = marisolHistory.slice(-12); }
+          appendMarisolMessage(cleanReply, 'teacher');
+          speakCharacter(cleanReply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
+        } else {
+          const fallback = preferredLanguage === 'es' ? 'Lo siento, hubo un error procesando tu respuesta.' : 'Sorry, there was an error processing your request.';
+          appendMarisolMessage(fallback, 'teacher');
+        }
+      } catch (error) {
+        const errorMsg = preferredLanguage === 'es' ? 'Error de conexión con la asistente.' : 'Connection error with the assistant.';
+        appendMarisolMessage(errorMsg, 'teacher');
+      }
+    }
+  </script>
+<script src="../claves-config.js"></script>
+<div id="eutTeacherOverlay" class="eut-overlay-t" role="dialog" aria-modal="true" aria-labelledby="eutTeacherTitle" onclick="eutCloseTeacher()">
+  <div class="eut-teacher-box" onclick="event.stopPropagation()">
+    <h3 id="eutTeacherTitle">Confirmación del maestro</h3>
+    <p>Maestro: escribe tu clave para confirmar que el alumno completó su clase guiada.</p>
+    <input type="text" id="eutTeacherInput" placeholder="Clave del maestro" autocomplete="off" onkeydown="if(event.key==='Enter'){eutCheckTeacher();}">
+    <div class="eut-teacher-error" id="eutTeacherError"></div>
+    <div class="eut-teacher-actions">
+      <button type="button" class="eut-teacher-ok" onclick="eutCheckTeacher()">Confirmar</button>
+      <button type="button" class="eut-teacher-cancel" onclick="eutCloseTeacher()">Cancelar</button>
+    </div>
+  </div>
+</div>
+<div id="eutNextOverlay" role="dialog" aria-modal="true" aria-labelledby="eutNextTitle" onclick="eutCloseNext()">
+  <div class="eut-next-box" onclick="event.stopPropagation()">
+    <img src="../images/plataforma-login.jpg" alt="Pantalla de inicio de sesión de la plataforma English User" onerror="this.style.display='none'">
+    <div class="eut-next-body">
+      <p class="eut-next-badge">✓ Tu maestro confirmó tu clase guiada</p>
+      <h3 id="eutNextTitle">¡Excelente trabajo! Sigue avanzando</h3>
+      <p>Reserva ahora tu cita para tu siguiente clase y continúa con tus actividades. Entra a tu plataforma con tu usuario y contraseña.</p>
+      <a id="eutNextCta" class="eut-next-cta" href="#" target="_blank" rel="noopener noreferrer">Reservar mi siguiente clase</a>
+      <button type="button" class="eut-next-later" onclick="eutCloseNext()">Ahora no</button>
+    </div>
+  </div>
+</div>
+<script>
+/* CONFIGURACIÓN: enlace de tu plataforma (único lugar para cambiarlo en esta página) */
+var EUT_PLATFORM_URL = 'https://englishuser.azurewebsites.net/Account/Login';
+/* La clave del maestro se lee de ../claves-config.js (se cambia con generador_claves.html). */
+function eutShowNext() {
+  document.getElementById('eutTeacherInput').value = '';
+  document.getElementById('eutTeacherError').textContent = '';
+  document.getElementById('eutTeacherOverlay').classList.add('open');
+  setTimeout(function () { document.getElementById('eutTeacherInput').focus(); }, 50);
+}
+function eutCloseTeacher() { document.getElementById('eutTeacherOverlay').classList.remove('open'); }
+async function eutSha(text) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+}
+async function eutCheckTeacher() {
+  var typed = document.getElementById('eutTeacherInput').value.trim().toUpperCase();
+  var err = document.getElementById('eutTeacherError');
+  var expected = window.EUT_KEYS && window.EUT_KEYS.teacher;
+  if (!expected) { err.textContent = 'No se pudo verificar la clave. Recarga la página.'; return; }
+  var hash = await eutSha('eut|teacher|' + typed);
+  if (typed && hash === expected) { eutCloseTeacher(); eutOpenWindow(); }
+  else { err.textContent = 'Clave incorrecta.'; }
+}
+function eutOpenWindow() {
+  var cta = document.getElementById('eutNextCta');
+  if (EUT_PLATFORM_URL) { cta.href = EUT_PLATFORM_URL; }
+  document.getElementById('eutNextOverlay').classList.add('open');
+}
+function eutCloseNext() { document.getElementById('eutNextOverlay').classList.remove('open'); }
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { eutCloseNext(); eutCloseTeacher(); } });
+</script>
+<script src="marisol-menu.js" data-menu="full"></script>
+</body>
+</html>

@@ -294,9 +294,9 @@
     }
   </style>
 <style>
-/* ===== VENTANA FINAL: SIGUIENTE CLASE / PLATAFORMA (NEXT CLASS) ===== */
-#eutNextOverlay { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 10001; background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 16px; }
-#eutNextOverlay.open { display: flex; }
+/* ===== VENTANA FINAL: CLAVE DEL MAESTRO + SIGUIENTE CLASE / PLATAFORMA ===== */
+#eutNextOverlay, #eutTeacherOverlay { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 10001; background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 16px; }
+#eutNextOverlay.open, #eutTeacherOverlay.open { display: flex; }
 .eut-next-box { background: #ffffff; border-radius: 12px; max-width: 560px; width: 100%; max-height: 92vh; overflow-y: auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 .eut-next-box img { display: block; width: 100%; height: auto; background: #f1f5f9; }
 .eut-next-body { padding: 20px 22px 24px; }
@@ -306,6 +306,16 @@
 .eut-next-cta:hover { background: #0d2d50; }
 .eut-next-later { display: block; margin: 12px auto 0; background: none; border: none; color: #123c69; font-size: 14px; text-decoration: underline; cursor: pointer; }
 .eut-next-cta:focus-visible, .eut-next-later:focus-visible { outline: 3px solid #10B981; outline-offset: 2px; }
+.eut-teacher-box { background: #ffffff; border-radius: 12px; max-width: 400px; width: 100%; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.eut-teacher-box h3 { margin: 0 0 8px; font-size: 20px; color: #123c69; }
+.eut-teacher-box p { margin: 0 0 14px; font-size: 15px; color: #374151; line-height: 1.5; }
+.eut-teacher-box input { width: 100%; padding: 12px; font-size: 18px; text-align: center; text-transform: uppercase; border: 2px solid #A7F3D0; border-radius: 8px; box-sizing: border-box; }
+.eut-teacher-error { color: #b91c1c; font-size: 14px; min-height: 20px; margin: 8px 0; }
+.eut-teacher-actions { display: flex; gap: 10px; justify-content: center; }
+.eut-teacher-actions button { padding: 10px 18px; font-size: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+.eut-teacher-ok { background: #10B981; color: #ffffff; }
+.eut-teacher-cancel { background: #e5e7eb; color: #123c69; }
+.eut-next-badge { display: inline-block; margin: 0 0 12px; padding: 5px 14px; background: #A7F3D0; color: #123c69; border-radius: 999px; font-size: 14px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -1623,10 +1633,24 @@
       }
     }
   </script>
+<script src="../claves-config.js"></script>
+<div id="eutTeacherOverlay" class="eut-overlay-t" role="dialog" aria-modal="true" aria-labelledby="eutTeacherTitle" onclick="eutCloseTeacher()">
+  <div class="eut-teacher-box" onclick="event.stopPropagation()">
+    <h3 id="eutTeacherTitle">Confirmación del maestro</h3>
+    <p>Maestro: escribe tu clave para confirmar que el alumno completó su clase guiada.</p>
+    <input type="text" id="eutTeacherInput" placeholder="Clave del maestro" autocomplete="off" onkeydown="if(event.key==='Enter'){eutCheckTeacher();}">
+    <div class="eut-teacher-error" id="eutTeacherError"></div>
+    <div class="eut-teacher-actions">
+      <button type="button" class="eut-teacher-ok" onclick="eutCheckTeacher()">Confirmar</button>
+      <button type="button" class="eut-teacher-cancel" onclick="eutCloseTeacher()">Cancelar</button>
+    </div>
+  </div>
+</div>
 <div id="eutNextOverlay" role="dialog" aria-modal="true" aria-labelledby="eutNextTitle" onclick="eutCloseNext()">
   <div class="eut-next-box" onclick="event.stopPropagation()">
     <img src="../images/plataforma-login.jpg" alt="Pantalla de inicio de sesión de la plataforma English User" onerror="this.style.display='none'">
     <div class="eut-next-body">
+      <p class="eut-next-badge">✓ Tu maestro confirmó tu clase guiada</p>
       <h3 id="eutNextTitle">¡Excelente trabajo! Sigue avanzando</h3>
       <p>Reserva ahora tu cita para tu siguiente clase y continúa con tus actividades. Entra a tu plataforma con tu usuario y contraseña.</p>
       <a id="eutNextCta" class="eut-next-cta" href="#" target="_blank" rel="noopener noreferrer">Reservar mi siguiente clase</a>
@@ -1637,13 +1661,34 @@
 <script>
 /* CONFIGURACIÓN: enlace de tu plataforma (único lugar para cambiarlo en esta página) */
 var EUT_PLATFORM_URL = 'https://englishuser.azurewebsites.net/Account/Login';
+/* La clave del maestro se lee de ../claves-config.js (se cambia con generador_claves.html). */
 function eutShowNext() {
+  document.getElementById('eutTeacherInput').value = '';
+  document.getElementById('eutTeacherError').textContent = '';
+  document.getElementById('eutTeacherOverlay').classList.add('open');
+  setTimeout(function () { document.getElementById('eutTeacherInput').focus(); }, 50);
+}
+function eutCloseTeacher() { document.getElementById('eutTeacherOverlay').classList.remove('open'); }
+async function eutSha(text) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+}
+async function eutCheckTeacher() {
+  var typed = document.getElementById('eutTeacherInput').value.trim().toUpperCase();
+  var err = document.getElementById('eutTeacherError');
+  var expected = window.EUT_KEYS && window.EUT_KEYS.teacher;
+  if (!expected) { err.textContent = 'No se pudo verificar la clave. Recarga la página.'; return; }
+  var hash = await eutSha('eut|teacher|' + typed);
+  if (typed && hash === expected) { eutCloseTeacher(); eutOpenWindow(); }
+  else { err.textContent = 'Clave incorrecta.'; }
+}
+function eutOpenWindow() {
   var cta = document.getElementById('eutNextCta');
   if (EUT_PLATFORM_URL) { cta.href = EUT_PLATFORM_URL; }
   document.getElementById('eutNextOverlay').classList.add('open');
 }
 function eutCloseNext() { document.getElementById('eutNextOverlay').classList.remove('open'); }
-document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { eutCloseNext(); } });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { eutCloseNext(); eutCloseTeacher(); } });
 </script>
 <script src="marisol-menu.js" data-menu="basic"></script>
 </body>
