@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1 - Lesson 13 and 14: Places in a City and What Are They Doing?</title>
+  <!-- Importamos fuente moderna y limpia (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* BARRA DE NAVEGACIÓN FLOTANTE (ESTILO PROFESIONAL) */
+    .lesson-nav-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #cbd5e1;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin: -20px -20px 20px -20px;
+    }
+    .lesson-nav-bar a {
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 6px;
+        transition: background 0.2s, transform 0.1s;
+    }
+    .btn-nav-menu {
+        background: #f1f5f9;
+        color: #123c69;
+        border: 1px solid #cbd5e1;
+    }
+    .btn-nav-menu:hover {
+        background: #e2e8f0;
+    }
+    .btn-nav-action {
+        background: #123c69;
+        color: white;
+    }
+    .btn-nav-action:hover {
+        background: #0d2b4a;
+    }
+    .lesson-nav-title {
+        font-size: 15px;
+        color: #475569;
+        font-weight: 600;
+    }
+    @media (max-width: 600px) {
+        .lesson-nav-bar { padding: 8px 10px; }
+        .lesson-nav-bar a { font-size: 12px; padding: 6px 10px; }
+        .lesson-nav-title { display: none; }
+    }
+
+    body { 
+      font-family: 'Inter', Arial, sans-serif; 
+      margin: 20px; 
+      line-height: 1.6; 
+      color: #334155;
+      background-color: #f8fafc;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b;
+    }
+
+    button { cursor: pointer; padding: 6px 12px; margin-left: 8px; border: none; border-radius: 6px; font-family: 'Inter', Arial, sans-serif; }
+    .btn-listen { background-color: #10b981; color: white; }
+    .btn-action { background-color: #0ea5e9; color: white; padding: 10px 20px; margin-top: 10px; font-weight: 600; }
+    .btn-speak { background-color: #f59e0b; color: white; padding: 8px 16px; font-weight: 600; }
+    .input-field { margin: 8px 0; padding: 8px; width: 100%; max-width: 350px; border: 1px solid #cbd5e1; border-radius: 6px; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+    .correct { color: #10b981; }
+    .incorrect { color: #ef4444; }
+
+    /* CONTENEDOR RESPONSIVE PARA EL VIDEO DE YOUTUBE */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      margin: 25px auto;
+      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      background: #000;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ESTILOS PARA LA FOTO PRINCIPAL REDUCIDA */
+    .main-photo {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      object-fit: cover;
+    }
+
+    /* ESTILOS PARA AVATARES Y FOTO DE CONTEXTO */
+    .avatar-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      vertical-align: middle;
+      margin-right: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .conv-context-img {
+      max-width: 220px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: block;
+      margin: 10px 0 15px 0;
+    }
+
+    .conv-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      background: #ffffff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .conv-dialogues {
+      flex: 1;
+    }
+
+    .conv-media-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+    .vocab-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
+    .vocab-img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background-color: #f9f9f9; }
+    .vocab-word { font-size: 18px; font-weight: bold; color: #333; margin: 10px 0; }
+
+    /* ESTILOS DEL ASISTENTE FLOTANTE (TEACHER MARISOL) */
+    #teacher-marisol-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    #marisol-floating-btn {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: 3px solid #10b981;
+      background: url('../images/marisol.jpg') center/cover no-repeat;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+    #marisol-floating-btn:hover {
+      transform: scale(1.08);
+    }
+    .marisol-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: #ef4444;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 500px;
+      border: 2px solid #fff;
+    }
+    #marisol-chat-box {
+      display: none;
+      position: fixed;
+      bottom: 95px;
+      right: 20px;
+      width: 340px;
+      max-height: 480px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border: 1px solid #cbd5e1;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .marisol-chat-header {
+      background: #123c69;
+      color: white;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .marisol-chat-header img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 8px;
+      border: 1px solid #fff;
+    }
+    .marisol-close-btn {
+      background: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+    .marisol-chat-body {
+      padding: 12px;
+      height: 300px;
+      overflow-y: auto;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .marisol-msg {
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 85%;
+      word-wrap: break-word;
+    }
+    .marisol-msg.teacher {
+      background: #e2e8f0;
+      color: #1e293b;
+      align-self: flex-start;
+      border-left: 3px solid #0ea5e9;
+    }
+    .marisol-msg.student {
+      background: #123c69;
+      color: white;
+      align-self: flex-end;
+    }
+    .marisol-chat-footer {
+      padding: 10px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .marisol-chat-footer input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .marisol-chat-footer button {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0;
+    }
+    .marisol-voice-btn {
+      background: #f59e0b !important;
+      padding: 8px 10px !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR FIJA -->
+<div class="lesson-nav-bar">
+    <a href="level1_reading6.html" class="btn-nav-action">← Prev</a>
+    <a href="../index.html" class="btn-nav-menu">🏠 Main Menu</a>
+    <span class="lesson-nav-title">English User Teacher</span>
+    <a href="level1_reading8.html" class="btn-nav-action">Next →</a>
+</div>
+
+
+  <!-- ENCABEZADO Y FOTO REDUCIDA -->
+  <img src="english-degradado.jpg" alt="School Logo" id="logo" style="max-height: 50px; float: left;">
+  <h1 style="margin-top: 15px;">Lesson 13 & 14: Places in a City and What Are They Doing?</h1>
+  <p style="text-align: center;"><em>(Lección 13 y 14: Lugares de la ciudad y qué están haciendo)</em></p>
+ 
+  <!-- VIDEO DE YOUTUBE INSERTADO -->
+  <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/5mxGXf4Nmio" title="Lesson Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+
+<!-- Inicio de la sección de vocabulario -->
+<div id="vocabulary-section">
+    <h2 style="color: #1e293b;">Vocabulary - Lesson 13 and 14</h2>
+    
+    <!-- Instrucciones bilingües -->
+    <div style="margin-bottom: 20px; color: #475569; background-color: #e2e8f0; padding: 15px; border-radius: 8px; border-left: 5px solid #0ea5e9;">
+        <p style="margin: 0 0 8px 0; font-size: 15px;">
+            <strong>Instructions:</strong> Listen to the words, relate them to the pictures, and practice your pronunciation.
+        </p>
+        <p style="margin: 0; font-size: 15px;">
+            <strong>Instrucciones:</strong> Escucha las palabras, relaciónalas con las imágenes y practica tu pronunciación.
+        </p>
+    </div>
+
+    <!-- Categoría: Places (Lugares de la Ciudad) -->
+    <h3 style="color: #334155; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px;">Places (Lugares de la Ciudad)</h3>
+    <div class="vocabulary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+
+        <!-- Airport -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/airport.jpg" alt="Airport" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Airport</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Airport')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Airport', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Bakery -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/bakery.jpg" alt="Bakery" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Bakery</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Bakery')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Bakery', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Bank -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/bank.jpg" alt="Bank" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Bank</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Bank')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Bank', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Barber shop -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/barbershop.jpg" alt="Barber shop" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Barber shop</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Barber shop')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Barber shop', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Beauty salon -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/beautysalon.jpg" alt="Beauty salon" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Beauty salon</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Beauty salon')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Beauty salon', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Book store -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/bookstore.jpg" alt="Book store" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Book store</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Book store')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Book store', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Bus stop -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/busstop.jpg" alt="Bus stop" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Bus stop</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Bus stop')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Bus stop', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Café -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/cafe.jpg" alt="Café" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Café</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Café')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Café', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Church -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/church.jpg" alt="Church" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Church</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Church')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Church', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Cinema -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/cinema.jpg" alt="Cinema" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Cinema</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Cinema')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Cinema', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Dance club -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/danceclub.jpg" alt="Dance club" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Dance club</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Dance club')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Dance club', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Food court -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/foodcourt.jpg" alt="Food court" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Food court</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Food court')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Food court', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Gas station -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/gasstation.jpg" alt="Gas station" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Gas station</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Gas station')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Gas station', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Hospital -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/hospital.jpg" alt="Hospital" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Hospital</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Hospital')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Hospital', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Jewelry store -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/jewelrystore.jpg" alt="Jewelry store" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Jewelry store</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Jewelry store')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Jewelry store', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Library -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/library.jpg" alt="Library" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Library</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Library')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Library', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Mall -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/mall.jpg" alt="Mall" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Mall</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Mall')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Mall', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Pet store -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/petstore.jpg" alt="Pet store" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Pet store</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Pet store')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Pet store', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Pharmacy -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/pharmacy.jpg" alt="Pharmacy" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Pharmacy</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Pharmacy')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Pharmacy', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Restaurant -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/restaurant.jpg" alt="Restaurant" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Restaurant</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Restaurant')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Restaurant', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- School -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/school.jpg" alt="School" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">School</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('School')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('School', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Stationery shop -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/stationeryshop.jpg" alt="Stationery shop" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Stationery shop</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Stationery shop')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Stationery shop', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Supermarket -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/supermarket.jpg" alt="Supermarket" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Supermarket</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Supermarket')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Supermarket', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+    </div>
+
+    <!-- Categoría: Directions (Direcciones) -->
+    <h3 style="color: #334155; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px;">Directions (Direcciones)</h3>
+    <div class="vocabulary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+
+        <!-- Ahead -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <div style="width: 80px; height: 80px; border-radius: 4px; margin: 0 auto; background: linear-gradient(135deg, #6366f1, #8b5cf6); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);">
+                <span style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 700; color: #ffffff; font-size: 26px; text-shadow: 0 1px 3px rgba(0,0,0,0.25); letter-spacing: 0.5px;">Ahead</span>
+            </div>
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Ahead</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Ahead')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Ahead', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Cross -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/cross.jpg" alt="Cross" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Cross</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Cross')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Cross', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Go straight -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/gostraight.jpg" alt="Go straight" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Go straight</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Go straight')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Go straight', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- On the left -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/ontheleft.jpg" alt="On the left" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">On the left</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('On the left')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('On the left', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- On the right -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/ontheright.jpg" alt="On the right" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">On the right</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('On the right')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('On the right', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Turn left -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/turnleft.jpg" alt="Turn left" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Turn left</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Turn left')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Turn left', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Turn right -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/turnright.jpg" alt="Turn right" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Turn right</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Turn right')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Turn right', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Walk down -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/walkdown.jpg" alt="Walk down" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Walk down</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Walk down')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Walk down', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Walk up -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/walkup.jpg" alt="Walk up" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Walk up</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Walk up')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Walk up', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+    </div>
+
+    <!-- Categoría: Activities (Actividades) -->
+    <h3 style="color: #334155; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px;">Activities (Actividades)</h3>
+    <div class="vocabulary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px;">
+
+        <!-- Chat with friends -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/chatwithfriends.jpg" alt="Chat with friends" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Chat with friends</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Chat with friends')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Chat with friends', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Clean the house -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/cleanthehouse.jpg" alt="Clean the house" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Clean the house</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Clean the house')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Clean the house', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Do gardening -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/dogardening.jpg" alt="Do gardening" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Do gardening</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Do gardening')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Do gardening', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Hang out -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/hangout.jpg" alt="Hang out" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Hang out</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Hang out')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Hang out', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Listen to music -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/listentomusic.jpg" alt="Listen to music" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Listen to music</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Listen to music')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Listen to music', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Look for something -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/lookforsomething.jpg" alt="Look for something" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Look for something</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Look for something')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Look for something', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Make lunch -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/makelunch.jpg" alt="Make lunch" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Make lunch</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Make lunch')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Make lunch', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Rain -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/rain.jpg" alt="Rain" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Rain</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Rain')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Rain', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Sleep -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/sleep.jpg" alt="Sleep" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Sleep</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Sleep')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Sleep', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Talk on the phone -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/talkonthephone.jpg" alt="Talk on the phone" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Talk on the phone</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Talk on the phone')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Talk on the phone', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Talk to a friend -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/talktoafriend.jpg" alt="Talk to a friend" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Talk to a friend</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Talk to a friend')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Talk to a friend', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Think -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/think.jpg" alt="Think" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Think</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Think')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Think', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Wash the car -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/washthecar.jpg" alt="Wash the car" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Wash the car</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Wash the car')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Wash the car', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+
+        <!-- Write a letter -->
+        <div class="vocab-item" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <img src="../images/writealetter.jpg" alt="Write a letter" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto;">
+            <p style="margin: 10px 0 8px; font-weight: 600; font-size: 14px; color: #1e293b;">Write a letter</p>
+            <button style="background-color: #10b981; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px;" onclick="speakWord('Write a letter')">Listen</button>
+            <button style="background-color: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="testPronunciation('Write a letter', this)">Practice</button>
+            <div class="feedback-msg" style="margin-top: 8px; font-size: 12px; font-weight: bold; min-height: 16px;"></div>
+        </div>
+    </div>
+</div>
+<!-- Fin de la sección de vocabulario -->
+
+
+  <!-- PASO 1: ESCUCHAR Y LEER LAS 3 CONVERSACIONES -->
+  <h2>Step 1: Read & Listen (Paso 1: Lee y Escucha)</h2>
+  <p>Read the dialogues and click the listen button to hear the correct pronunciation. <em>(Lee los diálogos y haz clic en el botón de escuchar para oír la pronunciación correcta.)</em></p>
+
+
+<h3>Conversation 1</h3>
+  <div class="conv-container">
+    <div class="conv-dialogues">
+      <p><img src="../images/marcoavatar.png" alt="Marco" class="avatar-icon"><strong>Marco:</strong> Excuse me, sir, is there a bank near here? 
+        <button class="btn-listen" onclick="speakCharacter('Excuse me, sir, is there a bank near here?', 'Marco')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/angelavatar.png" alt="Angel" class="avatar-icon"><strong>Angel:</strong> Yes, there is one near here, three blocks from here. 
+        <button class="btn-listen" onclick="speakCharacter('Yes, there is one near here, three blocks from here.', 'Angel')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/marcoavatar.png" alt="Marco" class="avatar-icon"><strong>Marco:</strong> How can I get there? 
+        <button class="btn-listen" onclick="speakCharacter('How can I get there?', 'Marco')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/angelavatar.png" alt="Angel" class="avatar-icon"><strong>Angel:</strong> Walk up one block and turn right at the pharmacy, walk straight two blocks, it is next to the gas station, you can't miss it. 
+        <button class="btn-listen" onclick="speakCharacter('Walk up one block and turn right at the pharmacy, walk straight two blocks, it is next to the gas station, you can\'t miss it.', 'Angel')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/marcoavatar.png" alt="Marco" class="avatar-icon"><strong>Marco:</strong> Ok, thank you so much, have a nice day! 
+        <button class="btn-listen" onclick="speakCharacter('Ok, thank you so much, have a nice day!', 'Marco')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/angelavatar.png" alt="Angel" class="avatar-icon"><strong>Angel:</strong> You too! 
+        <button class="btn-listen" onclick="speakCharacter('You too!', 'Angel')">🔊 Listen</button>
+      </p>
+    </div>
+  </div>
+
+
+<h3>Conversation 2</h3>
+  <div class="conv-container">
+    <div class="conv-dialogues">
+      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> Good morning, are there any restaurants around here? 
+        <button class="btn-listen" onclick="speakCharacter('Good morning, are there any restaurants around here?', 'Amanda')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/jeffreyavatar.png" alt="Jeffrey" class="avatar-icon"><strong>Jeffrey:</strong> Well, yes, there are some restaurants pretty near here. There is a café one block from here. There is a fast food restaurant in front of it and there are two restaurants, too. Just walk up one block and turn left. 
+        <button class="btn-listen" onclick="speakCharacter('Well, yes, there are some restaurants pretty near here. There is a café one block from here. There is a fast food restaurant in front of it and there are two restaurants, too. Just walk up one block and turn left.', 'Jeffrey')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/amandaavatar.png" alt="Amanda" class="avatar-icon"><strong>Amanda:</strong> Thank you! 
+        <button class="btn-listen" onclick="speakCharacter('Thank you!', 'Amanda')">🔊 Listen</button>
+      </p>
+    </div>
+  </div>
+
+
+<h3>Conversation 3</h3>
+  <div class="conv-container">
+    <div class="conv-dialogues">
+      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Hey Alex! Long time no see! 
+        <button class="btn-listen" onclick="speakCharacter('Hey Alex! Long time no see!', 'Sally')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> Hello! You look different! Are you going to the gym these days? 
+        <button class="btn-listen" onclick="speakCharacter('Hello! You look different! Are you going to the gym these days?', 'Alex')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Yes, I am. I am going to the gym in the mornings, what are you doing these days? 
+        <button class="btn-listen" onclick="speakCharacter('Yes, I am. I am going to the gym in the mornings, what are you doing these days?', 'Sally')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> Well, I am working for a construction company, what about you? Are you working too? 
+        <button class="btn-listen" onclick="speakCharacter('Well, I am working for a construction company, what about you? Are you working too?', 'Alex')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> No, I am not. I am currently studying at the university, I may get my degree this year. 
+        <button class="btn-listen" onclick="speakCharacter('No, I am not. I am currently studying at the university, I may get my degree this year.', 'Sally')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> Congrats! Are you going to school right now? 
+        <button class="btn-listen" onclick="speakCharacter('Congrats! Are you going to school right now?', 'Alex')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> No, I'm not, I usually go to school from Monday to Friday, today I'm going to the supermarket and after that I'm cleaning the house. Are you working today? 
+        <button class="btn-listen" onclick="speakCharacter('No, I\'m not, I usually go to school from Monday to Friday, today I\'m going to the supermarket and after that I\'m cleaning the house. Are you working today?', 'Sally')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> No, I'm not. I never work on weekends, on Saturdays I usually eat out with some friends or go to the movies. 
+        <button class="btn-listen" onclick="speakCharacter('No, I\'m not. I never work on weekends, on Saturdays I usually eat out with some friends or go to the movies.', 'Alex')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> Oh, so you are going out right now. 
+        <button class="btn-listen" onclick="speakCharacter('Oh, so you are going out right now.', 'Sally')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> That's right ha-ha-ha I'm getting together with some friends today. By the way, it is starting to rain, how about having a chat over coffee tomorrow? 
+        <button class="btn-listen" onclick="speakCharacter('That\'s right ha-ha-ha I\'m getting together with some friends today. By the way, it is starting to rain, how about having a chat over coffee tomorrow?', 'Alex')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/sallyavatar.png" alt="Sally" class="avatar-icon"><strong>Sally:</strong> I'd love to! Call me later! 
+        <button class="btn-listen" onclick="speakCharacter('I\'d love to! Call me later!', 'Sally')">🔊 Listen</button>
+      </p>
+      <p><img src="../images/alexavatar.png" alt="Alex" class="avatar-icon"><strong>Alex:</strong> I will, see you! 
+        <button class="btn-listen" onclick="speakCharacter('I will, see you!', 'Alex')">🔊 Listen</button>
+      </p>
+    </div>
+  </div>
+
+
+  <!-- PASO 2: VOCABULARIO CLAVE Y EXPRESIONES AMPLIADO -->
+  <h2>Step 2: Key Vocabulary & Expressions (Paso 2: Vocabulario Clave y Expresiones)</h2>
+  <ul>
+    <li><strong>Places:</strong> Airport, Bakery, Bank, Barber shop, Beauty salon, Book store, Bus stop, Café, Church, Cinema, Dance club, Food court, Gas station, Hospital, Jewelry store, Library, Mall, Pet store, Pharmacy, Restaurant, School, Stationery shop, Supermarket</li>
+    <li><strong>Directions:</strong> Ahead, Cross, Go straight, On the left, On the right, Turn left, Turn right, Walk down, Walk up</li>
+    <li><strong>Activities:</strong> Chat with friends, Clean the house, Do gardening, Hang out, Listen to music, Look for something, Make lunch, Rain, Sleep, Talk on the phone, Talk to a friend, Think, Wash the car, Write a letter</li>
+    <li><strong>There is / There are:</strong> "There is a café one block from here.", "There are two restaurants."</li>
+    <li><strong>Present Continuous:</strong> I am working, I am studying, I am going to the gym, I am cleaning the house, I am not working, it is starting to rain</li>
+    <li><strong>Useful Questions:</strong> "Is there a bank near here?", "Are there any restaurants around here?", "How can I get there?", "What are you doing these days?", "Are you working today?"</li>
+  </ul>
+
+
+  <!-- PASO 3: COMPROBACIÓN DE COMPRENSIÓN AMPLIADA -->
+  <h2>Step 3: Comprehension Check (Paso 3: Comprobación de Comprensión)</h2>
+  <ol>
+    <li>In Conversation 1, how many blocks away is the bank?<br>
+      <input type="text" id="q1" class="input-field">
+    </li>
+    <li>In Conversation 1, what is the bank next to?<br>
+      <input type="text" id="q2" class="input-field">
+    </li>
+    <li>In Conversation 2, what is in front of the café?<br>
+      <input type="text" id="q3" class="input-field">
+    </li>
+    <li>In Conversation 3, what is Alex doing these days?<br>
+      <input type="text" id="q4" class="input-field">
+    </li>
+    <li>In Conversation 3, what is Sally doing after going to the supermarket?<br>
+      <input type="text" id="q5" class="input-field">
+    </li>
+    <li>In Conversation 3, what does Alex usually do on Saturdays?<br>
+      <input type="text" id="q6" class="input-field">
+    </li>
+  </ol>
+  <button class="btn-action" onclick="checkAnswers()">Check Answers</button>
+  <div id="check-feedback" class="feedback"></div>
+
+
+  <!-- PASO 4: PRÁCTICA Y RECONOCIMIENTO DE VOZ AMPLIADO -->
+  <h2>Step 4: Speaking & Practice (Paso 4: Expresión Oral y Práctica)</h2>
+  <p>Answer the questions out loud using voice input or type your response below: <em>(Responde a las preguntas en voz alta usando la entrada de voz o escribe tus respuestas abajo:)</em></p>
+  
+  <p><strong>Question 1: "Is there a bank near your house? How can I get there? (Use: walk up, turn left, turn right, go straight)"</strong></p>
+  <button class="btn-speak" onclick="startDictation('practice-answer-1')">🎙️ Speak Answer (Voice Input)</button><br><br>
+  <textarea id="practice-answer-1" rows="2" cols="40" class="input-field" placeholder="Your answer here..."></textarea><br>
+
+
+  <p><strong>Question 2: "What are you doing right now? What are you doing these days?"</strong></p>
+  <button class="btn-speak" onclick="startDictation('practice-answer-2')">🎙️ Speak Answer (Voice Input)</button><br><br>
+  <textarea id="practice-answer-2" rows="2" cols="40" class="input-field" placeholder="Your answer here..."></textarea><br>
+
+
+  <p><strong>Question 3: "What do you usually do on Saturdays?"</strong></p>
+  <button class="btn-speak" onclick="startDictation('practice-answer-3')">🎙️ Speak Answer (Voice Input)</button><br><br>
+  <textarea id="practice-answer-3" rows="2" cols="40" class="input-field" placeholder="Your answer here..."></textarea><br>
+
+
+  <button class="btn-action" onclick="submitPractice()">Submit Practice</button>
+  <div id="practice-feedback" class="feedback"></div>
+
+<style>
+#teacher-marisol-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+.marisol-avatar-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.marisol-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.marisol-label {
+  background-color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  pointer-events: none;
+}
+</style>
+
+<div id="teacher-marisol-widget">
+  <div onclick="toggleMarisolChat()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+    <div class="marisol-avatar-wrapper">
+      <img src="../images/marisolavatar.png" alt="Teacher Marisol" class="marisol-avatar">
+    </div>
+    <div class="marisol-label">Ask Marisol</div>
+  </div>
+  
+  <div id="marisol-chat-box" style="display: none;">
+    <div class="marisol-chat-header">
+      <div style="display: flex; align-items: center;">
+        <img src="../images/marisolavatar.png" alt="Teacher Marisol">
+        <span>Teacher Marisol</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <button onclick="stopMarisolVoice()" title="Parar voz" style="background: #ef4444; color: white; border: none; margin: 0; width: 26px; height: 26px; border-radius: 6px; padding: 0; font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;">⏹️</button>
+        <button onclick="toggleMarisolLanguage()" id="lang-toggle-btn" title="Cambiar Idioma" style="background: #8b5cf6; color: white; border: none; margin: 0; width: 26px; height: 26px; border-radius: 6px; padding: 0; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">🌐</button>
+        <button class="marisol-close-btn" onclick="toggleMarisolChat()">×</button>
+      </div>
+    </div>
+    <div class="marisol-chat-body" id="marisol-chat-messages">
+      <!-- Los mensajes se cargan dinámicamente -->
+    </div>
+    <div class="marisol-chat-footer" style="flex-wrap: wrap; gap: 4px;">
+      <input type="text" id="marisol-user-input" placeholder="Ask Marisol..." onkeypress="handleMarisolKey(event)">
+      <button class="marisol-voice-btn" onclick="startMarisolDictation()" title="Hablar por voz">🎙️</button>
+      <button onclick="sendMarisolMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+  <!-- SCRIPTS JAVASCRIPT -->
+  <script>
+    let activeRecognition = null;
+    let cachedVoices = [];
+    const characterVoiceMap = {};
+    const usedVoiceNames = new Set();
+
+
+    function loadVoices() {
+      if ('speechSynthesis' in window) {
+        cachedVoices = window.speechSynthesis.getVoices();
+      }
+    }
+
+
+    if ('speechSynthesis' in window) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+
+    function getVoiceForCharacter(characterName, langCode = 'en-US') {
+      if (cachedVoices.length === 0) {
+        cachedVoices = window.speechSynthesis.getVoices();
+      }
+
+
+      const matchingVoices = cachedVoices.filter(v => v.lang.startsWith(langCode.substring(0, 2)));
+      if (matchingVoices.length === 0) return cachedVoices[0] || null;
+
+
+      if (langCode.startsWith('es')) {
+        const latamVoice = matchingVoices.find(v => v.lang.includes('MX') || v.lang.includes('LA') || v.lang.includes('ES'));
+        return latamVoice || matchingVoices[0];
+      }
+
+
+      if (characterVoiceMap[characterName]) {
+        return characterVoiceMap[characterName];
+      }
+
+
+      const maleNames = ['Jeffrey', 'Alex', 'Henry', 'Angel', 'Joseph', 'Marco'];
+      const isMale = maleNames.includes(characterName);
+
+
+      const genderVoices = matchingVoices.filter(v => {
+        const name = v.name.toLowerCase();
+        if (isMale) {
+          return name.includes('male') || name.includes('david') || name.includes('george') || name.includes('daniel') || name.includes('alex') || name.includes('oliver');
+        } else {
+          return name.includes('female') || name.includes('zira') || name.includes('samantha') || name.includes('karen') || name.includes('victoria') || name.includes('moira');
+        }
+      });
+
+
+      const pool = genderVoices.length > 0 ? genderVoices : matchingVoices;
+
+
+      let selectedVoice = null;
+      for (let i = 0; i < pool.length; i++) {
+        let candidate = pool[(characterName.length * 3 + i) % pool.length];
+        if (!usedVoiceNames.has(candidate.name)) {
+          selectedVoice = candidate;
+          break;
+        }
+      }
+
+
+      if (!selectedVoice) {
+        selectedVoice = pool.find(v => !usedVoiceNames.has(v.name)) || pool[0];
+      }
+
+
+      usedVoiceNames.add(selectedVoice.name);
+      characterVoiceMap[characterName] = selectedVoice;
+      return characterVoiceMap[characterName];
+    }
+
+
+    function speakCharacter(text, characterName, langCode = 'en-US') {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = langCode;
+        utterance.rate = 0.9;
+
+
+        const assignedVoice = getVoiceForCharacter(characterName, langCode);
+        if (assignedVoice) {
+          utterance.voice = assignedVoice;
+        }
+
+
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+
+    function speakWord(word) {
+      speakCharacter(word, 'Teacher Marisol', 'en-US');
+    }
+
+
+    const successMessages = [
+      "¡Perfecto! ✨ Sigue con la siguiente palabra.",
+      "¡Muy bien! 🎉 Continúa practicando.",
+      "¡Excelente pronunciación! 👏 Vamos con la próxima.",
+      "¡Así se hace! ✅ Sigue adelante.",
+      "¡Genial! 🙌 Avanza a la siguiente."
+    ];
+    const finalAttemptMessages = [
+      "No te preocupes, sigue practicando 🙂 Puedes continuar con la siguiente palabra.",
+      "Está bien, cada práctica cuenta 🌱 Continúa con la siguiente palabra.",
+      "Tranquilo, lo lograrás con más práctica 👍 Sigue con la siguiente palabra."
+    ];
+    const tryAgainMessages = [
+      "Casi, inténtalo una vez más 💪",
+      "Vas bien, sigue practicando 🙂",
+      "No pasa nada, inténtalo de nuevo o pasa a la siguiente palabra",
+      "Sigue intentando, cada práctica ayuda 🌱",
+      "Un poco más de práctica y lo tendrás 👍"
+    ];
+    function pickEncouragement(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function testPronunciation(targetWord, btnElement) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Tu navegador no soporta reconocimiento de voz. Usa Google Chrome o Microsoft Edge.");
+        return;
+      }
+      const card = btnElement.closest('.vocab-item');
+      const feedback = card.querySelector('.feedback-msg');
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      if (activeRecognition) {
+        try { activeRecognition.abort(); } catch (e) {}
+      }
+
+      const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+      const homophones = { to: 'two', too: 'two', for: 'four', fore: 'four', won: 'one', ate: 'eight', eye: 'i', aye: 'i', hee: 'he', wee: 'we' };
+      const targetClean = targetWord.trim().toLowerCase();
+
+      const normalize = (t) => {
+        let clean = t.trim().toLowerCase().replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ');
+        if (/^\d+$/.test(clean) && numberWords[parseInt(clean, 10)]) {
+          clean = numberWords[parseInt(clean, 10)];
+        }
+        if (homophones[clean] === targetClean) {
+          clean = targetClean;
+        }
+        return clean;
+      };
+      const isHit = (alt) => alt === targetClean || alt.split(' ').indexOf(targetClean) !== -1;
+
+      const maxAttempts = 3;
+      let attempts = parseInt(card.dataset.attempts || "0", 10);
+
+      // 4th click: no more listening, give the instruction and disable the button
+      if (attempts >= maxAttempts) {
+        feedback.style.color = "#f59e0b";
+        feedback.textContent = pickEncouragement(finalAttemptMessages);
+        btnElement.disabled = true;
+        return;
+      }
+      attempts++;
+      card.dataset.attempts = String(attempts);
+
+      const startListening = () => {
+        const recognition = new SpeechRecognition();
+        activeRecognition = recognition;
+        recognition.lang = 'en-US';
+        recognition.continuous = false;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 5;
+
+        let gotResult = false;
+        let matched = false;
+        let handledError = false;
+        let safetyTimer = null;
+
+        feedback.style.color = "#555";
+        feedback.textContent = "Listening...";
+
+        recognition.onresult = (event) => {
+          if (matched) return;
+          gotResult = true;
+          const last = event.results[event.results.length - 1];
+          const alternatives = [];
+          for (let j = 0; j < last.length; j++) {
+            alternatives.push(normalize(last[j].transcript));
+          }
+          if (alternatives.some(isHit)) {
+            matched = true;
+            clearTimeout(safetyTimer);
+            feedback.style.color = "#10b981";
+            feedback.textContent = pickEncouragement(successMessages);
+            card.dataset.attempts = "0";
+            btnElement.disabled = false;
+            try { recognition.stop(); } catch (e) {}
+          } else if (last.isFinal) {
+            clearTimeout(safetyTimer);
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          }
+        };
+
+        recognition.onerror = (event) => {
+          if (event.error === 'no-speech') {
+            return;
+          }
+          handledError = true;
+          clearTimeout(safetyTimer);
+          if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+            feedback.textContent = "";
+            alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
+          } else if (event.error === 'audio-capture') {
+            feedback.textContent = "";
+            alert('No se encontró un micrófono conectado.');
+          } else if (event.error === 'aborted') {
+            feedback.textContent = "";
+          } else {
+            feedback.style.color = "#ef4444";
+            feedback.textContent = "Error: " + event.error;
+          }
+        };
+
+        recognition.onend = () => {
+          clearTimeout(safetyTimer);
+          if (activeRecognition === recognition) {
+            activeRecognition = null;
+          }
+          if (!gotResult && !handledError) {
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          } else if (gotResult && !matched && feedback.textContent === "Listening...") {
+            feedback.style.color = "#f59e0b";
+            feedback.textContent = pickEncouragement(tryAgainMessages);
+          }
+        };
+
+        try {
+          recognition.start();
+          safetyTimer = setTimeout(() => { try { recognition.stop(); } catch (e) {} }, 6000);
+        } catch (e) {
+          feedback.textContent = "";
+          alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
+        }
+      };
+
+      startListening();
+    }
+
+
+    function checkAnswers() {
+      // Normaliza: minúsculas, sin acentos, sin signos, espacios simples
+      const norm = (t) => t.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ').trim();
+
+      // Distancia de edición (tolera 1-2 errores de dedo)
+      const lev = (a, b) => {
+        const d = [];
+        for (let i = 0; i <= a.length; i++) { d[i] = [i]; }
+        for (let j = 1; j <= b.length; j++) { d[0][j] = j; }
+        for (let i = 1; i <= a.length; i++) {
+          for (let j = 1; j <= b.length; j++) {
+            d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+          }
+        }
+        return d[a.length][b.length];
+      };
+
+      const hasKeyword = (text, keywords) => {
+        const words = norm(text).split(' ').filter(Boolean);
+        return keywords.some(k => words.some(w => {
+          const tol = k.length <= 4 ? 0 : (k.length <= 7 ? 1 : 2);
+          return w === k || lev(w, k) <= tol;
+        }));
+      };
+
+      const phraseOk = (text, phrases) => {
+        const n = norm(text);
+        const flat = n.replace(/ /g, '');
+        return phrases.some(p => n.includes(p) || flat.includes(p.replace(/ /g, '')));
+      };
+
+      const checks = [
+        (t) => hasKeyword(t, ['three', '3', 'tres']),
+        (t) => phraseOk(t, ['gas station', 'gasolinera']),
+        (t) => phraseOk(t, ['fast food', 'restaurant', 'restaurante']),
+        (t) => hasKeyword(t, ['construction', 'working', 'work', 'construccion']),
+        (t) => hasKeyword(t, ['cleaning', 'clean', 'house', 'limpiando', 'limpiar']),
+        (t) => hasKeyword(t, ['eat', 'friends', 'movies', 'cinema', 'cine'])
+      ];
+
+      // Pista leve (intento 4) y respuesta correcta a mostrar (intento 5+)
+      const hints = [
+        'Pista: vuelve a leer lo que dice Angel en la Conversación 1.',
+        'Pista: vuelve a leer lo que dice Angel al final de la Conversación 1.',
+        'Pista: vuelve a leer lo que dice Jeffrey en la Conversación 2.',
+        'Pista: vuelve a leer lo que dice Alex en la Conversación 3.',
+        'Pista: vuelve a leer lo que dice Sally en la Conversación 3.',
+        'Pista: vuelve a leer lo que dice Alex sobre los sábados en la Conversación 3.'
+      ];
+      const correctAnswers = [
+        'three blocks (tres cuadras)',
+        'the gas station (la gasolinera)',
+        'a fast food restaurant (un restaurante de comida rápida)',
+        'he is working for a construction company (trabaja en una constructora)',
+        'she is cleaning the house (está limpiando la casa)',
+        'he eats out with friends or goes to the movies (come fuera con amigos o va al cine)'
+      ];
+
+      let score = 0;
+      let firstWrong = null;
+      const total = checks.length;
+
+      checks.forEach((check, i) => {
+        const input = document.getElementById('q' + (i + 1));
+        let mark = document.getElementById('mark-q' + (i + 1));
+        if (!mark) {
+          mark = document.createElement('span');
+          mark.id = 'mark-q' + (i + 1);
+          mark.style.cssText = 'margin-left:10px;font-weight:bold;';
+          input.insertAdjacentElement('afterend', mark);
+          input.addEventListener('input', () => { mark.textContent = ''; });
+        }
+        let helpEl = document.getElementById('help-q' + (i + 1));
+        if (!helpEl) {
+          helpEl = document.createElement('div');
+          helpEl.id = 'help-q' + (i + 1);
+          helpEl.style.cssText = 'margin-top:4px;font-size:13px;color:#2563eb;';
+          mark.insertAdjacentElement('afterend', helpEl);
+        }
+
+        const value = input.value.trim();
+        if (value && check(value)) {
+          score++;
+          mark.textContent = '✅';
+          input.readOnly = true;
+          input.style.backgroundColor = '#dcfce7';
+          input.style.borderColor = '#10b981';
+          helpEl.textContent = '';
+          input.dataset.tries = '0';
+        } else {
+          const tries = parseInt(input.dataset.tries || '0', 10) + 1;
+          input.dataset.tries = String(tries);
+          mark.textContent = '❌';
+          input.value = '';
+          input.readOnly = false;
+          input.style.backgroundColor = '';
+          input.style.borderColor = '';
+          if (tries >= 5) {
+            helpEl.textContent = `Respuesta correcta: ${correctAnswers[i]}. Si tienes dudas, coméntalo con tu maestro.`;
+          } else if (tries >= 4) {
+            helpEl.textContent = hints[i];
+          } else {
+            helpEl.textContent = '';
+          }
+          if (!firstWrong) { firstWrong = input; }
+        }
+      });
+      if (firstWrong) { firstWrong.focus(); }
+
+      const feedbackEl = document.getElementById('check-feedback');
+      if (score === total) {
+        feedbackEl.className = 'feedback correct';
+        feedbackEl.innerText = `¡Excelente! Obtuviste ${score}/${total} respuestas correctas.`;
+      } else {
+        feedbackEl.className = 'feedback incorrect';
+        feedbackEl.innerText = `Tienes ${score}/${total} respuestas correctas. Las marcadas con ❌ se limpiaron: escríbelas de nuevo y presiona Check Answers otra vez. ¡Tú puedes! 💪`;
+      }
+    }
+
+
+    function startDictation(targetId) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('El reconocimiento de voz no está soportado. Usa Google Chrome o Microsoft Edge.');
+        return;
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      if (activeRecognition) {
+        try { activeRecognition.abort(); } catch (e) {}
+      }
+
+      const recognition = new SpeechRecognition();
+      activeRecognition = recognition;
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      const practiceInput = document.getElementById(targetId);
+      const defaultPlaceholder = 'Your answer here...';
+      practiceInput.placeholder = "Listening... Speak now!";
+
+      recognition.onresult = function(event) {
+        practiceInput.value = event.results[0][0].transcript;
+      };
+
+      recognition.onerror = function(event) {
+        practiceInput.placeholder = defaultPlaceholder;
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
+        } else if (event.error === 'no-speech') {
+          alert('No se detectó voz. Intenta de nuevo.');
+        } else if (event.error === 'audio-capture') {
+          alert('No se encontró un micrófono conectado.');
+        } else if (event.error !== 'aborted') {
+          alert('Error de voz: ' + event.error);
+        }
+      };
+
+      recognition.onend = function() {
+        practiceInput.placeholder = defaultPlaceholder;
+        if (activeRecognition === recognition) {
+          activeRecognition = null;
+        }
+      };
+
+      try {
+        recognition.start();
+      } catch (e) {
+        practiceInput.placeholder = defaultPlaceholder;
+        alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
+      }
+    }
+
+
+    function submitPractice() {
+      const a1 = document.getElementById('practice-answer-1').value.trim();
+      const a2 = document.getElementById('practice-answer-2').value.trim();
+      const a3 = document.getElementById('practice-answer-3').value.trim();
+      const feedbackEl = document.getElementById('practice-feedback');
+
+
+      if (a1.length === 0 && a2.length === 0 && a3.length === 0) {
+        feedbackEl.className = 'feedback incorrect';
+        feedbackEl.innerText = 'Por favor responde al menos una de las prácticas antes de enviar.';
+      } else {
+        feedbackEl.className = 'feedback correct';
+        feedbackEl.innerText = '¡Práctica enviada con éxito! Tus respuestas han sido registradas.';
+      }
+    }
+
+
+    /* LÓGICA CONECTADA A LA API DE OPENAI (TEACHER MARISOL) */
+    let studentName = null;
+    let preferredLanguage = null; 
+    let marisolChatInitialized = false;
+
+
+ function stopMarisolVoice() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function cleanForSpeech(text) {
+      return String(text)
+        .replace(/\/[^\/\n]*[\u0250-\u02FF\u1D00-\u1DBF][^\/\n]*\//g, ' ')
+        .replace(/\[[^\]\n]*[\u0250-\u02FF\u1D00-\u1DBF][^\]\n]*\]/g, ' ')
+        .replace(/\([^)\n]*[\u0250-\u02FF\u1D00-\u1DBF][^)\n]*\)/g, ' ')
+        .replace(/[\u0250-\u02FF\u1D00-\u1DBF]/g, '')
+        .replace(/^\s*[-•]\s+/gm, '')
+        .replace(/\//g, ' ')
+        .replace(/[*#_`~>|\\^=<>{}\[\]"]/g, ' ')
+        .replace(/\s+([.,!?;:])/g, '$1')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function extractStudentName(raw) {
+      let t = raw.trim().replace(/[.,!?;:]+$/g, '');
+      t = t.replace(/^(hello|hi|hey|hola)[,!\s]+/i, '');
+      t = t.replace(/^(my name is|my name's|i am|i'm|im|it is|it's|this is|call me|me llamo|mi nombre es|mi nombre|yo soy|soy|me dicen|puedes llamarme|llámame|llamame)\s+/i, '');
+      t = t.split(/\s+(?:and|y|but|pero)\s+/i)[0];
+      t = t.split(/\s+/).slice(0, 3).join(' ');
+      t = t.replace(/(^|\s)(\S)/g, (m0, a, b) => a + b.toUpperCase());
+      return t || raw.trim();
+    }
+
+    let marisolMic = null;
+    let marisolHistory = [];
+
+    function toggleMarisolLanguage() {
+      if (preferredLanguage === 'es') {
+        preferredLanguage = 'en';
+        appendMarisolMessage("Language changed to US English.", 'teacher');
+        speakCharacter("Language changed to US English.", 'Teacher Marisol', 'en-US');
+      } else {
+        preferredLanguage = 'es';
+        appendMarisolMessage("Idioma cambiado a Español.", 'teacher');
+        speakCharacter("Idioma cambiado a Español.", 'Teacher Marisol', 'es-MX');
+      }
+    }
+
+    function toggleMarisolChat() {
+      const chatBox = document.getElementById('marisol-chat-box');
+      if (chatBox.style.display === 'flex') {
+        chatBox.style.display = 'none';
+        preferredLanguage = null;
+        stopMarisolVoice();
+      } else {
+        chatBox.style.display = 'flex';
+        if (!marisolChatInitialized) {
+          marisolChatInitialized = true;
+          startMarisolSession();
+        }
+      }
+    }
+    function appendMarisolMessage(text, sender) {
+      const chatBody = document.getElementById('marisol-chat-messages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `marisol-msg ${sender}`;
+      msgDiv.innerText = text;
+      chatBody.appendChild(msgDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+
+    function startMarisolSession() {
+      const welcomeText = "Hello! I am Teacher Marisol. What is your name?";
+      appendMarisolMessage(welcomeText, 'teacher');
+      speakCharacter(welcomeText, 'Teacher Marisol', 'en-US');
+      document.getElementById('marisol-user-input').addEventListener('input', stopMarisolVoice);
+    }
+
+
+    function startMarisolDictation() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('El reconocimiento de voz no está soportado en este navegador.');
+        return;
+      }
+
+      stopMarisolVoice();
+
+      if (marisolMic) {
+        marisolMic.finish();
+        return;
+      }
+      if (activeRecognition) {
+        try { activeRecognition.abort(); } catch (e) {}
+      }
+
+      const recognition = new SpeechRecognition();
+      activeRecognition = recognition;
+      recognition.lang = preferredLanguage === 'es' ? 'es-MX' : 'en-US';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      const input = document.getElementById('marisol-user-input');
+      const defaultPlaceholder = "Ask Marisol a question...";
+      let sent = false;
+      let finished = false;
+      let silenceTimer = null;
+      let startTimer = null;
+
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        clearTimeout(silenceTimer);
+        clearTimeout(startTimer);
+        try { recognition.stop(); } catch (e) {}
+      };
+      marisolMic = { finish: finish };
+
+      input.placeholder = preferredLanguage === 'en' ? "Listening..." : "Escuchando...";
+
+      recognition.onspeechstart = function() {
+        stopMarisolVoice();
+      };
+
+      recognition.onresult = function(event) {
+        clearTimeout(startTimer);
+        clearTimeout(silenceTimer);
+        let finalText = '';
+        let interimText = '';
+        for (let i = 0; i < event.results.length; i++) {
+          const piece = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalText += piece + ' ';
+          } else {
+            interimText += piece;
+          }
+        }
+        input.value = (finalText + interimText).trim();
+        silenceTimer = setTimeout(finish, 3000);
+      };
+
+      recognition.onerror = function(event) {
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          alert('El micrófono está bloqueado. Permite el acceso al micrófono en el navegador (icono del candado junto a la dirección) y recarga la página.');
+        } else if (event.error === 'audio-capture') {
+          alert('No se encontró un micrófono conectado.');
+        }
+        finish();
+      };
+
+      recognition.onend = function() {
+        clearTimeout(silenceTimer);
+        clearTimeout(startTimer);
+        marisolMic = null;
+        if (activeRecognition === recognition) {
+          activeRecognition = null;
+        }
+        input.placeholder = defaultPlaceholder;
+        if (!sent && input.value.trim()) {
+          sent = true;
+          sendMarisolMessage();
+        }
+      };
+
+      try {
+        recognition.start();
+        startTimer = setTimeout(finish, 10000);
+      } catch (e) {
+        marisolMic = null;
+        input.placeholder = defaultPlaceholder;
+        alert('No se pudo iniciar el micrófono. Recarga la página e intenta de nuevo.');
+      }
+    }
+
+
+    function handleMarisolKey(event) {
+      if (event.key === 'Enter') {
+        sendMarisolMessage();
+      }
+    }
+
+
+    async function sendMarisolMessage() {
+      const input = document.getElementById('marisol-user-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+
+      stopMarisolVoice();
+      appendMarisolMessage(text, 'student');
+      input.value = '';
+
+
+      // Capturar nombre del alumno en el primer turno si no existe
+      if (!studentName) {
+        studentName = extractStudentName(text);
+        const reply = `Nice to meet you, ${studentName}! Would you like our help in English or in Spanish? (¿Prefieres la ayuda en inglés o en español?)`;
+        appendMarisolMessage(reply, 'teacher');
+        speakCharacter(`Nice to meet you, ${studentName}! Would you like our help in English or in Spanish?`, 'Teacher Marisol', 'en-US');
+        return;
+      }
+
+
+      // Capturar idioma preferido en el segundo turno si no existe
+      if (!preferredLanguage) {
+        const lowerInput = text.toLowerCase();
+        if (lowerInput.includes('english') || lowerInput.includes('inglés') || lowerInput.includes('in english')) {
+          preferredLanguage = 'en';
+        } else {
+          preferredLanguage = 'es';
+        }
+        const reply = preferredLanguage === 'en'
+          ? `Awesome, ${studentName}! Let's practice in US English. Feel free to ask any question about vocabulary, grammar, or your lesson.`
+          : `Entendido, ${studentName}. Te guiaré en español. Pregúntame con total libertad cualquier duda relacionada con las lecciones.`;
+        appendMarisolMessage(reply, 'teacher');
+        speakCharacter(reply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
+        return;
+      }
+
+
+      // Enviar mensaje a la API de Vercel/OpenAI con todo el contexto guardado
+      try {
+        const response = await fetch('https://englishteacheria1.vercel.app/api/marisol', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: text,
+            studentName: studentName,
+            language: preferredLanguage,
+            history: marisolHistory.slice(-10)
+          })
+        });
+
+
+        const data = await response.json();
+        if (data.reply) {
+          const cleanReply = cleanForSpeech(data.reply);
+          marisolHistory.push({ role: 'user', content: text });
+          marisolHistory.push({ role: 'assistant', content: cleanReply });
+          if (marisolHistory.length > 12) { marisolHistory = marisolHistory.slice(-12); }
+          appendMarisolMessage(cleanReply, 'teacher');
+          speakCharacter(cleanReply, 'Teacher Marisol', preferredLanguage === 'es' ? 'es-MX' : 'en-US');
+        } else {
+          const fallback = preferredLanguage === 'es' ? 'Lo siento, hubo un error procesando tu respuesta.' : 'Sorry, there was an error processing your request.';
+          appendMarisolMessage(fallback, 'teacher');
+        }
+      } catch (error) {
+        const errorMsg = preferredLanguage === 'es' ? 'Error de conexión con la asistente.' : 'Connection error with the assistant.';
+        appendMarisolMessage(errorMsg, 'teacher');
+      }
+    }
+  </script>
+<script src="marisol-menu.js" data-menu="full"></script>
+</body>
+</html>
